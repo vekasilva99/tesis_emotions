@@ -42,6 +42,7 @@ const Embedding = (props) => {
   const [currentImage, setCurrentImage] = useState(group);
   // Este es el modelo que reconoce los rostros.
   const blazeface = require("@tensorflow-models/blazeface");
+  const faceLandmarksDetection = require('@tensorflow-models/face-landmarks-detection');
   // Esta variable guarda el valor de la clase para que pueda mostrar elementos de acuerdo a si el modelo se ha cargado o no.
   const [sectionClass, setSectionClass] = useState("invisible");
   // Esta variable es para poder acceder al video.
@@ -49,6 +50,7 @@ const Embedding = (props) => {
   // Guarda el modelo (en este caso, el modelo para el reconocimiento de rostros)
   const [model, setModel] = useState(undefined);
   const [model2, setModel2] = useState(undefined);
+  const [landmarkDetectionModel, setLandmarkDetectionModel] = useState(undefined);
   // Este es el canvas donde se está dibujando la imagen cortada.
   const canvas2 = document.getElementById("canvas");
   // Variable que define el backend para poder cargar el modelo de blazeface.
@@ -252,6 +254,171 @@ const Embedding = (props) => {
   };
 
   // Predecir el rostro.
+
+  const predictWebcamLandmark = () => {
+
+    video.play();
+
+    videoWidth = video.videoWidth;
+    videoHeight = video.videoHeight;
+    video.width = videoWidth;
+    video.height = videoHeight;
+    canvas = document.getElementById("output");
+    canvas.width = videoWidth;
+    canvas.height = videoHeight;
+    ctx = canvas.getContext("2d");
+    ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
+
+    landmarkDetectionModel
+      .estimateFaces({
+        input: video
+      })
+      .then( (predictions) => {
+        if (predictions.length > 0) {
+          /*
+          `predictions` is an array of objects describing each detected face, for example:
+      
+          [
+            {
+              faceInViewConfidence: 1, // The probability of a face being present.
+              boundingBox: { // The bounding box surrounding the face.
+                topLeft: [232.28, 145.26],
+                bottomRight: [449.75, 308.36],
+              },
+              mesh: [ // The 3D coordinates of each facial landmark.
+                [92.07, 119.49, -17.54],
+                [91.97, 102.52, -30.54],
+                ...
+              ],
+              scaledMesh: [ // The 3D coordinates of each facial landmark, normalized.
+                [322.32, 297.58, -17.54],
+                [322.18, 263.95, -30.54]
+              ],
+              annotations: { // Semantic groupings of the `scaledMesh` coordinates.
+                silhouette: [
+                  [326.19, 124.72, -3.82],
+                  [351.06, 126.30, -3.00],
+                  ...
+                ],
+                ...
+              }
+            }
+          ]
+          */
+      
+          for (let i = 0; i < predictions.length; i++) {
+       
+            const keypoints = predictions[i].scaledMesh;
+            // console.log('130',keypoints[130])
+            // console.log('247',keypoints[247])
+            // console.log('30',keypoints[30])
+            // console.log('29',keypoints[29])
+            // console.log('27',keypoints[27])
+            // console.log('28',keypoints[28])
+            // console.log('56',keypoints[56])
+            // console.log('190',keypoints[190])
+            // console.log('243',keypoints[243])
+            // console.log('112',keypoints[112])
+            // console.log('26',keypoints[26])
+            // console.log('22',keypoints[22])
+            // console.log('23',keypoints[23])
+            // console.log('24',keypoints[24])
+            // console.log('110',keypoints[110])
+            // console.log('25',keypoints[25])
+            // console.log('-------------------------------------')
+            // console.log('33',keypoints[33])
+            // console.log('246',keypoints[246])
+            // console.log('161',keypoints[161])
+            // console.log('160',keypoints[160])
+            // console.log('159',keypoints[159])
+            // console.log('158',keypoints[158])
+            // console.log('157',keypoints[157])
+            // console.log('173',keypoints[173])
+            // console.log('133',keypoints[133])
+            // console.log('155',keypoints[155])
+            // console.log('154',keypoints[154])
+            // console.log('153',keypoints[153])
+            // console.log('145',keypoints[145])
+            // console.log('144',keypoints[144])
+            // console.log('163',keypoints[163])
+            // console.log('7',keypoints[7])
+            // Log facial keypoints.
+            // const resta247 =Math.sqrt(Math.abs(((keypoints[247][0]-keypoints[25][0])^2)+((keypoints[247][1]-keypoints[25][1])^2)+((keypoints[247][2]-keypoints[25][2])^2)))
+            // const resta30 =Math.sqrt(Math.abs(((keypoints[30][0]-keypoints[110][0])^2)+((keypoints[30][1]-keypoints[110][1])^2)+((keypoints[30][2]-keypoints[110][2])^2)))
+            // const resta29 =Math.sqrt(Math.abs(((keypoints[29][0]-keypoints[24][0])^2)+((keypoints[29][1]-keypoints[24][1])^2)+((keypoints[29][2]-keypoints[24][2])^2)))
+            // const resta27 =Math.sqrt(Math.abs(((keypoints[27][0]-keypoints[23][0])^2)+((keypoints[27][1]-keypoints[23][1])^2)+((keypoints[27][2]-keypoints[23][2])^2)))
+            // const resta28 =Math.sqrt(Math.abs(((keypoints[28][0]-keypoints[22][0])^2)+((keypoints[28][1]-keypoints[22][1])^2)+((keypoints[28][2]-keypoints[22][2])^2)))
+            // const resta56 =Math.sqrt(Math.abs(((keypoints[56][0]-keypoints[26][0])^2)+((keypoints[56][1]-keypoints[26][1])^2)+((keypoints[56][2]-keypoints[26][2])^2)))
+            // const resta190 =Math.sqrt(Math.abs(((keypoints[190][0]-keypoints[112][0])^2)+((keypoints[190][1]-keypoints[112][1])^2)+((keypoints[190][2]-keypoints[112][2])^2)))
+            // console.log('RESTA 247-25',resta247)
+            // console.log('RESTA 30-110',resta30)
+            // console.log('RESTA 29-24',resta29)
+            // console.log('RESTA 27-23',resta27)
+            // console.log('RESTA 28-22',resta28)
+            // console.log('RESTA 56-26',resta56)
+            // console.log('RESTA 190-112',resta190)
+
+            // console.log('SUMA',resta247+resta30+resta29+resta27+resta28+resta56+resta190)
+
+
+            const resta246 =Math.sqrt(Math.abs(((keypoints[246][0]-keypoints[7][0])^2)+((keypoints[246][1]-keypoints[7][1])^2)+((keypoints[246][2]-keypoints[7][2])^2)))
+            const resta161 =Math.sqrt(Math.abs(((keypoints[161][0]-keypoints[163][0])^2)+((keypoints[161][1]-keypoints[163][1])^2)+((keypoints[161][2]-keypoints[163][2])^2)))
+            const resta160 =Math.sqrt(Math.abs(((keypoints[160][0]-keypoints[144][0])^2)+((keypoints[160][1]-keypoints[144][1])^2)+((keypoints[160][2]-keypoints[144][2])^2)))
+            const resta159 =Math.sqrt(Math.abs(((keypoints[159][0]-keypoints[145][0])^2)+((keypoints[159][1]-keypoints[145][1])^2)+((keypoints[159][2]-keypoints[145][2])^2)))
+            const resta158 =Math.sqrt(Math.abs(((keypoints[158][0]-keypoints[153][0])^2)+((keypoints[158][1]-keypoints[153][1])^2)+((keypoints[158][2]-keypoints[153][2])^2)))
+            const resta157 =Math.sqrt(Math.abs(((keypoints[157][0]-keypoints[154][0])^2)+((keypoints[157][1]-keypoints[154][1])^2)+((keypoints[157][2]-keypoints[154][2])^2)))
+            const resta173 =Math.sqrt(Math.abs(((keypoints[173][0]-keypoints[155][0])^2)+((keypoints[173][1]-keypoints[155][1])^2)+((keypoints[173][2]-keypoints[155][2])^2)))
+
+            const distancia33 =Math.sqrt(Math.abs(((keypoints[33][0]-keypoints[133][0])^2)+((keypoints[33][1]-keypoints[133][1])^2)+((keypoints[33][2]-keypoints[133][2])^2)))
+            // console.log('RESTA 246-7',resta246)
+            // console.log('RESTA 161-163',resta161)
+            // console.log('RESTA 160-144',resta160)
+            // console.log('RESTA 159-145',resta159)
+            // console.log('RESTA 158-153',resta158)
+            // console.log('RESTA 157-154',resta157)
+            // console.log('RESTA 173-155',resta173)
+            console.log('SUMA OJO IZQUIERDO',resta246+resta161+resta160+resta159+resta158+resta157+resta173)
+            console.log('DISTANCIA IZQUIERDO',distancia33)
+
+
+            const resta398 =Math.sqrt(Math.abs(((keypoints[398][0]-keypoints[382][0])^2)+((keypoints[398][1]-keypoints[382][1])^2)+((keypoints[398][2]-keypoints[7][382])^2)))
+            const resta384 =Math.sqrt(Math.abs(((keypoints[384][0]-keypoints[381][0])^2)+((keypoints[384][1]-keypoints[381][1])^2)+((keypoints[384][2]-keypoints[381][2])^2)))
+            const resta385 =Math.sqrt(Math.abs(((keypoints[385][0]-keypoints[380][0])^2)+((keypoints[385][1]-keypoints[380][1])^2)+((keypoints[385][2]-keypoints[380][2])^2)))
+            const resta386 =Math.sqrt(Math.abs(((keypoints[386][0]-keypoints[374][0])^2)+((keypoints[386][1]-keypoints[374][1])^2)+((keypoints[386][2]-keypoints[374][2])^2)))
+            const resta387 =Math.sqrt(Math.abs(((keypoints[387][0]-keypoints[373][0])^2)+((keypoints[387][1]-keypoints[373][1])^2)+((keypoints[387][2]-keypoints[373][2])^2)))
+            const resta388 =Math.sqrt(Math.abs(((keypoints[388][0]-keypoints[390][0])^2)+((keypoints[388][1]-keypoints[390][1])^2)+((keypoints[388][2]-keypoints[390][2])^2)))
+            const resta466 =Math.sqrt(Math.abs(((keypoints[466][0]-keypoints[249][0])^2)+((keypoints[466][1]-keypoints[249][1])^2)+((keypoints[466][2]-keypoints[249][2])^2)))
+
+            const distancia362 =Math.sqrt(Math.abs(((keypoints[362][0]-keypoints[263][0])^2)+((keypoints[362][1]-keypoints[263][1])^2)+((keypoints[362][2]-keypoints[263][2])^2)))
+            // console.log('RESTA 398-382',resta398)
+            // console.log('RESTA 384-381',resta384)
+            // console.log('RESTA 385-380',resta385)
+            // console.log('RESTA 386-374',resta386)
+            // console.log('RESTA 387-373',esta387)
+            // console.log('RESTA 388-390',resta388)
+            // console.log('RESTA 466-249',resta466)
+            console.log('SUMA OJO DERECHO',resta398+resta384+resta385+resta386+resta387+resta388+resta466)
+            console.log('DISTANCIA DERECHO',distancia362)
+            console.log("------------------------------------------------------")
+
+            for (let i = 0; i < keypoints.length; i++) {
+              const [x, y, z] = keypoints[i];
+      
+              // console.log(`Keypoint ${i}: [${x}, ${y}, ${z}]`);
+            }
+          }
+        }
+
+      })
+
+      setTimeout(function () {
+        requestAnimationFrame(predictWebcamLandmark);
+      }, 20000);
+
+
+  }
+
+
   const predictWebcam = () => {
 
     video.play();
@@ -404,7 +571,7 @@ const Embedding = (props) => {
         .then((stream) => {
           console.log("camara habilitada");
           video.srcObject = stream;
-          video.addEventListener("loadeddata", predictWebcam);
+          video.addEventListener("loadeddata", predictWebcamLandmark);
         })
         .catch((error) => {
           console.log("error para habilitar la camara");
@@ -420,14 +587,28 @@ const Embedding = (props) => {
     }
   };
 
+  const loadLandmarkModel = async () =>{
+  
+    const model = await faceLandmarksDetection.load(
+      faceLandmarksDetection.SupportedPackages.mediapipeFacemesh);
+  
+      setLandmarkDetectionModel(model)
+
+      console.log('MODELITO',model)
+  }
+
+
+
   const setupPage = () => {
+
     tf.setBackend(state.backend).then(() => {
+      
       console.log("back ready ");
       blazeface
         .load()
         .then( (loadedModel) => {
           loadModel()
-
+          loadLandmarkModel()
           setModel(loadedModel);
           setSectionClass("");
           console.log("modelo cargado");
