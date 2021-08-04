@@ -361,15 +361,15 @@ const Embedding = (props) => {
             // console.log('SUMA',resta247+resta30+resta29+resta27+resta28+resta56+resta190)
 
 
-            const resta246 =Math.sqrt(Math.abs(((keypoints[246][0]-keypoints[7][0])^2)+((keypoints[246][1]-keypoints[7][1])^2)+((keypoints[246][2]-keypoints[7][2])^2)))
-            const resta161 =Math.sqrt(Math.abs(((keypoints[161][0]-keypoints[163][0])^2)+((keypoints[161][1]-keypoints[163][1])^2)+((keypoints[161][2]-keypoints[163][2])^2)))
-            const resta160 =Math.sqrt(Math.abs(((keypoints[160][0]-keypoints[144][0])^2)+((keypoints[160][1]-keypoints[144][1])^2)+((keypoints[160][2]-keypoints[144][2])^2)))
-            const resta159 =Math.sqrt(Math.abs(((keypoints[159][0]-keypoints[145][0])^2)+((keypoints[159][1]-keypoints[145][1])^2)+((keypoints[159][2]-keypoints[145][2])^2)))
-            const resta158 =Math.sqrt(Math.abs(((keypoints[158][0]-keypoints[153][0])^2)+((keypoints[158][1]-keypoints[153][1])^2)+((keypoints[158][2]-keypoints[153][2])^2)))
-            const resta157 =Math.sqrt(Math.abs(((keypoints[157][0]-keypoints[154][0])^2)+((keypoints[157][1]-keypoints[154][1])^2)+((keypoints[157][2]-keypoints[154][2])^2)))
-            const resta173 =Math.sqrt(Math.abs(((keypoints[173][0]-keypoints[155][0])^2)+((keypoints[173][1]-keypoints[155][1])^2)+((keypoints[173][2]-keypoints[155][2])^2)))
+            const resta246 =Math.sqrt(Math.abs(((keypoints[246][0]-keypoints[7][0])^2)+((keypoints[246][1]-keypoints[7][1])^2)))
+            const resta161 =Math.sqrt(Math.abs(((keypoints[161][0]-keypoints[163][0])^2)+((keypoints[161][1]-keypoints[163][1])^2)))
+            const resta160 =Math.sqrt(Math.abs(((keypoints[160][0]-keypoints[144][0])^2)+((keypoints[160][1]-keypoints[144][1])^2)))
+            const resta159 =Math.sqrt(Math.abs(((keypoints[159][0]-keypoints[145][0])^2)+((keypoints[159][1]-keypoints[145][1])^2)))
+            const resta158 =Math.sqrt(Math.abs(((keypoints[158][0]-keypoints[153][0])^2)+((keypoints[158][1]-keypoints[153][1])^2)))
+            const resta157 =Math.sqrt(Math.abs(((keypoints[157][0]-keypoints[154][0])^2)+((keypoints[157][1]-keypoints[154][1])^2)))
+            const resta173 =Math.sqrt(Math.abs(((keypoints[173][0]-keypoints[155][0])^2)+((keypoints[173][1]-keypoints[155][1])^2)))
 
-            const distancia33 =Math.sqrt(Math.abs(((keypoints[33][0]-keypoints[133][0])^2)+((keypoints[33][1]-keypoints[133][1])^2)+((keypoints[33][2]-keypoints[133][2])^2)))
+            const distancia33 =Math.sqrt(Math.abs(((keypoints[33][0]-keypoints[133][0])^2)+((keypoints[33][1]-keypoints[133][1])^2)))
             // console.log('RESTA 246-7',resta246)
             // console.log('RESTA 161-163',resta161)
             // console.log('RESTA 160-144',resta160)
@@ -377,19 +377,18 @@ const Embedding = (props) => {
             // console.log('RESTA 158-153',resta158)
             // console.log('RESTA 157-154',resta157)
             // console.log('RESTA 173-155',resta173)
-            console.log('SUMA OJO IZQUIERDO',resta246+resta161+resta160+resta159+resta158+resta157+resta173)
-            console.log('DISTANCIA IZQUIERDO',distancia33)
+            
 
 
-            const resta398 =Math.sqrt(Math.abs(((keypoints[398][0]-keypoints[382][0])^2)+((keypoints[398][1]-keypoints[382][1])^2)+((keypoints[398][2]-keypoints[7][382])^2)))
-            const resta384 =Math.sqrt(Math.abs(((keypoints[384][0]-keypoints[381][0])^2)+((keypoints[384][1]-keypoints[381][1])^2)+((keypoints[384][2]-keypoints[381][2])^2)))
-            const resta385 =Math.sqrt(Math.abs(((keypoints[385][0]-keypoints[380][0])^2)+((keypoints[385][1]-keypoints[380][1])^2)+((keypoints[385][2]-keypoints[380][2])^2)))
-            const resta386 =Math.sqrt(Math.abs(((keypoints[386][0]-keypoints[374][0])^2)+((keypoints[386][1]-keypoints[374][1])^2)+((keypoints[386][2]-keypoints[374][2])^2)))
-            const resta387 =Math.sqrt(Math.abs(((keypoints[387][0]-keypoints[373][0])^2)+((keypoints[387][1]-keypoints[373][1])^2)+((keypoints[387][2]-keypoints[373][2])^2)))
-            const resta388 =Math.sqrt(Math.abs(((keypoints[388][0]-keypoints[390][0])^2)+((keypoints[388][1]-keypoints[390][1])^2)+((keypoints[388][2]-keypoints[390][2])^2)))
-            const resta466 =Math.sqrt(Math.abs(((keypoints[466][0]-keypoints[249][0])^2)+((keypoints[466][1]-keypoints[249][1])^2)+((keypoints[466][2]-keypoints[249][2])^2)))
+            const resta398 =Math.sqrt(Math.abs(((keypoints[398][0]-keypoints[382][0])^2)+((keypoints[398][1]-keypoints[382][1])^2)))
+            const resta384 =Math.sqrt(Math.abs(((keypoints[384][0]-keypoints[381][0])^2)+((keypoints[384][1]-keypoints[381][1])^2)))
+            const resta385 =Math.sqrt(Math.abs(((keypoints[385][0]-keypoints[380][0])^2)+((keypoints[385][1]-keypoints[380][1])^2)))
+            const resta386 =Math.sqrt(Math.abs(((keypoints[386][0]-keypoints[374][0])^2)+((keypoints[386][1]-keypoints[374][1])^2)))
+            const resta387 =Math.sqrt(Math.abs(((keypoints[387][0]-keypoints[373][0])^2)+((keypoints[387][1]-keypoints[373][1])^2)))
+            const resta388 =Math.sqrt(Math.abs(((keypoints[388][0]-keypoints[390][0])^2)+((keypoints[388][1]-keypoints[390][1])^2)))
+            const resta466 =Math.sqrt(Math.abs(((keypoints[466][0]-keypoints[249][0])^2)+((keypoints[466][1]-keypoints[249][1])^2)))
 
-            const distancia362 =Math.sqrt(Math.abs(((keypoints[362][0]-keypoints[263][0])^2)+((keypoints[362][1]-keypoints[263][1])^2)+((keypoints[362][2]-keypoints[263][2])^2)))
+            const distancia362 =Math.sqrt(Math.abs(((keypoints[362][0]-keypoints[263][0])^2)+((keypoints[362][1]-keypoints[263][1])^2)))
             // console.log('RESTA 398-382',resta398)
             // console.log('RESTA 384-381',resta384)
             // console.log('RESTA 385-380',resta385)
@@ -397,8 +396,13 @@ const Embedding = (props) => {
             // console.log('RESTA 387-373',esta387)
             // console.log('RESTA 388-390',resta388)
             // console.log('RESTA 466-249',resta466)
-            console.log('SUMA OJO DERECHO',resta398+resta384+resta385+resta386+resta387+resta388+resta466)
-            console.log('DISTANCIA DERECHO',distancia362)
+            const left_eye_sum=resta246+resta161+resta160+resta159+resta158+resta157+resta173
+            const right_eye_sum=resta398+resta384+resta385+resta386+resta387+resta388+resta466
+          
+            console.log('SUMA OJO IZQUIERDO',left_eye_sum.toFixed(2))
+            console.log('SUMA OJO DERECHO',right_eye_sum.toFixed(2))
+            console.log('DISTANCIA IZQUIERDO',distancia33.toFixed(2))
+            console.log('DISTANCIA DERECHO',distancia362.toFixed(2))
             console.log("------------------------------------------------------")
 
             for (let i = 0; i < keypoints.length; i++) {
