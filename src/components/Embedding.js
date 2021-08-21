@@ -42,6 +42,7 @@ const Embedding = (props) => {
   const [currentImage, setCurrentImage] = useState(group);
   // Este es el modelo que reconoce los rostros.
   const blazeface = require("@tensorflow-models/blazeface");
+  const faceLandmarksDetection = require('@tensorflow-models/face-landmarks-detection');
   // Esta variable guarda el valor de la clase para que pueda mostrar elementos de acuerdo a si el modelo se ha cargado o no.
   const [sectionClass, setSectionClass] = useState("invisible");
   // Esta variable es para poder acceder al video.
@@ -49,6 +50,7 @@ const Embedding = (props) => {
   // Guarda el modelo (en este caso, el modelo para el reconocimiento de rostros)
   const [model, setModel] = useState(undefined);
   const [model2, setModel2] = useState(undefined);
+  const [landmarkDetectionModel, setLandmarkDetectionModel] = useState(undefined);
   // Este es el canvas donde se está dibujando la imagen cortada.
   const canvas2 = document.getElementById("canvas");
   // Variable que define el backend para poder cargar el modelo de blazeface.
@@ -252,6 +254,124 @@ const Embedding = (props) => {
   };
 
   // Predecir el rostro.
+
+  const predictWebcamLandmark = () => {
+
+    video.play();
+
+    videoWidth = video.videoWidth;
+    videoHeight = video.videoHeight;
+    video.width = videoWidth;
+    video.height = videoHeight;
+    canvas = document.getElementById("output");
+    canvas.width = videoWidth;
+    canvas.height = videoHeight;
+    ctx = canvas.getContext("2d");
+    ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
+
+    landmarkDetectionModel
+      .estimateFaces({
+        input: video
+      })
+      .then( (predictions) => {
+        if (predictions.length > 0) {
+          /*
+          `predictions` is an array of objects describing each detected face, for example:
+      
+          [
+            {
+              faceInViewConfidence: 1, // The probability of a face being present.
+              boundingBox: { // The bounding box surrounding the face.
+                topLeft: [232.28, 145.26],
+                bottomRight: [449.75, 308.36],
+              },
+              mesh: [ // The 3D coordinates of each facial landmark.
+                [92.07, 119.49, -17.54],
+                [91.97, 102.52, -30.54],
+                ...
+              ],
+              scaledMesh: [ // The 3D coordinates of each facial landmark, normalized.
+                [322.32, 297.58, -17.54],
+                [322.18, 263.95, -30.54]
+              ],
+              annotations: { // Semantic groupings of the `scaledMesh` coordinates.
+                silhouette: [
+                  [326.19, 124.72, -3.82],
+                  [351.06, 126.30, -3.00],
+                  ...
+                ],
+                ...
+              }
+            }
+          ]
+          */
+      
+          for (let i = 0; i < predictions.length; i++) {
+       
+            const keypoints = predictions[i].scaledMesh;
+            
+            // const resta246 =Math.sqrt(Math.abs(((keypoints[246][0]-keypoints[7][0])^2)+((keypoints[246][1]-keypoints[7][1])^2)))
+            // const resta161 =Math.sqrt(Math.abs(((keypoints[161][0]-keypoints[163][0])^2)+((keypoints[161][1]-keypoints[163][1])^2)))
+            // const resta160 =Math.sqrt(Math.abs(((keypoints[160][0]-keypoints[144][0])^2)+((keypoints[160][1]-keypoints[144][1])^2)))
+            // const resta159 =Math.sqrt(Math.abs(((keypoints[159][0]-keypoints[145][0])^2)+((keypoints[159][1]-keypoints[145][1])^2)))
+            // const resta158 =Math.sqrt(Math.abs(((keypoints[158][0]-keypoints[153][0])^2)+((keypoints[158][1]-keypoints[153][1])^2)))
+            // const resta157 =Math.sqrt(Math.abs(((keypoints[157][0]-keypoints[154][0])^2)+((keypoints[157][1]-keypoints[154][1])^2)))
+            // const resta173 =Math.sqrt(Math.abs(((keypoints[173][0]-keypoints[155][0])^2)+((keypoints[173][1]-keypoints[155][1])^2)))
+
+            const left_eye_1 =Math.abs(keypoints[246][1]-keypoints[7][1])
+            const left_eye_2 =Math.abs(keypoints[161][1]-keypoints[163][1])
+            const left_eye_3 =Math.abs(keypoints[160][1]-keypoints[144][1])
+            const left_eye_4 =Math.abs(keypoints[159][1]-keypoints[145][1])
+            const left_eye_5 =Math.abs(keypoints[158][1]-keypoints[153][1])
+            const left_eye_6 =Math.abs(keypoints[157][1]-keypoints[154][1])
+            const left_eye_7 =Math.abs(keypoints[173][1]-keypoints[155][1])
+
+            // const left_distance =Math.sqrt(Math.abs(((keypoints[33][0]-keypoints[133][0])^2)+((keypoints[33][1]-keypoints[133][1])^2)+((keypoints[33][2]-keypoints[133][2])^2)))
+            const left_distance =Math.abs(keypoints[33][0]-keypoints[133][0])
+            const left_eye_sum = left_eye_1+left_eye_2+left_eye_3+left_eye_4+left_eye_5+left_eye_6+left_eye_7
+
+            // const resta398 =Math.sqrt(Math.abs(((keypoints[398][0]-keypoints[382][0])^2)+((keypoints[398][1]-keypoints[382][1])^2)))
+            // const resta384 =Math.sqrt(Math.abs(((keypoints[384][0]-keypoints[381][0])^2)+((keypoints[384][1]-keypoints[381][1])^2)))
+            // const resta385 =Math.sqrt(Math.abs(((keypoints[385][0]-keypoints[380][0])^2)+((keypoints[385][1]-keypoints[380][1])^2)))
+            // const resta386 =Math.sqrt(Math.abs(((keypoints[386][0]-keypoints[374][0])^2)+((keypoints[386][1]-keypoints[374][1])^2)))
+            // const resta387 =Math.sqrt(Math.abs(((keypoints[387][0]-keypoints[373][0])^2)+((keypoints[387][1]-keypoints[373][1])^2)))
+            // const resta388 =Math.sqrt(Math.abs(((keypoints[388][0]-keypoints[390][0])^2)+((keypoints[388][1]-keypoints[390][1])^2)))
+            // const resta466 =Math.sqrt(Math.abs(((keypoints[466][0]-keypoints[249][0])^2)+((keypoints[466][1]-keypoints[249][1])^2)))
+
+            const right_eye_1 =Math.abs(keypoints[398][1]-keypoints[382][1])
+            const right_eye_2 =Math.abs(keypoints[384][1]-keypoints[381][1])
+            const right_eye_3 =Math.abs(keypoints[385][1]-keypoints[380][1])
+            const right_eye_4 =Math.abs(keypoints[386][1]-keypoints[374][1])
+            const right_eye_5 =Math.abs(keypoints[387][1]-keypoints[373][1])
+            const right_eye_6 =Math.abs(keypoints[388][1]-keypoints[390][1])
+            const right_eye_7 =Math.abs(keypoints[466][1]-keypoints[249][1])
+
+            // const right_distance =Math.sqrt(Math.abs(((keypoints[362][0]-keypoints[263][0])^2)+((keypoints[362][1]-keypoints[263][1])^2)+((keypoints[362][2]-keypoints[263][2])^2)))
+            const right_distance = Math.abs(keypoints[362][0]-keypoints[263][0])
+            const right_eye_sum = right_eye_1+right_eye_2+right_eye_3+right_eye_4+right_eye_5+right_eye_6+right_eye_7
+
+            console.log('SUMA OJO IZQUIERDO', left_eye_sum.toFixed(2))
+            console.log('SUMA OJO DERECHO',right_eye_sum.toFixed(2))
+            console.log('DISTANCIA IZQUIERDO',left_distance.toFixed(2))
+            console.log('DISTANCIA DERECHO',right_distance.toFixed(2))
+            console.log("------------------------------------------------------")
+
+            for (let i = 0; i < keypoints.length; i++) {
+              const [x, y, z] = keypoints[i];
+            }
+          }
+        }
+
+      })
+
+      setTimeout(function () {
+        requestAnimationFrame(predictWebcamLandmark);
+      }, 20000);
+
+
+  }
+
+
   const predictWebcam = () => {
 
     video.play();
@@ -404,7 +524,7 @@ const Embedding = (props) => {
         .then((stream) => {
           console.log("camara habilitada");
           video.srcObject = stream;
-          video.addEventListener("loadeddata", predictWebcam);
+          video.addEventListener("loadeddata", predictWebcamLandmark);
         })
         .catch((error) => {
           console.log("error para habilitar la camara");
@@ -420,14 +540,28 @@ const Embedding = (props) => {
     }
   };
 
+  const loadLandmarkModel = async () =>{
+  
+    const model = await faceLandmarksDetection.load(
+      faceLandmarksDetection.SupportedPackages.mediapipeFacemesh);
+  
+      setLandmarkDetectionModel(model)
+
+      console.log('MODELITO',model)
+  }
+
+
+
   const setupPage = () => {
+
     tf.setBackend(state.backend).then(() => {
+      
       console.log("back ready ");
       blazeface
         .load()
         .then( (loadedModel) => {
           loadModel()
-
+          loadLandmarkModel()
           setModel(loadedModel);
           setSectionClass("");
           console.log("modelo cargado");
