@@ -354,7 +354,7 @@ const Embedding = (props) => {
             console.log('SUMA OJO DERECHO',right_eye_sum.toFixed(2))
             console.log('DISTANCIA IZQUIERDO',left_distance.toFixed(2))
             console.log('DISTANCIA DERECHO',right_distance.toFixed(2))
-            console.log("------------------------------------------------------")
+            console.log("----------------------------------------------------")
 
             for (let i = 0; i < keypoints.length; i++) {
               const [x, y, z] = keypoints[i];
