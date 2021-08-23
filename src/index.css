@@ -1,13 +1,167 @@
 body {
-  margin: 0;
+  padding: 0;
+  margin: 0 !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+
+@font-face {
+  font-family:'Exo-Black';
+  src: local('Exo-Black'), url(./assets//fonts/Exo-Black.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-BlackItalic';
+  src: local('Exo-BlackItalic'), url(./assets//fonts/Exo-BlackItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-Bold';
+  src: local('Exo-Bold'), url(./assets//fonts/Exo-Bold.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-BoldItalic';
+  src: local('Exo-BoldItalic'), url(./assets//fonts/Exo-BoldItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-ExtraBold';
+  src: local('Exo-ExtraBold'), url(./assets//fonts/Exo-ExtraBold.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-ExtraBoldItalic';
+  src: local('Exo-ExtraBoldItalic'), url(./assets//fonts/Exo-ExtraBoldItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-ExtraLight';
+  src: local('Exo-ExtraLight'), url(./assets//fonts/Exo-ExtraLight.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-ExtraLightItalic';
+  src: local('Exo-ExtraLightItalic'), url(./assets//fonts/Exo-ExtraLightItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-Italic';
+  src: local('Exo-Italic'), url(./assets//fonts/Exo-Italic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-Light';
+  src: local('Exo-Light'), url(./assets//fonts/Exo-Light.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-LightItalic';
+  src: local('Exo-LightItalic'), url(./assets//fonts/Exo-LightItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-Medium';
+  src: local('Exo-Medium'), url(./assets//fonts/Exo-Medium.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-MediumItalic';
+  src: local('Exo-MediumItalic'), url(./assets//fonts/Exo-MediumItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-Regular';
+  src: local('Exo-Regular'), url(./assets//fonts/Exo-Regular.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-SemiBold';
+  src: local('Exo-SemiBold'), url(./assets//fonts/Exo-SemiBold.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-SemiBoldItalic';
+  src: local('Exo-SemiBoldItalic'), url(./assets//fonts/Exo-SemiBoldItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-Thin';
+  src: local('Exo-Thin'), url(./assets//fonts/Exo-Thin.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'Exo-ThinItalic';
+  src: local('Exo-ThinItalic'), url(./assets//fonts/Exo-ThinItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'PlayfairDisplay-Black';
+  src: local('PlayfairDisplay-Black'), url(./assets//fonts/PlayfairDisplay-Black.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'PlayfairDisplay-BlackItalic';
+  src: local('PlayfairDisplay-BlackItalic'), url(./assets//fonts/PlayfairDisplay-BlackItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'PlayfairDisplay-Bold';
+  src: local('PlayfairDisplay-Bold'), url(./assets//fonts/PlayfairDisplay-Bold.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'PlayfairDisplay-BoldItalic';
+  src: local('PlayfairDisplay-BoldItalic'), url(./assets//fonts/PlayfairDisplay-BoldItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'PlayfairDisplay-ExtraBold';
+  src: local('PlayfairDisplay-ExtraBold'), url(./assets//fonts/PlayfairDisplay-ExtraBold.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'PlayfairDisplay-ExtraBoldItalic';
+  src: local('PlayfairDisplay-ExtraBoldItalic'), url(./assets//fonts/PlayfairDisplay-ExtraBoldItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'PlayfairDisplay-Italic';
+  src: local('PlayfairDisplay-Italic'), url(./assets//fonts/PlayfairDisplay-Italic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'PlayfairDisplay-Medium';
+  src: local('PlayfairDisplay-Medium'), url(./assets//fonts/PlayfairDisplay-Medium.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'PlayfairDisplay-MediumItalic';
+  src: local('PlayfairDisplay-MediumItalic'), url(./assets//fonts/PlayfairDisplay-MediumItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'PlayfairDisplay-Regular';
+  src: local('PlayfairDisplay-Regular'), url(./assets//fonts/PlayfairDisplay-Regular.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'PlayfairDisplay-SemiBold';
+  src: local('PlayfairDisplay-SemiBold'), url(./assets//fonts/PlayfairDisplay-SemiBold.ttf) format('ttf');
+}
+
+@font-face {
+  font-family:'PlayfairDisplay-SemiBoldItalic';
+  src: local('PlayfairDisplay-SemiBoldItalic'), url(./assets//fonts/PlayfairDisplay-SemiBoldItalic.ttf) format('ttf');
 }

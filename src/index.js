@@ -7,8 +7,8 @@ import Routes from './Routes';
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <App /> */}
-    <Routes />
+    <App />
+    {/* <Routes /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

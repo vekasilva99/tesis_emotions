@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import * as tf from "@tensorflow/tfjs-core";
 import * as tf_2 from "@tensorflow/tfjs";
+import "../styles/pages/__pages-dir.scss";
 import * as tfjsWasm from "@tensorflow/tfjs-backend-wasm";
 import group from "./../assets/group.png";
 import {getEmotion} from "../helpers/getEmotion";
@@ -551,14 +552,24 @@ const Embedding = (props) => {
   }
 
 
+  async function loadBackend() {
+    console.log("entre")
+    await tf.ready();
+    return tf.getBackend();
+}
 
-  const setupPage = () => {
 
-    tf.setBackend(state.backend).then(() => {
+
+  const setupPage = async() => {
+
+  // loadBackend().then((backend) => console.log("Logrado")
+  //  .catch((e) => console.log(`Failed to load backend: ${e}`, true)))
+
+
+   loadBackend().then(async() => {
       
       console.log("back ready ");
-      blazeface
-        .load()
+      let r = await blazeface.load()
         .then( (loadedModel) => {
           loadModel()
           loadLandmarkModel()
@@ -567,7 +578,7 @@ const Embedding = (props) => {
           console.log("modelo cargado");
         })
         .catch((error) => {
-          console.log(error);
+          console.log("Error",error);
           console.log("no cargo");
         });
     });

@@ -1,0 +1,21 @@
+.big-circle{
+  width:50vw;
+  height:50vw;
+  background-color: #A9B18F;
+  border-radius: 100%;
+  position: absolute;
+  right:40px;
+  bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0 !important;
+}
+
+.small-circle{
+  background-color: #E5E5E5;
+  width:25vw;
+  height:25vw;
+  border-radius: 100%;
+  z-index: 0 !important;
+}
