@@ -1,0 +1,81 @@
+.app-no-account{
+  width: 100%;
+  min-height: 100%;
+max-height: 100%;
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden !important;
+  flex-direction: column;
+background-color: #A9B18F;
+padding-top:10vh ;
+padding-left: 10vw;
+padding-right: 10vw;
+
+
+}
+
+.input-container-column{
+
+width:100%;
+ max-height:60vh;
+ display: flex;
+ flex-wrap: wrap;
+ flex-direction: column;
+ justify-content: center;
+}
+
+.link-button{
+
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  position: fixed;
+  z-index: 10;
+  bottom: 7vh;
+  left: 20px;
+}
+
+.link-button h3{
+  font-size: 18px;
+  font-family: 'Exo-SemiBold';
+  color: white;
+}
+
+.link-button h4{
+  font-size: 18px;
+  font-family: 'Exo-SemiBold';
+  color: #F0B5B3;
+  text-decoration: underline  #F0B5B3;
+  margin-left: 5px;
+}
+
+.link-button2{
+  
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  position: fixed;
+  z-index: 10;
+  bottom: 3vh;
+  left: 20px;
+}
+
+.link-button2 h3{
+  font-size: 18px;
+  font-family: 'Exo-SemiBold';
+  color: white;
+}
+
+.link-button2 h4{
+  font-size: 18px;
+  font-family: 'Exo-SemiBold';
+  color: #F0B5B3;
+  text-decoration: underline  #F0B5B3;
+  margin-left: 5px;
+}

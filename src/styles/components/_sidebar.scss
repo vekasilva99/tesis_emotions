@@ -4,6 +4,7 @@
   position: fixed;
   background-color: rgba(229, 229, 229, 0.7);
   border-right: 2px solid white;
+  z-index: 10;
 }
 
 .logo-container{
@@ -79,4 +80,11 @@
     transition: all 0.5s;
   }
 
+}
+
+.green{
+  &:hover{
+    color: #CB807D;
+
+  }
 }

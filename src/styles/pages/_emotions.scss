@@ -1,0 +1,69 @@
+.app-emotions{
+  width: 100vw;
+max-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  overflow-x: hidden !important;
+  flex-direction: column;
+  // margin-left: 10vw;
+  padding: 50px;
+  padding-left: 15vw!important;
+
+}
+
+.emotions-container{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+flex-direction: row;
+
+
+}
+
+.emotion{
+  width:380px;
+  height: 340px;
+  background-color: pink;
+  margin:40px;
+  position: relative;
+  transition: all 1s;
+  &:hover{
+    transition: all 1s;
+    width:390px;
+    height: 350px;
+  }
+}
+
+.emotion-image{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  
+}
+
+.emotion-image-hover{
+  background-color: #CB807D;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0.6;
+  transition: all 1s;
+  cursor: pointer;
+
+}
+
+.emotion-title{
+  position: absolute;
+  margin: 0;
+  font-family: 'PlayfairDisplay-Medium';
+  color: black;
+  bottom: 0%;
+  left:-10%;
+  font-size: 60px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}

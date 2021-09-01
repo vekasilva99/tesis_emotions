@@ -1,7 +1,57 @@
 .big-circle{
-  width:50vw;
-  height:50vw;
+  width:45vw;
+  height:45vw;
+  min-width: 45vw;
+  max-height: 45vw;
+  min-height: 45vw;
+  max-width: 45vw;
   background-color: #A9B18F;
+  border-radius: 100%;
+  display: flex;
+  position: absolute;
+  top:50%;
+  right:5%;
+  transform: translateY(-50%);
+  justify-content: center;
+  align-items: center;
+  z-index: 2 !important;
+  opacity: 0.80;
+}
+
+.big-circle-image{
+  width:45vw;
+  height:45vw;
+  min-width: 45vw;
+  max-height: 45vw;
+  min-height: 45vw;
+  max-width: 45vw;
+  background-color: #A9B18F;
+  border-radius: 100%;
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  z-index: 2 !important;
+  opacity: 0.80;
+}
+
+.small-circle{
+  background-color: #4D4141;
+  width:22.5vw;
+  height:22.5vw;
+  border-radius: 100%;
+  z-index: 0 !important;
+  opacity: 0.60;
+}
+
+.image-circle{
+  width:45vw;
+  height:45vw;
+  min-width: 45vw;
+  max-height: 45vw;
+  min-height: 45vw;
+  max-width: 45vw;
+  background-color: pink;
   border-radius: 100%;
   position: absolute;
   right:40px;
@@ -11,11 +61,10 @@
   align-items: center;
   z-index: 0 !important;
 }
-
-.small-circle{
-  background-color: #E5E5E5;
-  width:25vw;
-  height:25vw;
+.video-presentation{
+  width: 100%;
   border-radius: 100%;
-  z-index: 0 !important;
+  height: 100%;
+  position: absolute;
+  z-index: 1 !important;
 }

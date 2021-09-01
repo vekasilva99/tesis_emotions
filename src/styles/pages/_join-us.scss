@@ -1,0 +1,24 @@
+.app-join{
+  width: 100vw;
+max-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  overflow-x: hidden !important;
+  flex-direction: column;
+  // margin-left: 10vw;
+  padding: 50px;
+  padding-left: 15vw!important;
+
+}
+
+.input-container{
+min-width: 100%;
+  width:100%;
+ max-height:300px;
+ display: flex;
+ flex-wrap: wrap;
+ flex-direction: column;
+ justify-content: center;
+}
+
