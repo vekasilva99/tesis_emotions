@@ -6,7 +6,7 @@ const Circle = ({drawerToggleClickHandler}) => {
 
   return (
  <div className="big-circle">
-     <div className="small-circle"></div>
+     <div className="small-circle" style={{background:"#E5E5E5",opacity:"1"}}></div>
  </div>
   );
 };

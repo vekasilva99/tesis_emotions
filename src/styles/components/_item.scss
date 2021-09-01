@@ -1,0 +1,22 @@
+.item-container{
+  width:240px;
+  height: 240px;
+  padding:20px;
+  cursor: pointer;
+  transition: all 1s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  &:hover{
+    background-color: #CB807D;
+    transition: all 1s;
+    box-shadow: 10px 22px 40px 0 rgba(0,0,0,0.20);
+  }
+}
+
+.logo{
+  max-width:100%;
+max-height:100%;
+}

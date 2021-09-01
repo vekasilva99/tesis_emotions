@@ -1,0 +1,38 @@
+.button-container{
+  background-color: white;
+  padding-bottom: 24px;
+  padding-top: 24px;
+  padding-left: 40px;
+  padding-right:40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  position: fixed;
+  z-index: 10;
+  bottom: 15vh;
+  transform: translateX(0);
+  transition: all 2s;
+}
+
+.hidden-button{
+  transform: translateX(100%);
+  transition: all 2s;
+
+}
+
+.button-title{
+  font-family: 'PlayfairDisplay-Medium';
+  color: black;
+  font-size: 40px;
+  margin:0 !important;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 1.20px;
+}
+
+.button-icon{
+font-size: 40px;
+margin-left: 120px;
+}

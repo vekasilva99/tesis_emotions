@@ -3,17 +3,17 @@ import {NavLink, withRouter} from 'react-router-dom';
 import "../../styles/components/__components-dir.scss";
 import { VscClose } from 'react-icons/vsc';
 
-const Drawer= ({sideDrawerOpen,drawerToggleClickHandler}) => {
+const Drawer= ({sideDrawerOpen,drawerToggleClickHandler,color}) => {
 
 
   return (
-    <div className={sideDrawerOpen ? "drawer-container drawer-visible" :"drawer-container"}>
-      <div className="drawer-close-container"><VscClose className="close-icon" onClick={drawerToggleClickHandler}/></div>
+    <div className={sideDrawerOpen ? "drawer-container drawer-visible" :"drawer-container"} style={{background:color ? color:""}}>
+      <div className="drawer-close-container"><VscClose className={color ? "close-icon green":"close-icon"} onClick={drawerToggleClickHandler}/></div>
       <div className="navlinks-container">
-      <NavLink to='/home' className="navlink">Home</NavLink>
-      <NavLink to='/home' className="navlink">Sign In</NavLink>
-      <NavLink to='/home' className="navlink">Sign Up</NavLink>
-      <NavLink to='/home' className="navlink">Join us</NavLink>
+      <NavLink to='/home' className={color ? "navlink green":"navlink"}>Home</NavLink>
+      <NavLink to='/home' className={color ? "navlink green":"navlink"}>Sign In</NavLink>
+      <NavLink to='/home' className={color ? "navlink green":"navlink"}>Sign Up</NavLink>
+      <NavLink to='/home' className={color ? "navlink green":"navlink"}>Join us</NavLink>
       </div>
       
 
