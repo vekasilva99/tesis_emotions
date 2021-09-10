@@ -1,16 +1,16 @@
 .input{
-  width: 400px;
+  width: 300px;
   height: 100px;
-  max-width: 400px;
+  max-width: 300px;
   max-height: 100px;
   margin-bottom: 50px;
 
 }
 
 .input.white{
-  width: 400px;
+  width: 300px;
   height: 100px;
-  max-width: 400px;
+  max-width: 300px;
   max-height: 100px;
   margin-bottom: 50px;
 
@@ -22,15 +22,16 @@
   border:none;
   border-bottom: 2px solid black;
   width: 100%;
-  font-size: 30px;
+  font-size: 20px;
   color:#A9B18F;
   font-family: 'PlayfairDisplay-MediumItalic';
   letter-spacing: 2px;
   padding-bottom: 8px;
+  transition: all 0.5s;
 }
 
 ::placeholder{
-  font-size: 30px;
+  font-size: 20px;
   color:black;
   font-family: 'PlayfairDisplay-MediumItalic';
   letter-spacing: 2px;
@@ -51,7 +52,7 @@ select:-webkit-autofill:focus {
 Demo
 
 .input input:-webkit-autofill::first-line{
-  font-size: 30px;
+  font-size: 20px;
   color:#E5E5E5;
   background-color: violet;
   font-family: 'PlayfairDisplay-MediumItalic';
@@ -71,12 +72,22 @@ select:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0px 1000px #A9B18F inset;
   transition: background-color 5000s ease-in-out 0s;
 }
-Demo
+
+.input-white.large-input.pink input:-webkit-autofill,
+.input-white.large-input.pink input:-webkit-autofill:hover, 
+.input-white.large-input.pink input:-webkit-autofill:focus,
+.input-white.pink input:-webkit-autofill,
+.input-white.pink input:-webkit-autofill:hover, 
+.input-white.pink input:-webkit-autofill:focus{
+  -webkit-text-fill-color: black;
+  -webkit-box-shadow: 0 0 0px 1000px #CB807D inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 
 .input-white input:-webkit-autofill::first-line{
-  font-size: 30px;
+  font-size: 20px;
   color:#A9B18F;
-  background-color: violet;
   font-family: 'PlayfairDisplay-MediumItalic';
   letter-spacing: 2px;
 }
@@ -97,6 +108,15 @@ Demo
 }
 
 .input-white{
+  width: 300px;
+  height: 100px;
+  max-width: 300px;
+  max-height: 100px;
+  margin-bottom: 50px;
+
+}
+
+.input-white.large-input{
   width: 400px;
   height: 100px;
   max-width: 400px;
@@ -105,11 +125,50 @@ Demo
 
 }
 
+.error-date input {
+  border-bottom: 2px solid #ef5350!important;
+  color: #ef5350 !important;
+  transition: all 0.5s;
+  ::placeholder{
+    color: #ef5350 !important;
+  }
+}
+
+.error {
+  border-bottom: 2px solid #ef5350!important;
+  color: #ef5350 !important;
+  transition: all 0.5s;
+  ::placeholder{
+    color: #ef5350 !important;
+  }
+}
+
 .input-white-field{
   outline:none;
   background-color: transparent;
   border:none;
-  border-bottom: 2px solid white !important;
+  border-bottom: 2px solid white ;
+  width: 100%;
+  font-size: 20px;
+  color:white;
+  font-family: 'PlayfairDisplay-MediumItalic';
+  letter-spacing: 2px;
+  padding-bottom: 8px;
+  transition: all 0.5s;
+}
+
+.input-white-field::placeholder{
+  font-size: 20px;
+  color:white;
+  font-family: 'PlayfairDisplay-MediumItalic';
+  letter-spacing: 2px;
+}
+
+.input-white-field.large-input{
+  outline:none;
+  background-color: transparent;
+  border:none;
+  border-bottom: 2px solid white ;
   width: 100%;
   font-size: 30px;
   color:white;
@@ -118,9 +177,34 @@ Demo
   padding-bottom: 8px;
 }
 
-.input-white-field::placeholder{
+.input-white-field.large-input::placeholder{
   font-size: 30px;
   color:white;
   font-family: 'PlayfairDisplay-MediumItalic';
   letter-spacing: 2px;
+}
+.react-datepicker-wrapper{
+
+  width:100%;
+}
+
+.react-datepicker__input-container{
+width: 100%;
+}
+
+.react-datepicker__input-container input{
+  outline:none;
+  background-color: transparent;
+  border:none;
+  border-bottom: 2px solid white ;
+  width: 100%;
+  font-size: 20px;
+  color:white;
+  font-family: 'PlayfairDisplay-MediumItalic';
+  letter-spacing: 2px;
+  padding-bottom: 8px;
+}
+
+.react-datepicker-popper{
+  z-index: 900000 !important;
 }

@@ -1,8 +1,7 @@
-import {all} from 'redux-saga/effects';
-
+import { all } from "redux-saga/effects";
+import signUpSagas from "./SignUp";
+import authSagas from "./Auth";
 
 export default function* rootSaga(getState) {
-  yield all([
-
-  ]);
+  yield all([signUpSagas(),authSagas()]);
 }

@@ -40,8 +40,9 @@
 
 body {
 font-family: helvetica, arial, sans-serif;
-margin: 2em;
 color: #3D3D3D;
+background-color: aqua;
+padding: 0%;
 }
 
 h1 {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ConnectedRouter } from 'connected-react-router'
 import { Provider } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import configureStore, { history } from './store';
 import CacheBuster from './CacheBuster';
@@ -15,9 +15,7 @@ function App() {
   return (
     <Provider store={store}>
     <ConnectedRouter history={history}>    
-              <Switch>
-                <Route path="/" component={Routes} />
-              </Switch>
+              <Routes />
     </ConnectedRouter>
     </Provider>
   );
