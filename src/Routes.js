@@ -14,6 +14,7 @@ import VideoDetail from './containers/VideoDetail'
 import VideoWatch from './containers/VideoWatch'
 import VideoStatistics from './containers/VideoStatistics'
 import Emotions from './containers/Emotions'
+import Prueba from './prueba';
 // import ProtectedRoute from './ProtectedRoute'
 
 function Routes() {
@@ -37,6 +38,8 @@ function Routes() {
           <Route exact path="/brand/:id/:video/watch" component={VideoWatch}/>,
           <Route exact path="/:video/statistics" component={VideoStatistics}/>,
           {/* <ProtectedRoute exact path="/:landing/main" role={isUser} component={UserMain}/>, */}
+
+          <Route exact path="/prueba" component={Prueba}/>,
         </Switch>
 
     </div>
