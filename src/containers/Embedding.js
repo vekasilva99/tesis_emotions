@@ -6,6 +6,7 @@ import "../styles/pages/__pages-dir.scss";
 import * as tfjsWasm from "@tensorflow/tfjs-backend-wasm";
 import group from "./../assets/group.png";
 import {getEmotion} from "../helpers/getEmotion";
+import {storage} from './../firebase';
 
 
   class scaling extends tf_2.layers.Layer {
@@ -525,7 +526,8 @@ const Embedding = (props) => {
         .then((stream) => {
           console.log("camara habilitada");
           video.srcObject = stream;
-          video.addEventListener("loadeddata", predictWebcamLandmark);
+          // video.addEventListener("loadeddata", predictWebcamLandmark);
+          video.addEventListener("loadeddata", predictWebcam);
         })
         .catch((error) => {
           console.log("error para habilitar la camara");
@@ -548,7 +550,7 @@ const Embedding = (props) => {
   
       setLandmarkDetectionModel(model)
 
-      console.log('MODELITO',model)
+      console.log('MODELITO', model)
   }
 
 
@@ -588,14 +590,15 @@ const Embedding = (props) => {
     setupPage();
     return () => {};
   }, []);
+
 const loadModel = async () =>{
   
   tf_2.serialization.registerClass(scaling);
   tf_2.serialization.registerClass(l2Norm);
   tf_2.serialization.registerClass(L2Norm);
 
-setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
-console.log('holaaas')
+  setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
+
 }
 
   // useEffect(() => {
