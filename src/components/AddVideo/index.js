@@ -39,8 +39,7 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion,open,videoSmall }) => {
       if(input.name == name )
      
         fields[index].value=event
-        console.log("entre",event)
-        console.log("entre",fields[index].value)
+  
         setInputFields(fields)
     });
 

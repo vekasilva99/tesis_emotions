@@ -8,6 +8,7 @@ import Button from "../components/Button/index";
 import validator from "validator";
 import { signUpCompanyRequest } from "../actions/SignUp";
 import ErrorPopUp from "../components/ErrorPopUp/index";
+import SuccessPopUp from "../components/SuccessPopUp/index";
 import { notLoading } from "../actions/Loader";
 import "../styles/pages/__pages-dir.scss";
 const JoinUs = (props) => {
@@ -150,6 +151,7 @@ console.log(error,emptyField)
        <div className={loader || submitted ? "full-page-loader" :"full-page-loader not-loading"}>
           <CircularProgress size={100} thickness={5}/></div>
       <ErrorPopUp inputs={inputFields} />
+      <SuccessPopUp inputs={inputFields} />
       <Sidebar drawerToggleClickHandler={drawerToggleClickHandler} />
       <Drawer
         sideDrawerOpen={sideDrawerOpen}

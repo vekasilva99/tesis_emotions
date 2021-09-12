@@ -525,7 +525,7 @@ const Embedding = (props) => {
         .then((stream) => {
           console.log("camara habilitada");
           video.srcObject = stream;
-          video.addEventListener("loadeddata", predictWebcamLandmark);
+          video.addEventListener("loadeddata", predictWebcam);
         })
         .catch((error) => {
           console.log("error para habilitar la camara");

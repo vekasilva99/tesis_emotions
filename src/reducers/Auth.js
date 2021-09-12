@@ -12,10 +12,13 @@ import {
     FETCH_USER_REQUEST,
     FETCH_USER_SUCCESS,
     FETCH_USER_ERROR,
+    SIGN_UP_ADMIN_SUCCESS,
+    SIGN_UP_COMPANY_SUCCESS,SIGN_UP_USER_SUCCESS,
     SIGN_UP_USER_ERROR,
     SIGN_UP_ADMIN_ERROR,
     SIGN_UP_COMPANY_ERROR,
-    REMOVE_ERROR
+    REMOVE_ERROR,
+    REMOVE_SUCCESS
 } from "../constants/ActionTypes";
 
 const INIT_STATE = {
@@ -30,7 +33,9 @@ const INIT_STATE = {
     mainImg:null,
     token:localStorage.getItem("token") ? localStorage.getItem("token"):null,
     _id:localStorage.getItem("_id") ? localStorage.getItem("_id"):null,
-    error:{}
+    error:{},
+    success:{}
+
 }
 
 export default (state = INIT_STATE, action) => {
@@ -59,7 +64,50 @@ export default (state = INIT_STATE, action) => {
                 birthdate:action.payload.data.data.birthdate ? action.payload.data.data.birthdate :null,
                 country:action.payload.data.data.country ? action.payload.data.data.country :null,
                 mainImg:action.payload.data.data.mainImg ? action.payload.data.data.mainImg : null,
-    
+               
+               
+            }
+        }
+        case SIGN_UP_USER_SUCCESS: {
+            // localStorage.setItem('_id',action.payload.data.data._id)
+            
+            return {
+                ...state,
+                loader: false,
+                // token:action.payload.data.token,
+                // _id:action.payload.data.data._id,
+                // role:action.payload.data.data.isAdmin != undefined ? action.payload.data.data.isAdmin ? "admin" :"user" :"company",
+                // full_name:action.payload.data.data.full_name,
+                // email:action.payload.data.data.email,
+                // gender:action.payload.data.data.gender ? action.payload.data.data.gender : null,
+                // active:action.payload.data.data.active,
+                // accepted:action.payload.data.data.accepted ? action.payload.data.data.accepted : null,
+                // birthdate:action.payload.data.data.birthdate ? action.payload.data.data.birthdate :null,
+                // country:action.payload.data.data.country ? action.payload.data.data.country :null,
+                // mainImg:action.payload.data.data.mainImg ? action.payload.data.data.mainImg : null,
+                success:{success:"User has been succesfully registered."},
+               
+            }
+        }
+        case SIGN_UP_COMPANY_SUCCESS: {
+  
+            
+            return {
+                ...state,
+                loader: false,
+                // token:action.payload.data.token,
+                // _id:action.payload.data.data._id,
+                // role:action.payload.data.data.isAdmin != undefined ? action.payload.data.data.isAdmin ? "admin" :"user" :"company",
+                // full_name:action.payload.data.data.full_name,
+                // email:action.payload.data.data.email,
+                // gender:action.payload.data.data.gender ? action.payload.data.data.gender : null,
+                // active:action.payload.data.data.active,
+                // accepted:action.payload.data.data.accepted ? action.payload.data.data.accepted : null,
+                // birthdate:action.payload.data.data.birthdate ? action.payload.data.data.birthdate :null,
+                // country:action.payload.data.data.country ? action.payload.data.data.country :null,
+                // mainImg:action.payload.data.data.mainImg ? action.payload.data.data.mainImg : null,
+                success:{success:"The company has been successfully registered. Please, wait for the confirmation email that we'll send you when your account has been activated."},
+               
             }
         }
         case SIGN_IN_USER_ERROR: {
@@ -144,6 +192,22 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 loader: false,
+                ...state,
+                loader: false,
+                token:action.payload.data.token,
+                _id:action.payload.data.data._id,
+                role:action.payload.data.data.isAdmin != undefined ? action.payload.data.data.isAdmin ? "admin" :"user" :"company",
+                full_name:action.payload.data.data.full_name,
+                email:action.payload.data.data.email,
+                gender:action.payload.data.data.gender ? action.payload.data.data.gender : null,
+                active:action.payload.data.data.active,
+                accepted:action.payload.data.data.accepted ? action.payload.data.data.accepted : null,
+                birthdate:action.payload.data.data.birthdate ? action.payload.data.data.birthdate :null,
+                country:action.payload.data.data.country ? action.payload.data.data.country :null,
+                mainImg:action.payload.data.data.mainImg ? action.payload.data.data.mainImg : null,
+               
+               
+                
     
             }
         }
@@ -183,7 +247,17 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 loader: false,
-                error:{}
+                error:{},
+                success:{}
+    
+            }
+        }
+        case REMOVE_SUCCESS: {
+            
+            return {
+                ...state,
+                loader: false,
+                success:{}
     
             }
         }
