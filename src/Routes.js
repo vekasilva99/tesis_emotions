@@ -60,12 +60,12 @@ function Routes() {
             component={ManuelModel}
           />
           ,
-          <GuardRoutesUser
+          {/* <GuardRoutesUser
             role={role}
             exact
             path="/embedding"
             component={Embedding}
-          />
+          /> */}
           ,
           <GuardRoutesCompany
             role={role}
