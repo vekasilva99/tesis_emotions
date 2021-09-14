@@ -37,8 +37,8 @@ function Routes() {
 
   useEffect(() => {
  
-    if (token && _id && role === null) {
-      dispatch(fetchUserRequest(_id));
+    if (token && role === null) {
+      dispatch(fetchUserRequest(token));
     }
   }, [role]);
 
@@ -60,12 +60,12 @@ function Routes() {
             component={ManuelModel}
           />
           ,
-          <GuardRoutesUser
+          {/* <GuardRoutesUser
             role={role}
             exact
             path="/embedding"
             component={Embedding}
-          />
+          /> */}
           ,
           <GuardRoutesCompany
             role={role}

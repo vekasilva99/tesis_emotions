@@ -597,11 +597,11 @@ const loadModel = async () =>{
   tf_2.serialization.registerClass(l2Norm);
   tf_2.serialization.registerClass(L2Norm);
 
-  console.log('holap, before');
   // setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
-  // setModel2(await tf_2.loadLayersModel('https://emotions-ai.s3.us-east-2.amazonaws.com/model/model.json'))
+  console.log('EMPEZANDO')
   setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS))
-  console.log('holap, after');
+  console.log('TERMINADO')
+
 }
 
   // useEffect(() => {

@@ -45,10 +45,9 @@ const signInUserRequest = async (payload) => {
 const fetchUserRequest = async (payload) => {
   console.log("UPDATE RESUME", payload);
   const options = {
-    url: "http://localhost:5000/users/" + payload.payload,
+    url: "http://localhost:5000/account",
     method: "GET",
-    headers: { "Content-Type": "application/json" },
-    data: payload.payload,
+    headers: { 'Authorization': `Bearer ${payload.payload}` },
   };
 
   let res = await axios(options)

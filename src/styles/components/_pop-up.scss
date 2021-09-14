@@ -60,7 +60,7 @@ align-items: flex-start;
 .pop-up-input-container{
   width:100%;
   margin-top: 100px;
-   max-height:60vh;
+   max-height:40vh;
    display: flex;
    flex-wrap: wrap;
    flex-direction: column;
@@ -163,6 +163,54 @@ position: relative;
   border-radius: 27px;
 }
 
+.upload-button-3{
+
+  width:150px;
+  height:180px;
+  border:4px dashed #A9B18F;
+  margin: 15px;
+  border-radius: 27px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  }
+  
+  .upload-button-icon-3{
+   width:100% !important;
+   position: absolute;
+   color: #A9B18F;
+   font-size: 50px;
+  
+  }
+.upload-button-2{
+
+  width:250px;
+  height:280px;
+  border:4px dashed #A9B18F;
+  margin: 15px;
+  border-radius: 27px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  }
+  
+  .upload-button-icon-2{
+   width:100% !important;
+   position: absolute;
+   color: #CB807D;
+   font-size: 70px;
+  
+  }
+  
+  .upload-button-image-2{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 27px;
+  }
+
 .pop-up-item-new-emotion-2 p{
   font-family: 'Exo-Medium';
   font-size: 20px;
@@ -212,10 +260,10 @@ h4{
 }
 }
 }
-.pop-up-container.pink{
+.pop-up-container-error.pink{
   background-color:#CB807D ;
 }
-.pop-up-container{
+.pop-up-container-error{
 
 background-color: #ef5350;
 display: flex;
@@ -245,4 +293,18 @@ h4{
   color: white;
   font-size: 80px;
   transition: all 0.2s;
+}
+
+.rdp-reticule{
+
+  border-top:2px solid black !important;
+}
+
+.rdp-column-container{
+  font-family: 'PlayfairDisplay-Medium';
+  color: #A9B18F;
+}
+
+.rdp-text-overlay{
+  color: #A9B18F;
 }

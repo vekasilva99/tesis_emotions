@@ -29,7 +29,7 @@ const SuccessPopUp = ({inputs,stateLocation,}) => {
      
       }}
     >
-      <div className="pop-up-container pink">
+      <div className="pop-up-container-error pink">
         <BiHappy className="message-icon" />
         <h4>
        {successMessage}

@@ -49,7 +49,7 @@ export default (state = INIT_STATE, action) => {
         }
         case SIGN_IN_USER_SUCCESS: {
             localStorage.setItem('_id',action.payload.data.data._id)
-            
+            localStorage.setItem('token',action.payload.data.token)
             return {
                 ...state,
                 loader: false,
@@ -69,7 +69,7 @@ export default (state = INIT_STATE, action) => {
             }
         }
         case SIGN_UP_USER_SUCCESS: {
-            // localStorage.setItem('_id',action.payload.data.data._id)
+            localStorage.setItem('token',action.payload.data.token)
             
             return {
                 ...state,
@@ -188,6 +188,8 @@ export default (state = INIT_STATE, action) => {
             }
         }
         case SIGN_IN_COMPANY_SUCCESS: {
+            console.log("SUCCES",action.payload.data.token)
+            localStorage.setItem('token',action.payload.data.token)
             
             return {
                 ...state,
