@@ -237,7 +237,7 @@ const Embedding = (props) => {
     setCurrentImage(url);
 
     // Crear tensor con la información de la imagen ya en blanco y negro.
-    console.log(JSON.stringify(baw_array));
+    // console.log(JSON.stringify(baw_array));
     let finalIMG = tf.tensor(baw_array);
     finalIMG = tf.reshape(finalIMG, [1, modelImageSize, modelImageSize, 3])
     console.log('i', index);
@@ -597,8 +597,11 @@ const loadModel = async () =>{
   tf_2.serialization.registerClass(l2Norm);
   tf_2.serialization.registerClass(L2Norm);
 
-  setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
-
+  console.log('holap, before');
+  // setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
+  // setModel2(await tf_2.loadLayersModel('https://emotions-ai.s3.us-east-2.amazonaws.com/model/model.json'))
+  setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS))
+  console.log('holap, after');
 }
 
   // useEffect(() => {
