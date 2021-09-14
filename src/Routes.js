@@ -37,8 +37,8 @@ function Routes() {
 
   useEffect(() => {
  
-    if (token && _id && role === null) {
-      dispatch(fetchUserRequest(_id));
+    if (token && role === null) {
+      dispatch(fetchUserRequest(token));
     }
   }, [role]);
 

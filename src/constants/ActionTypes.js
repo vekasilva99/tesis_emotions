@@ -32,3 +32,20 @@ export const REMOVE_SUCCESS= 'remove_error'
 
 export const NOT_LOADING= 'not_loading'
 export const LOADING= 'loading'
+
+
+export const FETCH_COMPANIES_REQUEST= 'fetch_companies_request'
+export const FETCH_COMPANIES_SUCCESS= 'fetch_companies_success'
+export const FETCH_COMPANIES_ERROR= 'fetch_companies_error'
+
+export const ADD_EMOTION_REQUEST= 'add_emotion_request'
+export const ADD_EMOTION_SUCCESS= 'add_emotion_success'
+export const ADD_EMOTION_ERROR= 'add_emotion_error'
+
+export const FETCH_EMOTIONS_REQUEST= 'fetch_emotions_request'
+export const FETCH_EMOTIONS_SUCCESS= 'fetch_emotions_success'
+export const FETCH_EMOTIONS_ERROR= 'fetch_emotions_error'
+
+export const ADD_VIDEO_REQUEST= 'add_video_request'
+export const ADD_VIDEO_SUCCESS= 'add_video_success'
+export const ADD_VIDEO_ERROR= 'add_video_error'
