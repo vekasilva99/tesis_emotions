@@ -29,7 +29,7 @@ const ErrorPopUp = ({inputs,stateLocation,}) => {
      
       }}
     >
-      <div className="pop-up-container">
+      <div className="pop-up-container-error">
         <BiSad className="message-icon" />
         <h4>
        {errorMessage}
