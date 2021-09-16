@@ -159,6 +159,7 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 loader: false,
+                _id:action.payload.data.data._id,
                 role:action.payload.data.data.isAdmin != undefined ? action.payload.data.data.isAdmin ? "admin" :"user" :"company",
                 full_name:action.payload.data.data.full_name,
                 email:action.payload.data.data.email,
