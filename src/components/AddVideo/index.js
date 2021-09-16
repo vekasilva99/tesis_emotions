@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "../../styles/components/__components-dir.scss";
 import polar from "../../assets/images/Polar.png";
 import Button from "../ButtonPopUp/index";
 import Input from "../Input/index";
 import { FaPlus } from "react-icons/fa";
 import DurationPicker from 'react-duration-picker'
+import validator from "validator";
+import { addVideoRequest } from "../../actions";
+
 const AddVideoPopUp = ({ open }) => {
+  const dispatch=useDispatch()
   const [submitted,setSubmitted]=useState(false)
   const [duration,setDuration]=useState(null)
   const [image, setImage] = useState(null);
   const [preview,setPreview]=useState(null)
+  const { token, _id, role,loader } = useSelector((state) => ({
+    ...state.auth,
+  }));
 
+  console.log("ID", _id)
   const uploadImage =(files)=>{
   
 
@@ -68,6 +77,56 @@ const AddVideoPopUp = ({ open }) => {
 setDuration(d)
   }
 
+  const onSubmit =()=>{
+    setSubmitted(true);
+    let emptyField = false;
+    let error = false;
+
+
+    if (inputFields[0].value === "") {
+      setError(true, 0, "Required Field");
+      emptyField = true;
+    } 
+    if (inputFields[1].value === "") {
+      setError(true, 1, "Required Field");
+      console.log("2");
+      emptyField = true;
+    } 
+    if (duration===null) {
+      // setError(true, 2, "Required Field");
+      emptyField = true;
+
+    } 
+     if (image === null) {
+      // setError(true, 3, "Required Field");
+      emptyField = true;
+
+    } 
+    if (!validator.isURL(inputFields[1].value)) {
+      setError(true, 1, "Invalid Email");
+      error = true;
+      console.log("8");
+    }
+ 
+    console.log(error, emptyField);
+   
+    if (!error && !emptyField) {
+      console.log("entreeeee");
+      let payload = {
+        name: inputFields[0].value,
+        companyID: _id,
+        mainImg: image,
+        duration: duration.hours*3600+duration.minutes*60+duration.seconds,
+        link: inputFields[1].value,
+        active: true,
+      };
+     
+      dispatch(addVideoRequest(payload));
+    }else{
+      setTimeout(() => {setSubmitted(false)}, 1200);
+    }
+  }
+
 
   return (
     <div className={open ? "pop-up-container":"pop-up-container closed"}>
@@ -113,7 +172,7 @@ setDuration(d)
       
   
         </div>
-        <Button title={"Add Video."} position={"right"} event={()=>{console.log('video')}}/>
+        <Button event={()=>{onSubmit()}}title={"Add Video."} position={"right"} />
       </div>
     </div>
   );
