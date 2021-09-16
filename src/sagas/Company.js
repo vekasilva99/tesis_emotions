@@ -13,11 +13,11 @@ import { storage } from "../firebase";
 const addNewVideoRequest = async (payload) => {
   console.log("ENTRE PARA ACA",payload)
    storage
-    .ref(`companies/videos/${payload._id}`)
+    .ref(`videos/${payload._id}`)
     .put(payload.mainImg)
     .then(() => {
       storage
-        .ref(`companies/videos`)
+        .ref(`videos`)
         .child(payload._id)
         .getDownloadURL()
         .then(async (url) => {
@@ -47,7 +47,9 @@ const addNewVideoRequest = async (payload) => {
           //     return err;
           //   });
           // return res;
-        });
+        }).catch(err=>{
+          console.log("error", err)
+        })
     });
 
   return "res2";
