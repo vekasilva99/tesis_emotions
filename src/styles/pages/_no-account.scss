@@ -21,11 +21,23 @@ padding-right: 10vw;
 .input-container-column{
 
 width:100%;
- max-height:60vh;
+height: 60vh;
+ max-height:500px;
  display: flex;
  flex-wrap: wrap;
  flex-direction: column;
  justify-content: center;
+ @media screen and (max-width: 800px) {
+  max-height:100%;
+  flex-direction: row;
+  overflow: scroll;
+ }
+ @media screen and (max-width: 1024px) {
+  max-height:70vh;
+ }
+ @media screen and (min-width: 3000px) {
+  max-height:60vh;
+ }
 }
 
 .link-button{
@@ -46,6 +58,9 @@ width:100%;
   font-size: 18px;
   font-family: 'Exo-SemiBold';
   color: white;
+  @media screen and (min-width: 3000px) {
+    font-size: 2vw !important;
+  }
 }
 
 .link-button h4{
@@ -54,6 +69,10 @@ width:100%;
   color: #F0B5B3;
   text-decoration: underline  #F0B5B3;
   margin-left: 5px;
+  @media screen and (min-width: 3000px) {
+    font-size: 2vw;
+    margin-left: 0.8vw;
+  }
 }
 
 .link-button.green h4{
@@ -87,6 +106,9 @@ width:100%;
   font-size: 18px;
   font-family: 'Exo-SemiBold';
   color: white;
+  @media screen and (min-width: 3000px) {
+    font-size: 2vw !important;
+  }
 }
 
 .link-button2 h4{
@@ -95,4 +117,8 @@ width:100%;
   color: #F0B5B3;
   text-decoration: underline  #F0B5B3;
   margin-left: 5px;
+  @media screen and (min-width: 3000px) {
+    font-size: 2vw;
+    margin-left: 0.8vw;
+  }
 }

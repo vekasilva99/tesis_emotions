@@ -1,34 +1,52 @@
 import React, { useEffect, useState } from "react";
 
 import "../../styles/components/__components-dir.scss";
-const Input = ({item, changeInput,white, index, submitted, changeError,setSubmitted}) => {
+const Input = ({
+  item,
+  changeInput,
+  white,
+  index,
+  submitted,
+  changeError,
+  setSubmitted,
+}) => {
   const [error, setError] = useState(item.error);
   const [value, setValue] = useState(item.value);
   const onChange = (event) => {
     setSubmitted();
-    setTimeout(() => {changeError(true, index, "");}, 400);
-  
-    
-  
+    setTimeout(() => {
+      changeError(true, index, "");
+    }, 400);
+
     setValue(event.target.value);
     changeInput(item.name, event.target.value);
   };
   useEffect(() => {
     setError(item.error);
-
   }, [submitted]);
 
-  useEffect(() => {
-    
-  
-  }, [item]);
+  useEffect(() => {}, [item]);
   return (
-<div className={white ? "input-white":"input"}>
-  <h2 className="placeholder">{item.name}</h2>
- <input name={item.name} className={white ? item.error !="" ? "input-white-field error": "input-white-field":item.error !="" ? "input-field error":"input-field"} value={value} placeholder={item.placeholder} type={item.type} onChange={onChange}/>
- 
-</div>
-  )
+    <div className={white ? "input-white" : "input"}>
+      <h2 className="placeholder">{item.name}</h2>
+      <input
+        name={item.name}
+        className={
+          white
+            ? item.error != ""
+              ? "input-white-field error"
+              : "input-white-field"
+            : item.error != ""
+            ? "input-field error"
+            : "input-field"
+        }
+        value={value}
+        placeholder={item.placeholder}
+        type={item.type}
+        onChange={onChange}
+      />
+    </div>
+  );
 };
 
 export default Input;

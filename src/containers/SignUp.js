@@ -21,12 +21,10 @@ const SignUp = (props) => {
   const [submitted, setSubmitted] = useState(false);
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
   const errors = useSelector((state) => ({ ...state.auth.error }));
-  const loader = useSelector((state) => ({ ...state.signUp})).loader;
-  console.log("LOADER",loader)
+  const loader = useSelector((state) => ({ ...state.signUp })).loader;
 
   const drawerToggleClickHandler = () => {
     setSideDrawerOpen(!sideDrawerOpen);
-    console.log("click");
   };
 
   const changeInput = (name, event) => {
@@ -48,8 +46,6 @@ const SignUp = (props) => {
   };
 
   useEffect(() => {
-    console.log("hollllll");
-    
     if (errors.emailError && errors.passwordError) {
       setError(true, 0, errors.emailError);
       setError(true, 0, errors.passwordError);
@@ -57,8 +53,11 @@ const SignUp = (props) => {
   }, [errors]);
 
   useEffect(() => {
-    if(loader){
-    setTimeout(() => {setSubmitted(false);dispatch(notLoading())}, 1800);
+    if (loader) {
+      setTimeout(() => {
+        setSubmitted(false);
+        dispatch(notLoading());
+      }, 1800);
     }
   }, [loader]);
 
@@ -131,44 +130,34 @@ const SignUp = (props) => {
   const signUp = () => {
     setSubmitted(true);
     let emptyField = false;
-    console.log('FALTA ESTO 0',selectFields[0])
+
     let error = false;
-    console.log(inputFields);
-    console.log(selectFields);
+
     if (inputFields[0].value === "") {
       setError(true, 0, "Required Field");
-      console.log("1");
       emptyField = true;
-    } 
+    }
     if (inputFields[1].value === "") {
       setError(true, 1, "Required Field");
-      console.log("2");
       emptyField = true;
-    } 
+    }
     if (inputFields[2].value === "") {
       setError(true, 2, "Required Field");
       emptyField = true;
-      console.log("3");
-    } 
-     if (inputFields[3].value === "") {
+    }
+    if (inputFields[3].value === "") {
       setError(true, 3, "Required Field");
       emptyField = true;
-      console.log("4");
-    } 
+    }
     if (selectFields[0].selected === "") {
-  
       setError(false, 0, "Required Field");
-      console.log('FALTA ESTO',selectFields[0])
       emptyField = true;
-      console.log("5");
-    } 
-     if (selectFields[1].selected === "") {
+    }
+    if (selectFields[1].selected === "") {
       setError(false, 1, "Required Field");
       emptyField = true;
-      console.log("6");
-    } 
+    }
     if (birthdate === new Date()) {
-      console.log("7");
       setBirthdateError("Required Field");
       emptyField = true;
     }
@@ -176,23 +165,18 @@ const SignUp = (props) => {
     if (!validator.isEmail(inputFields[1].value)) {
       setError(true, 1, "Invalid Email");
       error = true;
-      console.log("8");
     }
     if (!validator.isStrongPassword(inputFields[2].value)) {
       setError(true, 2, "Weak Password");
       error = true;
-      console.log("9");
     }
     if (inputFields[2].value != inputFields[3].value) {
       setError(true, 2, "Passwords do not match");
       setError(true, 3, "Passwords do not match");
       error = true;
-      console.log("10");
     }
-    console.log(error, emptyField);
-   
+
     if (!error && !emptyField) {
-      console.log("entreeeee");
       let payload = {
         email: inputFields[1].value,
         password: inputFields[3].value,
@@ -203,22 +187,30 @@ const SignUp = (props) => {
         active: true,
         isAdmin: false,
       };
-     
+
       dispatch(signUpUserRequest(payload));
-    }else{
-      setTimeout(() => {setSubmitted(false)}, 1200);
+    } else {
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 1200);
     }
-   
   };
 
   return (
     <>
-    <div className={loader || submitted ? "full-page-loader" :"full-page-loader not-loading"}>
-          <CircularProgress size={100} thickness={5}/></div>
+      <div
+        className={
+          loader || submitted
+            ? "full-page-loader"
+            : "full-page-loader not-loading"
+        }
+      >
+        <CircularProgress size={100} thickness={5} />
+      </div>
       <ErrorPopUp inputs={inputFields} />
       <SuccessPopUp inputs={inputFields} />
       <div className="app-no-account">
-        <div className="input-container-column">
+        <div className="input-container-column" style={{background:"pink"}}>
           {selectFields.map((input, index) => (
             <Select
               changeError={setError}
@@ -232,8 +224,10 @@ const SignUp = (props) => {
             />
           ))}
           <DatePicker
-          errorDate={birthdateError}
-          removeError={()=>{setBirthdateError("")}}
+            errorDate={birthdateError}
+            removeError={() => {
+              setBirthdateError("");
+            }}
             white={true}
             selected={birthdate}
             name={"Birthdate"}

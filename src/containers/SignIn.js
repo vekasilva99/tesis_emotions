@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../components/Sidebar/index";
 import Drawer from "../components/Drawer/index";
@@ -11,23 +12,21 @@ import validator from "validator";
 import { signInUserRequest } from "../actions/SignIn";
 import "../styles/pages/__pages-dir.scss";
 const SignIn = (props) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [submitted, setSubmitted] = useState(false);
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
-  const errors = useSelector((state) => ({...state.auth.error }));
-  console.log("STATEs", errors);
+  const errors = useSelector((state) => ({ ...state.auth.error }));
 
   const drawerToggleClickHandler = () => {
     setSideDrawerOpen(!sideDrawerOpen);
-    console.log("click");
   };
 
   const changeInput = (name, event) => {
     let fields = inputFields;
     var item = inputFields.find(function (input, index) {
       if (input.name == name) fields[index].value = event;
-      console.log("entre", event);
-      console.log("entre", fields[index].value);
+
       setInputFields(fields);
     });
   };
@@ -44,28 +43,28 @@ const SignIn = (props) => {
       placeholder: "Enter your email",
       name: "email",
       value: "",
-      error: !errors ? "" : errors.emailError ? errors.emailError:"",
+      error: !errors ? "" : errors.emailError ? errors.emailError : "",
       type: "email",
     },
     {
       placeholder: "Enter your password",
       name: "password",
       value: "",
-      error: errors==={}  ? "" : errors.passwordError ? errors.passwordError : "",
+      error:
+        errors === {} ? "" : errors.passwordError ? errors.passwordError : "",
       type: "password",
     },
   ]);
 
   useEffect(() => {
-    console.log("hollllll")
-    if(errors.emailError && errors.passwordError){
-  setError(true,0,errors.emailError)
-  setError(true,0,errors.passwordError)
+    if (errors.emailError && errors.passwordError) {
+      setError(true, 0, errors.emailError);
+      setError(true, 0, errors.passwordError);
     }
   }, [errors]);
-console.log(inputFields)
+
   const signIn = () => {
-    setSubmitted(true)
+    setSubmitted(true);
     let emptyField = false;
     let error = false;
     if (inputFields[0].value === "") {
@@ -84,6 +83,7 @@ console.log(inputFields)
         signInUserRequest({
           email: inputFields[0].value,
           password: inputFields[1].value,
+          history: history.push("/home"),
         })
       );
     }
@@ -91,9 +91,9 @@ console.log(inputFields)
 
   return (
     <>
-    <ErrorPopUp inputs={inputFields} />
+      <ErrorPopUp inputs={inputFields} />
       <div className="app-no-account">
-        <div className="input-container-column">
+        <div className="input-container-column" >
           {inputFields.map((input, index) => (
             <Input
               changeError={setError}
@@ -109,11 +109,11 @@ console.log(inputFields)
           ))}
         </div>
         <Button event={signIn} title={"Sign In"} position={"left"} top />
-        <div className="link-button" style={{ bottom: "20vh" }}>
+        <div className="link-button" style={{ bottom: "16vh" }}>
           <h3>Wanto to watch video without an account? </h3>
           <h4>Click Here</h4>
         </div>
-        <div className="link-button2" style={{ bottom: "16vh" }}>
+        <div className="link-button2" style={{ bottom: "12vh" }}>
           <h3>Want to create an account? </h3>
           <h4> Sign Up Here</h4>
         </div>

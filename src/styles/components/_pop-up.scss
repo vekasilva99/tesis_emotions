@@ -41,18 +41,33 @@ align-items: flex-start;
 
 .pop-up-item-new-emotion-1{
  
-  width: 60%;
+  width: 50%;
   height: 100%;
   min-height:55vh;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+}
+
+.pop-up-item-new-emotion-1-container{
+ 
+  width: 100%;
+
+  height: 100%;
+  display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
+}
+
+.canvas-upload{
+  background-color: hotpink;
 }
 
 .pop-up-item-new-emotion-2{
 
-  width: 40%;
+  width: 50%;
   height: 100%;
   min-height:55vh;
 }
@@ -131,9 +146,9 @@ font-style: none;
   background: transparent;  /* Optional: just make scrollbar invisible */
 }
 /* Optional: show position indicator in red */
-::-webkit-scrollbar-thumb {
-  background: #FF0000;
-}
+// ::-webkit-scrollbar-thumb {
+//   background: #FF0000;
+// }
 
 .upload-button{
 
@@ -232,19 +247,20 @@ position: relative;
   align-items: start;
   visibility: visible;
 opacity: 1;
-transition: all 1s;
-.pop-up-container{
+transition: all 3s;
+.pop-up-container-error{
   width:500px;
 height:250px;
 transition: all 2s;
 }
 
+
 }
 .pop-up.not-visible{
 visibility: hidden;
 opacity: 0;
-transition: all 2s;
-.pop-up-container{
+transition: all 3s;
+.pop-up-container-error{
 width:0px;
 height:0px;
 transition: all 2s;
@@ -287,6 +303,11 @@ h4{
 
 }
 
+.pop-up-container-error.company{
+  background: #A9B18F;
+
+}
+
 .message-icon{
   visibility: visible;
   opacity: 1;
@@ -308,3 +329,4 @@ h4{
 .rdp-text-overlay{
   color: #A9B18F;
 }
+

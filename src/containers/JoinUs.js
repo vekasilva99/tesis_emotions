@@ -21,24 +21,19 @@ const JoinUs = (props) => {
   const errors = useSelector((state) => ({ ...state.auth.error }));
   const loader = useSelector((state) => ({ ...state.signUp })).loader;
   const [image, setImage] = useState(null);
-  const [preview,setPreview]=useState(null)
+  const [preview, setPreview] = useState(null);
   const drawerToggleClickHandler = () => {
     setSideDrawerOpen(!sideDrawerOpen);
-    console.log("click");
   };
 
   const changeInput = (name, event) => {
     let fields = inputFields;
     var item = inputFields.find(function (input, index) {
       if (input.name == name) fields[index].value = event;
-      console.log("entre", event);
-      console.log("entre", fields[index].value);
       setInputFields(fields);
     });
   };
   useEffect(() => {
-    console.log("hollllll");
-
     if (errors.emailError && errors.passwordError) {
       setError(true, 0, errors.emailError);
     }
@@ -61,7 +56,13 @@ const JoinUs = (props) => {
       error: "",
       type: "text",
     },
-    { placeholder: "Enter email", name: "email", value: "", type: "email" },
+    {
+      placeholder: "Enter email",
+      name: "email",
+      value: "",
+      error: "",
+      type: "email",
+    },
     {
       placeholder: "Enter password",
       name: "password",
@@ -92,45 +93,38 @@ const JoinUs = (props) => {
     let error = false;
     if (inputFields[0].value === "") {
       setError(true, 0, "Required Field");
-      console.log("1");
+
       emptyField = true;
     } else if (inputFields[1].value === "") {
       setError(true, 1, "Required Field");
-      console.log("2");
+
       emptyField = true;
     } else if (inputFields[2].value === "") {
       setError(true, 2, "Required Field");
       emptyField = true;
-      console.log("3");
     } else if (inputFields[3].value === "") {
       setError(true, 3, "Required Field");
       emptyField = true;
-      console.log("4");
     }
 
     if (!validator.isEmail(inputFields[1].value)) {
       setError(true, 1, "Invalid Email");
       error = true;
-      console.log("8");
     }
     if (!validator.isStrongPassword(inputFields[2].value)) {
       setError(true, 2, "Weak Password");
       error = true;
-      console.log("9");
     }
     if (inputFields[2].value != inputFields[3].value) {
       setError(true, 2, "Passwords do not match");
       setError(true, 3, "Passwords do not match");
       error = true;
-      console.log("10");
     }
-    if (image==null) {
+    if (image == null) {
       error = true;
-      console.log("10");
     }
-    console.log(error, emptyField);
+
     if (!error && !emptyField) {
-      console.log("entreeeee");
       let payload = {
         email: inputFields[1].value,
         password: inputFields[3].value,
@@ -139,8 +133,8 @@ const JoinUs = (props) => {
         active: false,
         accepted: false,
       };
-      setImage(null)
-      setOpen(false)
+      setImage(null);
+      setOpen(false);
       dispatch(signUpCompanyRequest(payload));
     } else {
       setTimeout(() => {
@@ -149,96 +143,85 @@ const JoinUs = (props) => {
     }
   };
 
-
   const preSignUp = () => {
-
     let emptyField = false;
     let error = false;
     if (inputFields[0].value === "") {
       setError(true, 0, "Required Field");
-      console.log("1");
+
       emptyField = true;
     } else if (inputFields[1].value === "") {
       setError(true, 1, "Required Field");
-      console.log("2");
+
       emptyField = true;
     } else if (inputFields[2].value === "") {
       setError(true, 2, "Required Field");
       emptyField = true;
-      console.log("3");
     } else if (inputFields[3].value === "") {
       setError(true, 3, "Required Field");
       emptyField = true;
-      console.log("4");
     }
 
     if (!validator.isEmail(inputFields[1].value)) {
       setError(true, 1, "Invalid Email");
       error = true;
-      console.log("8");
     }
     if (!validator.isStrongPassword(inputFields[2].value)) {
       setError(true, 2, "Weak Password");
       error = true;
-      console.log("9");
     }
     if (inputFields[2].value != inputFields[3].value) {
       setError(true, 2, "Passwords do not match");
       setError(true, 3, "Passwords do not match");
       error = true;
-      console.log("10");
     }
- 
-    console.log(error, emptyField);
-    if (!error && !emptyField) {
-      setOpen(true)
 
-    } 
+    if (!error && !emptyField) {
+      setOpen(true);
+    }
   };
 
-  const uploadImage =(files)=>{
-  
-
-  setImage(files[0])
-    setPreview(URL.createObjectURL(files[0]))
-  
-  }
+  const uploadImage = (files) => {
+    setImage(files[0]);
+    setPreview(URL.createObjectURL(files[0]));
+  };
   return (
-    <>      <div className={open ? "add-company-image" :"add-company-image-hidden" }>
-    <div className="add-company-image-container">
-      <h4>Add Logo</h4>
-      <label
-        style={{ marginBottom: "5px", marginTop: "70px" }}
-        className="upload-button-2"
-      >
-        <input
-          style={{ visibility: "hidden" }}
-          onChange={(event) => {
-            uploadImage(event.target.files)
-          }}
-          type="file"
-          accept="image/*"
-          multiple={false}
-        />
+    <>
+      {" "}
+      <div className={open ? "add-company-image" : "add-company-image-hidden"}>
+        <div className="add-company-image-container">
+          <h4>Add Logo</h4>
+          <label
+            style={{ marginBottom: "5px", marginTop: "70px" }}
+            className="upload-button-2"
+          >
+            <input
+              style={{ visibility: "hidden" }}
+              onChange={(event) => {
+                uploadImage(event.target.files);
+              }}
+              type="file"
+              accept="image/*"
+              multiple={false}
+            />
 
-        {image === null ? (
-          <FaPlus className="upload-button-icon-2" />
-        ) : (
-          <img
-            className="upload-button-image-2"
-            src={URL.createObjectURL(image)}
+            {image === null ? (
+              <FaPlus className="upload-button-icon-2" />
+            ) : (
+              <img
+                className="upload-button-image-2"
+                src={URL.createObjectURL(image)}
+              />
+            )}
+          </label>
+          <ButtonPopUp
+            color={"pink"}
+            title={"Join Now."}
+            position={"right"}
+            event={signUp}
           />
-        )}
-      </label>
-      <ButtonPopUp
-        color={"pink"}
-        title={"Join Now."}
-        position={"right"}
-        event={signUp}
-      />
-    </div>
-  </div>
-
+        </div>
+      </div>
       <div
         className={
           loader || submitted
@@ -255,9 +238,7 @@ const JoinUs = (props) => {
         sideDrawerOpen={sideDrawerOpen}
         drawerToggleClickHandler={drawerToggleClickHandler}
       />
-
       <div className="app-join">
-        
         <h1
           className="subtitle"
           style={{ marginTop: "0px", marginBottom: "60px" }}
@@ -279,7 +260,13 @@ const JoinUs = (props) => {
             />
           ))}
         </div>
-        <Button event={()=>{preSignUp()}} title={"Join Now."} position={"right"} />
+        <Button
+          event={() => {
+            preSignUp();
+          }}
+          title={"Join Now."}
+          position={"right"}
+        />
       </div>
     </>
   );

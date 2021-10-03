@@ -1,35 +1,44 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar/index";
 import Drawer from "../components/Drawer/index";
-
+import { useParams } from "react-router-dom";
 import VideoItem from "../components/VideoItem/index";
 import Button from "../components/Button/index";
-import polar from '../assets/images/Polar.png'
+import { useDispatch, useSelector } from "react-redux";
+import polar from "../assets/images/Polar.png";
+import { fetchVideosRequest } from "../actions/Brands";
 import "../styles/pages/__pages-dir.scss";
 const BrandDetail = (props) => {
-  console.log(window.location.pathname)
-  const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
+  const dispatch = useDispatch();
 
+  const [visible, setVisible] = useState(false);
+  const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
+  const { id } = useParams();
   const drawerToggleClickHandler = () => {
     setSideDrawerOpen(!sideDrawerOpen);
-    console.log("click");
   };
 
-  const changeInput=(name,event)=>{
-   
-    let fields= inputFields;
-    var item = inputFields.find(function(input, index) {
- 
-      if(input.name == name )
-     
-        fields[index].value=event
-        console.log("entre",event)
-        console.log("entre",fields[index].value)
-        setInputFields(fields)
+  const { selectedCompany, videos, loader } = useSelector((state) => ({
+    ...state.brands,
+  }));
+
+  const changeInput = (name, event) => {
+    let fields = inputFields;
+    var item = inputFields.find(function (input, index) {
+      if (input.name == name) fields[index].value = event;
+      setInputFields(fields);
     });
-
-  }
-
+  };
+  useEffect(() => {
+    if (!visible) {
+      setTimeout(() => {
+        setVisible(true);
+      }, 600);
+    }
+  }, []);
+  useEffect(() => {
+    dispatch(fetchVideosRequest(id));
+  }, []);
   const [inputFields, setInputFields] = useState([
     {
       name: "The Polar Bowl",
@@ -56,20 +65,23 @@ const BrandDetail = (props) => {
         sideDrawerOpen={sideDrawerOpen}
         drawerToggleClickHandler={drawerToggleClickHandler}
       />
-
-      <div className="app-videos">
-        <h1 className="subtitle" style={{ marginTop: "0px",marginBottom:"60px",color:"white" }}>
-          Coca Cola.
-        </h1>
-        <div className="videos-container">
-   <VideoItem image={polar}/>
-   <VideoItem image={polar}/>
-   <VideoItem image={polar}/>
-   <VideoItem image={polar}/>
-   <VideoItem image={polar}/>
+      {selectedCompany && videos.length > 0 ? (
+        <div className="app-videos">
+          <h1
+            className={visible ? "subtitle" : "subtitle-onload"}
+            style={{ marginTop: "0px", marginBottom: "60px", color: "white" }}
+          >
+            {selectedCompany.full_name}.
+          </h1>
+          <div
+            className={visible ? "videos-container" : "videos-container-onload"}
+          >
+            {videos.map((video, index) => {
+              return <VideoItem image={polar} video={video} index={index} />;
+            })}
+          </div>
         </div>
-       
-      </div>
+      ) : null}
     </>
   );
 };

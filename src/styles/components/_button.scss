@@ -13,7 +13,30 @@
   z-index: 10;
   bottom: 15vh;
   transform: translateX(0);
-  transition: all 2s;
+  transition: all 1.5s;
+
+  &:hover{
+    padding-left: 80px;
+    .button-title{
+      font-size: 45px;
+    }
+    .button-icon{
+      font-size: 60px !important;
+
+      }
+  }
+  @media screen and (min-width: 3000px) {
+    &:hover{
+      padding-left: 80px;
+      .button-title{
+        font-size: 6.5vw;
+      }
+      .button-icon{
+        font-size: 6.5vw!important;
+  
+        }
+    }
+  }
 }
 
 .button-container-pop-up{
@@ -48,11 +71,22 @@
   font-style: normal;
   text-transform: uppercase;
   letter-spacing: 1.20px;
+  transition: all 1.5s;
+  @media screen and (min-width: 3000px) {
+    font-size: 6vw;
+    letter-spacing: 0.2vw;
+  }
+
 }
 
 .button-icon{
-font-size: 40px;
+font-size: 40px !important;
 margin-left: 120px;
+transition: all 1.5s;
+@media screen and (min-width: 3000px) {
+  font-size: 6vw !important;
+  
+}
 }
 
 .button-title-pop-up{
@@ -67,7 +101,7 @@ margin-left: 120px;
 
 .button-icon-pop-up{
 font-size: 40px;
-margin-left: 120px;
+margin-left: 120px !important;
 color: white;
 }
 

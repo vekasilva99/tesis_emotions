@@ -10,7 +10,7 @@ export default function GuardRoutesAdmin({ component: Component, role, ...rest }
         role == "admin" ? (
           <Component {...props} />
         ) : (
-          <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+          <Redirect to={{ pathname: "/home", state: { from: props.location } }} />
         )
       }
     />

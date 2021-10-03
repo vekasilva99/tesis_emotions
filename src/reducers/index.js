@@ -4,7 +4,10 @@ import { loadingBarReducer } from 'react-redux-loading-bar'
 import SignUp from './SignUp';
 import Auth from './Auth';
 import Brands from './Brands';
-
+import Company from './Company';
+import Admin from './Admin';
+import Model from './Model';
+import Statistics from './Statistics';
 
 
 
@@ -14,7 +17,9 @@ export default (history) => combineReducers({
   router: connectRouter(history),
   signUp:SignUp,
   auth:Auth,
-  brands:Brands
-  
-
+  brands:Brands,
+  company:Company,
+  admin:Admin,
+  model:Model,
+  stats:Statistics
 });

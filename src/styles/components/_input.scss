@@ -4,6 +4,13 @@
   max-width: 300px;
   max-height: 100px;
   margin-bottom: 50px;
+  @media screen and (min-width: 3000px) {
+    width: 25vw;
+    height: 300px;
+    max-width: 25vw;
+    max-height: 300px;
+    margin-bottom: 300px;
+  }
 
 }
 
@@ -28,6 +35,11 @@
   letter-spacing: 2px;
   padding-bottom: 8px;
   transition: all 0.5s;
+  @media screen and (min-width: 3000px) {
+    font-size:  2vw;
+    height: 3.3vw;
+    border-bottom: 0.5vh solid white ;
+  }
 }
 
 ::placeholder{
@@ -35,6 +47,10 @@
   color:black;
   font-family: 'PlayfairDisplay-MediumItalic';
   letter-spacing: 2px;
+  @media screen and (min-width: 3000px) {
+    font-size:  2vw;
+    height: 4vw;
+  }
 }
 .input input:-webkit-autofill,
 .input input:-webkit-autofill:hover, 
@@ -68,9 +84,10 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  -webkit-text-fill-color: black;
+  -webkit-text-fill-color: white;
   -webkit-box-shadow: 0 0 0px 1000px #A9B18F inset;
   transition: background-color 5000s ease-in-out 0s;
+  font-size: 20px !important;
 }
 
 .input-white.large-input.pink input:-webkit-autofill,
@@ -79,7 +96,7 @@ select:-webkit-autofill:focus {
 .input-white.pink input:-webkit-autofill,
 .input-white.pink input:-webkit-autofill:hover, 
 .input-white.pink input:-webkit-autofill:focus{
-  -webkit-text-fill-color: black;
+  -webkit-text-fill-color: white;
   -webkit-box-shadow: 0 0 0px 1000px #CB807D inset !important;
   transition: background-color 5000s ease-in-out 0s;
 }
@@ -98,6 +115,9 @@ select:-webkit-autofill:focus {
   text-transform: uppercase;
   font-size: 20px;
   letter-spacing: 1.5px;
+  @media screen and (min-width: 3000px) {
+    font-size: 1.5vw;
+  }
 }
 .placeholder-white{
   font-family: 'PlayfairDisplay-SemiBold';
@@ -105,6 +125,9 @@ select:-webkit-autofill:focus {
   text-transform: uppercase;
   font-size: 20px;
   letter-spacing: 1.5px;
+  @media screen and (min-width: 3000px) {
+    font-size: 1.5vw;
+  }
 }
 
 .input-white{
@@ -113,6 +136,13 @@ select:-webkit-autofill:focus {
   max-width: 300px;
   max-height: 100px;
   margin-bottom: 50px;
+  @media screen and (min-width: 3000px) {
+    width: 25vw;
+    height: 300px;
+    max-width: 25vw;
+    max-height: 300px;
+    margin-bottom: 300px;
+  }
 
 }
 
@@ -122,6 +152,13 @@ select:-webkit-autofill:focus {
   max-width: 400px;
   max-height: 100px;
   margin-bottom: 50px;
+  @media screen and (min-width: 3000px) {
+    width: 30vw;
+    height: 300px;
+    max-width: 30vw;
+    max-height: 300px;
+    margin-bottom: 300px;
+  }
 
 }
 
@@ -155,6 +192,11 @@ select:-webkit-autofill:focus {
   letter-spacing: 2px;
   padding-bottom: 8px;
   transition: all 0.5s;
+  @media screen and (min-width: 3000px) {
+    font-size:  2.5vw;
+    height: 3.3vw;
+    border-bottom: 0.5vh solid white ;
+  }
 }
 
 .input-white-field::placeholder{
@@ -162,11 +204,15 @@ select:-webkit-autofill:focus {
   color:white;
   font-family: 'PlayfairDisplay-MediumItalic';
   letter-spacing: 2px;
+  @media screen and (min-width: 3000px) {
+    font-size:  2.5vw;
+    height: 4vw;
+  }
+
 }
 
 .input-white-field.large-input{
   outline:none;
-  background-color: transparent;
   border:none;
   border-bottom: 2px solid white ;
   width: 100%;
@@ -175,6 +221,12 @@ select:-webkit-autofill:focus {
   font-family: 'PlayfairDisplay-MediumItalic';
   letter-spacing: 2px;
   padding-bottom: 8px;
+ 
+  @media screen and (min-width: 3000px) {
+    height:4vw;
+    border-bottom: 0.5vh solid white ;
+    font-size: 3vw;
+  }
 }
 
 .input-white-field.large-input::placeholder{
@@ -182,6 +234,9 @@ select:-webkit-autofill:focus {
   color:white;
   font-family: 'PlayfairDisplay-MediumItalic';
   letter-spacing: 2px;
+  @media screen and (min-width: 3000px) {
+    font-size: 3vw;
+  }
 }
 .react-datepicker-wrapper{
 
@@ -203,8 +258,59 @@ width: 100%;
   font-family: 'PlayfairDisplay-MediumItalic';
   letter-spacing: 2px;
   padding-bottom: 8px;
+  @media screen and (min-width: 3000px) {
+    height:3.3vw;
+    border-bottom: 0.5vh solid white ;
+    font-size:  2.5vw;
+  }
 }
 
 .react-datepicker-popper{
   z-index: 900000 !important;
 }
+
+.react-datepicker{
+  @media screen and (min-width: 3000px) {
+
+    // font-size: 3vw !important;
+  }
+}
+
+.react-datepicker {
+  @media screen and (min-width: 3000px) {
+  font-size: 3em !important;
+}}
+.react-datepicker__header {
+  @media screen and (min-width: 3000px) {
+  padding-top: 0.8em !important;
+}}
+.react-datepicker__month {
+  @media screen and (min-width: 3000px) {
+  margin: 0.4em 1em !important;
+}}
+.react-datepicker__day-name, .react-datepicker__day {
+  @media screen and (min-width: 3000px) {
+  width: 1.9em !important;
+  line-height: 1.9em !important;
+  margin: 0.166em !important;
+}}
+.react-datepicker__current-month {
+  @media screen and (min-width: 3000px) {
+  font-size: 1em !important;
+}}
+.react-datepicker__navigation {
+  @media screen and (min-width: 3000px) {
+  top: 1em !important;
+  line-height: 1.7em !important;
+  border: 0.45em solid transparent !important;
+}}
+.react-datepicker__navigation--previous {
+  @media screen and (min-width: 3000px) {
+  border-right-color: #ccc !important;
+  left: 1em !important;
+}}
+.react-datepicker__navigation--next {
+  @media screen and (min-width: 3000px) {
+  border-left-color: #ccc !important;
+  right: 1em !important;
+}}

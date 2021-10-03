@@ -12,12 +12,27 @@ import {
   FETCH_USER_SUCCESS,
   FETCH_USER_REQUEST,
   REMOVE_ERROR,
-  REMOVE_SUCCESS
+  REMOVE_SUCCESS,
+  SIGN_OUT,
+  SIGN_OUT_SUCCESS,
 } from "../constants/ActionTypes";
 
 export const signInUserRequest = (payload) => {
   return {
     type: SIGN_IN_USER_REQUEST,
+    payload: payload,
+  };
+};
+
+export const signOut = (payload) => {
+  return {
+    type: SIGN_OUT,
+    payload: payload,
+  };
+};
+export const signOutSuccess = (payload) => {
+  return {
+    type: SIGN_OUT_SUCCESS,
     payload: payload,
   };
 };
