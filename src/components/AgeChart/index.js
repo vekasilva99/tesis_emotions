@@ -5,10 +5,11 @@ import { useParams } from "react-router-dom";
 import "../../styles/components/__components-dir.scss";
 import {  Bar } from 'react-chartjs-2'
 import { statAgeRequest } from "../../actions/Statistics";
+import CircularProgress from "@material-ui/core/CircularProgress";
 const AgeChart = ({}) => {
 const dispatch = useDispatch();
 const { video } = useParams();
-const { ages } = useSelector((state) => ({
+const { ages,loaderStatistics } = useSelector((state) => ({
   ...state.stats,
 }));
 const [barData, setBarData] = useState({
@@ -17,22 +18,10 @@ const [barData, setBarData] = useState({
     {
       label: 'Age Groups',
       backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
       ],
       borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
       ],
-      borderWidth: 1,
+      borderWidth: 2,
       data: [],
     },
   ],
@@ -48,9 +37,26 @@ useEffect(() => {
     for(let i=0;i<ages.length;i++){
       aux.labels.push(ages[i]._id)
       aux.datasets[0].data.push(ages[i].total)
+      if(ages[i]._id==="Kids"){
+        aux.datasets[0].backgroundColor.push("rgba(240, 181, 179, 0.4)")
+        aux.datasets[0].borderColor.push("rgba(240, 181, 179, 1)")
+      }else if(ages[i]._id==="Teenagers"){
+        aux.datasets[0].backgroundColor.push("rgba(169, 177, 143, 0.4)")
+        aux.datasets[0].borderColor.push("rgba(169, 177, 143, 1)")
+      }else if(ages[i]._id==="Adults"){
+        aux.datasets[0].backgroundColor.push("rgba(203, 128, 125, 0.4)")
+        aux.datasets[0].borderColor.push("rgba(203, 128, 125, 1)")
+      }else if(ages[i]._id==="Elderly"){
+        aux.datasets[0].backgroundColor.push("rgba(182, 132, 161, 0.4)")
+        aux.datasets[0].borderColor.push("rgba(182, 132, 161, 1)")
+      }else{
+        aux.datasets[0].backgroundColor.push("rgba(186, 153, 134, 0.4)")
+        aux.datasets[0].borderColor.push("rgba(186, 153, 134, 1)")
+      }
+
     }
     setBarData(aux)
-console.log("hjj",aux)
+
   }
 }, [ages]);
 
@@ -58,18 +64,24 @@ console.log("hjj",aux)
 
 const barOptions = {
   aspectRatio: 1.4,
+  scale:{
+    lineWidth:5
+  },
   scales: {
     xAxes: [
       {
         stacked: true,
+        lineWidth:5
       },
     ],
     yAxes: [
       {
         stacked: true,
+        lineWidth:5
       },
     ],
   },
+ 
 }
 
 
@@ -78,6 +90,9 @@ const barOptions = {
   {ages.length>0 &&
 <Bar data={barData} options={barOptions} width={null} height={null} />
 }
+{ages.length === 0 && loaderStatistics &&
+        <CircularProgress size={100} thickness={5} />
+       }
 </div>
   );
 };

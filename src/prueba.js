@@ -51,7 +51,7 @@ const Prueba = (props) => {
             // .child('hola')
             .getDownloadURL()
             .then( url => {
-                console.log(url);
+        
             })
             .catch( err => {
                 console.log('image posted but unable to get the url. Error: ', err);

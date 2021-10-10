@@ -70,7 +70,9 @@ const SignInCompany = (props) => {
     if (inputFields[0].value === "") {
       setError(true, 0, "Required Field");
       emptyField = true;
-    } else if (inputFields[1].value === "") {
+    } 
+     if (inputFields[1].value === "") {
+   
       setError(true, 1, "Required Field");
       emptyField = true;
     }
@@ -78,12 +80,13 @@ const SignInCompany = (props) => {
       setError(true, 0, "Invalid Email");
       error = true;
     }
+   
     if (!emptyField && !error) {
       dispatch(
         signInCompanyRequest({
           email: inputFields[0].value,
           password: inputFields[1].value,
-          history: history.push("/homeCompany"),
+          history: history,
         })
       );
     }

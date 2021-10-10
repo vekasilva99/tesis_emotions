@@ -50,7 +50,7 @@ if( window.innerWidth<1200){
     }else if(window.innerWidth >=4000){
       radious= (window.innerWidth*0.3).toString()
     }
-    console.log("RADIO",radious)
+
 return radious
   
 
@@ -77,7 +77,7 @@ return radious
     else if(window.innerWidth >=6000){
       radious= (window.innerWidth*0.1).toString()
     }
-    console.log("RADIO",radious)
+  
 return radious
   
   }
@@ -97,7 +97,7 @@ return radious
 
 
       <Circle />
-      <div className={visible ? "app-home" : "app-home onload"}>
+      <div className={visible ? companies.length>0 ? "app-home":"app-home no-companies" : companies.length>0 ? "app-home onload":"app-home onload no-companies"}>
         <div className="section-home" >
           <h2 className="home-title-vertical">Full service creative agency</h2>
           <h1 className="home-title">We build brands of the future</h1>
@@ -133,6 +133,7 @@ return radious
             </h2>
           </div>
         </div>
+        {companies.length>0 ?
         <div
           className="section-home"
           style={{
@@ -141,6 +142,7 @@ return radious
             alignItems: "flex-start",
           }}
         >
+          
           <h1 className="subtitle2-home">Our Brands.</h1>
           <div className="brands-container-home">
             {companies
@@ -152,6 +154,7 @@ return radious
               })}
           </div>
         </div>
+        :null}
       </div>
     </>
   );

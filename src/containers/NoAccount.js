@@ -144,15 +144,29 @@ const NoAccount = (props) => {
             />
           ))}
         </div>
-        <Button event={submit} title={"Continue"} position={"left"} />
-        <div className="link-button">
+        <Button event={submit} title={"Continue"} position={"left"} top />
+        <div className="link-button" style={{ bottom: "16vh" }}>
           <h3>Already have an account? </h3>
-          <h4> Sign In Here</h4>
+          <h4
+            onClick={() => {
+              history.push({
+                pathname: "/signin",
+                state: {
+                  // location state
+                  videoId: videoId,
+                  companyId: id,
+                },
+              });
+            }}
+          >
+            {" "}
+            Sign In Here
+          </h4>
         </div>
-        <div className="link-button2">
+        {/* <div className="link-button2">
           <h3>Want to create an account? </h3>
           <h4> Sign Up Here</h4>
-        </div>
+        </div> */}
       </div>
     </>
   );

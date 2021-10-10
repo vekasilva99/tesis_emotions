@@ -11,6 +11,7 @@ import {
   FETCH_VIDEO_ERROR,
   FETCH_VIDEO_REQUEST,
   FETCH_VIDEO_SUCCESS,
+  REMOVE_ERROR
 } from "../constants/ActionTypes";
 
 const INIT_STATE = {
@@ -21,6 +22,8 @@ const INIT_STATE = {
   selectedCompany: {},
   selectedVideo: {},
   allVideos: [],
+  error:"",
+  errorCompany:""
 };
 
 export default (state = INIT_STATE, action) => {
@@ -57,6 +60,7 @@ export default (state = INIT_STATE, action) => {
       return {
         ...state,
         loader: false,
+        errorCompany:action.payload
       };
     }
     case FETCH_VIDEOS_SUCCESS: {
@@ -98,6 +102,7 @@ export default (state = INIT_STATE, action) => {
       return {
         ...state,
         loader: false,
+        error:action.payload.status
       };
     }
     case FETCH_VIDEO_SUCCESS: {
@@ -106,6 +111,14 @@ export default (state = INIT_STATE, action) => {
         loader: false,
         selectedVideo: action.payload.video,
         selectedCompany: action.payload.company,
+      };
+    }
+    case REMOVE_ERROR: {
+      return {
+        ...state,
+        loader: false,
+       error:"",
+       errorCompany:""
       };
     }
 

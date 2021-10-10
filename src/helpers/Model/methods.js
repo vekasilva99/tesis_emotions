@@ -95,7 +95,6 @@ export const trimCanvas = (c) => {
 };
 
 export const YouTubeGetID=(url)=>{
-console.log("URLLLL", url)
   var ID = '';
  
   url = url.replace(/(>|<)/gi,'').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
@@ -108,4 +107,35 @@ console.log("URLLLL", url)
   }
     return ID;
 
+}
+
+export const getMean = (array) =>{
+  var total = 0;
+  var count = 0;
+  for(let i=0;i<array.length;i++){
+    total+=array[i]
+    count++
+  }
+return total/count
+}
+
+export const getSTD = (array, mean)=>{
+  array = array.map((k)=>{
+    return (k - mean) ** 2
+  })
+  let sum = array.reduce((acc, curr)=> acc + curr, 0);
+  
+ // Calculating the variance
+ let variance = sum / array.length
+  
+ // Returning the Standered deviation
+ return Math.sqrt(sum / array.length)
+
+}
+
+export const getStandarizedArray = (array,mean,std) =>{
+  for(let i=0;i<array.length;i++){
+    array[i]=(array[i]-mean)/std
+  }
+  return array
 }

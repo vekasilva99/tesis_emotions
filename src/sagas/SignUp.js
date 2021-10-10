@@ -16,11 +16,11 @@ import {
 import axios from "axios";
 import { storage } from "../firebase";
 
-// import API_URL from '../constants/ApiURL';
+import {API_URL} from '../constants/ApiURL';
 
 const signUpUserRequest = async (payload) => {
   const options = {
-    url: "http://localhost:5000/users/register",
+    url: API_URL+"users/register",
     method: "POST",
     headers: { "Content-Type": "application/json" },
     data: payload.payload,
@@ -39,7 +39,7 @@ const signUpUserRequest = async (payload) => {
 
 const signUpCompanyRequest = async (payload) => {
   const options = {
-    url: "http://localhost:5000/companies/register",
+    url: API_URL+"companies/register",
     method: "POST",
     headers: { "Content-Type": "application/json" },
     data: {
@@ -64,7 +64,7 @@ const signUpCompanyRequest = async (payload) => {
             .getDownloadURL()
             .then(async (url) => {
               const options2 = {
-                url: `http://localhost:5000/companies/register/${resp.data.data._id}/upload/image`,
+                url: API_URL+`companies/register/${resp.data.data._id}/upload/image`,
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 data: {

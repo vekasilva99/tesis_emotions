@@ -9,6 +9,24 @@ min-height: 100vh;
   // margin-left: 10vw;
   padding: 50px;
   padding-left: 15vw!important;
+  background-color: #CB807D;
+
+}
+
+.app-emotions-test{
+  width: 100vw;
+min-height: 85vh;
+max-height:85vh;
+overflow: hidden !important;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  overflow-x: hidden !important;
+  flex-direction: column;
+  // margin-left: 10vw;
+  padding: 50px;
+  padding-left: 15vw!important;
+  
 
 }
 
@@ -66,6 +84,13 @@ min-height: 100vh;
 
 }
 
+.disable{
+  cursor:not-allowed;
+  &:hover{
+    transform: rotate(320deg) !important;
+  }
+}
+
 .emotions-home-section{
   width: 100%; 
   display: flex;
@@ -112,6 +137,7 @@ min-height: 100vh;
   width:100%;
   height: 100%;
   border-radius: 46px;
+  padding: 0;
   
 }
 
@@ -153,7 +179,7 @@ min-height: 100vh;
   transform: rotate(40deg);
 }
 
-.button-icon{
+.button-icon-home{
   margin:0 !important;
   font-size: 80px !important;
 }
@@ -176,7 +202,7 @@ min-height: 100vh;
 }
 .emotions-container{
   width: 100%;
-  height: auto;
+  height: 500px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -184,8 +210,9 @@ min-height: 100vh;
 flex-direction: row;
 
 
+
 }
-.circle-button-big .icon-container-button .button-icon{
+.circle-button-big .icon-container-button .button-icon-home{
   font-size: 180px !important;
   
 }
@@ -212,6 +239,15 @@ flex-direction: row;
     transition: all 1s;
     width:390px;
     height: 350px;
+  }
+}
+
+.disable-emotion{
+  cursor: not-allowed;
+  &:hover{
+    transition: all 1s;
+    width:380px;
+    height: 340px;
   }
 }
 
@@ -244,3 +280,47 @@ flex-direction: row;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
+
+.step-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-direction: row;
+  margin-left: 10px;
+
+}
+
+.step-container h2{
+  font-family: 'PlayFairDisplay-SemiBold';
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: #CB807D;
+  letter-spacing: 0.5px;
+  font-size: 80px;
+  margin-top: 0;
+  text-align: start;
+
+  
+
+}
+
+.step-container h3{
+  font-family: 'Exo-Light';
+  margin-bottom: 0;
+  color: black;
+  letter-spacing: 0.5px;
+  font-size: 25px;
+  margin-top: 0;
+  max-width:600px;
+  margin-left: 35px;
+
+}
+
+.app-emotions{
+  .subtitle{
+    margin-bottom: 30px !important;
+    margin-right:0 !important;
+  }
+}
+

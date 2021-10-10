@@ -19,11 +19,11 @@ import {
 import axios from "axios";
 import { storage } from "../firebase";
 
-// import API_URL from '../constants/ApiURL';
+import {API_URL} from '../constants/ApiURL';
 
 const fetchAllCompaniesRequest = async (payload) => {
   const options = {
-    url: "http://localhost:5000/companies",
+    url: API_URL+"companies",
     method: "GET",
     headers: { "Content-Type": "application/json" },
   };
@@ -40,13 +40,14 @@ const fetchAllCompaniesRequest = async (payload) => {
 };
 
 const fetchVideosRequest = async (payload) => {
+
   const options = {
-    url: `http://localhost:5000/companies/${payload.payload}`,
+    url: API_URL+`companies/${payload.payload}`,
     method: "GET",
     headers: { "Content-Type": "application/json" },
   };
   const options2 = {
-    url: `http://localhost:5000/videos`,
+    url: API_URL+`videos`,
     method: "GET",
     headers: { "Content-Type": "application/json" },
     data: {
@@ -76,7 +77,7 @@ const fetchVideosRequest = async (payload) => {
 
 const fetchAllVideosRequest = async (payload) => {
   const options = {
-    url: `http://localhost:5000/videos`,
+    url: API_URL+`videos`,
     method: "GET",
     headers: { "Content-Type": "application/json" },
   };
@@ -94,12 +95,12 @@ const fetchAllVideosRequest = async (payload) => {
 
 const fetchVideoRequest = async (payload) => {
   const options = {
-    url: `http://localhost:5000/companies/${payload.payload.company}`,
+    url: API_URL+`companies/${payload.payload.company}`,
     method: "GET",
     headers: { "Content-Type": "application/json" },
   };
   const options2 = {
-    url: `http://localhost:5000/videos/${payload.payload.video}`,
+    url: API_URL+`videos/${payload.payload.video}`,
     method: "GET",
     headers: { "Content-Type": "application/json" },
   };
@@ -109,7 +110,7 @@ const fetchVideoRequest = async (payload) => {
       let companyAux = resp.data;
 
       let res2 = await axios(options2).then((resp2) => {
-        console.log("RES",resp2)
+
         return {
           company: companyAux.data,
           video: resp2.data.data[0],
@@ -171,6 +172,7 @@ function* fetchVideo(payload) {
       yield put(fetchVideoSuccess(res));
     } else {
       yield put(fetchVideoError(res));
+      // payload.payload.history.goBack()
     }
   } catch (error) {
     yield put(fetchVideoError(error));

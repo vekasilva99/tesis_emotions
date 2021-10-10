@@ -11,12 +11,28 @@ import { getEmbedding } from "../../helpers/getEmbedding";
 import { addEmotionRequest, loading } from "../../actions/Company";
 import { useDispatch, useSelector } from "react-redux";
 import ErrorPopUp from "../../components/ErrorPopUp/index";
+import ErrorPopUpModel from "../../components/ErrorPopUpModel/index";
 import SuccessPopUp from "../../components/SuccessPopUp/index";
 import CircularProgress from "@material-ui/core/CircularProgress";
 class scaling extends tf_2.layers.Layer {
   static className = "scaling";
   constructor(config) {
     super(config);
+    this.scale=config.scale
+  }
+  call(input){
+    return tf_2.tidy(()=>{
+      console.log("SCALE ",this.scale)
+    // console.log("SCALE Antes",input[0].dataSync())
+    // console.log("SCALE Despues",input[0].mul(this.scale).dataSync())
+      return input[0].mul(this.scale)
+      // return tf_2.math.l2_normalize(input,-1,1e-12,this.name)
+    })
+  }
+  getConfig() {
+    const config = super.getConfig();
+    Object.assign(config, {scale: this.scale});
+    return config;
   }
 }
 
@@ -25,15 +41,16 @@ class l2Norm extends tf_2.layers.Layer {
   constructor(config) {
     super(config);
   }
-}
-
-class L2Norm extends tf_2.layers.Layer {
-  static className = "L2Norm";
-  constructor(config) {
-    super(config);
+  call(input){
+    return tf_2.tidy(()=>{
+      console.log("SJA ANTES",tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12).dataSync())
+      console.log("SJA",input[0].div(tf_2.sqrt(tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12))).dataSync())
+      return input[0].div(tf_2.sqrt(tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12)))
+      // return tf_2.math.l2_normalize(input,-1,1e-12,this.name)
+    })
   }
 }
-const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen }) => {
+const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage }) => {
   const dispatch = useDispatch();
   const [images, setImages] = useState([
     { image: null },
@@ -46,6 +63,7 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen }) => {
   const faceLandmarksDetection = require("@tensorflow-models/face-landmarks-detection");
   const [model, setModel] = useState(undefined);
   const [model2, setModel2] = useState(undefined);
+
   const modelImageSize = 160;
   const img1 = useRef(null);
   const img2 = useRef(null);
@@ -154,12 +172,18 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen }) => {
   const loadModel = async () => {
     tf_2.serialization.registerClass(scaling);
     tf_2.serialization.registerClass(l2Norm);
-    tf_2.serialization.registerClass(L2Norm);
 
-    // setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
+
+    
+    try{
     console.log("EMPEZANDO");
-    setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
+    setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
+    // setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
     console.log("TERMINADO");
+    }catch(error){
+      setErrorMessage('Oops! It seems something went wrong when loading the model. Please clear your cache and try again. Sorry for the inconvinience.')
+ 
+    }
   };
 
   const setError = (input, index, error) => {
@@ -181,9 +205,17 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen }) => {
       >
         <CircularProgress size={100} thickness={5} />
       </div>
+      <ErrorPopUpModel error={error} setError={setErrorMessage} />
       <ErrorPopUp company={true} inputs={inputFields} />
       <SuccessPopUp company={true} inputs={inputFields} />
       <div className={open ? "pop-up-container" : "pop-up-container closed"}>
+        <div className="close-pop-up"> <h3
+              onClick={() => {
+          setOpen(false)
+              }}
+            >
+              Close
+            </h3></div>
         <div className="pop-up-content">
           <h4>New Emotion</h4>
 

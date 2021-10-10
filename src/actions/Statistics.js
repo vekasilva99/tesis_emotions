@@ -32,7 +32,9 @@ STAT_TOP_RESULT_GENDER_SUCCESS,
 STAT_TOTAL_VIEW_ERROR,
 STAT_TOTAL_VIEW_REQUEST,
 STAT_TOTAL_VIEW_SUCCESS,
-
+TEST_ERROR,
+TEST_REQUEST,
+TEST_SUCCESS
 } from "../constants/ActionTypes";
 
 export const emotionsInVideoRequest = (payload) => {
@@ -261,6 +263,27 @@ export const statTotalViewsSuccess= (payload) => {
 export const statTotalViewsError = (payload) => {
   return {
     type: STAT_TOTAL_VIEW_ERROR,
+    payload: payload,
+  };
+};
+
+export const testRequest = (payload) => {
+  return {
+    type: TEST_REQUEST,
+    payload: payload,
+  };
+};
+
+export const testSuccess= (payload) => {
+  return {
+    type: TEST_SUCCESS,
+    payload: payload,
+  };
+};
+
+export const testError = (payload) => {
+  return {
+    type: TEST_ERROR,
     payload: payload,
   };
 };

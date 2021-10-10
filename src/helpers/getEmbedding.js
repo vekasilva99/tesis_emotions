@@ -1,4 +1,6 @@
 import * as tf from "@tensorflow/tfjs-core";
+import * as tf_2 from "@tensorflow/tfjs";
+import { getMean,getSTD,getStandarizedArray} from './Model/methods'
 
 export const getEmbedding = async(img, model, model2,i) => {
 
@@ -15,7 +17,7 @@ const embedding= await model
     .then((predictions) => {
     let array=[]
       if (predictions.length > 0) {
-     
+     console.log("HOLA",canvas)
 
         array=predictions.map((face_detected, index) => {
           if (returnTensors) {
@@ -67,7 +69,7 @@ const snap = (start, size, index, img, model2,i) => {
     .getContext("2d")
     .putImageData(imageData, 0, 0, start[0], start[1], size[0], size[1]);
   // Dibujar la imagen recortada.
-
+  
   let trimmedCanvas = trimCanvas(canvas2);
   imageData = trimmedCanvas
     .getContext("2d")
@@ -79,32 +81,49 @@ const snap = (start, size, index, img, model2,i) => {
     .getContext("2d")
     .putImageData(imageData, 0, 0, 0, 0, imageData.width, imageData.height);
   // Convertir la imagen del canvas en una imagen con un url.
+  imageData = trimmedCanvas
+  .getContext("2d")
+  .getImageData(0, 0, 160, 160);
+;
+console.log("ARREGLO", imageData)
   let url = trimmedCanvas.toDataURL();
+
   const image = new Image();
   image.src = url;
   image.onload = () => {
-    context.drawImage(image, 0, 0, canvas2.width, canvas2.height);
+   
+    context.drawImage(image, 0, 0, 160, 160);
   };
 
-  imageData = context.getImageData(0, 0, canvas2.width, canvas2.height);
+
+
   let baw_array = [];
   for (var i = 0; i < imageData.data.length; i += 4) {
     baw_array.push(imageData.data[i]);
     baw_array.push(imageData.data[i + 1]);
     baw_array.push(imageData.data[i + 2]);
   }
-
+  
   // Setear la imagen para poder visualizarla.
+  let mean = getMean(baw_array)
 
-  let finalIMG = tf.tensor(baw_array);
+  let std =getSTD(baw_array,mean)
+ 
+  if(std>0){
+  baw_array = getStandarizedArray(baw_array,mean,std)
+  console.log("PIXELS",JSON.stringify(baw_array))
+  let finalIMG = tf_2.tensor(baw_array);
 
-  finalIMG = tf.reshape(finalIMG, [1, modelImageSize, modelImageSize, 3]);
+  finalIMG = tf_2.reshape(finalIMG, [1, modelImageSize, modelImageSize, 3]);
 
   let prediction = model2.predict(finalIMG);
   const value = prediction.dataSync();
+  let prueba =model2.getWeights()[0].dataSync();
 
+console.log("model",value)
 
-  return value
+  return value}else{return undefined}
+
 };
 
 const trimCanvas = (c) => {

@@ -25,13 +25,13 @@ import {
 import axios from "axios";
 import { storage } from "../firebase";
 
-// import API_URL from '../constants/ApiURL';
+import {API_URL} from '../constants/ApiURL';
 
 const createViewRequest = async (payload) => {
   const req = payload.payload;
 
   const options = {
-    url: `http://localhost:5000/views/add`,
+    url: API_URL+`views/add`,
     method: "POST",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,

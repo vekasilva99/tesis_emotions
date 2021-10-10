@@ -56,7 +56,6 @@ export const fetchVideosError = (payload) => {
 };
 
 export const fetchVideoRequest = (payload) => {
-  console.log("JJJ")
   return {
     type: FETCH_VIDEO_REQUEST,
     payload: payload,

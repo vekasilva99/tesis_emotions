@@ -132,3 +132,29 @@ export const STAT_PAYING_ATTENTION_ERROR = 'stat_paying_attention_error'
 export const STAT_PREDOMINANT_EMOTION_REQUEST = 'stat_predominant_emotion_request'
 export const STAT_PREDOMINANT_EMOTION_SUCCESS = 'stat_predominant_emotion_success'
 export const STAT_PREDOMINANT_EMOTION_ERROR = 'stat_predominant_emotion_error'
+
+export const DISABLE_VIDEO_REQUEST = 'disable_video_request'
+export const DISABLE_VIDEO_SUCCESS = 'disable_video_success'
+export const DISABLE_VIDEO_ERROR = 'disable_video_error'
+
+
+export const CHANGE_PASSWORD_REQUEST = 'change_password_request'
+export const CHANGE_PASSWORD_SUCCESS = 'change_password_success'
+export const CHANGE_PASSWORD_ERROR = 'change_password_error'
+
+export const UPDATE_PROFILE_REQUEST = 'update_profile_request'
+export const UPDATE_PROFILE_SUCCESS = 'update_profile_success'
+export const UPDATE_PROFILE_ERROR = 'update_profile_error'
+
+export const UPDATE_PROFILE_IMAGE_REQUEST = 'update_profile_image_request'
+export const UPDATE_PROFILE_IMAGE_SUCCESS = 'update_profile_image_success'
+export const UPDATE_PROFILE_IMAGE_ERROR = 'update_profile_image_error'
+
+
+export const UPDATE_EMOTION_REQUEST = 'update_emotion_request'
+export const UPDATE_EMOTION_SUCCESS = 'update_emotion_success'
+export const UPDATE_EMOTION_ERROR = 'update_emotion_error'
+
+export const TEST_REQUEST = 'test_request'
+export const TEST_SUCCESS = 'test_success'
+export const TEST_ERROR = 'test_error'

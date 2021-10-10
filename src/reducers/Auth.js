@@ -21,6 +21,12 @@ import {
   SIGN_OUT,
   REMOVE_SUCCESS,
   SIGN_OUT_SUCCESS,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_REQUEST,
+  CHANGE_PASSWORD_ERROR,
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_REQUEST,
+  UPDATE_PROFILE_ERROR,
 } from "../constants/ActionTypes";
 
 const INIT_STATE = {
@@ -41,6 +47,7 @@ const INIT_STATE = {
 };
 
 export default (state = INIT_STATE, action) => {
+
   switch (action.type) {
     case SIGN_IN_USER_REQUEST: {
       return {
@@ -111,17 +118,7 @@ export default (state = INIT_STATE, action) => {
       return {
         ...state,
         loader: false,
-        // token:action.payload.data.token,
-        // _id:action.payload.data.data._id,
-        // role:action.payload.data.data.isAdmin != undefined ? action.payload.data.data.isAdmin ? "admin" :"user" :"company",
-        // full_name:action.payload.data.data.full_name,
-        // email:action.payload.data.data.email,
-        // gender:action.payload.data.data.gender ? action.payload.data.data.gender : null,
-        // active:action.payload.data.data.active,
-        // accepted:action.payload.data.data.accepted ? action.payload.data.data.accepted : null,
-        // birthdate:action.payload.data.data.birthdate ? action.payload.data.data.birthdate :null,
-        // country:action.payload.data.data.country ? action.payload.data.data.country :null,
-        // mainImg:action.payload.data.data.mainImg ? action.payload.data.data.mainImg : null,
+
         success: { success: "User has been succesfully registered." },
       };
     }
@@ -129,17 +126,7 @@ export default (state = INIT_STATE, action) => {
       return {
         ...state,
         loader: false,
-        // token:action.payload.data.token,
-        // _id:action.payload.data.data._id,
-        // role:action.payload.data.data.isAdmin != undefined ? action.payload.data.data.isAdmin ? "admin" :"user" :"company",
-        // full_name:action.payload.data.data.full_name,
-        // email:action.payload.data.data.email,
-        // gender:action.payload.data.data.gender ? action.payload.data.data.gender : null,
-        // active:action.payload.data.data.active,
-        // accepted:action.payload.data.data.accepted ? action.payload.data.data.accepted : null,
-        // birthdate:action.payload.data.data.birthdate ? action.payload.data.data.birthdate :null,
-        // country:action.payload.data.data.country ? action.payload.data.data.country :null,
-        // mainImg:action.payload.data.data.mainImg ? action.payload.data.data.mainImg : null,
+    
         success: {
           success:
             "The company has been successfully registered. Please, wait for the confirmation email that we'll send you when your account has been activated.",
@@ -309,7 +296,48 @@ export default (state = INIT_STATE, action) => {
         success: {},
       };
     }
-
+    case CHANGE_PASSWORD_REQUEST: {
+      return {
+        ...state,
+        loader: true,
+      };
+    }
+    case CHANGE_PASSWORD_SUCCESS: {
+      return {
+        ...state,
+        loader: false,
+      };
+    }
+    case CHANGE_PASSWORD_ERROR: {
+      return {
+        ...state,
+        alertMessage: action.payload,
+        showMessage: true,
+        loader: false,
+        error: action.payload
+      };
+    }
+    case UPDATE_PROFILE_REQUEST: {
+      return {
+        ...state,
+        loader: true,
+      };
+    }
+    case UPDATE_PROFILE_SUCCESS: {
+      return {
+        ...state,
+        loader: false,
+      };
+    }
+    case UPDATE_PROFILE_ERROR: {
+      return {
+        ...state,
+        alertMessage: action.payload,
+        showMessage: true,
+        loader: false,
+        error: action.payload
+      };
+    }
     default: {
       return state;
     }

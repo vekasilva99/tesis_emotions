@@ -13,6 +13,7 @@ import {
   STAT_TOP_RESULT_COUNTRY_REQUEST,
   STAT_TOP_RESULT_GENDER_REQUEST,
   STAT_TOTAL_VIEW_REQUEST,
+  TEST_REQUEST
 } from "../constants/ActionTypes";
 import {
   emotionsInVideoSuccess,
@@ -36,16 +37,18 @@ import {
   statTopGenderSuccess,
   statTopGenderError,
   statTotalViewsSuccess,
-  statTotalViewsError
+  statTotalViewsError,
+  testError,
+  testSuccess
 } from "../actions/Statistics";
 import axios from "axios";
 import { storage } from "../firebase";
 
-// import API_URL from '../constants/ApiURL';
+import {API_URL} from '../constants/ApiURL';
 
 const totalViewsRequest = async (payload) => {
   const options = {
-    url: `http://localhost:5000/statistics/total-views/${payload.payload}`,
+    url: API_URL+`statistics/total-views/${payload.payload}`,
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -67,7 +70,7 @@ return res;
 
 const topGenderRequest = async (payload) => {
   const options = {
-    url: `http://localhost:5000/statistics/top-results/gender/${payload.payload}`,
+    url: API_URL+`statistics/top-results/gender/${payload.payload}`,
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -78,7 +81,11 @@ const topGenderRequest = async (payload) => {
   let res = await axios(options)
   .then((resp) => {
 
+    if(resp.data.data.length===0){
+      return {status:200,res:{}};
+    }else{
     return {status:200,res:resp.data.data[0]};
+    }
   })
   .catch((error) => {
     return {status:error.response.status};
@@ -89,7 +96,7 @@ return res;
 
 const topCountryRequest = async (payload) => {
   const options = {
-    url: `http://localhost:5000/statistics/top-results/country/${payload.payload}`,
+    url: API_URL+`statistics/top-results/country/${payload.payload}`,
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -100,7 +107,11 @@ const topCountryRequest = async (payload) => {
   let res = await axios(options)
   .then((resp) => {
 
+    if(resp.data.data.length===0){
+      return {status:200,res:{}};
+    }else{
     return {status:200,res:resp.data.data[0]};
+    }
   })
   .catch((error) => {
     return {status:error.response.status};
@@ -111,7 +122,7 @@ return res;
 
 const topAgeRequest = async (payload) => {
   const options = {
-    url: `http://localhost:5000/statistics/top-results/age/${payload.payload}`,
+    url: API_URL+`statistics/top-results/age/${payload.payload}`,
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -121,7 +132,11 @@ const topAgeRequest = async (payload) => {
 
   let res = await axios(options)
   .then((resp) => {
+    if(resp.data.data.length===0){
+      return {status:200,res:{}};
+    }else{
     return {status:200,res:resp.data.data[0]};
+    }
   })
   .catch((error) => {
     return {status:error.response.status};
@@ -132,7 +147,7 @@ return res;
 
 const payingAttentionRequest = async (payload) => {
   const options = {
-    url: `http://localhost:5000/statistics/paying-attention/${payload.payload}`,
+    url: API_URL+`statistics/paying-attention/${payload.payload}`,
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -153,7 +168,7 @@ return res;
 
 const predominantEmotionRequest = async (payload) => {
   const options = {
-    url: `http://localhost:5000/statistics/predominant-emotion`,
+    url: API_URL+`statistics/predominant-emotion`,
     method: "POST",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -179,7 +194,7 @@ return res;
 
 const genderRequest = async (payload) => {
   const options = {
-    url: `http://localhost:5000/statistics/gender/${payload.payload}`,
+    url: API_URL+`statistics/gender/${payload.payload}`,
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -201,7 +216,7 @@ return res;
 
 const countryRequest = async (payload) => {
   const options = {
-    url: `http://localhost:5000/statistics/country/${payload.payload}`,
+    url: API_URL+`statistics/country/${payload.payload}`,
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -223,7 +238,7 @@ return res;
 
 const ageRequest = async (payload) => {
   const options = {
-    url: `http://localhost:5000/statistics/age/${payload.payload}`,
+    url: API_URL+`statistics/age/${payload.payload}`,
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -245,7 +260,7 @@ return res;
 
 const attentionRequest = async (payload) => {
   const options = {
-    url: `http://localhost:5000/statistics/attention-in-video/${payload.payload}`,
+    url: API_URL+`statistics/attention-in-video/${payload.payload}`,
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -265,9 +280,9 @@ return res;
 };
 
 const emotionsRequest = async (payload) => {
-  console.log("EMO")
+
   const options = {
-    url: `http://localhost:5000/statistics/emotions-in-video`,
+    url: API_URL+`statistics/emotions-in-video`,
     method: "POST",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -280,7 +295,7 @@ const emotionsRequest = async (payload) => {
 
   let res = await axios(options)
   .then((resp) => {
-    console.log("EMOTIONS!!",resp)
+    
     return {status:200,res:resp.data.data};
   })
   .catch((error) => {
@@ -290,6 +305,31 @@ const emotionsRequest = async (payload) => {
 return res;
 };
 
+const testRequest = async (payload) => {
+
+  const options = {
+    url: API_URL+`statistics/emotions-in-photo`,
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    data:{
+      photo_embedding:payload.payload.photo_embedding,
+      emotions:payload.payload.emotions
+    }
+  };
+
+  let res = await axios(options)
+  .then((resp) => {
+    console.log("TEST",resp)
+    return {status:200,res:resp.data.data};
+  })
+  .catch((error) => {
+    return {status:error.response.status};
+  });
+
+return res;
+};
 function* totalViews(payload) {
   try {
     const res = yield call(totalViewsRequest, payload);
@@ -509,6 +549,26 @@ function* emotions(payload) {
   }
 }
 
+function* test(payload) {
+  try {
+    const res = yield call(testRequest, payload);
+    if (res.status === 200) {
+      yield put(
+        testSuccess(res.res)
+      );
+    } else {
+      let error = { emailError: null };
+
+      error = {
+        error: "Oops. Something went wrong.",
+      };
+      yield put( testError(error));
+    }
+  } catch (error) {
+    yield put( testError(error));
+  }
+}
+
 export default function* rootSaga() {
   yield all([
     takeEvery(STAT_TOTAL_VIEW_REQUEST, totalViews),
@@ -522,5 +582,6 @@ export default function* rootSaga() {
     takeEvery(STAT_AGE_REQUEST, age),
     takeEvery(STAT_ATTENTION_REQUEST, attention),
     takeEvery(EMOTIONS_IN_VIDEO_REQUEST, emotions),
+    takeEvery(TEST_REQUEST, test),
   ]);
 }

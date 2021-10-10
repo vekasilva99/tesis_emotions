@@ -14,7 +14,9 @@
   transition: all 1s ease-in-out;
 transform: translateX(100%);
 }
-
+.no-companies{
+  min-height: 210vh;
+}
 .home-title {
   font-family: "PlayfairDisplay-SemiBold";
   color: black;

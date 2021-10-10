@@ -15,6 +15,12 @@ import {
   REMOVE_SUCCESS,
   SIGN_OUT,
   SIGN_OUT_SUCCESS,
+  CHANGE_PASSWORD_ERROR,
+  CHANGE_PASSWORD_REQUEST,
+  CHANGE_PASSWORD_SUCCESS,
+  UPDATE_PROFILE_ERROR,
+  UPDATE_PROFILE_REQUEST,
+  UPDATE_PROFILE_SUCCESS
 } from "../constants/ActionTypes";
 
 export const signInUserRequest = (payload) => {
@@ -123,6 +129,48 @@ export const removeError = (payload) => {
 export const removeSuccess = (payload) => {
   return {
     type: REMOVE_SUCCESS,
+    payload: payload,
+  };
+};
+
+export const changePasswordRequest = (payload) => {
+  return {
+    type: CHANGE_PASSWORD_REQUEST,
+    payload: payload,
+  };
+};
+
+export const changePasswordSuccess = (payload) => {
+  return {
+    type: CHANGE_PASSWORD_SUCCESS,
+    payload: payload,
+  };
+};
+
+export const changePasswordError = (payload) => {
+  return {
+    type: CHANGE_PASSWORD_ERROR,
+    payload: payload,
+  };
+};
+
+export const updateProfileRequest = (payload) => {
+  return {
+    type: UPDATE_PROFILE_REQUEST,
+    payload: payload,
+  };
+};
+
+export const updateProfileSuccess = (payload) => {
+  return {
+    type: UPDATE_PROFILE_SUCCESS,
+    payload: payload,
+  };
+};
+
+export const updateProfileError = (payload) => {
+  return {
+    type: UPDATE_PROFILE_ERROR,
     payload: payload,
   };
 };

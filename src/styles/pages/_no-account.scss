@@ -40,6 +40,28 @@ height: 60vh;
  }
 }
 
+.input-container-column.small{
+
+  width:90%;
+  height: 40vh;
+   max-height:300px;
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: column;
+   justify-content: center;
+   @media screen and (max-width: 800px) {
+    max-height:100%;
+    flex-direction: row;
+    overflow: scroll;
+   }
+   @media screen and (max-width: 1024px) {
+    max-height:70vh;
+   }
+   @media screen and (min-width: 3000px) {
+    max-height:60vh;
+   }
+  }
+
 .link-button{
 
 
@@ -68,7 +90,12 @@ height: 60vh;
   font-family: 'Exo-SemiBold';
   color: #F0B5B3;
   text-decoration: underline  #F0B5B3;
-  margin-left: 5px;
+  margin-left: 10px;
+  opacity: 1;
+  transition: all 0.5s;
+  &:hover{
+    opacity: 0.8;
+  }
   @media screen and (min-width: 3000px) {
     font-size: 2vw;
     margin-left: 0.8vw;
@@ -116,9 +143,32 @@ height: 60vh;
   font-family: 'Exo-SemiBold';
   color: #F0B5B3;
   text-decoration: underline  #F0B5B3;
-  margin-left: 5px;
+  margin-left: 10px;
+  opacity: 1;
+  transition: all 0.5s;
+  &:hover{
+    opacity: 0.8;
+  }
   @media screen and (min-width: 3000px) {
     font-size: 2vw;
     margin-left: 0.8vw;
   }
+}
+
+.change-password{
+  margin-top: 0;
+  font-size:25px;
+  font-family: 'PlayfairDisplay-Medium';
+  font-style: italic;
+  color:#CB807D;
+  text-decoration: underline solid #CB807D;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  &:hover{
+    opacity: 0.8;
+    font-size:27px;
+    transition: all 0.5s ease-in-out;
+  }
+
 }

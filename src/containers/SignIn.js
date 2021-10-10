@@ -8,16 +8,18 @@ import Input from "../components/InputWhite/index";
 import Button from "../components/Button/index";
 import ErrorPopUp from "../components/ErrorPopUp/index";
 import countryList from "../helpers/countries";
+import { useLocation } from "react-router-dom";
 import validator from "validator";
 import { signInUserRequest } from "../actions/SignIn";
 import "../styles/pages/__pages-dir.scss";
 const SignIn = (props) => {
+  const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
   const [submitted, setSubmitted] = useState(false);
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
   const errors = useSelector((state) => ({ ...state.auth.error }));
-
+  console.log("LOCATION", location);
   const drawerToggleClickHandler = () => {
     setSideDrawerOpen(!sideDrawerOpen);
   };
@@ -51,15 +53,16 @@ const SignIn = (props) => {
       name: "password",
       value: "",
       error:
-        errors === {} ? "" : errors.passwordError ? errors.passwordError : "",
+        !errors === {} ? "" : errors.passwordError ? errors.passwordError : "",
       type: "password",
     },
   ]);
 
   useEffect(() => {
+
     if (errors.emailError && errors.passwordError) {
       setError(true, 0, errors.emailError);
-      setError(true, 0, errors.passwordError);
+      setError(true, 1, errors.passwordError);
     }
   }, [errors]);
 
@@ -70,7 +73,8 @@ const SignIn = (props) => {
     if (inputFields[0].value === "") {
       setError(true, 0, "Required Field");
       emptyField = true;
-    } else if (inputFields[1].value === "") {
+    } 
+    if (inputFields[1].value === "") {
       setError(true, 1, "Required Field");
       emptyField = true;
     }
@@ -83,7 +87,7 @@ const SignIn = (props) => {
         signInUserRequest({
           email: inputFields[0].value,
           password: inputFields[1].value,
-          history: history.push("/home"),
+          history: history,
         })
       );
     }
@@ -93,7 +97,7 @@ const SignIn = (props) => {
     <>
       <ErrorPopUp inputs={inputFields} />
       <div className="app-no-account">
-        <div className="input-container-column" >
+        <div className="input-container-column">
           {inputFields.map((input, index) => (
             <Input
               changeError={setError}
@@ -109,14 +113,30 @@ const SignIn = (props) => {
           ))}
         </div>
         <Button event={signIn} title={"Sign In"} position={"left"} top />
+
         <div className="link-button" style={{ bottom: "16vh" }}>
-          <h3>Wanto to watch video without an account? </h3>
-          <h4>Click Here</h4>
-        </div>
-        <div className="link-button2" style={{ bottom: "12vh" }}>
           <h3>Want to create an account? </h3>
-          <h4> Sign Up Here</h4>
+          <h4
+            onClick={() => {
+              history.push("/signup");
+            }}
+          >
+            {" "}
+            Sign Up Here
+          </h4>
         </div>
+        {location.state ?
+        <>
+        {location.state.videoId && location.state.companyId ? (
+          <div className="link-button2" style={{ bottom: "12vh" }}>
+            <h3>Wanto to watch video without an account? </h3>
+            <h4   onClick={() => {
+              history.push(`/watchvideo/${location.state.companyId}/${location.state.videoId}`);
+            }}>Click Here</h4>
+          </div>
+        ) : null}
+        </>
+        :null}
       </div>
     </>
   );

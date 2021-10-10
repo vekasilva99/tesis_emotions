@@ -23,13 +23,13 @@ import {
 import axios from "axios";
 import { storage } from "../firebase";
 
-// import API_URL from '../constants/ApiURL';
+import {API_URL} from '../constants/ApiURL';
 
 const acceptCompanyRequest = async (payload) => {
   const req = payload.payload;
 
   const options = {
-    url: `http://localhost:5000/companies/accept/${payload.payload._id}/true`,
+    url: API_URL+`companies/accept/${payload.payload._id}/true`,
     method: "POST",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -49,7 +49,7 @@ const rejectCompanyRequest = async (payload) => {
   const req = payload.payload;
 
   const options = {
-    url: `http://localhost:5000/companies/accept/${payload.payload._id}/false`,
+    url: API_URL+`companies/accept/${payload.payload._id}/false`,
     method: "POST",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -69,7 +69,7 @@ const blockVideoRequest = async (payload) => {
   const req = payload.payload;
 
   const options = {
-    url: `http://localhost:5000/videos/update/${req._id}`,
+    url: API_URL+`videos/update/${req._id}`,
     method: "POST",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -98,7 +98,7 @@ const unblockVideoRequest = async (payload) => {
   const req = payload.payload;
 
   const options = {
-    url: `http://localhost:5000/videos/update/${req._id}`,
+    url: API_URL+`videos/update/${req._id}`,
     method: "POST",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,

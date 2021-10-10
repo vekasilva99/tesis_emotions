@@ -7,9 +7,11 @@ import AddVideoPopUp from "../components/AddVideo/index";
 import AddEmotionPopUp from "../components/AddEmotion/index";
 import Item from "../components/EmotionItem/index";
 import Button from "../components/Button/index";
+import ErrorPopUpModel from "../components/ErrorPopUpModel/index"
 import polar from "../assets/images/Polar.png";
 import "../styles/pages/__pages-dir.scss";
 const Emotions = (props) => {
+  const [error, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
   const [open, setOpen] = useState(false);
@@ -66,7 +68,7 @@ const Emotions = (props) => {
   }, []);
   return (
     <>
-      <AddEmotionPopUp open={open} setOpen={setOpen} />
+      <AddEmotionPopUp error={error} setErrorMessage={setErrorMessage} open={open} setOpen={setOpen} />
       <Sidebar
         drawerToggleClickHandler={drawerToggleClickHandler}
         color={"#A9B18F"}
@@ -76,7 +78,7 @@ const Emotions = (props) => {
         sideDrawerOpen={sideDrawerOpen}
         drawerToggleClickHandler={drawerToggleClickHandler}
       />
-
+   
       <div className="app-emotions">
         <h1
           className="subtitle"
@@ -95,6 +97,7 @@ const Emotions = (props) => {
           event={() => {
             setOpen(true);
           }}
+          disable={error ? true :false}
           title={"Add Emotion."}
           position={"right"}
         />

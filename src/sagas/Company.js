@@ -4,6 +4,9 @@ import {
   ADD_VIDEO_REQUEST,
   ADD_EMOTION_REQUEST,
   FETCH_EMOTIONS_REQUEST,
+  DISABLE_VIDEO_REQUEST,
+  UPDATE_PROFILE_IMAGE_REQUEST,
+  UPDATE_EMOTION_REQUEST,
 } from "../constants/ActionTypes";
 import {
   addVideoError,
@@ -12,25 +15,36 @@ import {
   addEmotionSuccess,
   fetchEmotionsSuccess,
   fetchEmotionsError,
+  disableVideoError,
+  disableVideoSuccess,
+  updateImageError,
+  updateImageSuccess,
+  updateEmotionSuccess,
+  updateEmotionError,
+  fetchEmotionsRequest,
 } from "../actions/Company";
+import {
+  fetchVideosRequest
+} from "../actions/Brands"
 import axios from "axios";
 import { storage } from "../firebase";
+import moment from "moment";
 
-// import API_URL from '../constants/ApiURL';
+import { API_URL } from "../constants/ApiURL";
 
 const addNewVideoRequest = async (payload) => {
   const req = payload.payload;
 
   let res2 = storage
-    .ref(`companies/videos/${req._id}`)
-    .put(payload.mainImg)
+    .ref(`companies/videos/${req.companyID}/${req.name}`)
+    .put(req.mainImg)
     .then(() => {
       let res3 = storage
-        .ref(`companies/videos/${req._id}`)
+        .ref(`companies/videos/${req.companyID}/${req.name}`)
         .getDownloadURL()
         .then(async (url) => {
           const options = {
-            url: "http://localhost:5000/videos/add",
+            url: API_URL + "videos/add",
             method: "POST",
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -60,11 +74,11 @@ const addNewVideoRequest = async (payload) => {
   return res2;
 };
 
-const fetchEmotionsRequest = async (payload) => {
+const fetchEmotionsRequest2 = async (payload) => {
   const req = payload.payload;
 
   const options = {
-    url: "http://localhost:5000/emotions",
+    url: API_URL + "emotions",
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -80,9 +94,30 @@ const fetchEmotionsRequest = async (payload) => {
   return res;
 };
 
+const disableVideoRequest = async (payload) => {
+  const req = payload.payload;
+
+  const options = {
+    url: API_URL + `videos/update/${req._id}`,
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    data: req,
+  };
+  let res = await axios(options)
+    .then((resp) => {
+      return { status: 200 };
+    })
+    .catch((error) => {
+      return { status: error.response.status };
+    });
+  return res;
+};
+
 const addEmotionRequest = async (payload) => {
   const options = {
-    url: "http://localhost:5000/emotions/add",
+    url: API_URL + "emotions/add",
     method: "POST",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -93,19 +128,25 @@ const addEmotionRequest = async (payload) => {
       companyID: payload.payload.company,
     },
   };
+  let cont = 0;
+
   let res = await axios(options)
-    .then((resp) => {
+    .then(async (resp) => {
       for (let i = 0; i < payload.payload.embeddings.length; i++) {
-        storage
-          .ref(`companies/emotions/${payload.payload.company}`)
+        let storageRes = await storage
+          .ref(
+            `companies/emotions/${payload.payload.company}/${resp.data.emotion._id}/${i}`
+          )
           .put(payload.payload.embeddings[i].img)
-          .then(() => {
-            let res3 = storage
-              .ref(`companies/emotions/${payload.payload.company}`)
+          .then(async () => {
+            let res3 = await storage
+              .ref(
+                `companies/emotions/${payload.payload.company}/${resp.data.emotion._id}/${i}`
+              )
               .getDownloadURL()
               .then(async (url) => {
                 const options2 = {
-                  url: `http://localhost:5000/embeddings/add`,
+                  url: API_URL + `embeddings/add`,
                   method: "POST",
                   headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -118,26 +159,89 @@ const addEmotionRequest = async (payload) => {
                 };
                 let res2 = await axios(options2)
                   .then((resp2) => {
+                    cont++;
                     return 200;
                   })
-                  .catch((err) => {
-                    return err.response.status;
+                  .catch((errRes2) => {
+                    return errRes2.response.status;
                   });
               })
-
-              .catch((err) => {
-                return err.response.status;
+              .catch((errorRes3) => {
+                return { status: errorRes3.response.status };
               });
+          })
+          .catch((errorStorageRes) => {
+            return { status: errorStorageRes.response.status };
           });
       }
+    })
+    .catch((errorRes) => {
+      return { status: errorRes.response.status };
+    });
 
-      return 200;
+  if (cont === 3) {
+    return { status: 200 };
+  } else {
+    return { status: 502 };
+  }
+};
+
+const updateImageRequest = async (payload) => {
+  const req = payload.payload;
+
+  let res = storage
+    .ref(`companies/${req._id}`)
+    .put(req.mainImg)
+    .then(() => {
+      return { status: 200 };
     })
     .catch((error) => {
-      return error.response.status;
+      return { status: error.response.status };
     });
 
   return res;
+};
+
+const updateEmotionRequest = async (payload) => {
+  let cont = 0;
+  let storageRes = await storage
+    .ref(
+      `companies/emotions/${payload.payload.company}/${payload.payload.emotion}/${payload.payload.index}`
+    )
+    .put(payload.payload.embeddings.img)
+    .then(async () => {
+      let date=new Date().toISOString();
+      const options2 = {
+        url: API_URL + `embeddings/update/${payload.payload.embeddings._id}`,
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+    
+        data: {
+          img: payload.payload.url+`?date=${date}`,
+          embedding: payload.payload.embeddings.embedding,
+          emotionID: payload.payload.emotion,
+        },
+      };
+      let res2 = await axios(options2)
+        .then((resp2) => {
+          cont++;
+          return 200;
+        })
+        .catch((errRes2) => {
+          return errRes2.response.status;
+        });
+    })
+    .catch((errorStorageRes) => {
+      return { status: errorStorageRes.response.status };
+    });
+
+  if (cont === 1) {
+    return { status: 200 };
+  } else {
+    return { status: 502 };
+  }
 };
 function* addVideo(payload) {
   try {
@@ -146,6 +250,7 @@ function* addVideo(payload) {
       yield put(
         addVideoSuccess({ success: "The video has been successfully added." })
       );
+      yield put(fetchVideosRequest(payload.payload.companyID))
     } else {
       let error = { emailError: null };
       if (res === 400) {
@@ -170,20 +275,22 @@ function* addVideo(payload) {
 function* addEmotion(payload) {
   try {
     const res = yield call(addEmotionRequest, payload);
-    if (res === 200) {
+    if (res.status === 200) {
+      yield put(fetchEmotionsRequest());
       yield put(
         addEmotionSuccess({
           success: "The emotion has been successfully added.",
         })
       );
+
     } else {
       let error = { emailError: null };
-      if (res === 400) {
+      if (res.status === 400) {
         error = {
           error:
             "There's already another emotion called like this one. Please, enter another name.",
         };
-      } else if (res === 500) {
+      } else if (res.status === 500) {
         error = { emailError: "Server Error" };
       } else {
         error = {
@@ -199,7 +306,7 @@ function* addEmotion(payload) {
 
 function* fetchEmotions(payload) {
   try {
-    const res = yield call(fetchEmotionsRequest, payload);
+    const res = yield call(fetchEmotionsRequest2, payload);
     if (res.status === 200) {
       yield put(fetchEmotionsSuccess(res.emotions));
     } else {
@@ -223,10 +330,78 @@ function* fetchEmotions(payload) {
   }
 }
 
+function* disableVideo(payload) {
+  try {
+    const res = yield call(disableVideoRequest, payload);
+    if (res.status === 200) {
+      yield put(disableVideoSuccess(res.emotions));
+    } else {
+      let error = { emailError: null };
+      if (res.status === 500) {
+        error = { emailError: "Server Error" };
+      } else {
+        error = {
+          error: "Oops. Something went wrong.",
+        };
+      }
+      yield put(fetchEmotionsError(error));
+    }
+  } catch (error) {
+    yield put(fetchEmotionsError(error));
+  }
+}
+function* updateImage(payload) {
+  try {
+    const res = yield call(updateImageRequest, payload);
+    if (res.status === 200) {
+      yield put(updateImageSuccess(res.emotions));
+    } else {
+      let error = { emailError: null };
+      if (res.status === 500) {
+        error = { emailError: "Server Error" };
+      } else {
+        error = {
+          error: "Oops. Something went wrong.",
+        };
+      }
+      yield put(updateImageError(error));
+    }
+  } catch (error) {
+    yield put(updateImageError(error));
+  }
+}
+
+function* updateEmotion(payload) {
+  try {
+    const res = yield call(updateEmotionRequest, payload);
+    if (res.status === 200) {
+      yield put(fetchEmotionsRequest());
+      yield put(updateEmotionSuccess(res.emotions));
+
+      yield put(payload.payload.setOpen(false))
+    } else {
+      let error = { emailError: null };
+      if (res.status === 500) {
+        error = { emailError: "Server Error" };
+      } else {
+        error = {
+          error: "Oops. Something went wrong.",
+        };
+      }
+      yield put(updateEmotionError(error));
+    }
+  } catch (error) {
+    yield put(updateEmotionError(error));
+  }
+}
+
 export default function* rootSaga() {
   yield all([
     takeEvery(ADD_VIDEO_REQUEST, addVideo),
     takeEvery(ADD_EMOTION_REQUEST, addEmotion),
     takeEvery(FETCH_EMOTIONS_REQUEST, fetchEmotions),
+    takeEvery(DISABLE_VIDEO_REQUEST, disableVideo),
+    takeEvery(UPDATE_PROFILE_IMAGE_REQUEST, updateImage),
+    takeEvery(UPDATE_EMOTION_REQUEST, updateEmotion),
   ]);
 }

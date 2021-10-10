@@ -172,6 +172,7 @@ const AddVideoPopUp = ({ open, setOpen }) => {
     setDuration(event.target.getDuration());
   };
 
+  console.log("LOAD VIDEO", loader)
   return (
     <>
       <div
@@ -186,6 +187,13 @@ const AddVideoPopUp = ({ open, setOpen }) => {
       <ErrorPopUp company={true} inputs={inputFields} />
       <SuccessPopUp company={true} inputs={inputFields} />
       <div className={open ? "pop-up-container" : "pop-up-container closed"}>
+      <div className="close-pop-up"> <h3
+              onClick={() => {
+          setOpen(false)
+              }}
+            >
+              Close
+            </h3></div>
         <div className="pop-up-content">
           <h4>New Video</h4>
           <div className="pop-up-input-container">

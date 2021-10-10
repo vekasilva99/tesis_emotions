@@ -5,10 +5,11 @@ import { useParams } from "react-router-dom";
 import "../../styles/components/__components-dir.scss";
 import {  Line } from 'react-chartjs-2'
 import { statAttentionRequest } from "../../actions/Statistics";
+import CircularProgress from "@material-ui/core/CircularProgress";
 const AttentionChart = ({}) => {
 const dispatch = useDispatch();
 const { video } = useParams();
-const { attention } = useSelector((state) => ({
+const { attention,loaderStatistics } = useSelector((state) => ({
   ...state.stats,
 }));
 const [lineData, setLineData] = useState({
@@ -17,42 +18,42 @@ const [lineData, setLineData] = useState({
     {
       label: 'High Level of Attention',
       fill: false,
-      lineTension: 0.1,
-      backgroundColor: 'rgba(75,192,192,0.4)',
-      borderColor: 'rgba(75,192,192,1)',
+      lineTension: 0.3,
+      backgroundColor: 'rgba(203, 128, 125, 0.4)',
+      borderColor: 'rgba(203, 128, 125, 1)',
       borderCapStyle: 'butt',
       borderDash: [],
       borderDashOffset: 0.0,
       borderJoinStyle: 'miter',
-      pointBorderColor: 'rgba(75,192,192,1)',
-      pointBackgroundColor: '#fff',
+      pointBorderColor: 'rgba(203, 128, 125, 1)',
+      pointBackgroundColor: 'rgba(203, 128, 125, 1)',
       pointBorderWidth: 1,
       pointHoverRadius: 5,
-      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBackgroundColor: 'rgba(203, 128, 125, 1)',
+      pointHoverBorderColor: 'rgba(203, 128, 125, 1)',
       pointHoverBorderWidth: 2,
-      pointRadius: 1,
+      pointRadius: 2,
       pointHitRadius: 10,
       data: [],
     },
     {
       label: 'Low Level of Attention',
       fill: false,
-      lineTension: 0.1,
-      backgroundColor: 'rgba(75,192,192,0.4)',
-      borderColor: 'rgba(75,192,192,1)',
+      lineTension: 0.3,
+      backgroundColor: 'rgba(169, 177, 143, 0.4)',
+      borderColor: 'rgba(169, 177, 143, 1)',
       borderCapStyle: 'butt',
       borderDash: [],
       borderDashOffset: 0.0,
       borderJoinStyle: 'miter',
-      pointBorderColor: 'rgba(75,192,192,1)',
-      pointBackgroundColor: '#fff',
+      pointBorderColor: 'rgba(169, 177, 143, 1)',
+      pointBackgroundColor: 'rgba(169, 177, 143, 1)',
       pointBorderWidth: 1,
       pointHoverRadius: 5,
-      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBackgroundColor: 'rgba(169, 177, 143, 1)',
+      pointHoverBorderColor: 'rgba(169, 177, 143, 1)',
       pointHoverBorderWidth: 2,
-      pointRadius: 1,
+      pointRadius: 2,
       pointHitRadius: 10,
       data: [],
     },
@@ -72,7 +73,7 @@ useEffect(() => {
       aux.datasets[1].data.push(attention.notAttentionValues[i].total)
     }
     setLineData(aux)
-console.log("Graph",aux)
+
   }
 }, [attention]);
 
@@ -97,6 +98,9 @@ const lineOptions = {
   {Object.keys(attention).length>0 &&
 <Line data={lineData} options={lineOptions} width={null} height={null} />
 }
+{Object.keys(attention).length === 0 && loaderStatistics &&
+        <CircularProgress size={100} thickness={5} />
+       }
 </div>
   );
 };
