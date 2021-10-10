@@ -1,0 +1,95 @@
+
+.app-videos{
+  width: 100vw;
+max-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  overflow-x: hidden !important;
+  flex-direction: column;
+  // margin-left: 10vw;
+  padding: 50px;
+  padding-left: 15vw!important;
+  padding-right: 0;
+  background-color: #A9B18F;
+  transform: translateX(0);
+  transition: all 1s ease-in-out;
+
+}
+
+
+
+.videos-container{
+min-width: 100%;
+  width:100%;
+  min-height: 400px;
+ max-height:400px;
+ display: flex;
+ flex-direction: row;
+ overflow-x: scroll !important;
+ overflow-y: hidden;
+ transform: translateX(0);
+ transition: all 1s ease-in-out;
+}
+
+.videos-container-onload{
+  min-width: 100%;
+  width:100%;
+  min-height: 400px;
+ max-height:400px;
+ display: flex;
+ flex-direction: row;
+
+ overflow-x: scroll !important;
+ overflow-y: hidden;
+  transform: translateX(100%);
+  transition: all 1s ease-in-out;
+  }
+
+.video-item{
+  width:600px !important;
+  min-width: 600px;
+  height: 100%;
+  margin-right: 55px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+position: relative;
+
+
+}
+
+.image-video-container{
+  width: 85%;
+  height: 80%;
+  position: relative;
+}
+.image-video-container img{
+  position: absolute;
+  width:100%;
+  height: 100%;
+  z-index: 10;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.video-number{
+  position: absolute;
+  top:-35%;
+  left: -15%;
+  color:black;
+  font-size: 120px;
+  font-family: 'PlayfairDisplay-Medium';
+  z-index: 5;
+  margin:0 !important;
+}
+.video-title-list{
+  position: absolute;
+  bottom:0%;
+  left: 0;
+  color:white;
+  font-size: 70px;
+  font-family: 'PlayfairDisplay-Medium';
+  z-index: 15;
+  margin:0 !important;
+}

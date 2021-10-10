@@ -1,0 +1,128 @@
+.select{
+  width: 300px;
+  height: 100px;
+  max-width: 300px;
+  max-height: 100px;
+  margin-bottom: 50px;
+  @media screen and (min-width: 3000px) {
+    width: 25vw;
+    height: 300px;
+    max-width: 25vw;
+    max-height: 300px;
+    margin-bottom: 300px;
+  }
+
+}
+
+.select.error-select select{
+  border-bottom: 2px solid #ef5350!important;
+  color: #ef5350 !important;
+  transition: all 0.5s;
+  ::placeholder{
+    color: #ef5350 !important;
+  }
+}
+
+.select select{
+  outline:none;
+  background-color: transparent;
+  border:none;
+  border-bottom: 2px solid white;
+  width: 100%;
+  font-size: 20px;
+  color:white;
+  font-family: 'PlayfairDisplay-MediumItalic';
+  letter-spacing: 2px;
+  padding-bottom: 8px;
+  @media screen and (min-width: 3000px) {
+    height:4vw;
+    border-bottom: 0.5vh solid white ;
+    font-size: 2.5vw;
+  }
+}
+
+optgroup{
+  font-size: 20px !important;
+  size:20px;
+}
+
+// ::placeholder{
+//   font-size: 30px;
+//   color:black;
+//   font-family: 'PlayfairDisplay-MediumItalic';
+//   letter-spacing: 2px;
+// }
+// select:-webkit-autofill,
+// select:-webkit-autofill:hover, 
+// input:-webkit-autofill:focus,
+// textarea:-webkit-autofill,
+// textarea:-webkit-autofill:hover,
+// textarea:-webkit-autofill:focus,
+// select:-webkit-autofill,
+// select:-webkit-autofill:hover,
+// select:-webkit-autofill:focus {
+//   -webkit-text-fill-color: black;
+//   -webkit-box-shadow: 0 0 0px 1000px #E5E5E5 inset;
+//   transition: background-color 5000s ease-in-out 0s;
+// }
+// Demo
+
+// select:-webkit-autofill::first-line{
+//   font-size: 30px;
+//   color:#A9B18F;
+//   background-color: violet;
+//   font-family: 'PlayfairDisplay-MediumItalic';
+//   letter-spacing: 2px;
+// }
+
+// .placeholder{
+//   font-family: 'PlayfairDisplay-SemiBold';
+//   color: #CB807D;
+//   text-transform: uppercase;
+//   font-size: 20px;
+//   letter-spacing: 1.5px;
+// }
+
+.select-white{
+  width: 300px;
+  height: 100px;
+  max-width: 300px;
+  max-height: 100px;
+  margin-bottom: 50px;
+  @media screen and (min-width: 3000px) {
+    width: 25vw;
+    height: 300px;
+    max-width: 25vw;
+    max-height: 300px;
+    margin-bottom: 300px;
+  }
+
+}
+
+.select-white.error-select select{
+  border-bottom: 2px solid #ef5350!important;
+  color: #ef5350 !important;
+  transition: all 0.5s;
+  ::placeholder{
+    color: #ef5350 !important;
+  }
+}
+
+.select-white select{
+  outline:none;
+  background-color: transparent;
+  border:none;
+  border-bottom: 2px solid black;
+  width: 100%;
+  font-size: 20px;
+  color:#A9B18F;
+  font-family: 'PlayfairDisplay-MediumItalic';
+  letter-spacing: 2px;
+  padding-bottom: 8px;
+  @media screen and (min-width: 3000px) {
+    height:4vw;
+    border-bottom: 0.5vh solid black ;
+    font-size: 2.5vw;
+  }
+}
+
