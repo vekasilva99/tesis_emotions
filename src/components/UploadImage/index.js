@@ -292,6 +292,7 @@ const UploadImage = ({
             <canvas
               crossOrigin="anonymous"
               style={{
+          
                 background: "pink",
                 visibility: "hidden",
                 position: "absolute",
@@ -315,6 +316,7 @@ const UploadImage = ({
                   model2,
                   i + 1
                 );
+              
                 var arrayString = JSON.stringify(auxEmbedding);
                 auxEmbedding = JSON.parse(arrayString);
 

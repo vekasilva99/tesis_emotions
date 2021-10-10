@@ -60,7 +60,7 @@ const snap = (start, size, index, img, model2,i) => {
   const canvas2 = document.getElementById("output-upload-detail");
   canvas2 .getContext("2d").clearRect(0, 0, canvas2.width, canvas2.height);
   let canvas = document.getElementById(`output-upload${i}`);
-
+const realTopLeftX= canvas.width-(start[0]+size[0])
   const modelImageSize = 160;
   let context = canvas2.getContext("2d");
   canvas2.width = canvas.width;
@@ -69,17 +69,23 @@ const snap = (start, size, index, img, model2,i) => {
   let imageData = canvas
     .getContext("2d")
     .getImageData(0, 0, canvas.width, canvas.height);
-    console.log(imageData)
+
   canvas2
     .getContext("2d")
-    .putImageData(imageData, 0, 0, start[0], start[1], size[0], size[1]);
+    .putImageData(imageData, 0, 0, realTopLeftX, start[1], size[0], size[1]);
   // Dibujar la imagen recortada.
   
   let trimmedCanvas = trimCanvas(canvas2);
   imageData = trimmedCanvas
     .getContext("2d")
     .getImageData(0, 0, trimmedCanvas.width, trimmedCanvas.height);
-
+    let baw_array0 = [];
+    for (var i = 0; i < imageData.data.length; i += 4) {
+      baw_array0.push(imageData.data[i]);
+      baw_array0.push(imageData.data[i + 1]);
+      baw_array0.push(imageData.data[i + 2]);
+    }
+    console.log("ARREGLO", JSON.stringify(baw_array0))
   canvas2.width = 160;
   canvas2.height = 160;
   trimmedCanvas
@@ -90,7 +96,7 @@ const snap = (start, size, index, img, model2,i) => {
   .getContext("2d")
   .getImageData(0, 0, 160, 160);
 ;
-console.log("ARREGLO", imageData)
+
   let url = trimmedCanvas.toDataURL();
 
   const image = new Image();
