@@ -11,13 +11,16 @@ export const getEmbedding = async(img, model, model2,i) => {
   const flipHorizontal = true;
   const annotateBoxes = true;
 
-
+console.log('kik;',canvas
+.getContext("2d")
+.getImageData(0, 0, canvas.width, canvas.height))
 const embedding= await model
     .estimateFaces(canvas, returnTensors, flipHorizontal, annotateBoxes)
     .then((predictions) => {
     let array=[]
       if (predictions.length > 0) {
-     console.log("HOLA",canvas)
+
+        console.log('blazeface is', model);
 
         array=predictions.map((face_detected, index) => {
           if (returnTensors) {
@@ -53,7 +56,9 @@ const embedding= await model
 };
 
 const snap = (start, size, index, img, model2,i) => {
+
   const canvas2 = document.getElementById("output-upload-detail");
+  canvas2 .getContext("2d").clearRect(0, 0, canvas2.width, canvas2.height);
   let canvas = document.getElementById(`output-upload${i}`);
 
   const modelImageSize = 160;
@@ -64,7 +69,7 @@ const snap = (start, size, index, img, model2,i) => {
   let imageData = canvas
     .getContext("2d")
     .getImageData(0, 0, canvas.width, canvas.height);
-
+    console.log(imageData)
   canvas2
     .getContext("2d")
     .putImageData(imageData, 0, 0, start[0], start[1], size[0], size[1]);
@@ -95,7 +100,7 @@ console.log("ARREGLO", imageData)
     context.drawImage(image, 0, 0, 160, 160);
   };
 
-
+trimmedCanvas.remove()
 
   let baw_array = [];
   for (var i = 0; i < imageData.data.length; i += 4) {
@@ -111,11 +116,11 @@ console.log("ARREGLO", imageData)
  
   if(std>0){
   baw_array = getStandarizedArray(baw_array,mean,std)
-  console.log("PIXELS",JSON.stringify(baw_array))
+  // console.log("PIXELS",JSON.stringify(baw_array))
   let finalIMG = tf_2.tensor(baw_array);
 
   finalIMG = tf_2.reshape(finalIMG, [1, modelImageSize, modelImageSize, 3]);
-
+// console.log("MODEL",model2.getWeights()[0].print())
   let prediction = model2.predict(finalIMG);
   const value = prediction.dataSync();
   let prueba =model2.getWeights()[0].dataSync();
@@ -128,7 +133,7 @@ console.log("model",value)
 
 const trimCanvas = (c) => {
   let ctx = c.getContext("2d"),
-    copy = document.createElement("canvas").getContext("2d"),
+    copy = document.createElement("canvas"),
     pixels = ctx.getImageData(0, 0, c.width, c.height),
     l = pixels.data.length,
     i,
@@ -140,7 +145,9 @@ const trimCanvas = (c) => {
     },
     x,
     y;
-
+   
+    copy.setAttribute('id', "trimmed-canvas");
+    copy = copy.getContext("2d");
   // Iterate over every pixel to find the highest
   // and where it ends on every axis ()
   const cont = 5;

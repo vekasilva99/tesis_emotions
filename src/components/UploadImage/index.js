@@ -14,26 +14,27 @@ import ErrorPopUp from "../../components/ErrorPopUp/index";
 import ErrorPopUpModel from "../../components/ErrorPopUpModel/index";
 import SuccessPopUp from "../../components/SuccessPopUp/index";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import {testRequest} from "../../actions/Statistics"
+import { testRequest } from "../../actions/Statistics";
+import adidas from "../../assets/images/adidas.png";
 
 class scaling extends tf_2.layers.Layer {
   static className = "scaling";
   constructor(config) {
     super(config);
-    this.scale=config.scale
+    this.scale = config.scale;
   }
-  call(input){
-    return tf_2.tidy(()=>{
-      console.log("SCALE ",this.scale)
-    // console.log("SCALE Antes",input[0].dataSync())
-    // console.log("SCALE Despues",input[0].mul(this.scale).dataSync())
-      return input[0].mul(this.scale)
+  call(input) {
+    return tf_2.tidy(() => {
+      //   console.log("SCALE ",this)
+      // console.log("SCALE Antes",JSON.stringify(input[0].arraySync()))
+      // console.log("SCALE Despues",input[0].mul(this.scale).dataSync())
+      return input[0].mul(this.scale);
       // return tf_2.math.l2_normalize(input,-1,1e-12,this.name)
-    })
+    });
   }
   getConfig() {
     const config = super.getConfig();
-    Object.assign(config, {scale: this.scale});
+    Object.assign(config, { scale: this.scale });
     return config;
   }
 }
@@ -43,13 +44,16 @@ class l2Norm extends tf_2.layers.Layer {
   constructor(config) {
     super(config);
   }
-  call(input){
-    return tf_2.tidy(()=>{
-      console.log("SJA ANTES",JSON.stringify(input[0].arraySync()))
-      console.log("SJA",input[0].div(tf_2.sqrt(tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12))).dataSync())
-      return input[0].div(tf_2.sqrt(tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12)))
+
+  call(input) {
+    return tf_2.tidy(() => {
+      // console.log("SJA ANTES",JSON.stringify(input[0].arraySync()))
+      // console.log("SJA",input[0].div(tf_2.sqrt(tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12))).dataSync())
+      return input[0].div(
+        tf_2.sqrt(tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12))
+      );
       // return tf_2.math.l2_normalize(input,-1,1e-12,this.name)
-    })
+    });
   }
 }
 
@@ -59,17 +63,23 @@ class l2Norm extends tf_2.layers.Layer {
 //     super(config);
 //   }
 // }
-const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage,selectedEmotions }) => {
+const UploadImage = ({
+  settingChooseEmotion,
+  open,
+  setOpen,
+  error,
+  setErrorMessage,
+  selectedEmotions,
+}) => {
   const dispatch = useDispatch();
-  const [images, setImages] = useState([
-    { image: null },
-  ]);
+  const [images, setImages] = useState([{ image: null }]);
   const [preview, setPreview] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const blazeface = require("@tensorflow-models/blazeface");
   const faceLandmarksDetection = require("@tensorflow-models/face-landmarks-detection");
   const [model, setModel] = useState(undefined);
   const [model2, setModel2] = useState(undefined);
+  let image = new Image();
   const modelImageSize = 160;
   const img1 = useRef(null);
   const img2 = useRef(null);
@@ -80,28 +90,29 @@ const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage
   const errors = useSelector((state) => ({ ...state.company.error }));
   const success = useSelector((state) => ({ ...state.company.success }));
   const loader = useSelector((state) => ({ ...state.company })).loaderCompany;
- 
+
   const uploadImages = (files, index) => {
     let auxImages = images;
     let auxFiles = images.filter((image) => image.image === null);
     if (files.length <= 1) {
-  
       for (let j = 0; j < files.length; j++) {
         for (var i = 0; i < auxImages.length; i++) {
- 
-            auxImages[i].image = files[j];
-            let canvas = document.getElementById(
-              `output-upload` + (i + 1).toString()
-            );
-            let ctx = canvas.getContext("2d");
-            const image = new Image();
-            image.src = URL.createObjectURL(files[j]);
-            image.onload = () => {
-              ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-            };
+          auxImages[i].image = files[j];
+          let canvas = document.getElementById(
+            `output-upload` + (i + 1).toString()
+          );
+          canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+          let ctx = canvas.getContext("2d");
 
-            break;
-          
+          image.src = URL.createObjectURL(files[j]);
+          image.onload = () => {
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+          };
+          canvas
+            .getContext("2d")
+            .getImageData(0, 0, canvas.width, canvas.height);
+
+          break;
         }
       }
     }
@@ -181,15 +192,15 @@ const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage
     tf_2.serialization.registerClass(l2Norm);
     // tf_2.serialization.registerClass(L2Norm);
 
-   
-    try{
-    console.log("EMPEZANDO");
-     setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
-    // setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
-    console.log("TERMINADO");
-    }catch(error){
-      setErrorMessage('Oops! It seems something went wrong when loading the model. Please clear your cache and try again. Sorry for the inconvinience.')
- 
+    try {
+      console.log("EMPEZANDO");
+      setModel2(await tf_2.loadLayersModel("http://localhost:8887/model.json"));
+      // setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
+      console.log("TERMINADO");
+    } catch (error) {
+      setErrorMessage(
+        "Oops! It seems something went wrong when loading the model. Please clear your cache and try again. Sorry for the inconvinience."
+      );
     }
   };
 
@@ -215,14 +226,21 @@ const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage
       <ErrorPopUpModel error={error} setError={setErrorMessage} />
       <ErrorPopUp company={true} inputs={inputFields} />
       <SuccessPopUp company={true} inputs={inputFields} />
-      <div className={open ? "pop-up-container-down" : "pop-up-container-down closed"}>
-        <div className="close-pop-up"> <h3
-              onClick={() => {
-          setOpen(false)
-              }}
-            >
-              Close
-            </h3></div>
+      <div
+        className={
+          open ? "pop-up-container-down" : "pop-up-container-down closed"
+        }
+      >
+        <div className="close-pop-up">
+          {" "}
+          <h3
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            Close
+          </h3>
+        </div>
         <div className="pop-up-content">
           <h4>Upload Image</h4>
 
@@ -317,7 +335,7 @@ const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage
                 testRequest({
                   emotions: selectedEmotions,
                   company: _id,
-                  photo_embedding:auxArray[0].embedding,
+                  photo_embedding: auxArray[0].embedding,
                 })
               );
             }}
