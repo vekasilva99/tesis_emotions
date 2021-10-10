@@ -19,10 +19,26 @@ import ErrorPopUpModel from "../../components/ErrorPopUpModel/index";
 import SuccessPopUp from "../../components/SuccessPopUp/index";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+
 class scaling extends tf_2.layers.Layer {
   static className = "scaling";
   constructor(config) {
     super(config);
+    this.scale=config.scale
+  }
+  call(input){
+    return tf_2.tidy(()=>{
+    //   console.log("SCALE ",this)
+    // console.log("SCALE Antes",JSON.stringify(input[0].arraySync()))
+    // console.log("SCALE Despues",input[0].mul(this.scale).dataSync())
+      return input[0].mul(this.scale)
+      // return tf_2.math.l2_normalize(input,-1,1e-12,this.name)
+    })
+  }
+  getConfig() {
+    const config = super.getConfig();
+    Object.assign(config, {scale: this.scale});
+    return config;
   }
 }
 
@@ -30,13 +46,7 @@ class l2Norm extends tf_2.layers.Layer {
   static className = "l2Norm";
   constructor(config) {
     super(config);
-  }
-}
 
-class L2Norm extends tf_2.layers.Layer {
-  static className = "L2Norm";
-  constructor(config) {
-    super(config);
   }
 }
 const ChooseEmotionPopUp = ({
@@ -89,6 +99,9 @@ const ChooseEmotionPopUp = ({
           image.onload = () => {
             ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
           };
+          canvas
+          .getContext("2d")
+          .getImageData(0, 0, canvas.width, canvas.height);
 
           break;
         }
@@ -168,17 +181,17 @@ const ChooseEmotionPopUp = ({
   const loadModel = async () => {
     tf_2.serialization.registerClass(scaling);
     tf_2.serialization.registerClass(l2Norm);
-    tf_2.serialization.registerClass(L2Norm);
 
-    // setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
+
     try{
-    console.log("EMPEZANDO");
-    setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
-    console.log("TERMINADO");
-    }catch(error){
-      setErrorMessage('Oops! It seems something went wrong when loading the model. Please clear your cache and try again. Sorry for the inconvinience.')
- 
-    }
+      console.log("EMPEZANDO");
+      setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
+      // setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
+      console.log("TERMINADO");
+      }catch(error){
+        setErrorMessage('Oops! It seems something went wrong when loading the model. Please clear your cache and try again. Sorry for the inconvinience.')
+   
+      }
   };
 
   const setError = (input, index, error) => {

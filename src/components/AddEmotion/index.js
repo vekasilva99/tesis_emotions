@@ -14,6 +14,7 @@ import ErrorPopUp from "../../components/ErrorPopUp/index";
 import ErrorPopUpModel from "../../components/ErrorPopUpModel/index";
 import SuccessPopUp from "../../components/SuccessPopUp/index";
 import CircularProgress from "@material-ui/core/CircularProgress";
+
 class scaling extends tf_2.layers.Layer {
   static className = "scaling";
   constructor(config) {
@@ -22,8 +23,8 @@ class scaling extends tf_2.layers.Layer {
   }
   call(input){
     return tf_2.tidy(()=>{
-      console.log("SCALE ",this.scale)
-    // console.log("SCALE Antes",input[0].dataSync())
+    //   console.log("SCALE ",this)
+    // console.log("SCALE Antes",JSON.stringify(input[0].arraySync()))
     // console.log("SCALE Despues",input[0].mul(this.scale).dataSync())
       return input[0].mul(this.scale)
       // return tf_2.math.l2_normalize(input,-1,1e-12,this.name)
@@ -40,14 +41,7 @@ class l2Norm extends tf_2.layers.Layer {
   static className = "l2Norm";
   constructor(config) {
     super(config);
-  }
-  call(input){
-    return tf_2.tidy(()=>{
-      console.log("SJA ANTES",tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12).dataSync())
-      console.log("SJA",input[0].div(tf_2.sqrt(tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12))).dataSync())
-      return input[0].div(tf_2.sqrt(tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12)))
-      // return tf_2.math.l2_normalize(input,-1,1e-12,this.name)
-    })
+
   }
 }
 const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage }) => {
@@ -92,7 +86,9 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
             image.onload = () => {
               ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
             };
-
+            canvas
+            .getContext("2d")
+            .getImageData(0, 0, canvas.width, canvas.height);
             break;
           }
         }
@@ -100,7 +96,7 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
     }
     setPreview(URL.createObjectURL(files[0]));
   };
-
+ 
   const [inputFields, setInputFields] = useState([
     {
       placeholder: "Enter Emotion Name",
