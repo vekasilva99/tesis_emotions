@@ -82,7 +82,14 @@ const AddVideoPopUp = ({ open, setOpen }) => {
       error: "",
     },
   ]);
+  const defaults=()=>{
+    let aux=inputFields
+    aux[0].value=""
+    aux[1].value=""
+    setDuration(null)
+    setInputFields(aux)
 
+  }
   const changeInput = (name, event) => {
     let fields = inputFields;
     var item = inputFields.find(function (input, index) {
@@ -97,14 +104,17 @@ const AddVideoPopUp = ({ open, setOpen }) => {
       setInputFields(fields);
     });
   };
+
   useEffect(() => {
     if (Object.keys(successCompany).length > 0 && open === true) {
-      inputFields[0].value = "";
-      inputFields[1].value = "";
+      let aux=inputFields
+      aux[0].value = "";
+      aux[1].value = "";
       setDuration(null);
       setImage(null);
-      inputFields[0].error = "";
-      inputFields[1].error = "";
+      aux[0].error = "";
+      aux[1].error = "";
+      setInputFields(aux)
       setOpen(false);
     }
   }, [successCompany]);
@@ -155,7 +165,7 @@ const AddVideoPopUp = ({ open, setOpen }) => {
         companyID: _id,
         mainImg: image,
         duration:
-          duration.hours * 3600 + duration.minutes * 60 + duration.seconds,
+          duration,
         link: inputFields[1].value,
         active: true,
       };
@@ -169,8 +179,10 @@ const AddVideoPopUp = ({ open, setOpen }) => {
   };
 
   const onReady2 = (event) => {
+    console.log("duracion",event.target.getDuration())
     setDuration(event.target.getDuration());
   };
+
 
   console.log("LOAD VIDEO", loader)
   return (

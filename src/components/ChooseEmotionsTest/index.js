@@ -19,9 +19,13 @@ const ChooseEmotionPopUp = ({
   }));
   const { video } = useParams();
   const dispatch = useDispatch();
+  const [selected, setSelected] = useState(false);
   useEffect(() => {
     dispatch(fetchEmotionsRequest());
   }, []);
+  useEffect(() => {
+    dispatch(fetchEmotionsRequest());
+  }, [selectedEmotions]);
   return (
     <div className={open ? "pop-up-container" : "pop-up-container closed"}>
        <div className="close-pop-up"> <h3

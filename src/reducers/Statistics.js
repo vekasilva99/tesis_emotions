@@ -52,7 +52,8 @@ const INIT_STATE = {
   topCountry:{},
   topGender:{},
   totalViews:null,
-  testInfo:[]
+  testInfo:[],
+  image:null,
 };
 
 export default (state = INIT_STATE, action) => {
@@ -294,7 +295,8 @@ export default (state = INIT_STATE, action) => {
       return {
         ...state,
         loaderStatistics: false,
-        testInfo:action.payload,
+        testInfo:action.payload.results,
+        image:action.payload.image
       };
     }
     

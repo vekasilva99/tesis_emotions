@@ -19,7 +19,7 @@ import neutrogenaLogo from "../assets/images/neutrogena.png";
 import nikeLogo from "../assets/images/nike.png";
 import Button from "../components/Button/index";
 import group from "../assets/group.png";
-import { scaling, l2Norm, L2Norm } from "../helpers/Model/modelClasses";
+import { scaling, l2Norm} from "../helpers/Model/modelClasses";
 import { loadBackend } from "../helpers/Model/setUp";
 import { YouTubeGetID } from "../helpers/Model/methods";
 import "../styles/pages/__pages-dir.scss";
@@ -154,12 +154,13 @@ const VideoWatch = (props) => {
   const loadModel = async () => {
     tf_2.serialization.registerClass(scaling);
     tf_2.serialization.registerClass(l2Norm);
-    tf_2.serialization.registerClass(L2Norm);
 
-    // setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
+
+ 
     try{
     console.log("EMPEZANDO");
-    setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
+    // setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
+       setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
     console.log("TERMINADO");
     setVisible(true);
     }catch(error){
@@ -323,6 +324,7 @@ const VideoWatch = (props) => {
     }
 
     // Modificar el canvas con la imagen b&w.
+    console.log("ACA ESTA EL ARREGLO",JSON.stringify(baw_array))
     trimmedCanvas
       .getContext("2d")
       .putImageData(imageData, 0, 0, 0, 0, imageData.width, imageData.height);

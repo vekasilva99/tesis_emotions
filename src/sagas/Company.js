@@ -250,7 +250,9 @@ function* addVideo(payload) {
       yield put(
         addVideoSuccess({ success: "The video has been successfully added." })
       );
+
       yield put(fetchVideosRequest(payload.payload.companyID))
+      
     } else {
       let error = { emailError: null };
       if (res === 400) {
