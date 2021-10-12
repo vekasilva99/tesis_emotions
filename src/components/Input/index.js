@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
 import "../../styles/components/__components-dir.scss";
 const Input = ({
   item,
@@ -12,6 +12,13 @@ const Input = ({
 }) => {
   const [error, setError] = useState(item.error);
   const [value, setValue] = useState(item.value);
+  const successCompany = useSelector((state) => ({ ...state.company.success }));
+  useEffect(() => {
+    if (Object.keys(successCompany).length > 0 ) {
+      setValue("");
+      changeInput(item.name, "");
+    }
+  }, [successCompany]);
   const onChange = (event) => {
     setSubmitted();
     setTimeout(() => {

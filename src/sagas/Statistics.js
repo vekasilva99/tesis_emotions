@@ -306,7 +306,7 @@ return res;
 };
 
 const testRequest = async (payload) => {
-
+console.log(payload)
   const options = {
     url: API_URL+`statistics/emotions-in-photo`,
     method: "POST",
@@ -554,8 +554,10 @@ function* test(payload) {
     const res = yield call(testRequest, payload);
     if (res.status === 200) {
       yield put(
-        testSuccess(res.res)
+        testSuccess({results:res.res,image:payload.payload.img})
       );
+ 
+      yield put(payload.payload.setOpen());
     } else {
       let error = { emailError: null };
 
