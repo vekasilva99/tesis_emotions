@@ -144,7 +144,7 @@ const VideoStatistics = (props) => {
       : (window.innerWidth * 0.35).toString(),
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
+      autoplay: 0,
       controls: 0,
       modestbranding: 1,
       disablek: 1,
@@ -166,6 +166,10 @@ const VideoStatistics = (props) => {
   const onReady = (event) => {
     setLoader(false)
   };
+  const { emotionsInVideo,loaderStatistics } = useSelector((state) => ({
+    ...state.stats,
+  }));
+ 
 
   return (
     <>
@@ -193,7 +197,7 @@ const VideoStatistics = (props) => {
             : "app-video-statistics-watch large"
         }
       >
-        <div className="section-statistics">
+        <div className="section-statistics" style={{height:emotionsInVideo.length > 0 ? "215vh" :"110vh"}}>
           <div style={{ width:"100%",display:"flex",flexDirection:"row",alignItems:"center"}}>
           <h1 className="video-stat-title">{selectedVideo.name}</h1>
          {selectedVideo != {} ?

@@ -149,7 +149,7 @@ const TestModel = ({}) => {
               Results.
             </h1>
             <h3 className="explanation">
-              The metrics used to measure the distance between the images is the cosine similarity. An emotion will match the image if the value of the similarity is 0.99 or more.  
+              The metric displayed is the cosine similarity between the image you uploaded and the emotions selected. An emotion will match the image if the value of the similarity is 0.99 or more.  
               </h3>
             <div className="test-results-container">
               <div className="test-results-container-1">
