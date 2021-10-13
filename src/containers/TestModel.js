@@ -41,8 +41,7 @@ const TestModel = ({}) => {
   const videos = useSelector((state) => ({ ...state.brands })).videos;
   const testInfo = useSelector((state) => state.stats.testInfo);
   const testImage = useSelector((state) => state.stats.image);
-  console.log("TEST", testInfo);
-  console.log("TEST", testImage);
+
   const drawerToggleClickHandler = () => {
     setSideDrawerOpen(!sideDrawerOpen);
   };
@@ -145,10 +144,13 @@ const TestModel = ({}) => {
           <>
             <h1
               className="subtitle"
-              style={{ color: "black", marginTop: "0px", marginBottom: "40px" }}
+              style={{ color: "black", marginTop: "0px", marginBottom: "10px" }}
             >
               Results.
             </h1>
+            <h3 className="explanation">
+              The metrics used to measure the distance between the images is the cosine similarity. An emotion will match the image if the value of the similarity is 0.99 or more.  
+              </h3>
             <div className="test-results-container">
               <div className="test-results-container-1">
                 <img
@@ -180,7 +182,7 @@ const TestModel = ({}) => {
                         return (
                           <div className={"result-info"}>
                             <h3>
-                              {Number((test.sim * 100).toFixed(2)).toString()}%
+                              {Number((test.sim ).toFixed(3)).toString()}
                             </h3>
                             <h4>{test.name}</h4>
                           </div>
@@ -213,7 +215,7 @@ const TestModel = ({}) => {
                         return (
                           <div className={"result-info"}>
                             <h3>
-                              {Number((test.sim * 100).toFixed(2)).toString()}%
+                              {Number((test.sim ).toFixed(3)).toString()}
                             </h3>
                             <h4>{test.name}</h4>
                           </div>

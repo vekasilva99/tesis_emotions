@@ -356,6 +356,26 @@ flex-direction: row;
 
 }
 
+.test-results-container-2-test{
+  width:60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.test-results-container-2-test h2{
+  font-size: 40px;
+  font-family: 'PlayfairDisplay-Bold';
+  font-style: italic;
+
+  letter-spacing: 1px;
+  margin-bottom: 0;
+  margin-top: 0;
+
+}
+
 .result-info{
   width: 100%;
   
