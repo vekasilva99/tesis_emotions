@@ -338,6 +338,7 @@ const VideoWatch = (props) => {
     let std = getSTD(baw_array, mean);
     if (std > 0) {
       baw_array = getStandarizedArray(baw_array, mean, std);
+      console.log("ACA ESTA EL ARREGLO Stan",JSON.stringify(baw_array))
       let finalIMG = tf.tensor(baw_array);
       finalIMG = tf.reshape(finalIMG, [1, modelImageSize, modelImageSize, 3]);
       let prediction = model2.predict(finalIMG);
@@ -346,7 +347,7 @@ const VideoWatch = (props) => {
 
       var arrayString = JSON.stringify(value);
       value = JSON.parse(arrayString);
-
+      console.log("ACA ESTA EL ARREGLO Final",JSON.stringify(prediction.arraySync()))
       let aux = [];
 
       for (let j = 0; j < 16; j++) {
