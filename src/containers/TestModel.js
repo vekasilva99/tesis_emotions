@@ -168,12 +168,12 @@ const TestModel = ({}) => {
                   Your Photo matched:
                 </h2>
                 {testInfo.filter(function (test) {
-                  return test.sim >= 0.99;
+                  return  test.belongsToEmotion === true;
                 }).length > 0 ? (
                   <>
                     {testInfo
                       .filter(function (test) {
-                        return test.sim >= 0.99;
+                        return test.belongsToEmotion === true;
                       })
                       .sort(function (a, b) {
                         return b.sim - a.sim;
@@ -201,12 +201,12 @@ const TestModel = ({}) => {
                   Your Photo did not match:
                 </h2>
                 {testInfo.filter(function (test) {
-                  return test.sim < 0.99;
+                  return  test.belongsToEmotion === false;
                 }).length > 0 ? (
                   <>
                     {testInfo
                       .filter(function (test) {
-                        return test.sim < 0.99;
+                        return  test.belongsToEmotion === false;
                       })
                       .sort(function (a, b) {
                         return b.sim - a.sim;
