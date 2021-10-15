@@ -122,7 +122,7 @@ const TestModelAttention = ({}) => {
           })
           .then((predictions) => {
             if (predictions.length > 0) {
-     
+
               for (let i = 0; i < predictions.length; i++) {
                 const keypoints = predictions[i].scaledMesh;
 
@@ -210,6 +210,7 @@ const TestModelAttention = ({}) => {
                 ) {
                   payingAttention = true;
                 }
+       
                 setAttention(payingAttention)
                 
                 for (let i = 0; i < keypoints.length; i++) {
@@ -223,7 +224,7 @@ const TestModelAttention = ({}) => {
           });
           setTimeout(function () {
             requestAnimationFrame(predictWebcamLandmark);
-          }, 10000);
+          }, 1000);
         }
     } catch (error) {}
   };
@@ -311,7 +312,7 @@ const TestModelAttention = ({}) => {
             className="subtitle"
             style={{ color: "black", marginTop: "0px", marginBottom: "40px" }}
           >
-            Test Attention.
+            Probar modelo de Atención.
           </h1>
           <div className="test-results-container">
             <div className="test-results-container-1-test" >
@@ -341,7 +342,7 @@ const TestModelAttention = ({}) => {
                   color:"rgb(169, 177, 143)"
                 }}
               >
-                Person IS paying attention
+                ESTA prestando atención
               </h2>}
               {attention===false && <h2
               style={{
@@ -350,7 +351,7 @@ const TestModelAttention = ({}) => {
                 color:"#FE5F55"
               }}
             >
-             Person IS NOT paying attention
+             NO ESTA prestando atención
             </h2>}
               </>
              :null}
@@ -360,13 +361,13 @@ const TestModelAttention = ({}) => {
           {!videoPlaying ?
           <Button
             disable={error ? true : false}
-            title={"Start."}
+            title={"Empezar."}
             position={"right"}
             event={()=>{setVideoPlaying(true);}}
           />
           :  <Button
           disable={error ? true : false}
-          title={"Stop."}
+          title={"Parar."}
           position={"right"}
           event={()=>{stopStreamedVideo(video)}}
         />}

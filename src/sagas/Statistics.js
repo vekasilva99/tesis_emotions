@@ -341,7 +341,8 @@ function* totalViews(payload) {
       let error = { emailError: null };
 
       error = {
-        error: "Oops. Something went wrong.",
+        error: "Oops. Algo salió mal."
+,
       };
       yield put(statTotalViewsError(error));
     }
@@ -361,7 +362,8 @@ function* topGender(payload) {
       let error = { emailError: null };
 
       error = {
-        error: "Oops. Something went wrong.",
+        error: "Oops. Algo salió mal."
+,
       };
       yield put( statTopGenderError(error));
     }
@@ -381,7 +383,8 @@ function* topCountry(payload) {
       let error = { emailError: null };
 
       error = {
-        error: "Oops. Something went wrong.",
+        error: "Oops. Algo salió mal."
+,
       };
       yield put( statTopCountryError(error));
     }
@@ -400,7 +403,8 @@ function* topAge(payload) {
       let error = { emailError: null };
 
       error = {
-        error: "Oops. Something went wrong.",
+        error: "Oops. Algo salió mal."
+,
       };
       yield put( statTopAgeError(error));
     }
@@ -420,7 +424,8 @@ function* payingAttention(payload) {
       let error = { emailError: null };
 
       error = {
-        error: "Oops. Something went wrong.",
+        error: "Oops. Algo salió mal."
+,
       };
       yield put( statPayingAttentionError(error));
     }
@@ -440,7 +445,8 @@ function* predominantEmotion(payload) {
       let error = { emailError: null };
 
       error = {
-        error: "Oops. Something went wrong.",
+        error: "Oops. Algo salió mal."
+,
       };
       yield put( statPredominantEmotionError(error));
     }
@@ -460,7 +466,8 @@ function* gender(payload) {
       let error = { emailError: null };
 
       error = {
-        error: "Oops. Something went wrong.",
+        error: "Oops. Algo salió mal."
+,
       };
       yield put( statGenderError(error));
     }
@@ -480,7 +487,8 @@ function* country(payload) {
       let error = { emailError: null };
 
       error = {
-        error: "Oops. Something went wrong.",
+        error: "Oops. Algo salió mal."
+,
       };
       yield put( statCountryError(error));
     }
@@ -500,7 +508,8 @@ function* age(payload) {
       let error = { emailError: null };
 
       error = {
-        error: "Oops. Something went wrong.",
+        error: "Oops. Algo salió mal."
+,
       };
       yield put( statAgeError(error));
     }
@@ -520,7 +529,8 @@ function* attention(payload) {
       let error = { emailError: null };
 
       error = {
-        error: "Oops. Something went wrong.",
+        error: "Oops. Algo salió mal."
+,
       };
       yield put( statAttentionError(error));
     }
@@ -540,7 +550,8 @@ function* emotions(payload) {
       let error = { emailError: null };
 
       error = {
-        error: "Oops. Something went wrong.",
+        error: "Oops. Algo salió mal."
+,
       };
       yield put( emotionsInVideoError(error));
     }
@@ -562,7 +573,8 @@ function* test(payload) {
       let error = { emailError: null };
 
       error = {
-        error: "Oops. Something went wrong.",
+        error: "Oops. Algo salió mal."
+,
       };
       yield put( testError(error));
     }

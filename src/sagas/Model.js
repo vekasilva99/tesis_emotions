@@ -64,10 +64,12 @@ function* createView(payload) {
     } else {
       let error = { emailError: null };
       if (res.status === 500) {
-        error = { emailError: "Server Error" };
+        error = { emailError: "Error de Servidor"
+ };
       } else {
         error = {
-          error: "Oops. Something went wrong.",
+          error: "Oops. Algo salió mal."
+,
         };
       }
       yield put(createViewError(error));

@@ -65,36 +65,36 @@ const EditCompany = (props) => {
 
   const [inputFields, setInputFields] = useState([
     {
-      placeholder: "Enter your full name",
-      name: "full_name",
+      placeholder: "Ingrese nombre",
+      name: "nombre_completo",
       value: full_name,
       error: "",
       type: "text",
     },
     {
-      placeholder: "Enter your email",
+      placeholder: "Ingrese su email",
       name: "email",
       value: email,
       error: "",
       type: "email",
     },
     {
-      placeholder: "Enter your password",
-      name: "password",
+      placeholder: "Ingrese su contraseña",
+      name: "contraseña",
       value: "",
       error: "",
       type: "password",
     },
     {
-      placeholder: "Enter your new password",
-      name: "new password",
+      placeholder: "Ingrese nueva contraseña",
+      name: "nueva contraseña",
       value: "",
       error: "",
       type: "password",
     },
     {
-      placeholder: "Confirm your new password",
-      name: "confirm new password",
+      placeholder: "Confirme nueva contraseña",
+      name: "Confirme nueva contraseña",
       value: "",
       error: "",
       type: "password",
@@ -115,12 +115,12 @@ const EditCompany = (props) => {
 
     let error = false;
     if (inputFields[0].value === "") {
-      setError(true, 0, "Required Field");
+      setError(true, 0, "Campo requerido");
       emptyField = true;
     }
 
     if (inputFields[1].value === "") {
-      setError(true, 1, "Required Field");
+      setError(true, 1, "Campo requerido");
       emptyField = true;
     }
 
@@ -128,12 +128,12 @@ const EditCompany = (props) => {
       moment(birthdateDate).format("LL") === moment(new Date()).format("LL") ||
       birthdateDate >= new Date()
     ) {
-      setBirthdateError("Required Field");
+      setBirthdateError("Campo requerido");
       emptyField = true;
     }
 
     if (!validator.isEmail(inputFields[1].value)) {
-      setError(true, 1, "Invalid Email");
+      setError(true, 1, "Email invalido");
       error = true;
     }
 
@@ -173,25 +173,25 @@ const EditCompany = (props) => {
     let error = false;
 
     if (inputFields[2].value === "") {
-      setError(true, 2, "Required Field");
+      setError(true, 2, "Campo requerido");
       emptyField = true;
     }
     if (inputFields[3].value === "") {
-      setError(true, 3, "Required Field");
+      setError(true, 3, "Campo requerido");
       emptyField = true;
     }
     if (inputFields[4].value === "") {
-      setError(true, 4, "Required Field");
+      setError(true, 4, "Campo requerido");
       emptyField = true;
     }
 
     if (!validator.isStrongPassword(inputFields[3].value)) {
-      setError(true, 2, "Weak Password");
+      setError(true, 2, "Contraseña debil");
       error = true;
     }
     if (inputFields[3].value != inputFields[4].value) {
-      setError(true, 3, "Passwords do not match");
-      setError(true, 4, "Passwords do not match");
+      setError(true, 3, "Contraseñas no concuerdan");
+      setError(true, 4, "Contraseñas no concuerdan");
       error = true;
     }
 
@@ -218,7 +218,7 @@ const EditCompany = (props) => {
       {/* <SuccessPopUp defaultInputs={defaultInputs} inputs={inputFields} /> */}
       <div className={open ? "add-company-image" : "add-company-image-hidden"}>
         <div className="add-company-image-container big">
-          <h4>Change Password</h4>
+          <h4>Cambio de Contraseña</h4>
           <div className="input-container-column small">
             {inputFields.slice(2, 5).map((input, index) => (
               <Input
@@ -236,7 +236,7 @@ const EditCompany = (props) => {
           </div>
           <ButtonPopUp
             color={"pink"}
-            title={"Set Password."}
+            title={"Cambiar Contraseña."}
             position={"right"}
             event={changePassword}
           />
@@ -262,7 +262,7 @@ const EditCompany = (props) => {
           className="subtitle"
           style={{ marginTop: "0px", marginBottom: "30px" }}
         >
-          Profile.
+          Perfil.
         </h1>
         <div className="input-container">
           {inputFields.slice(0, 2).map((input, index) => (
@@ -318,13 +318,13 @@ const EditCompany = (props) => {
             setOpen(true);
           }}
         >
-          Change Password?
+          Cambiar Contraseña?
         </h5>
         <Button
           event={() => {
             signUp();
           }}
-          title={"Update Profile."}
+          title={"Actualizar."}
           position={"right"}
         />
       </div>

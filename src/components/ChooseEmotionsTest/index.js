@@ -33,17 +33,17 @@ const ChooseEmotionPopUp = ({
           setOpen(false)
               }}
             >
-              Close
+              Cerrar
             </h3></div>
       <div className="pop-up-content">
-        <h4>Choose Emotions</h4>
+        <h4>Seleccionar Emociones</h4>
         <div className="pop-up-item-container">
           {emotions.map((emotion) => {
             return <Item addEmotion={addEmotion} selectedEmotions={selectedEmotions} emotion={emotion} />;
           })}
         </div>
         <Button
-          title={"Next."}
+          title={"Siguiente."}
           position={"right"}
           event={() => {
             if(selectedEmotions.length>0){

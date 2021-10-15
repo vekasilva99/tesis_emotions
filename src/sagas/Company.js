@@ -248,7 +248,7 @@ function* addVideo(payload) {
     const res = yield call(addNewVideoRequest, payload);
     if (res === 200) {
       yield put(
-        addVideoSuccess({ success: "The video has been successfully added." })
+        addVideoSuccess({ success: "El video se ha agregado correctamente." })
       );
 
       yield put(fetchVideosRequest(payload.payload.companyID))
@@ -258,13 +258,15 @@ function* addVideo(payload) {
       if (res === 400) {
         error = {
           error:
-            "There's already another video called like this one. Please, enter another name.",
+            "Ya hay otro video llamado así. Por favor, ingrese otro nombre.",
         };
       } else if (res === 500) {
-        error = { emailError: "Server Error" };
+        error = { emailError: "Error de Servidor"
+ };
       } else {
         error = {
-          error: "Oops. Something went wrong.",
+          error: "Oops. Algo salió mal."
+,
         };
       }
       yield put(addVideoError(error));
@@ -281,7 +283,7 @@ function* addEmotion(payload) {
       yield put(fetchEmotionsRequest());
       yield put(
         addEmotionSuccess({
-          success: "The emotion has been successfully added.",
+          success: "La emoción se ha agregado con éxito.",
         })
       );
 
@@ -290,13 +292,15 @@ function* addEmotion(payload) {
       if (res.status === 400) {
         error = {
           error:
-            "There's already another emotion called like this one. Please, enter another name.",
+            "Ya hay otra emoción llamada así. Por favor, ingrese otro nombre.",
         };
       } else if (res.status === 500) {
-        error = { emailError: "Server Error" };
+        error = { emailError: "Error de Servidor"
+ };
       } else {
         error = {
-          error: "Oops. Something went wrong.",
+          error: "Oops. Algo salió mal."
+,
         };
       }
       yield put(addEmotionError(error));
@@ -316,13 +320,15 @@ function* fetchEmotions(payload) {
       if (res.status === 400) {
         error = {
           error:
-            "There's already another emotion called like this one. Please, enter another name.",
+            "Ya hay otra emoción llamada así. Por favor, ingrese otro nombre.",
         };
       } else if (res.status === 500) {
-        error = { emailError: "Server Error" };
+        error = { emailError: "Error de Servidor"
+ };
       } else {
         error = {
-          error: "Oops. Something went wrong.",
+          error: "Oops. Algo salió mal."
+,
         };
       }
       yield put(fetchEmotionsError(error));
@@ -340,10 +346,12 @@ function* disableVideo(payload) {
     } else {
       let error = { emailError: null };
       if (res.status === 500) {
-        error = { emailError: "Server Error" };
+        error = { emailError: "Error de Servidor"
+ };
       } else {
         error = {
-          error: "Oops. Something went wrong.",
+          error: "Oops. Algo salió mal."
+,
         };
       }
       yield put(fetchEmotionsError(error));
@@ -360,10 +368,12 @@ function* updateImage(payload) {
     } else {
       let error = { emailError: null };
       if (res.status === 500) {
-        error = { emailError: "Server Error" };
+        error = { emailError: "Error de Servidor"
+ };
       } else {
         error = {
-          error: "Oops. Something went wrong.",
+          error: "Oops. Algo salió mal."
+,
         };
       }
       yield put(updateImageError(error));
@@ -384,10 +394,12 @@ function* updateEmotion(payload) {
     } else {
       let error = { emailError: null };
       if (res.status === 500) {
-        error = { emailError: "Server Error" };
+        error = { emailError: "Error de Servidor"
+ };
       } else {
         error = {
-          error: "Oops. Something went wrong.",
+          error: "Oops. Algo salió mal."
+,
         };
       }
       yield put(updateEmotionError(error));

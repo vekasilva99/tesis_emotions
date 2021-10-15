@@ -85,7 +85,7 @@ return radious
     <>
       <div className="home-big-circle">
         <circular-text
-          text="Full service creative agency  Full service creative agency   "
+          text="Agencia creativa de servicio completo  Agencia creativa de servicio completo "
           radius={getRadious()}
         ></circular-text>
       </div>
@@ -99,8 +99,8 @@ return radious
       <Circle />
       <div className={visible ? companies.length>0 ? "app-home":"app-home no-companies" : companies.length>0 ? "app-home onload":"app-home onload no-companies"}>
         <div className="section-home" >
-          <h2 className="home-title-vertical">Full service creative agency</h2>
-          <h1 className="home-title">We build brands of the future</h1>
+          <h2 className="home-title-vertical">Agencia creativa de servicio completo</h2>
+          <h1 className="home-title">Construimos Marcas del Futuro</h1>
         </div>
         <div
           className="section-home"
@@ -115,13 +115,13 @@ return radious
             <div className="medium-circle-center"></div>
             <div className="circular-cont">
               <circular-text
-                text="Full service creative agency    "
+                text="Agencia creativa de servicio completo "
                 radius={getRadiousSmall()}
               ></circular-text>
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <h1 className="subtitle-home">What we do.</h1>
+            <h1 className="subtitle-home">¿Qué hacemos?</h1>
             <h2 className="paragraph-home">
               Full service creative agency Full service creative agency Full
               service creative agency Full Full service creative agencyservice
@@ -143,7 +143,7 @@ return radious
           }}
         >
           
-          <h1 className="subtitle2-home">Our Brands.</h1>
+          <h1 className="subtitle2-home">Nuestras Marcas.</h1>
           <div className="brands-container-home">
             {companies
               .filter((comp) => {

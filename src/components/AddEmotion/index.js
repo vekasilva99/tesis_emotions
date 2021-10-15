@@ -117,8 +117,8 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
  
   const [inputFields, setInputFields] = useState([
     {
-      placeholder: "Enter Emotion Name",
-      name: "emotion name",
+      placeholder: "Ingrese Emoción",
+      name: "Nombre de Emoción",
       value: "",
       error: "",
       type: "text",
@@ -195,7 +195,7 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
     // setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
     console.log("TERMINADO");
     }catch(error){
-      setErrorMessage('Oops! It seems something went wrong when loading the model. Please clear your cache and try again. Sorry for the inconvinience.')
+      setErrorMessage('Oops! Parece que algo salió mal al cargar el modelo. Limpia tu caché y vuelve a intentarlo. Perdon por la inconveniencia.')
  
     }
   };
@@ -479,10 +479,10 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
           setOpen(false)
               }}
             >
-              Close
+              Cerrar
             </h3></div>
         <div className="pop-up-content">
-          <h4>New Emotion</h4>
+          <h4>Nueva Emoción</h4>
 
           <div className="pop-up-item-new-emotion">
             <div className="pop-up-item-new-emotion-1">
@@ -545,7 +545,7 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
             </div>
           </div>
           <Button
-            title={"Add Emotion."}
+            title={"Agregar."}
             position={"right"}
             event={async () => {
               // videoSmall();

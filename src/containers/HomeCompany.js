@@ -121,7 +121,7 @@ const HomeCompany = (props) => {
             }}
           >
             <circular-text
-              text="ADD EMOTION   "
+              text="AGREGAR EMOCIÓN   "
               radius={
                 emotions.length === 0 && videos.length === 0 ? "230" : "100"
               }
@@ -141,7 +141,7 @@ const HomeCompany = (props) => {
             }}
           >
             <circular-text
-              text="ADD VIDEO   "
+              text="AGREGAR VIDEO   "
               radius={
                 emotions.length === 0 && videos.length === 0 ? "230" : "100"
               }
@@ -153,7 +153,7 @@ const HomeCompany = (props) => {
         </div>
         {emotions.length > 0 ? (
           <div className="emotions-home-section">
-            <h1>Emotions</h1>
+            <h1>Emociones</h1>
 
             <div className="emotions-home-container">
               {emotions.map((emotion) => {

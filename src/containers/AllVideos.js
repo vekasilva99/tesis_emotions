@@ -82,7 +82,7 @@ const AllVideos = (props) => {
           event={() => {
             setOpenVideo(true);
           }}
-          title={"Add Video."}
+          title={"Agregar Video."}
           position={"right"}
         />
       </div>

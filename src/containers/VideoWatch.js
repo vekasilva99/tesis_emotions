@@ -87,7 +87,7 @@ const VideoWatch = (props) => {
     const timer = setTimeout(function () {
       if (!visible && error===null) {
         setErrorMessage(
-          "We are having some issues loading the AI Model. Make sure to check your connection."
+          "Tenemos algunos problemas para cargar el modelo de IA. Asegúrese de verificar su conexión."
         );
       }
     }, 100000);
@@ -164,7 +164,7 @@ const VideoWatch = (props) => {
     console.log("TERMINADO");
     setVisible(true);
     }catch(error){
-      setError('Oops! It seems something went wrong when loading the model. Please clear your cache and try again. Sorry for the inconvinience.')
+      setError('Oops! Parece que algo salió mal al cargar el modelo. Limpia tu caché y vuelve a intentarlo. Perdon por la inconveniencia.')
  
     }
   };

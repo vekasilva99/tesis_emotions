@@ -47,13 +47,13 @@ const HomeAdmin = (props) => {
     let time = today.getHours();
 
     if (time < 12 && time >= 5) {
-      return "Good Morning, ";
+      return "Buenos días, ";
     } else if (time >= 12 && time < 18) {
-      return "Good Afternoon, ";
+      return "Buenas tarder, ";
     } else if (time >= 18) {
-      return "Good Evening, ";
+      return "Buenas noches, ";
     } else {
-      return "Good Night, ";
+      return "Buenas noches, ";
     }
   };
   return (
@@ -78,7 +78,7 @@ const HomeAdmin = (props) => {
           <div className="admin-col">
             <div className="admin-request">
               <div className="title-request">
-                <h2>Company Requests</h2>
+                <h2>Solicitudes de Marcas</h2>
               </div>
               {companiesNotAccepted.length > 0 ? (
                 <div className="request-container">
@@ -87,7 +87,7 @@ const HomeAdmin = (props) => {
                   })}
                 </div>
               ) : <div className="request-container">
-              <h4 className="no-content">There are no pending companies requests</h4>
+              <h4 className="no-content">No hay solicitudes pendientes</h4>
               </div>}
             </div>
           </div>
@@ -103,7 +103,7 @@ const HomeAdmin = (props) => {
                   })}
                 </div>
               ) : <div className="request-container">
-                <h4 className="no-content">There are no videos available</h4>
+                <h4 className="no-content">No hay videos disponibles</h4>
                 </div>}
             </div>
           </div>

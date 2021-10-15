@@ -15,25 +15,26 @@ const Drawer= ({sideDrawerOpen,drawerToggleClickHandler,color}) => {
       <div className="navlinks-container">
         {role === null ?
         <>
-      <NavLink to='/home' className={color ? "navlink green":"navlink"}>Home</NavLink>
-      <NavLink to='/signin' className={color ? "navlink green":"navlink"}>Sign In</NavLink>
-      <NavLink to='/signup' className={color ? "navlink green":"navlink"}>Sign Up</NavLink>
-      <NavLink to='/join-us' className={color ? "navlink green":"navlink"}>Join us</NavLink>
+      <NavLink to='/home' className={color ? "navlink green":"navlink"}>Inicio</NavLink>
+      <NavLink to='/signin' className={color ? "navlink green":"navlink"}>Iniciar Sesion</NavLink>
+      <NavLink to='/signup' className={color ? "navlink green":"navlink"}>Registrarse</NavLink>
+      <NavLink to='/join-us' className={color ? "navlink green":"navlink"}>Únete</NavLink>
       </>
       :
       <>
       {role === "company" &&
       <>
-            <NavLink to='/homeCompany' className={color ? "navlink green":"navlink"}>Home</NavLink>
+            <NavLink to='/homeCompany' className={color ? "navlink green":"navlink"}>Inicio</NavLink>
       <NavLink to='/videos' className={color ? "navlink green":"navlink"}>Videos</NavLink>
-      <NavLink to='/emotions' className={color ? "navlink green":"navlink"}>Emotions</NavLink>
-      <NavLink to='/testModel' className={color ? "navlink green":"navlink"}>Test Model</NavLink>
+      <NavLink to='/emotions' className={color ? "navlink green":"navlink"}>Emociones</NavLink>
+      <NavLink to='/testModel' className={color ? "navlink green":"navlink"}>Prueba el Modelo</NavLink>
+      <NavLink to='/testModelAttention' className={color ? "navlink green":"navlink"}>Prueba el Modelo de Atención</NavLink>
       </>
       }
         {role === "user" &&
       <>
-            <NavLink to='/home' className={color ? "navlink green":"navlink"}>Home</NavLink>
-      <NavLink to='/brands' className={color ? "navlink green":"navlink"}>Brands</NavLink>
+            <NavLink to='/home' className={color ? "navlink green":"navlink"}>Inicio</NavLink>
+      <NavLink to='/brands' className={color ? "navlink green":"navlink"}>Marcas</NavLink>
   
       </>
       }

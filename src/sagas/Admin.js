@@ -132,10 +132,12 @@ function* acceptCompany(payload) {
     } else {
       let error = { emailError: null };
       if (res.status === 500) {
-        error = { emailError: "Server Error" };
+        error = { emailError: "Error de Servidor"
+ };
       } else {
         error = {
-          error: "Oops. Something went wrong.",
+          error: "Oops. Algo salió mal."
+,
         };
       }
       yield put(acceptCompanyError(error));
@@ -154,10 +156,12 @@ function* rejectCompany(payload) {
     } else {
       let error = { emailError: null };
       if (res.status === 500) {
-        error = { emailError: "Server Error" };
+        error = { emailError: "Error de Servidor"
+ };
       } else {
         error = {
-          error: "Oops. Something went wrong.",
+          error: "Oops. Algo salió mal."
+,
         };
       }
       yield put(rejectCompanyError(error));
@@ -176,10 +180,12 @@ function* blockVideo(payload) {
     } else {
       let error = { emailError: null };
       if (res.status === 500) {
-        error = { emailError: "Server Error" };
+        error = { emailError: "Error de Servidor"
+ };
       } else {
         error = {
-          error: "Oops. Something went wrong.",
+          error: "Oops. Algo salió mal."
+,
         };
       }
       yield put(blockVideoError(error));
@@ -198,10 +204,12 @@ function* unblockVideo(payload) {
     } else {
       let error = { emailError: null };
       if (res.status === 500) {
-        error = { emailError: "Server Error" };
+        error = { emailError: "Error de Servidor"
+ };
       } else {
         error = {
-          error: "Oops. Something went wrong.",
+          error: "Oops. Algo salió mal."
+,
         };
       }
       yield put(unblockVideoError(error));
