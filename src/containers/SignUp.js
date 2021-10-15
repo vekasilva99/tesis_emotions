@@ -74,7 +74,7 @@ const SignUp = (props) => {
       type: "text",
     },
     {
-      placeholder: "Enter your email",
+      placeholder: "Ingrese su email",
       name: "email",
       value: "",
       error: "",
@@ -82,15 +82,15 @@ const SignUp = (props) => {
     },
 
     {
-      placeholder: "Enter your password",
-      name: "password",
+      placeholder: "Ingrese contraseña",
+      name: "contraseña",
       value: "",
       error: "",
       type: "password",
     },
     {
-      placeholder: "Confirm your password",
-      name: "confirm password",
+      placeholder: "Confirme contraseña",
+      name: "confirme contraseña",
       value: "",
       error: "",
       type: "password",
@@ -99,20 +99,20 @@ const SignUp = (props) => {
 
   const [selectFields, setSelectFields] = useState([
     {
-      placeholder: "Choose your gender",
-      name: "gender",
+      placeholder: "Seleccione su genero",
+      name: "genero",
       error: "",
       selected: "",
       type: "text",
       options: [
-        { value: "Male", name: "Male" },
-        { value: "Female", name: "Female" },
-        { value: "Other", name: "Other" },
+        { value: "Masculino", name: "Masculino" },
+        { value: "Femenino", name: "Femenino" },
+        { value: "Otro", name: "Otro" },
       ],
     },
     {
-      placeholder: "Choose your country",
-      name: "country",
+      placeholder: "Seleccione su país",
+      name: "país",
       error: "",
       selected: "",
       type: "text",
@@ -137,48 +137,48 @@ const SignUp = (props) => {
 
     let error = false;
     if (inputFields[0].value === "") {
-      setError(true, 0, "Required Field");
+      setError(true, 0, "Campo requerido");
       emptyField = true;
     }
     if (inputFields[1].value === "") {
-      setError(true, 1, "Required Field");
+      setError(true, 1, "Campo requerido");
       emptyField = true;
     }
     if (inputFields[2].value === "") {
-      setError(true, 2, "Required Field");
+      setError(true, 2, "Campo requerido");
       emptyField = true;
     }
     if (inputFields[3].value === "") {
-      setError(true, 3, "Required Field");
+      setError(true, 3, "Campo requerido");
       emptyField = true;
     }
     if (selectFields[0].selected === "") {
-      setError(false, 0, "Required Field");
+      setError(false, 0, "Campo requerido");
       emptyField = true;
     }
     if (selectFields[1].selected === "") {
-      setError(false, 1, "Required Field");
+      setError(false, 1, "Campo requerido");
       emptyField = true;
     }
     if (
       moment(birthdate).format("LL") === moment(new Date()).format("LL") ||
       birthdate >= new Date()
     ) {
-      setBirthdateError("Required Field");
+      setBirthdateError("Campo requerido");
       emptyField = true;
     }
 
     if (!validator.isEmail(inputFields[1].value)) {
-      setError(true, 1, "Invalid Email");
+      setError(true, 1, "Email invalido");
       error = true;
     }
     if (!validator.isStrongPassword(inputFields[2].value)) {
-      setError(true, 2, "Weak Password");
+      setError(true, 2, "Contraseña Debil");
       error = true;
     }
     if (inputFields[2].value != inputFields[3].value) {
-      setError(true, 2, "Passwords do not match");
-      setError(true, 3, "Passwords do not match");
+      setError(true, 2, "Contraseñas no concuerdan");
+      setError(true, 3, "Contraseñas no concuerdan");
       error = true;
     }
 
@@ -266,12 +266,12 @@ const SignUp = (props) => {
             />
           ))}
         </div>
-        <Button event={signUp} title={"Sign Up"} position={"left"} />
+        <Button event={signUp} title={"Registrarse"} position={"left"} />
         <div className="link-button">
-          <h3>Already have an account? </h3>
+          <h3>Ya tiene cuenta? </h3>
           <h4  onClick={() => {
               history.push("/signin");
-            }}> Sign In Here</h4>
+            }}> Ingrese Aqui</h4>
         </div>
       </div>
     </>

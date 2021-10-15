@@ -31,43 +31,6 @@ return emotion._id===emotionId
     setSideDrawerOpen(!sideDrawerOpen);
   };
 
-  const changeInput = (name, event) => {
-    let fields = inputFields;
-    var item = inputFields.find(function (input, index) {
-      if (input.name == name) fields[index].value = event;
-      setInputFields(fields);
-    });
-  };
-
-  const setError = (input, index, error) => {
-    if (input) {
-      let fields = inputFields;
-      fields[index].error = error;
-      setInputFields(fields);
-    }
-  };
-
-  const [inputFields, setInputFields] = useState([
-    {
-      placeholder: "Enter company name",
-      name: "company name",
-      value: "",
-      type: "text",
-    },
-    { placeholder: "Enter email", name: "email", value: "", type: "email" },
-    {
-      placeholder: "Enter password",
-      name: "password",
-      value: "",
-      type: "password",
-    },
-    {
-      placeholder: "Confirm your password",
-      name: "confirm password",
-      value: "",
-      type: "password",
-    },
-  ]);
   useEffect(() => {
     if (emotions.length === 0) {
       dispatch(fetchEmotionsRequest(_id));

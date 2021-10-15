@@ -95,13 +95,15 @@ function* signUpUser(payload) {
       let error = { emailError: null };
       if (res === 400) {
         error = {
-          emailError: "There is already a user registered with this email.",
+          emailError: "Ya hay un usuario registrado con este correo electrónico.",
         };
       } else if (res === 500) {
-        error = { emailError: "Server Error" };
+        error = { emailError: "Error de Servidor"
+ };
       } else {
         error = {
-          emailError: "Oops. Something went wrong.",
+          emailError: "Oops. Algo salió mal."
+,
         };
       }
       yield put(signUpUserError(error));
@@ -120,13 +122,15 @@ function* signUpCompany(payload) {
       let error = { emailError: null };
       if (res === 400) {
         error = {
-          emailError: "There is already a company registered with this email.",
+          emailError: "Ya hay una compañia registrada con este correo electrónico.",
         };
       } else if (res === 500) {
-        error = { emailError: "Server Error" };
+        error = { emailError: "Error de Servidor"
+ };
       } else {
         error = {
-          emailError: "Oops. Something went wrong.",
+          emailError: "Oops. Algo salió mal."
+,
         };
       }
       yield put(signUpCompanyError(error));

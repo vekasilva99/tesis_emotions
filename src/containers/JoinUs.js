@@ -50,29 +50,29 @@ const JoinUs = (props) => {
 
   const [inputFields, setInputFields] = useState([
     {
-      placeholder: "Enter company name",
-      name: "company name",
+      placeholder: "Ingrese nombre",
+      name: "nombre de la compañia",
       value: "",
       error: "",
       type: "text",
     },
     {
-      placeholder: "Enter email",
+      placeholder: "Ingrese email",
       name: "email",
       value: "",
       error: "",
       type: "email",
     },
     {
-      placeholder: "Enter password",
-      name: "password",
+      placeholder: "Ingrese contraseña",
+      name: "contraseña",
       value: "",
       error: "",
       type: "password",
     },
     {
-      placeholder: "Confirm your password",
-      name: "confirm password",
+      placeholder: "Confirme contraseña",
+      name: "Confirme contraseña",
       value: "",
       error: "",
       type: "password",
@@ -92,32 +92,32 @@ const JoinUs = (props) => {
     let emptyField = false;
     let error = false;
     if (inputFields[0].value === "") {
-      setError(true, 0, "Required Field");
+      setError(true, 0, "Campo requerido");
 
       emptyField = true;
     } else if (inputFields[1].value === "") {
-      setError(true, 1, "Required Field");
+      setError(true, 1, "Campo requerido");
 
       emptyField = true;
     } else if (inputFields[2].value === "") {
-      setError(true, 2, "Required Field");
+      setError(true, 2, "Campo requerido");
       emptyField = true;
     } else if (inputFields[3].value === "") {
-      setError(true, 3, "Required Field");
+      setError(true, 3, "Campo requerido");
       emptyField = true;
     }
 
     if (!validator.isEmail(inputFields[1].value)) {
-      setError(true, 1, "Invalid Email");
+      setError(true, 1, "Email invalido");
       error = true;
     }
     if (!validator.isStrongPassword(inputFields[2].value)) {
-      setError(true, 2, "Weak Password");
+      setError(true, 2, "Contraseña Debil");
       error = true;
     }
     if (inputFields[2].value != inputFields[3].value) {
-      setError(true, 2, "Passwords do not match");
-      setError(true, 3, "Passwords do not match");
+      setError(true, 2, "Contraseñas no concuerdan");
+      setError(true, 3, "Contraseñas no concuerdan");
       error = true;
     }
     if (image == null) {
@@ -147,32 +147,32 @@ const JoinUs = (props) => {
     let emptyField = false;
     let error = false;
     if (inputFields[0].value === "") {
-      setError(true, 0, "Required Field");
+      setError(true, 0, "Campo requerido");
 
       emptyField = true;
     } else if (inputFields[1].value === "") {
-      setError(true, 1, "Required Field");
+      setError(true, 1, "Campo requerido");
 
       emptyField = true;
     } else if (inputFields[2].value === "") {
-      setError(true, 2, "Required Field");
+      setError(true, 2, "Campo requerido");
       emptyField = true;
     } else if (inputFields[3].value === "") {
-      setError(true, 3, "Required Field");
+      setError(true, 3, "Campo requerido");
       emptyField = true;
     }
 
     if (!validator.isEmail(inputFields[1].value)) {
-      setError(true, 1, "Invalid Email");
+      setError(true, 1, "Email invalido");
       error = true;
     }
     if (!validator.isStrongPassword(inputFields[2].value)) {
-      setError(true, 2, "Weak Password");
+      setError(true, 2, "Contraseña Debil");
       error = true;
     }
     if (inputFields[2].value != inputFields[3].value) {
-      setError(true, 2, "Passwords do not match");
-      setError(true, 3, "Passwords do not match");
+      setError(true, 2, "Contraseñas no concuerdan");
+      setError(true, 3, "Contraseñas no concuerdan");
       error = true;
     }
 
@@ -190,7 +190,7 @@ const JoinUs = (props) => {
       {" "}
       <div className={open ? "add-company-image" : "add-company-image-hidden"}>
         <div className="add-company-image-container">
-          <h4>Add Logo</h4>
+          <h4>Insertar Logo</h4>
           <label
             style={{ marginBottom: "5px", marginTop: "70px" }}
             className="upload-button-2"
@@ -216,7 +216,7 @@ const JoinUs = (props) => {
           </label>
           <ButtonPopUp
             color={"pink"}
-            title={"Join Now."}
+            title={"Unirse."}
             position={"right"}
             event={signUp}
           />
@@ -243,7 +243,7 @@ const JoinUs = (props) => {
           className="subtitle"
           style={{ marginTop: "0px", marginBottom: "60px" }}
         >
-          Join Us.
+          Unete a Nosotros.
         </h1>
         <div className="input-container">
           {inputFields.map((input, index) => (
@@ -264,7 +264,7 @@ const JoinUs = (props) => {
           event={() => {
             preSignUp();
           }}
-          title={"Join Now."}
+          title={"Unirse."}
           position={"right"}
         />
       </div>

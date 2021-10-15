@@ -93,7 +93,7 @@ const VideoStatistics = (props) => {
       console.log("ENTRE ACA",emotions,errorMessage)
       if (emotions.length===0 && errorMessage===null) {
         setErrorMessage(
-          "It looks like your company has not defined any emotions. In order to see this video's statistics you need to define at least one."
+          "Parece que su empresa no ha definido ninguna emoción. Para ver las estadísticas de este video, debes definir al menos una."
         );
       
       }
@@ -250,35 +250,35 @@ const VideoStatistics = (props) => {
           >
             {Object.keys(predominantEmotion).length > 0 && (
               <Circle
-                title={"Predominant Emotion"}
+                title={"Emoción Predominante"}
                 data={
                   predominantEmotion.count > 0
                     ? predominantEmotion.name
-                    : "None"
+                    : "Ninguna"
                 }
               />
             )}
             {totalViews != null && (
               <Circle
-                title={totalViews === 1 ? "View" : "Views"}
+                title={totalViews === 1 ? "Vista" : "Vistas"}
                 data={totalViews.toString()}
               />
             )}
             {Object.keys(payingAttention).length > 0 && (
               <Circle
                 title={payingAttention.message}
-                data={payingAttention.value.toString() != "Nobody" ? payingAttention.value.toString()+"%" :payingAttention.value.toString()}
+                data={payingAttention.value.toString() != "Nadie" ? payingAttention.value.toString()+"%" :payingAttention.value.toString()}
               />
             )}
             {Object.keys(topGender).length > 0 ? (
-              <Circle title={"GENDER WITH MOST VIEWS"} data={topGender._id} />
-            ): <Circle title={"GENDER WITH MOST VIEWS"} data={"None"} />}
+              <Circle title={"GENERO CON MAS VISTAS"} data={topGender._id} />
+            ): <Circle title={"GENERO CON MAS VISTAS"} data={"Ninguno"} />}
             {Object.keys(topCountry).length > 0 ? (
-              <Circle title={"COUNTRY WITH MOST VIEWS"} data={topCountry._id} />
-            ):   <Circle title={"COUNTRY WITH MOST VIEWS"} data={"None"} />}
+              <Circle title={"PAÍS CON MAS VISTAS"} data={topCountry._id} />
+            ):   <Circle title={"PAÍS CON MAS VISTAS"} data={"Ninguno"} />}
             {Object.keys(topAges).length > 0 ? (
-              <Circle title={"AGE GROUP WITH MOST VIEWS"} data={topAges._id} />
-            ):   <Circle title={"AGE GROUP WITH MOST VIEWS"} data={"None"} />}
+              <Circle title={"GRUPO ETAREO CON MAS VISTAS"} data={topAges._id} />
+            ):   <Circle title={"GRUPO ETAREO CON MAS VISTAS"} data={"Ninguno"} />}
           </div>
           {totalViews >0 ?
           <>
@@ -326,7 +326,7 @@ const VideoStatistics = (props) => {
 
         <Button
         disable={emotions.length===0 ? true:false}
-          title={"View Statistics."}
+          title={"Ver Estadisticas."}
           position={"right"}
           hide={videoSmall}
           event={settingChooseEmotion}

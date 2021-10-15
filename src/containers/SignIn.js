@@ -42,15 +42,15 @@ const SignIn = (props) => {
 
   const [inputFields, setInputFields] = useState([
     {
-      placeholder: "Enter your email",
+      placeholder: "Ingrese su email",
       name: "email",
       value: "",
       error: !errors ? "" : errors.emailError ? errors.emailError : "",
       type: "email",
     },
     {
-      placeholder: "Enter your password",
-      name: "password",
+      placeholder: "Ingrese su contraseña",
+      name: "contraseña",
       value: "",
       error:
         !errors === {} ? "" : errors.passwordError ? errors.passwordError : "",
@@ -71,15 +71,15 @@ const SignIn = (props) => {
     let emptyField = false;
     let error = false;
     if (inputFields[0].value === "") {
-      setError(true, 0, "Required Field");
+      setError(true, 0, "Campo requerido");
       emptyField = true;
     } 
     if (inputFields[1].value === "") {
-      setError(true, 1, "Required Field");
+      setError(true, 1, "Campo requerido");
       emptyField = true;
     }
     if (!validator.isEmail(inputFields[0].value)) {
-      setError(true, 0, "Invalid Email");
+      setError(true, 0, "Email invalido");
       error = true;
     }
     if (!emptyField && !error) {
@@ -112,27 +112,27 @@ const SignIn = (props) => {
             />
           ))}
         </div>
-        <Button event={signIn} title={"Sign In"} position={"left"} top />
+        <Button event={signIn} title={"Iniciar Sesión"} position={"left"} top />
 
         <div className="link-button" style={{ bottom: "16vh" }}>
-          <h3>Want to create an account? </h3>
+          <h3>Desea crear una cuenta? </h3>
           <h4
             onClick={() => {
               history.push("/signup");
             }}
           >
             {" "}
-            Sign Up Here
+            Registrese Aqui
           </h4>
         </div>
         {location.state ?
         <>
         {location.state.videoId && location.state.companyId ? (
           <div className="link-button2" style={{ bottom: "12vh" }}>
-            <h3>Wanto to watch video without an account? </h3>
+            <h3>Desea ver sin crear una cuenta? </h3>
             <h4   onClick={() => {
               history.push(`/watchvideo/${location.state.companyId}/${location.state.videoId}`);
-            }}>Click Here</h4>
+            }}>Click Aqui</h4>
           </div>
         ) : null}
         </>

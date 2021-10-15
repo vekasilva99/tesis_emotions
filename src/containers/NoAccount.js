@@ -63,13 +63,13 @@ const NoAccount = (props) => {
       type: "text",
       error: "",
       options: [
-        { value: "Male", name: "Male" },
-        { value: "Female", name: "Female" },
-        { value: "Other", name: "Other" },
+        { value: "Masculino", name: "Masculino" },
+        { value: "Femenino", name: "Femenino" },
+        { value: "Otro", name: "Otro" },
       ],
     },
     {
-      placeholder: "Choose your country",
+      placeholder: "Seleccione su país",
       name: "country",
       selected: "",
       type: "text",
@@ -85,16 +85,16 @@ const NoAccount = (props) => {
     let error = false;
 
     if (inputFields[0].value === "") {
-      setError(true, 0, "Required Field");
+      setError(true, 0, "Campo requerido");
       emptyField = true;
     }
     if (selectFields[0].selected === "") {
-      setError(false, 0, "Required Field");
+      setError(false, 0, "Campo requerido");
 
       emptyField = true;
     }
     if (selectFields[1].selected === "") {
-      setError(false, 1, "Required Field");
+      setError(false, 1, "Campo requerido");
       emptyField = true;
     }
 
@@ -146,7 +146,7 @@ const NoAccount = (props) => {
         </div>
         <Button event={submit} title={"Continue"} position={"left"} top />
         <div className="link-button" style={{ bottom: "16vh" }}>
-          <h3>Already have an account? </h3>
+          <h3>Ya tiene una cuenta? </h3>
           <h4
             onClick={() => {
               history.push({
@@ -160,7 +160,7 @@ const NoAccount = (props) => {
             }}
           >
             {" "}
-            Sign In Here
+            Inicia Sesión aqui
           </h4>
         </div>
         {/* <div className="link-button2">

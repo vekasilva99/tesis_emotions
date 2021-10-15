@@ -16,7 +16,7 @@ const [lineData, setLineData] = useState({
   labels: [],
   datasets: [
     {
-      label: 'High Level of Attention',
+      label: 'Alto Nivel de Atención',
       fill: false,
       lineTension: 0.3,
       backgroundColor: 'rgba(203, 128, 125, 0.4)',
@@ -37,7 +37,7 @@ const [lineData, setLineData] = useState({
       data: [],
     },
     {
-      label: 'Low Level of Attention',
+      label: 'Bajo Nivel de Atención',
       fill: false,
       lineTension: 0.3,
       backgroundColor: 'rgba(169, 177, 143, 0.4)',

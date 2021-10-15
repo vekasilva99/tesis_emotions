@@ -84,7 +84,7 @@ const Emotions = (props) => {
           className="subtitle"
           style={{ color: "#CB807D", marginTop: "0px", marginBottom: "60px" }}
         >
-          Emotions.
+          Emociones.
         </h1>
         {emotions.length > 0 ? (
           <div className="emotions-container">
@@ -98,7 +98,7 @@ const Emotions = (props) => {
             setOpen(true);
           }}
           disable={error ? true :false}
-          title={"Add Emotion."}
+          title={"Agregar Emoción."}
           position={"right"}
         />
       </div>

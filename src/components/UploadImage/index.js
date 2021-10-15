@@ -215,7 +215,7 @@ const loaderStatistics =useSelector((state) => (state.stats.loaderStatistics));
       console.log("TERMINADO");
     } catch (error) {
       setErrorMessage(
-        "Oops! It seems something went wrong when loading the model. Please clear your cache and try again. Sorry for the inconvinience."
+        "Oops! Parece que algo salió mal al cargar el modelo. Limpia tu caché y vuelve a intentarlo. Perdon por la inconveniencia."
       );
     }
   };
@@ -500,11 +500,11 @@ const loaderStatistics =useSelector((state) => (state.stats.loaderStatistics));
               setOpen(false);
             }}
           >
-            Close
+            Cerrar
           </h3>
         </div>
         <div className="pop-up-content">
-          <h4>Upload Image</h4>
+          <h4>Subir Imagen</h4>
 
           <div className="pop-up-item-new-emotion">
             <div className="pop-up-item-new-emotion-1-upload">
@@ -563,7 +563,7 @@ const loaderStatistics =useSelector((state) => (state.stats.loaderStatistics));
             ></canvas>
           </div>
           <Button
-            title={"Results."}
+            title={"Resultados."}
             position={"right"}
             event={async () => {
               // videoSmall();

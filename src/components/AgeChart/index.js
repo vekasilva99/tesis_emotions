@@ -16,7 +16,7 @@ const [barData, setBarData] = useState({
   labels: [],
   datasets: [
     {
-      label: 'Age Groups',
+      label: 'Grupos Etareos',
       backgroundColor: [
       ],
       borderColor: [

@@ -99,7 +99,7 @@ const VideoDetail = (props) => {
               >
                 <div className="section-title">
                   <h2 className="home-title-vertical2">
-                    By {selectedCompany.full_name}
+                    Por {selectedCompany.full_name}
                   </h2>
                   <h1 className="video-title2">{selectedVideo.name}</h1>
                 </div>
@@ -107,7 +107,7 @@ const VideoDetail = (props) => {
               </div>
               <Button
                 event={openInstructions}
-                title={"Watch Now."}
+                title={"Ver Ahora."}
                 position={"right"}
               />
             </>

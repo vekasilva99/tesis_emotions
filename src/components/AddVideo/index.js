@@ -68,14 +68,14 @@ const AddVideoPopUp = ({ open, setOpen }) => {
 
   const [inputFields, setInputFields] = useState([
     {
-      placeholder: "Enter Video Name",
-      name: "video name",
+      placeholder: "Ingrese Nombre",
+      name: "nombre del video",
       value: "",
       type: "text",
       error: "",
     },
     {
-      placeholder: "Enter Video Link",
+      placeholder: "Ingrese link",
       name: "video link",
       value: "",
       type: "text",
@@ -137,19 +137,19 @@ const AddVideoPopUp = ({ open, setOpen }) => {
     let error = false;
 
     if (inputFields[0].value === "") {
-      setError(true, 0, "Required Field");
+      setError(true, 0, "Campo requerido");
       emptyField = true;
     }
     if (inputFields[1].value === "") {
-      setError(true, 1, "Required Field");
+      setError(true, 1, "Campo requerido");
       emptyField = true;
     }
     if (duration === null) {
-      // setError(true, 2, "Required Field");
+      // setError(true, 2, "Campo requerido");
       emptyField = true;
     }
     if (image === null) {
-      // setError(true, 3, "Required Field");
+      // setError(true, 3, "Campo requerido");
       emptyField = true;
     }
     if (!validateYouTubeUrl(inputFields[1].value)) {
@@ -204,7 +204,7 @@ const AddVideoPopUp = ({ open, setOpen }) => {
           setOpen(false)
               }}
             >
-              Close
+              Cerrar
             </h3></div>
         <div className="pop-up-content">
           <h4>New Video</h4>
@@ -221,7 +221,7 @@ const AddVideoPopUp = ({ open, setOpen }) => {
             ))}
 
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <h2 className="placeholder">Video Image</h2>
+              <h2 className="placeholder">Imagen</h2>
               <label
                 style={{
                   marginBottom: "5px",
@@ -261,7 +261,7 @@ const AddVideoPopUp = ({ open, setOpen }) => {
             event={() => {
               onSubmit();
             }}
-            title={"Add Video."}
+            title={"Agregar."}
             position={"right"}
           />
         </div>

@@ -116,26 +116,25 @@ const TestModel = ({}) => {
               className="subtitle"
               style={{ color: "black", marginTop: "0px", marginBottom: "40px" }}
             >
-              Test Our Model.
+              Prueba Nuestro Modelo.
             </h1>
             <div className="step-container">
-              <h2>Step 1</h2>
+              <h2>Paso 1</h2>
               <h3>
-                Choose some of your existing emotions to define the space we'll
-                work with.
+              Elija algunas de sus emociones existentes para definir el espacio con el que trabajaremos.
               </h3>
             </div>
             <div className="step-container">
-              <h2>Step 2</h2>
-              <h3>Upload an image.</h3>
+              <h2>Paso 2</h2>
+              <h3>Sube una imagen.</h3>
             </div>
             <div className="step-container">
-              <h2>Step 3</h2>
-              <h3>See the results.</h3>
+              <h2>Paso 3</h2>
+              <h3>Observa los resultado.</h3>
             </div>
             <Button
               disable={error ? true : false}
-              title={"Start."}
+              title={"Empezar."}
               position={"right"}
               event={settingChooseEmotion}
             />
@@ -146,10 +145,10 @@ const TestModel = ({}) => {
               className="subtitle"
               style={{ color: "black", marginTop: "0px", marginBottom: "10px" }}
             >
-              Results.
+              Resultados.
             </h1>
             <h3 className="explanation">
-              The metric displayed is the cosine similarity between the image you uploaded and the emotions selected. An emotion will match the image if the value of the similarity is 0.99 or more.  
+            La métrica que se muestra es la similitud de coseno entre la imagen que subió y las emociones seleccionadas. Una emoción coincidirá con la imagen si el valor de la similitud es 0,97 o más.
               </h3>
             <div className="test-results-container">
               <div className="test-results-container-1">
@@ -165,7 +164,7 @@ const TestModel = ({}) => {
                     marginBottom: "20px",
                   }}
                 >
-                  Your Photo matched:
+                  Tu foto coincide:
                 </h2>
                 {testInfo.filter(function (test) {
                   return  test.belongsToEmotion === true;
@@ -190,7 +189,7 @@ const TestModel = ({}) => {
                       })}
                   </>
                 ) : (
-                  <h4>No Emotion</h4>
+                  <h4>Ninguna</h4>
                 )}
                 <h2
                   style={{
@@ -198,7 +197,7 @@ const TestModel = ({}) => {
                     marginBottom: "20px",
                   }}
                 >
-                  Your Photo did not match:
+                  Tu foto no coincide:
                 </h2>
                 {testInfo.filter(function (test) {
                   return  test.belongsToEmotion === false;
@@ -227,7 +226,7 @@ const TestModel = ({}) => {
             </div>
             <Button
               disable={error ? true : false}
-              title={"Try Again."}
+              title={"Otra vez."}
               position={"right"}
               event={settingChooseEmotion}
             />

@@ -30,7 +30,7 @@ const [barData, setBarData] = useState({
   labels: [],
   datasets: [
     {
-      label: 'Countries',
+      label: 'Paises',
       backgroundColor: [],
       borderColor: [],
       borderWidth: 2,
