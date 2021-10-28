@@ -52,7 +52,7 @@ const VideoStatistics = (props) => {
   const [visible, setVisible] = useState(false);
   const [loader, setLoader] = useState(true);
 
-  const { selectedCompany, selectedVideo,error  } = useSelector((state) => ({
+  const { selectedCompany, selectedVideo,error,loaderCompany  } = useSelector((state) => ({
     ...state.brands,
   }));
   const { emotions } = useSelector((state) => ({
@@ -87,11 +87,16 @@ const VideoStatistics = (props) => {
   useEffect(() => {
     dispatch(fetchEmotionsRequest());
   }, []);
+  useEffect(() => {
+    if(loaderCompany==false){
+      setLoader(false)
+    }
+  }, [loaderCompany]);
 
   useEffect(() => {
     const timer = setTimeout(function () {
       console.log("ENTRE ACA",emotions,errorMessage)
-      if (emotions.length===0 && errorMessage===null) {
+      if (emotions.length===0 && errorMessage===null && loader===false && loaderCompany) {
         setErrorMessage(
           "Parece que su empresa no ha definido ninguna emoción. Para ver las estadísticas de este video, debes definir al menos una."
         );
@@ -277,8 +282,8 @@ const VideoStatistics = (props) => {
               <Circle title={"PAÍS CON MAS VISTAS"} data={topCountry._id} />
             ):   <Circle title={"PAÍS CON MAS VISTAS"} data={"Ninguno"} />}
             {Object.keys(topAges).length > 0 ? (
-              <Circle title={"GRUPO ETAREO CON MAS VISTAS"} data={topAges._id} />
-            ):   <Circle title={"GRUPO ETAREO CON MAS VISTAS"} data={"Ninguno"} />}
+              <Circle title={"GRUPO ETARIO CON MAS VISTAS"} data={topAges._id} />
+            ):   <Circle title={"GRUPO ETARIO CON MAS VISTAS"} data={"Ninguno"} />}
           </div>
           {totalViews >0 ?
           <>

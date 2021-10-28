@@ -9,14 +9,14 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 const AgeChart = ({}) => {
 const dispatch = useDispatch();
 const { video } = useParams();
-const { ages,loaderStatistics } = useSelector((state) => ({
+const { ages,loaderStatistics,loaderAge } = useSelector((state) => ({
   ...state.stats,
 }));
 const [barData, setBarData] = useState({
   labels: [],
   datasets: [
     {
-      label: 'Grupos Etareos',
+      label: 'Grupos Etarios',
       backgroundColor: [
       ],
       borderColor: [
@@ -90,7 +90,7 @@ const barOptions = {
   {ages.length>0 &&
 <Bar data={barData} options={barOptions} width={null} height={null} />
 }
-{ages.length === 0 && loaderStatistics &&
+{ages.length === 0 && loaderAge &&
         <CircularProgress size={100} thickness={5} />
        }
 </div>

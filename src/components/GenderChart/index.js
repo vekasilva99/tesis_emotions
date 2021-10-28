@@ -9,7 +9,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 const GenderChart = ({}) => {
 const dispatch = useDispatch();
 const { video } = useParams();
-const { gender,loaderStatistics } = useSelector((state) => ({
+const { gender,loaderStatistics,loaderGender } = useSelector((state) => ({
   ...state.stats,
 }));
 
@@ -68,7 +68,7 @@ const pieOptions = {
   {gender.length>0 &&
 <Pie data={pieData} options={pieOptions} width={null} height={null} />
 }
-{gender.length === 0 && loaderStatistics &&
+{gender.length === 0 && loaderGender &&
         <CircularProgress size={100} thickness={5} />
        }
 </div>

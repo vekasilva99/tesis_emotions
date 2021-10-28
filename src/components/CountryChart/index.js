@@ -23,7 +23,7 @@ const getColor = (cont) =>{
     return {backgroundColor:'rgba(186, 153, 134, 0.4)',borderColor:'rgba(186, 153, 134, 1)'}
   }
 }
-const { country,loaderStatistics } = useSelector((state) => ({
+const { country,loaderStatistics,loaderCountry } = useSelector((state) => ({
   ...state.stats,
 }));
 const [barData, setBarData] = useState({
@@ -87,7 +87,7 @@ const barOptions = {
   {country.length>0 &&
 <Bar data={barData} options={barOptions} width={null} height={null} />
 }
-{country.length === 0 && loaderStatistics &&
+{country.length === 0 && loaderCountry &&
         <CircularProgress size={100} thickness={5} />
        }
 </div>

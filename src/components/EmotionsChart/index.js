@@ -9,7 +9,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 const EmotionsChart = ({ selectedEmotions }) => {
   const dispatch = useDispatch();
   const { video } = useParams();
-  const { emotionsInVideo,loaderStatistics } = useSelector((state) => ({
+  const { emotionsInVideo,loaderStatistics,loaderEmotions } = useSelector((state) => ({
     ...state.stats,
   }));
  
@@ -137,7 +137,7 @@ const EmotionsChart = ({ selectedEmotions }) => {
         />
       )}
 
-      {emotionsInVideo.length === 0 && loaderStatistics &&
+      {loaderEmotions &&
         <CircularProgress size={100} thickness={5} />
        }
     </div>

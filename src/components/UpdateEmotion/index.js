@@ -122,7 +122,11 @@ const ChooseEmotionPopUp = ({
         }
       }
     }
+    try{
     setPreview(URL.createObjectURL(files[0]));
+    }catch(error){
+      
+    }
   };
 
   const [inputFields, setInputFields] = useState([
@@ -200,8 +204,8 @@ const ChooseEmotionPopUp = ({
 
     try{
       console.log("EMPEZANDO");
-      setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
-      // setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
+      // setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
+      setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
       console.log("TERMINADO");
       }catch(error){
         setErrorMessage('Oops! Parece que algo salió mal al cargar el modelo. Limpia tu caché y vuelve a intentarlo. Perdon por la inconveniencia.')

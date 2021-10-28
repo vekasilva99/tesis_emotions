@@ -9,7 +9,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 const AttentionChart = ({}) => {
 const dispatch = useDispatch();
 const { video } = useParams();
-const { attention,loaderStatistics } = useSelector((state) => ({
+const { attention,loaderStatistics,loaderAttention } = useSelector((state) => ({
   ...state.stats,
 }));
 const [lineData, setLineData] = useState({
@@ -98,7 +98,7 @@ const lineOptions = {
   {Object.keys(attention).length>0 &&
 <Line data={lineData} options={lineOptions} width={null} height={null} />
 }
-{Object.keys(attention).length === 0 && loaderStatistics &&
+{Object.keys(attention).length === 0 && loaderAttention &&
         <CircularProgress size={100} thickness={5} />
        }
 </div>
