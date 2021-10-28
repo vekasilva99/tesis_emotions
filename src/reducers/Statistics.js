@@ -54,6 +54,11 @@ const INIT_STATE = {
   totalViews:null,
   testInfo:[],
   image:null,
+  loaderEmotions:false,
+  loaderGender:false,
+  loaderAttention:false,
+  loaderCountry:false,
+  loaderAge:false
 };
 
 export default (state = INIT_STATE, action) => {
@@ -61,7 +66,7 @@ export default (state = INIT_STATE, action) => {
     case EMOTIONS_IN_VIDEO_REQUEST: {
       return {
         ...state,
-        loaderStatistics: true,
+        loaderEmotions: true,
       };
     }
     case EMOTIONS_IN_VIDEO_ERROR: {
@@ -69,19 +74,22 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         error: action.payload,
+        loaderEmotions: false,
       };
     }
     case EMOTIONS_IN_VIDEO_SUCCESS: {
       return {
         ...state,
         loaderStatistics: false,
-        emotionsInVideo:action.payload
+        emotionsInVideo:action.payload,
+        loaderEmotions: false,
       };
     }
     case STAT_AGE_REQUEST: {
       return {
         ...state,
         loaderStatistics: true,
+        loaderAge:true
       };
     }
     case STAT_AGE_ERROR: {
@@ -89,6 +97,7 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         error: action.payload,
+        loaderAge:false
       };
     }
     case STAT_AGE_SUCCESS: {
@@ -96,12 +105,14 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         ages:action.payload,
+        loaderAge:false
       };
     }
     case STAT_ATTENTION_REQUEST: {
       return {
         ...state,
         loaderStatistics: true,
+        loaderAttention:true
       };
     }
     case STAT_ATTENTION_ERROR: {
@@ -109,6 +120,7 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         error: action.payload,
+        loaderAttention:false
       };
     }
     case STAT_ATTENTION_SUCCESS: {
@@ -116,12 +128,14 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         attention:action.payload,
+        loaderAttention:false
       };
     }
     case STAT_COUNTRY_REQUEST: {
       return {
         ...state,
         loaderStatistics: true,
+        loaderCountry:true
       };
     }
     case STAT_COUNTRY_ERROR: {
@@ -129,6 +143,7 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         error: action.payload,
+        loaderCountry:false
       };
     }
     case STAT_COUNTRY_SUCCESS: {
@@ -136,12 +151,14 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         country:action.payload,
+        loaderCountry:false
       };
     }
     case STAT_GENDER_REQUEST: {
       return {
         ...state,
         loaderStatistics: true,
+        loaderGender: true,
       };
     }
     case STAT_GENDER_ERROR: {
@@ -149,6 +166,7 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         error: action.payload,
+        loaderGender: false,
       };
     }
     case STAT_GENDER_SUCCESS: {
@@ -156,6 +174,7 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         gender:action.payload,
+        loaderGender: false,
       };
     }
     case STAT_PAYING_ATTENTION_REQUEST: {

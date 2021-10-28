@@ -96,7 +96,7 @@ export const trimCanvas = (c) => {
 
 export const YouTubeGetID=(url)=>{
   var ID = '';
- 
+ try{
   url = url.replace(/(>|<)/gi,'').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
   if(url[2] !== undefined) {
     ID = url[2].split(/[^0-9a-z_\-]/i);
@@ -106,6 +106,9 @@ export const YouTubeGetID=(url)=>{
     ID = url;
   }
     return ID;
+}catch(error){
+  
+}
 
 }
 

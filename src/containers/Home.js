@@ -123,13 +123,13 @@ return radious
           <div style={{ display: "flex", flexDirection: "column" }}>
             <h1 className="subtitle-home">¿Qué hacemos?</h1>
             <h2 className="paragraph-home">
-              Full service creative agency Full service creative agency Full
-              service creative agency Full Full service creative agencyservice
-              creative agency Full service creative agency Full service creative
-              agency Full service creative agency Full service creative agency
-              Full service creative agency Full service creative agency. Full
-              service creative agency Full service creative agency Full service
-              creative agency.
+              Proporcionamos información relevante a 
+              empresas acerca de la recepción de sus comerciales
+               con el uso de Inteligencia Artificial. A través de nuestra
+                plataforma, usuarios de todo el mundo podrán visualizar las
+                 propagandas disponibles, y mediante sus dispositivos captaremos
+                 las expresiones faciales que realicen a lo largo de la transmisión, 
+                 con el fin de que cada empresa pueda evaluar lo que sus comerciales causan en los usuarios.
             </h2>
           </div>
         </div>

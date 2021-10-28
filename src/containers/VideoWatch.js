@@ -28,6 +28,7 @@ import { createViewRequest } from "../actions/Model";
 import ErrorPopUpModel from "../components/ErrorPopUpModel/index";
 import NotLoading from "../components/NotLoading";
 import { getMean, getSTD, getStandarizedArray } from "../helpers/Model/methods";
+import { IFFT } from "@tensorflow/tfjs-core";
 const VideoWatch = (props) => {
   // DEFINICIÓN DE VARIABLES Y CONSTANTES.
   const { id, videoId } = useParams();
@@ -159,8 +160,8 @@ const VideoWatch = (props) => {
  
     try{
     console.log("EMPEZANDO");
-    // setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
-       setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
+    setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
+      //  setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
     console.log("TERMINADO");
     setVisible(true);
     }catch(error){
@@ -203,6 +204,21 @@ const VideoWatch = (props) => {
   useEffect(() => {
     if (startTimer) {
       handleEnableCamera();
+    }
+  }, [startTimer]);
+
+  useEffect(() => {
+ 
+    if(startTimer===false && timeLeft>0){
+    const mediaStream = video.srcObject;
+
+    // Through the MediaStream, you can get the MediaStreamTracks with getTracks():
+    const tracks = mediaStream.getTracks();
+    // Tracks are returned as an array, so if you know you only have one, you can stop it with: 
+    tracks[0].stop();
+    // Or stop all like so:
+    tracks.forEach(track => track.stop())
+    video.srcObject = null;
     }
   }, [startTimer]);
 
@@ -563,7 +579,6 @@ const VideoWatch = (props) => {
       }
     } catch (error) {}
   };
-
   const enableCam = async () => {
     const constraints = {
       video: {

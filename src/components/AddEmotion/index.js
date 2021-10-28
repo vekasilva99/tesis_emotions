@@ -99,6 +99,7 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
               `output-upload` + (i + 1).toString()
             );
             let ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
             const image = new Image();
             image.src = URL.createObjectURL(files[j]);
             image.onload = () => {
@@ -111,8 +112,27 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
           }
         }
       }
+    }else{
+      auxImages[index].image = files[0];
+            let canvas = document.getElementById(
+              `output-upload` + (index + 1).toString()
+            );
+            let ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            const image = new Image();
+            image.src = URL.createObjectURL(files[0]);
+            image.onload = () => {
+              ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+            };
+            canvas
+            .getContext("2d")
+            .getImageData(0, 0, canvas.width, canvas.height);
     }
+    try{
     setPreview(URL.createObjectURL(files[0]));
+    }catch(error){
+
+    }
   };
  
   const [inputFields, setInputFields] = useState([
@@ -191,8 +211,8 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
     
     try{
     console.log("EMPEZANDO");
-    setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
-    // setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
+    // setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
+    setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
     console.log("TERMINADO");
     }catch(error){
       setErrorMessage('Oops! Parece que algo salió mal al cargar el modelo. Limpia tu caché y vuelve a intentarlo. Perdon por la inconveniencia.')
@@ -532,10 +552,10 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
               </div>
             </div>
             <div className="pop-up-item-new-emotion-2">
-              <p>
-                Full service creative agency Full service creative agency Full
-                service creative agency Full Full service creative{" "}
-              </p>
+              {/* <p>
+               Suba las tres imagenes que mejor describan la emoción o expresión que desea agregar. 
+               Recuerde que los resultados obtenidos dependeran de esto.{" "}
+              </p> */}
               <canvas
                 style={{ background: "pink"
                 , visibility: "hidden" 
