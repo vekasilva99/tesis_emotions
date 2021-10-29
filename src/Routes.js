@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import App from './App';
-import Blazeface from './containers/blazeface';
-import ManuelModel from './containers/ManuelModel';
-import Embedding from './containers/Embedding';
-import Home from './containers/Home'
-import JoinUs from './containers/JoinUs'
-import SignIn from './containers/SignIn'
-import SignUp from './containers/SignUp'
-import NoAccount from './containers/NoAccount'
-import BrandDetail from './containers/BrandDetail'
-import VideoDetail from './containers/VideoDetail'
-import VideoWatch from './containers/VideoWatch'
-import VideoStatistics from './containers/VideoStatistics'
-import Emotions from './containers/Emotions'
-import Prueba from './prueba';
-=======
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { useLocation } from "react-router-dom";
@@ -47,15 +28,6 @@ import GuardRoutesUserAdmin from "./helpers/GuardRoutesUserAdmin";
 import GuardRoutesCompany from "./helpers/GuardRoutesCompany";
 import WatchVideoRoute from "./helpers/WatchVideoRoute";
 import GuardRoutesAdmin from "./helpers/GuardRoutesAdmin";
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 2acdec8... Login
-=======
-import NoRoleRoute from "./helpers/NoRoleRoute";
-import Prueba from "./prueba";
-import { RiLogoutCircleRFill } from "react-icons/ri";
->>>>>>> 2f4effd... Stats
-=======
 import TestModel from "./containers/TestModel"
 import TestModelAttention from "./containers/TestModelAttention"
 import AllVideos from "./containers/AllVideos"
@@ -64,7 +36,6 @@ import NoRoleRoute from "./helpers/NoRoleRoute";
 import Prueba from "./prueba";
 import { RiLogoutCircleRFill } from "react-icons/ri";
 import EditCompany from "./containers/EditCompany";
->>>>>>> 0f9f13c... M
 // import ProtectedRoute from './ProtectedRoute'
 
 function Routes(props) {
@@ -94,43 +65,6 @@ console.log("Admin",role)
   return (
     <div className="Routes">
       {role ? (
-<<<<<<< HEAD
-        <Switch>
-<<<<<<< HEAD
-          {/* Users */}
-          {/* <Route exact path="/" component={App}/>, */}
-          <Route exact path="/home" component={Home}/>,
-          <Route exact path="/join-us" component={JoinUs}/>,
-          <Route exact path="/blazeface" component={Blazeface}/>,
-          <Route exact path="/manuel" component={ManuelModel}/>,
-          <Route exact path="/embedding" component={Embedding}/>,
-          <Route exact path="/watchvideo" component={NoAccount}/>,
-          <Route exact path="/signin" component={SignIn}/>,
-          <Route exact path="/brand/:id" component={BrandDetail}/>,
-          <Route exact path="/emotions" component={Emotions}/>,
-          <Route exact path="/brand/:id/:video" component={VideoDetail}/>,
-          <Route exact path="/brand/:id/:video/watch" component={VideoWatch}/>,
-          <Route exact path="/:video/statistics" component={VideoStatistics}/>,
-          {/* <ProtectedRoute exact path="/:landing/main" role={isUser} component={UserMain}/>, */}
-
-          <Route exact path="/prueba" component={Prueba}/>,
-=======
-          <GuardRoutesUser
-            role={role}
-            exact
-            path="/blazeface"
-            component={Blazeface}
-          />
-          ,
-          <GuardRoutesUser
-            role={role}
-            exact
-            path="/manuel"
-            component={ManuelModel}
-          />
-          ,
-          {/* <GuardRoutesUser
-=======
         <>
           <Switch>
             <GuardRoutesUser
@@ -149,42 +83,11 @@ console.log("Admin",role)
             />
             ,
             {/* <GuardRoutesUser
->>>>>>> 2f4effd... Stats
             role={role}
             exact
             path="/embedding"
             component={Embedding}
           /> */}
-<<<<<<< HEAD
-          ,
-          <GuardRoutesCompany
-            role={role}
-            exact
-            path="/emotions"
-            component={Emotions}
-          />
-          ,
-          <GuardRoutesUser
-            role={role}
-            exact
-            path="/brand/:id/:video/watch"
-            component={VideoWatch}
-          />
-          ,
-          <GuardRoutesCompany
-            role={role}
-            exact
-            path="/:video/statistics"
-            component={VideoStatistics}
-          />
-<<<<<<< HEAD
-          <Redirect exact from="*" to="/home" />
->>>>>>> 2acdec8... Login
-=======
-       
->>>>>>> c75d24d... Login
-        </Switch>
-=======
             ,
             <GuardRoutesCompany
               role={role}
@@ -256,7 +159,6 @@ console.log("Admin",role)
             </h3>
           </div>
         </>
->>>>>>> 2f4effd... Stats
       ) : (
         <>
           {loader ? (
@@ -278,8 +180,6 @@ console.log("Admin",role)
         <Route exact path="/home" component={Home} />,
        
         <Route exact path="/embedding" component={Embedding} />,
-<<<<<<< HEAD
-=======
         <Route exact path="/prueba" component={Prueba} />,
       
         <NoRoleRoute role={role} exact path="/signin" component={SignIn} />,
@@ -299,7 +199,6 @@ console.log("Admin",role)
           component={NoAccount}
         />
         ,
->>>>>>> 2f4effd... Stats
       </Switch>
       {loader && role ? (
         <div className="full-page-loader">

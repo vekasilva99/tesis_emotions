@@ -47,8 +47,8 @@ const NoAccount = (props) => {
 
   const [inputFields, setInputFields] = useState([
     {
-      placeholder: "Enter your age",
-      name: "age",
+      placeholder: "Ingrese su edad",
+      name: "edad",
       value: "",
       type: "number",
       error: "",
@@ -57,8 +57,8 @@ const NoAccount = (props) => {
 
   const [selectFields, setSelectFields] = useState([
     {
-      placeholder: "Choose your gender",
-      name: "gender",
+      placeholder: "Seleccione su género",
+      name: "género",
       selected: "",
       type: "text",
       error: "",
