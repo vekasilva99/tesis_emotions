@@ -32,6 +32,9 @@ import {
   STAT_TOTAL_VIEW_ERROR,
   STAT_TOTAL_VIEW_REQUEST,
   STAT_TOTAL_VIEW_SUCCESS,
+  TEST_ERROR,
+  TEST_REQUEST,
+  TEST_SUCCESS
 } from "../constants/ActionTypes";
 
 const INIT_STATE = {
@@ -48,7 +51,8 @@ const INIT_STATE = {
   topAges:{},
   topCountry:{},
   topGender:{},
-  totalViews:null
+  totalViews:null,
+  testInfo:[]
 };
 
 export default (state = INIT_STATE, action) => {
@@ -273,6 +277,27 @@ export default (state = INIT_STATE, action) => {
         totalViews:action.payload,
       };
     }
+    case TEST_REQUEST: {
+      return {
+        ...state,
+        loaderStatistics: true,
+      };
+    }
+    case TEST_ERROR: {
+      return {
+        ...state,
+        loaderStatistics: false,
+        error: action.payload,
+      };
+    }
+    case TEST_SUCCESS: {
+      return {
+        ...state,
+        loaderStatistics: false,
+        testInfo:action.payload,
+      };
+    }
+    
     
 
     default: {

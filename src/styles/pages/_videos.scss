@@ -26,7 +26,6 @@ min-width: 100%;
  max-height:400px;
  display: flex;
  flex-direction: row;
-
  overflow-x: scroll !important;
  overflow-y: hidden;
  transform: translateX(0);
@@ -57,6 +56,7 @@ min-width: 100%;
   align-items: flex-end;
 position: relative;
 
+
 }
 
 .image-video-container{
@@ -70,6 +70,7 @@ position: relative;
   height: 100%;
   z-index: 10;
   opacity: 1;
+  cursor: pointer;
 }
 
 .video-number{

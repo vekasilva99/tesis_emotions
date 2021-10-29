@@ -2,7 +2,7 @@
   width: 100vw;
   height: 100vh;
   background-color: #CB807D;
-  position: absolute;
+  position: fixed;
   z-index: 10000;
   display: flex;
   justify-content: center;
@@ -17,6 +17,27 @@
 // opacity: 0;
 transition:all 1.5s;
 transform:translateY(-100%)
+}
+
+.pop-up-container-down{
+  width: 100vw;
+  height: 100vh;
+  background-color: #CB807D;
+  position: absolute;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform:translateX(0%);
+  transition:all 1.5s;
+//   visibility: visible;
+// opacity: 1;
+}
+.pop-up-container-down.closed{
+// visibility: hidden;
+// opacity: 0;
+transition:all 1.5s;
+transform:translateX(-100%)
 }
 .pop-up-content{
 background-color: white;
@@ -35,6 +56,7 @@ align-items: flex-start;
   width: 100%;
   margin-top: 100px;
   min-height:55vh;
+  height:55vh;
   display: flex;
   flex-direction: row;
 }
@@ -51,6 +73,17 @@ align-items: flex-start;
 }
 
 .pop-up-item-new-emotion-1-container{
+ 
+  width: 100%;
+
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.pop-up-item-new-emotion-1-upload{
  
   width: 100%;
 
@@ -163,6 +196,19 @@ align-items: center;
 position: relative;
 }
 
+.upload-button.big{
+
+  width:250px;
+  height:300px;
+  border:4px dashed #A9B18F;
+  margin: 15px;
+  border-radius: 27px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  }
+
 .upload-button-icon{
  width:100% !important;
  position: absolute;
@@ -171,12 +217,23 @@ position: relative;
 
 }
 
+
+.upload-button-icon.big{
+  width:100% !important;
+  position: absolute;
+  color: #A9B18F;
+  font-size: 100px;
+ 
+ }
+
 .upload-button-image{
   width: 100%;
   height: 100%;
   position: absolute;
   border-radius: 27px;
 }
+
+
 
 .upload-button-3{
 
@@ -238,7 +295,7 @@ position: relative;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 200000;

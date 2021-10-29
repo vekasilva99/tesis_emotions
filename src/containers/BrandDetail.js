@@ -7,6 +7,7 @@ import Button from "../components/Button/index";
 import { useDispatch, useSelector } from "react-redux";
 import polar from "../assets/images/Polar.png";
 import { fetchVideosRequest } from "../actions/Brands";
+import CompanyNotExistPopUp from "../components/CompanyNotExist";
 import "../styles/pages/__pages-dir.scss";
 const BrandDetail = (props) => {
   const dispatch = useDispatch();
@@ -60,6 +61,7 @@ const BrandDetail = (props) => {
 
   return (
     <>
+    <CompanyNotExistPopUp/>
       <Sidebar drawerToggleClickHandler={drawerToggleClickHandler} />
       <Drawer
         sideDrawerOpen={sideDrawerOpen}

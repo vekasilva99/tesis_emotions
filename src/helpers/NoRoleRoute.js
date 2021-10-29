@@ -8,8 +8,8 @@ export default function NoRoleRoute({ component: Component, role, ...rest }) {
     <Route
       {...rest}
       render={(props) =>
-        role == null ? (
-        
+        role != "admin" && role != "user" && role != "company" ? (
+   
           <Component {...props} />
         ) : (
           <Redirect to={{ pathname: role === "company" ? "/homeCompany":"/home", state: { from: props.location } }} />

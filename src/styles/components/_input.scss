@@ -42,7 +42,7 @@
   }
 }
 
-::placeholder{
+.input-field::placeholder{
   font-size: 20px;
   color:black;
   font-family: 'PlayfairDisplay-MediumItalic';
@@ -166,18 +166,26 @@ select:-webkit-autofill:focus {
   border-bottom: 2px solid #ef5350!important;
   color: #ef5350 !important;
   transition: all 0.5s;
-  ::placeholder{
-    color: #ef5350 !important;
-  }
+
+}
+::placeholder{
+  color: #ef5350 ;
 }
 
 .error {
   border-bottom: 2px solid #ef5350!important;
   color: #ef5350 !important;
   transition: all 0.5s;
-  ::placeholder{
-    color: #ef5350 !important;
-  }
+ 
+}
+.input-white-field.error::placeholder{
+  color: #ef5350 ;
+}
+.input-white-field.large-input.pink.error::placeholder{
+  color: #ef5350 ;
+}
+.input-white-field.large-input.error::placeholder{
+  color: #ef5350 ;
 }
 
 .input-white-field{
@@ -245,6 +253,12 @@ select:-webkit-autofill:focus {
 
 .react-datepicker__input-container{
 width: 100%;
+}
+.edit{
+  .react-datepicker__input-container input{
+    border-bottom: 2px solid black ;
+    color:#A9B18F;
+  }
 }
 
 .react-datepicker__input-container input{

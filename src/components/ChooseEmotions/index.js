@@ -12,6 +12,7 @@ const ChooseEmotionPopUp = ({
   settingChooseEmotion,
   open,
   videoSmall,
+  setOpen
 }) => {
   const { emotions } = useSelector((state) => ({
     ...state.company,
@@ -23,6 +24,13 @@ const ChooseEmotionPopUp = ({
   }, []);
   return (
     <div className={open ? "pop-up-container" : "pop-up-container closed"}>
+       <div className="close-pop-up"> <h3
+              onClick={() => {
+          setOpen(false)
+              }}
+            >
+              Close
+            </h3></div>
       <div className="pop-up-content">
         <h4>Choose Emotions</h4>
         <div className="pop-up-item-container">

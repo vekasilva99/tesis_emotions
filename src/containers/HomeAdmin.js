@@ -86,7 +86,9 @@ const HomeAdmin = (props) => {
                     return <Item company={company} />;
                   })}
                 </div>
-              ) : null}
+              ) : <div className="request-container">
+              <h4 className="no-content">There are no pending companies requests</h4>
+              </div>}
             </div>
           </div>
           <div className="admin-col-big">
@@ -100,7 +102,9 @@ const HomeAdmin = (props) => {
                     return <ItemVideo video={video} />;
                   })}
                 </div>
-              ) : null}
+              ) : <div className="request-container">
+                <h4 className="no-content">There are no videos available</h4>
+                </div>}
             </div>
           </div>
         </div>

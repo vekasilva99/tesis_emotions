@@ -15,12 +15,16 @@ import nikeLogo from "../assets/images/nike.png";
 import Button from "../components/Button/index";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchVideoRequest } from "../actions/Brands";
+import NotExistPopUp from "../components/VideoNotExist";
+import Instructions from "../components/Instructions";
+import { getMean,getSTD} from '../helpers/Model/methods'
 import "../styles/pages/__pages-dir.scss";
 const VideoDetail = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [instruction, setInstruction] = useState(false);
   const { token, _id, role } = useSelector((state) => ({
     ...state.auth,
   }));
@@ -51,9 +55,16 @@ const VideoDetail = (props) => {
       history.push(`/watchvideo/${id}/${videoId}`);
     }
   };
+  const openInstructions = () => {
+ 
+    setInstruction(true)
+  
+  };
 
   return (
     <>
+
+    <Instructions watchVideo={watchVideo} instruction={instruction} setInstruction={setInstruction}/>
       <div
         style={{
           width: "100%",
@@ -64,6 +75,7 @@ const VideoDetail = (props) => {
           position: "relative",
         }}
       >
+        <NotExistPopUp/>
         <Sidebar drawerToggleClickHandler={drawerToggleClickHandler} />
         <Drawer
           sideDrawerOpen={sideDrawerOpen}
@@ -91,9 +103,10 @@ const VideoDetail = (props) => {
                   </h2>
                   <h1 className="video-title2">{selectedVideo.name}</h1>
                 </div>
+
               </div>
               <Button
-                event={watchVideo}
+                event={openInstructions}
                 title={"Watch Now."}
                 position={"right"}
               />

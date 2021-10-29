@@ -13,6 +13,7 @@ const ErrorPopUp = ({inputs,stateLocation,company}) => {
   const errorsCompany = useSelector((state) => ({...state.company.error }));
  
   useEffect(() => {
+   
     if(company===null || company === undefined || company===false){
  if(Object.keys(errors).length >0 && open===false){
  

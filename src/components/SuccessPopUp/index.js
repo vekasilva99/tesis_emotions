@@ -5,7 +5,7 @@ import "../../styles/components/__components-dir.scss";
 import { BiHappy } from "react-icons/bi";
 import { removeSuccess } from "../../actions/SignIn";
 
-const SuccessPopUp = ({ inputs, stateLocation, company }) => {
+const SuccessPopUp = ({ defaultInputs,inputs, stateLocation, company }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -18,6 +18,11 @@ const SuccessPopUp = ({ inputs, stateLocation, company }) => {
         setOpen(true);
         setSuccessMessage(success[Object.keys(success)[0]]);
       }
+    }
+  }, [success]);
+  useEffect(() => {
+    if (inputs && defaultInputs && Object.keys(success).length > 0 && open === false) {
+     defaultInputs()
     }
   }, [success]);
 

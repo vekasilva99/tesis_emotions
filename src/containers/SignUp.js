@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import Sidebar from "../components/Sidebar/index";
+import { useHistory } from "react-router";
 import Drawer from "../components/Drawer/index";
 import Select from "../components/Select/index";
 import Input from "../components/InputWhite/index";
@@ -14,10 +16,12 @@ import { signUpUserRequest } from "../actions/SignUp";
 import { notLoading } from "../actions/Loader";
 import "../styles/pages/__pages-dir.scss";
 import validator from "validator";
+import moment from "moment";
 const SignUp = (props) => {
   const [birthdate, setBirthdate] = useState(new Date());
   const [birthdateError, setBirthdateError] = useState("");
   const dispatch = useDispatch();
+  const history = useHistory();
   const [submitted, setSubmitted] = useState(false);
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
   const errors = useSelector((state) => ({ ...state.auth.error }));
@@ -132,7 +136,6 @@ const SignUp = (props) => {
     let emptyField = false;
 
     let error = false;
-
     if (inputFields[0].value === "") {
       setError(true, 0, "Required Field");
       emptyField = true;
@@ -157,7 +160,10 @@ const SignUp = (props) => {
       setError(false, 1, "Required Field");
       emptyField = true;
     }
-    if (birthdate === new Date()) {
+    if (
+      moment(birthdate).format("LL") === moment(new Date()).format("LL") ||
+      birthdate >= new Date()
+    ) {
       setBirthdateError("Required Field");
       emptyField = true;
     }
@@ -196,11 +202,23 @@ const SignUp = (props) => {
     }
   };
 
+  const defaultInputs = () => {
+    let aux = inputFields;
+    let auxSelect = selectFields;
+    aux[0].value = "";
+    aux[1].value = "";
+    aux[2].value = "";
+    aux[3].value = "";
+    auxSelect[0].selected = "";
+    auxSelect[1].selected = "";
+    setInputFields(aux);
+    setSelectFields(auxSelect);
+  };
   return (
     <>
       <div
         className={
-          loader || submitted
+          loader 
             ? "full-page-loader"
             : "full-page-loader not-loading"
         }
@@ -208,9 +226,9 @@ const SignUp = (props) => {
         <CircularProgress size={100} thickness={5} />
       </div>
       <ErrorPopUp inputs={inputFields} />
-      <SuccessPopUp inputs={inputFields} />
+      <SuccessPopUp defaultInputs={defaultInputs} inputs={inputFields} />
       <div className="app-no-account">
-        <div className="input-container-column" style={{background:"pink"}}>
+        <div className="input-container-column">
           {selectFields.map((input, index) => (
             <Select
               changeError={setError}
@@ -230,6 +248,7 @@ const SignUp = (props) => {
             }}
             white={true}
             selected={birthdate}
+            submitted={submitted}
             name={"Birthdate"}
             onChange={(date) => setBirthdate(date)}
           />
@@ -250,11 +269,9 @@ const SignUp = (props) => {
         <Button event={signUp} title={"Sign Up"} position={"left"} />
         <div className="link-button">
           <h3>Already have an account? </h3>
-          <h4> Sign In Here</h4>
-        </div>
-        <div className="link-button2">
-          <h3>Want to create an account? </h3>
-          <h4> Sign Up Here</h4>
+          <h4  onClick={() => {
+              history.push("/signin");
+            }}> Sign In Here</h4>
         </div>
       </div>
     </>

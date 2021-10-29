@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar/index";
 import Drawer from "../components/Drawer/index";
 import { useDispatch, useSelector } from "react-redux";
+import {useHistory} from "react-router-dom";
 import Circle from "../components/CircleStatistics/index";
 import CircularText from "../components/CircularText/index";
 import Item from "../components/Item/index";
@@ -17,6 +18,7 @@ import AddVideo from "../components/AddVideo/index";
 import AddEmotion from "../components/AddEmotion/index";
 import { YouTubeGetID } from "../helpers/Model/methods";
 import { fetchVideoRequest } from "../actions/Brands";
+import { disableVideoRequest,fetchEmotionsRequest } from "../actions/Company";
 import {
   statTotalViewsRequest,
   statTopGenderRequest,
@@ -26,6 +28,7 @@ import {
   statPredominantEmotionRequest,
 } from "../actions/Statistics";
 import ChooseEmotions from "../components/ChooseEmotions/index";
+import ErrorPopUpModel from '../components/ErrorPopUpModel'
 import "../styles/pages/__pages-dir.scss";
 import { useParams } from "react-router-dom";
 import GenderChart from "../components/GenderChart";
@@ -33,18 +36,32 @@ import CountryChart from "../components/CountryChart";
 import AgeChart from "../components/AgeChart";
 import AttentionChart from "../components/AttentionChart";
 import EmotionsChart from "../components/EmotionsChart";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import NotExistPopUp from "../components/VideoNotExist";
+import {BiHide,BiShow} from 'react-icons/bi'
 const VideoStatistics = (props) => {
+  const history = useHistory();
   const [selectedEmotions, setSelectedEmotions] = useState([]);
+  const [chooseEmotion, setChooseEmotion] = useState(false);
+  const [videoSmall, setVideoSmall] = useState(false);
   const dispatch = useDispatch();
   const { video } = useParams();
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
-  const [chooseEmotion, setChooseEmotion] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [display, setDisplay] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [videoSmall, setVideoSmall] = useState(false);
-  const { selectedCompany, selectedVideo, loader } = useSelector((state) => ({
+  const [loader, setLoader] = useState(true);
+
+  const { selectedCompany, selectedVideo,error  } = useSelector((state) => ({
     ...state.brands,
   }));
+  const { emotions } = useSelector((state) => ({
+    ...state.company,
+  }));
+  const state= useSelector((state) => ({
+    ...state.stats,
+  }));
+
   const {
     totalViews,
     topGender,
@@ -56,15 +73,33 @@ const VideoStatistics = (props) => {
     ...state.stats,
   }));
   useEffect(() => {
-    dispatch(fetchVideoRequest({ company: _id, video: video }));
+    dispatch(fetchVideoRequest({ company: _id, video: video,history:history }));
   }, []);
+  useEffect(() => {
+  
+  }, [error]);
 
   useEffect(() => {
     if (Object.keys(selectedVideo).length > 0 && visible === false) {
       setVisible(true);
     }
   }, [selectedVideo]);
+  useEffect(() => {
+    dispatch(fetchEmotionsRequest());
+  }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(function () {
+      console.log("ENTRE ACA",emotions,errorMessage)
+      if (emotions.length===0 && errorMessage===null) {
+        setErrorMessage(
+          "It looks like your company has not defined any emotions. In order to see this video's statistics you need to define at least one."
+        );
+      
+      }
+    }, 100);
+    return () => clearTimeout(timer);
+  });
   useEffect(() => {
     dispatch(statTotalViewsRequest(video));
   }, []);
@@ -126,21 +161,27 @@ const VideoStatistics = (props) => {
       });
     }
     setSelectedEmotions(aux);
-    console.log(aux);
+
+  };
+  const onReady = (event) => {
+    setLoader(false)
   };
 
   return (
     <>
+    <NotExistPopUp />
       <ChooseEmotions
         settingChooseEmotion={settingChooseEmotion}
         open={chooseEmotion}
+        setOpen={setChooseEmotion}
         videoSmall={settingVideoSmall}
         selectedEmotions={selectedEmotions}
         addEmotion={addEmotion}
       />
-
-      <Sidebar drawerToggleClickHandler={drawerToggleClickHandler} />
+      <ErrorPopUpModel error={errorMessage} setError={setErrorMessage} />
+      <Sidebar color={"#A9B18F"} drawerToggleClickHandler={drawerToggleClickHandler} />
       <Drawer
+      color={"#A9B18F"}
         sideDrawerOpen={sideDrawerOpen}
         drawerToggleClickHandler={drawerToggleClickHandler}
       />
@@ -153,7 +194,24 @@ const VideoStatistics = (props) => {
         }
       >
         <div className="section-statistics">
-          <h1 className="video-watch-title">The Polar Bowl</h1>
+          <div style={{ width:"100%",display:"flex",flexDirection:"row",alignItems:"center"}}>
+          <h1 className="video-stat-title">{selectedVideo.name}</h1>
+         {selectedVideo != {} ?
+         <>
+         {selectedVideo.active ?
+          <BiHide className="disable-video" onClick={()=>{
+            let auxVideo=selectedVideo
+            auxVideo.active=false
+            dispatch(disableVideoRequest(auxVideo))
+          }} />
+          :  <BiShow className="disable-video" onClick={()=>{
+            let auxVideo=selectedVideo
+            auxVideo.active=true
+            dispatch(disableVideoRequest(auxVideo))
+          }}/>}
+          </>
+      :null}
+          </div>
           <div
             className={
               videoSmall
@@ -163,16 +221,18 @@ const VideoStatistics = (props) => {
           >
             {visible && selectedVideo != {} ? (
               <div
-                style={{ background: "purple", width: "100%", height: "100%" }}
+                style={{ width: "100%", height: "100%" }}
               >
                 <div style={{ width: "100%", height: "100%" }}>
                   <YouTube
                     videoId={YouTubeGetID(selectedVideo.link)}
                     opts={opts}
+                    onReady={onReady}
                   />
+
                 </div>
               </div>
-            ) : null}
+            ) :  <CircularProgress size={100} thickness={5} />}
           </div>
 
           <div
@@ -203,19 +263,21 @@ const VideoStatistics = (props) => {
             {Object.keys(payingAttention).length > 0 && (
               <Circle
                 title={payingAttention.message}
-                data={payingAttention.value.toString() + "%"}
+                data={payingAttention.value.toString() != "Nobody" ? payingAttention.value.toString()+"%" :payingAttention.value.toString()}
               />
             )}
-            {Object.keys(topGender).length > 0 && (
+            {Object.keys(topGender).length > 0 ? (
               <Circle title={"GENDER WITH MOST VIEWS"} data={topGender._id} />
-            )}
-            {Object.keys(topCountry).length > 0 && (
+            ): <Circle title={"GENDER WITH MOST VIEWS"} data={"None"} />}
+            {Object.keys(topCountry).length > 0 ? (
               <Circle title={"COUNTRY WITH MOST VIEWS"} data={topCountry._id} />
-            )}
-            {Object.keys(topAges).length > 0 && (
+            ):   <Circle title={"COUNTRY WITH MOST VIEWS"} data={"None"} />}
+            {Object.keys(topAges).length > 0 ? (
               <Circle title={"AGE GROUP WITH MOST VIEWS"} data={topAges._id} />
-            )}
+            ):   <Circle title={"AGE GROUP WITH MOST VIEWS"} data={"None"} />}
           </div>
+          {totalViews >0 ?
+          <>
           <div
             className={
               videoSmall
@@ -253,9 +315,13 @@ const VideoStatistics = (props) => {
               <AgeChart />{" "}
             </div>
           </div>
+          </>
+        :null}
         </div>
+       
 
         <Button
+        disable={emotions.length===0 ? true:false}
           title={"View Statistics."}
           position={"right"}
           hide={videoSmall}

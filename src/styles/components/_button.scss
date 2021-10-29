@@ -33,10 +33,39 @@
       }
       .button-icon{
         font-size: 6.5vw!important;
+
   
         }
     }
   }
+}
+
+.disable-button{
+  cursor: not-allowed;
+  &:hover{
+    padding-left: 40px;
+    .button-title{
+      font-size: 40px;
+    }
+    .button-icon{
+      font-size: 40px !important;
+
+      }
+  }
+  @media screen and (min-width: 3000px) {
+    &:hover{
+      padding-left: 40px;
+      .button-title{
+        font-size: 6vw;
+      }
+      .button-icon{
+        font-size: 6vw!important;
+
+  
+        }
+    }
+  }
+
 }
 
 .button-container-pop-up{

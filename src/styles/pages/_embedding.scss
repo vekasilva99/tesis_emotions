@@ -116,8 +116,9 @@ display:flex;
 
   .sign-out-container{
     position: fixed;
+    z-index: 900;
     top: 30px;
-    right: 30px;
+    right: 50px;
     cursor:pointer;
    
   }
@@ -127,13 +128,34 @@ display:flex;
     text-align: right;
     font-size: 12px;
     transition: all 0.5s ease-in-out;
+    
     &:hover{
       color:#A9B18F;
       font-size: 14px;
     }
   }
 
+  .close-pop-up{
+    position: fixed;
+    z-index: 90000;
+    top: 30px;
+    right: 50px;
+    cursor:pointer;
+   
+  }
 
+  .close-pop-up{
+    font-family: 'Exo-Light';
+    text-align: right;
+    font-size: 12px;
+    color: white;
+    transition: all 0.5s ease-in-out;
+    
+    &:hover{
+      color:#A9B18F;
+      font-size: 14px;
+    }
+  }
   .MuiCircularProgress-colorPrimary{
     color: #A9B18F !important;
   }

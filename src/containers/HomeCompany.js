@@ -22,7 +22,11 @@ const HomeCompany = (props) => {
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
   const [openVideo, setOpenVideo] = useState(false);
   const [openAdd, setOpenAdd] = useState(false);
+  const [error, setErrorMessage] = useState(null);
   const { _id } = useSelector((state) => ({
+    ...state.auth,
+  }));
+  const state = useSelector((state) => ({
     ...state.auth,
   }));
   const name = useSelector((state) => ({ ...state.auth })).full_name;
@@ -67,7 +71,7 @@ const HomeCompany = (props) => {
     if (videos.length === 0) {
       dispatch(fetchVideosRequest(_id));
     }
-  }, [emotions]);
+  }, []);
 
   useEffect(() => {
     if (emotions.length === 0) {
@@ -77,7 +81,7 @@ const HomeCompany = (props) => {
 
   return (
     <>
-      <AddEmotionPopUp open={openAdd} setOpen={setOpenAdd} />
+      <AddEmotionPopUp error={error} setErrorMessage={setErrorMessage}open={openAdd} setOpen={setOpenAdd} />
       <AddVideoPopUp open={openVideo} setOpen={setOpenVideo} />
       <Sidebar
         drawerToggleClickHandler={drawerToggleClickHandler}
@@ -107,11 +111,13 @@ const HomeCompany = (props) => {
           <div
             className={
               emotions.length === 0 && videos.length === 0
-                ? "circle-button-big"
-                : "circle-button"
+                ? error===null ? "circle-button-big" :"circle-button-big disable"
+                : error===null ? "circle-button" :"circle-button disable"
             }
             onClick={() => {
+              if(error===null){
               setOpenAdd(true);
+              }
             }}
           >
             <circular-text
@@ -121,7 +127,7 @@ const HomeCompany = (props) => {
               }
             ></circular-text>
             <div className="icon-container-button">
-              <BiHappy className="button-icon" />
+              <BiHappy className="button-icon-home" />
             </div>
           </div>
           <div
@@ -141,7 +147,7 @@ const HomeCompany = (props) => {
               }
             ></circular-text>
             <div className="icon-container-button">
-              <FaVideo className="button-icon" />
+              <FaVideo className="button-icon-home" />
             </div>
           </div>
         </div>

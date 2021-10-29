@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Circle from "../components/CircleImage/index";
 import CircularText from "../components/CircularText/index";
 import Item from "../components/Item/index";
-
+import CircularProgress from "@material-ui/core/CircularProgress";
 import adidasLogo from "../assets/images/adidas.png";
 import benefitLogo from "../assets/images/benefit.png";
 import cocaColaLogo from "../assets/images/cocaCola.png";
@@ -25,10 +25,14 @@ import { YouTubeGetID } from "../helpers/Model/methods";
 import "../styles/pages/__pages-dir.scss";
 import { fetchVideoRequest } from "../actions/Brands";
 import { createViewRequest } from "../actions/Model";
+import ErrorPopUpModel from "../components/ErrorPopUpModel/index";
+import NotLoading from "../components/NotLoading";
+import { getMean, getSTD, getStandarizedArray } from "../helpers/Model/methods";
 const VideoWatch = (props) => {
   // DEFINICIÓN DE VARIABLES Y CONSTANTES.
   const { id, videoId } = useParams();
   const dispatch = useDispatch();
+  const [error, setError] = useState(null);
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
   const [duration, setDuration] = useState(false);
   const [attention, setAttention] = useState(null);
@@ -59,6 +63,7 @@ const VideoWatch = (props) => {
   // Guarda el modelo (en este caso, el modelo para el reconocimiento de rostros)
   const [model, setModel] = useState(undefined);
   const [model2, setModel2] = useState(undefined);
+  const [errorMessage, setErrorMessage] = useState("");
   const [landmarkDetectionModel, setLandmarkDetectionModel] =
     useState(undefined);
   // Este es el canvas donde se está dibujando la imagen cortada.
@@ -73,6 +78,21 @@ const VideoWatch = (props) => {
   useEffect(() => {
     dispatch(fetchVideoRequest({ company: id, video: videoId }));
   }, []);
+
+  const getVisibility = () => {
+    return visible;
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(function () {
+      if (!visible && error===null) {
+        setErrorMessage(
+          "We are having some issues loading the AI Model. Make sure to check your connection."
+        );
+      }
+    }, 100000);
+    return () => clearTimeout(timer);
+  });
 
   const loadLandmarkModel = async () => {
     const model = await faceLandmarksDetection.load(
@@ -105,7 +125,18 @@ const VideoWatch = (props) => {
     return () => {};
   }, []);
   useEffect(() => {
-    if (attention != null && embedding) {
+    if (attention != null && embedding !=null) {
+      if(embedding.embedding.length===0){
+        dispatch(
+          createViewRequest({
+            embedding: embedding.embedding,
+            time: embedding.time,
+            user: getUserInfo(),
+            attention: false,
+            videoID: videoId,
+          })
+        );
+      }else{
       dispatch(
         createViewRequest({
           embedding: embedding.embedding,
@@ -115,6 +146,7 @@ const VideoWatch = (props) => {
           videoID: videoId,
         })
       );
+      }
       setEmbedding(null);
       setAttention(null);
     }
@@ -125,10 +157,15 @@ const VideoWatch = (props) => {
     tf_2.serialization.registerClass(L2Norm);
 
     // setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
+    try{
     console.log("EMPEZANDO");
     setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
     console.log("TERMINADO");
     setVisible(true);
+    }catch(error){
+      setError('Oops! It seems something went wrong when loading the model. Please clear your cache and try again. Sorry for the inconvinience.')
+ 
+    }
   };
 
   useEffect(() => {
@@ -293,213 +330,235 @@ const VideoWatch = (props) => {
     let url = trimmedCanvas.toDataURL();
     // Setear la imagen para poder visualizarla.
     setCurrentImage(url);
-
+    console.log("shape", baw_array);
     // Crear tensor con la información de la imagen ya en blanco y negro.
-    let finalIMG = tf.tensor(baw_array);
-    finalIMG = tf.reshape(finalIMG, [1, modelImageSize, modelImageSize, 3]);
-    let prediction = model2.predict(finalIMG);
-    let value = prediction.dataSync();
-    let auxArray = [];
+    let mean = getMean(baw_array);
+    let std = getSTD(baw_array, mean);
+    if (std > 0) {
+      baw_array = getStandarizedArray(baw_array, mean, std);
+      let finalIMG = tf.tensor(baw_array);
+      finalIMG = tf.reshape(finalIMG, [1, modelImageSize, modelImageSize, 3]);
+      let prediction = model2.predict(finalIMG);
+      let value = prediction.dataSync();
+      let auxArray = [];
 
-    var arrayString = JSON.stringify(value);
-    value = JSON.parse(arrayString);
+      var arrayString = JSON.stringify(value);
+      value = JSON.parse(arrayString);
 
-    let aux = [];
+      let aux = [];
 
-    for (let j = 0; j < 16; j++) {
-      aux.push(value[j]);
+      for (let j = 0; j < 16; j++) {
+        aux.push(value[j]);
+      }
+      let embedding = {
+        time: timeLeft,
+        embedding: aux,
+      };
+      setEmbedding(embedding);
     }
-    let embedding = {
-      time: timeLeft,
-      embedding: aux,
-    };
-    setEmbedding(embedding);
   };
 
   const predictWebcam = () => {
-    if (
-      predict &&
-      startTimer &&
-      timeLeft <= duration &&
-      timeLeft > 0 &&
-      timeLeft % 5 === 0
-    ) {
-      video.play();
+    try {
+      if (
+        predict &&
+        startTimer &&
+        timeLeft <= duration &&
+        timeLeft > 0 &&
+        timeLeft % 5 === 0
+      ) {
+        video.play();
 
-      videoWidth = video.videoWidth;
-      videoHeight = video.videoHeight;
-      video.width = videoWidth;
-      video.height = videoHeight;
-      canvas = document.getElementById("output");
-      canvas.width = videoWidth;
-      canvas.height = videoHeight;
-      ctx = canvas.getContext("2d");
-      ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
+        videoWidth = video.videoWidth;
+        videoHeight = video.videoHeight;
+        video.width = videoWidth;
+        video.height = videoHeight;
+        canvas = document.getElementById("output");
+        canvas.width = videoWidth;
+        canvas.height = videoHeight;
+        ctx = canvas.getContext("2d");
+        ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
 
-      const returnTensors = false; // Pass in `true` to get tensors back, rather than values.
-      const flipHorizontal = true;
-      const annotateBoxes = true;
+        const returnTensors = false; // Pass in `true` to get tensors back, rather than values.
+        const flipHorizontal = true;
+        const annotateBoxes = true;
 
-      model
-        .estimateFaces(video, returnTensors, flipHorizontal, annotateBoxes)
-        .then((predictions) => {
-          if (predictions.length > 0) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        model
+          .estimateFaces(video, returnTensors, flipHorizontal, annotateBoxes)
+          .then((predictions) => {
+            if (predictions.length > 0) {
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            predictions.map((face_detected, index) => {
-              if (returnTensors) {
-                face_detected.topLeft = face_detected.topLeft.arraySync();
-                face_detected.bottomRight =
-                  face_detected.bottomRight.arraySync();
-                if (annotateBoxes) {
-                  face_detected.landmarks = face_detected.landmarks.arraySync();
+              predictions.map((face_detected, index) => {
+                if (index === 0) {
+                  if (returnTensors) {
+                    face_detected.topLeft = face_detected.topLeft.arraySync();
+                    face_detected.bottomRight =
+                      face_detected.bottomRight.arraySync();
+                    if (annotateBoxes) {
+                      face_detected.landmarks =
+                        face_detected.landmarks.arraySync();
+                    }
+                  }
+                  const start = face_detected.topLeft;
+                  const end = face_detected.bottomRight;
+                  const size = [end[0] - start[0], end[1] - start[1]];
+
+                  // Render a rectangle over each detected face.
+                  ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
+                  ctx.fillRect(start[0], start[1], size[0], size[1]);
+
+                  // Tomar la imagen.
+                  snap(start, size, index);
+
+                  if (annotateBoxes) {
+                    const landmarks = face_detected.landmarks;
+                    ctx.fillStyle = "blue";
+                    landmarks.map((mark) => {
+                      const x = mark[0];
+                      const y = mark[1];
+                      ctx.fillRect(x, y, 5, 5);
+                    });
+                  }
                 }
-              }
-              const start = face_detected.topLeft;
-              const end = face_detected.bottomRight;
-              const size = [end[0] - start[0], end[1] - start[1]];
-
-              // Render a rectangle over each detected face.
-              ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
-              ctx.fillRect(start[0], start[1], size[0], size[1]);
-
-              // Tomar la imagen.
-              snap(start, size, index);
-
-              if (annotateBoxes) {
-                const landmarks = face_detected.landmarks;
-                ctx.fillStyle = "blue";
-                landmarks.map((mark) => {
-                  const x = mark[0];
-                  const y = mark[1];
-                  ctx.fillRect(x, y, 5, 5);
-                });
-              }
-            });
-          }
-        });
-    }
+              });
+            }else{
+              setEmbedding( {
+                time: timeLeft,
+                embedding: [],
+              });
+            }
+          });
+      }
+    } catch (error) {}
   };
 
   const predictWebcamLandmark = () => {
-    if (
-      predict &&
-      startTimer &&
-      timeLeft <= duration &&
-      timeLeft > 0 &&
-      timeLeft % 5 === 0
-    ) {
-      video.play();
+    try {
+      if (
+        predict &&
+        startTimer &&
+        timeLeft <= duration &&
+        timeLeft > 0 &&
+        timeLeft % 5 === 0
+      ) {
+        video.play();
 
-      videoWidth = video.videoWidth;
-      videoHeight = video.videoHeight;
-      video.width = videoWidth;
-      video.height = videoHeight;
-      canvas = document.getElementById("output");
-      canvas.width = videoWidth;
-      canvas.height = videoHeight;
-      ctx = canvas.getContext("2d");
-      ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
+        videoWidth = video.videoWidth;
+        videoHeight = video.videoHeight;
+        video.width = videoWidth;
+        video.height = videoHeight;
+        canvas = document.getElementById("output");
+        canvas.width = videoWidth;
+        canvas.height = videoHeight;
+        ctx = canvas.getContext("2d");
+        ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
 
-      landmarkDetectionModel
-        .estimateFaces({
-          input: video,
-        })
-        .then((predictions) => {
-          if (predictions.length > 0) {
-            for (let i = 0; i < predictions.length; i++) {
-              const keypoints = predictions[i].scaledMesh;
+        landmarkDetectionModel
+          .estimateFaces({
+            input: video,
+          })
+          .then((predictions) => {
+            if (predictions.length > 0) {
+              console.log("ENTRE A PREDICTION")
+              for (let i = 0; i < predictions.length; i++) {
+                const keypoints = predictions[i].scaledMesh;
 
-              const left_eye_1 = Math.abs(keypoints[246][1] - keypoints[7][1]);
-              const left_eye_2 = Math.abs(
-                keypoints[161][1] - keypoints[163][1]
-              );
-              const left_eye_3 = Math.abs(
-                keypoints[160][1] - keypoints[144][1]
-              );
-              const left_eye_4 = Math.abs(
-                keypoints[159][1] - keypoints[145][1]
-              );
-              const left_eye_5 = Math.abs(
-                keypoints[158][1] - keypoints[153][1]
-              );
-              const left_eye_6 = Math.abs(
-                keypoints[157][1] - keypoints[154][1]
-              );
-              const left_eye_7 = Math.abs(
-                keypoints[173][1] - keypoints[155][1]
-              );
+                const left_eye_1 = Math.abs(
+                  keypoints[246][1] - keypoints[7][1]
+                );
+                const left_eye_2 = Math.abs(
+                  keypoints[161][1] - keypoints[163][1]
+                );
+                const left_eye_3 = Math.abs(
+                  keypoints[160][1] - keypoints[144][1]
+                );
+                const left_eye_4 = Math.abs(
+                  keypoints[159][1] - keypoints[145][1]
+                );
+                const left_eye_5 = Math.abs(
+                  keypoints[158][1] - keypoints[153][1]
+                );
+                const left_eye_6 = Math.abs(
+                  keypoints[157][1] - keypoints[154][1]
+                );
+                const left_eye_7 = Math.abs(
+                  keypoints[173][1] - keypoints[155][1]
+                );
 
-              const left_distance = Math.abs(
-                keypoints[33][0] - keypoints[133][0]
-              );
-              const left_eye_sum =
-                left_eye_1 +
-                left_eye_2 +
-                left_eye_3 +
-                left_eye_4 +
-                left_eye_5 +
-                left_eye_6 +
-                left_eye_7;
+                const left_distance = Math.abs(
+                  keypoints[33][0] - keypoints[133][0]
+                );
+                const left_eye_sum =
+                  left_eye_1 +
+                  left_eye_2 +
+                  left_eye_3 +
+                  left_eye_4 +
+                  left_eye_5 +
+                  left_eye_6 +
+                  left_eye_7;
 
-              const right_eye_1 = Math.abs(
-                keypoints[398][1] - keypoints[382][1]
-              );
-              const right_eye_2 = Math.abs(
-                keypoints[384][1] - keypoints[381][1]
-              );
-              const right_eye_3 = Math.abs(
-                keypoints[385][1] - keypoints[380][1]
-              );
-              const right_eye_4 = Math.abs(
-                keypoints[386][1] - keypoints[374][1]
-              );
-              const right_eye_5 = Math.abs(
-                keypoints[387][1] - keypoints[373][1]
-              );
-              const right_eye_6 = Math.abs(
-                keypoints[388][1] - keypoints[390][1]
-              );
-              const right_eye_7 = Math.abs(
-                keypoints[466][1] - keypoints[249][1]
-              );
+                const right_eye_1 = Math.abs(
+                  keypoints[398][1] - keypoints[382][1]
+                );
+                const right_eye_2 = Math.abs(
+                  keypoints[384][1] - keypoints[381][1]
+                );
+                const right_eye_3 = Math.abs(
+                  keypoints[385][1] - keypoints[380][1]
+                );
+                const right_eye_4 = Math.abs(
+                  keypoints[386][1] - keypoints[374][1]
+                );
+                const right_eye_5 = Math.abs(
+                  keypoints[387][1] - keypoints[373][1]
+                );
+                const right_eye_6 = Math.abs(
+                  keypoints[388][1] - keypoints[390][1]
+                );
+                const right_eye_7 = Math.abs(
+                  keypoints[466][1] - keypoints[249][1]
+                );
 
-              const right_distance = Math.abs(
-                keypoints[362][0] - keypoints[263][0]
-              );
-              const right_eye_sum =
-                right_eye_1 +
-                right_eye_2 +
-                right_eye_3 +
-                right_eye_4 +
-                right_eye_5 +
-                right_eye_6 +
-                right_eye_7;
+                const right_distance = Math.abs(
+                  keypoints[362][0] - keypoints[263][0]
+                );
+                const right_eye_sum =
+                  right_eye_1 +
+                  right_eye_2 +
+                  right_eye_3 +
+                  right_eye_4 +
+                  right_eye_5 +
+                  right_eye_6 +
+                  right_eye_7;
 
-              // console.log("SUMA OJO IZQUIERDO", left_eye_sum.toFixed(2));
-              // console.log("SUMA OJO DERECHO", right_eye_sum.toFixed(2));
-              // console.log("DISTANCIA IZQUIERDO", left_distance.toFixed(2));
-              // console.log("DISTANCIA DERECHO", right_distance.toFixed(2));
-              // console.log(
-              //   "------------------------------------------------------"
-              // );
-              let payingAttention = false;
+                // console.log("SUMA OJO IZQUIERDO", left_eye_sum.toFixed(2));
+                // console.log("SUMA OJO DERECHO", right_eye_sum.toFixed(2));
+                // console.log("DISTANCIA IZQUIERDO", left_distance.toFixed(2));
+                // console.log("DISTANCIA DERECHO", right_distance.toFixed(2));
+                // console.log(
+                //   "------------------------------------------------------"
+                // );
+                let payingAttention = false;
 
-              if (
-                left_distance + right_distance >
-                  process.env.REACT_APP_SUMA_DISTANCIA &&
-                left_eye_sum + right_eye_sum > process.env.REACT_APP_SUMA
-              ) {
-                payingAttention = true;
+                if (
+                  left_distance + right_distance >
+                    process.env.REACT_APP_SUMA_DISTANCIA &&
+                  left_eye_sum + right_eye_sum > process.env.REACT_APP_SUMA
+                ) {
+                  payingAttention = true;
+                }
+                setAttention(payingAttention);
+                for (let i = 0; i < keypoints.length; i++) {
+                  const [x, y, z] = keypoints[i];
+                }
               }
-              setAttention(payingAttention);
-              for (let i = 0; i < keypoints.length; i++) {
-                const [x, y, z] = keypoints[i];
-              }
+            }else{
+              setAttention(false);
             }
-          }
-        });
-    }
+          });
+      }
+    } catch (error) {}
   };
 
   const enableCam = async () => {
@@ -540,30 +599,20 @@ const VideoWatch = (props) => {
   };
 
   const onPause = (event) => {
-    // event.target.playVideo();
     setStartTimer(false);
-    const mediaStream = video.srcObject;
-
-    // Through the MediaStream, you can get the MediaStreamTracks with getTracks():
-    const tracks = mediaStream.getTracks();
-
-    // Tracks are returned as an array, so if you know you only have one, you can stop it with:
-    tracks[0].stop();
-
-    // Or stop all like so:
-    tracks.forEach((track) => track.stop());
   };
 
   return (
     <>
+      <NotLoading message={errorMessage} setMessage={setErrorMessage} />
       <Sidebar drawerToggleClickHandler={drawerToggleClickHandler} />
       <Drawer
         sideDrawerOpen={sideDrawerOpen}
         drawerToggleClickHandler={drawerToggleClickHandler}
       />
-
+      <ErrorPopUpModel error={error} setError={setError} />
       <div className="app-video-detail-watch">
-        <h1 className="video-watch-title">The Polar Bowl</h1>
+        <h1 className="video-watch-title">{selectedVideo.name}</h1>
         {/* <span>{timeLeft}s</span> */}
         <div className="big-video-container">
           <div id="liveView" className="video-container cam">
@@ -595,7 +644,11 @@ const VideoWatch = (props) => {
                 />
               </div>
             </div>
-          ) : null}
+          ) : (
+            <div className="video-container">
+              <CircularProgress size={100} thickness={5} />
+            </div>
+          )}
         </div>
       </div>
     </>
