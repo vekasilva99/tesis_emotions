@@ -6,7 +6,7 @@ const DatePick = ({selected,onChange,white,name,errorDate}) => {
   const [error, setError] = useState(errorDate);
   return (
 <div className={white ? error!="" ? "input-white error-date": "input-white":error!="" ? "input error-date":"input"}>
-  <h2 className="placeholder" style={{color:"black"}}>{name}</h2>
+  {/* <h2 className="placeholder" style={{color:"black"}}>{name}</h2> */}
   <DatePicker selected={selected} onChange={(date) => {setError("");onChange(date)}} />
  
 </div>

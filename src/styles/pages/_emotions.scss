@@ -1,6 +1,6 @@
 .app-emotions{
   width: 100vw;
-max-height: 100vh;
+min-height: 100vh;
   position: relative;
   display: flex;
   align-items: flex-start;
@@ -24,11 +24,156 @@ max-height: 100vh;
   color: white;
   font-size: 30px;
   text-transform: uppercase;
-  transform: rotate(180deg);
+  transform: rotate(320deg);
+  position: relative;
+  margin-right: 50px;
+  cursor: pointer;
+  transition: all 0.8s ease-in-out;
+
+  &:hover{
+    transform: rotate(680deg);
+  }
+  
+
+}
+
+.circle-button-big{
+  width:500px;
+  height: 500px;
+  min-width: 500px;
+  max-width: 500px;
+  min-height: 500px;
+  max-height: 500px;
+  border-radius: 100%;
+  background-color: #CB807D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'PlayfairDisplay-SemiBold';
+  color: white;
+  font-size: 70px;
+  text-transform: uppercase;
+  transform: rotate(320deg);
+  position: relative;
+  margin-right: 50px;
+  cursor: pointer;
+  transition: all 0.8s ease-in-out;
+
+  &:hover{
+    transform: rotate(680deg);
+  }
+  
+
+}
+
+.emotions-home-section{
+  width: 100%; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.emotions-home-section h1{
+  font-family: "PlayfairDisplay-Medium" !important;
+  text-transform: uppercase;
+  font-style: normal;
+  color: black;
+  letter-spacing: 1.7px;
+  font-size: 40px;
+  width:100%;
+  text-align: left;
+}
+
+.emotions-home-container{
+  min-width: 1050px;
+  max-width: 1050px;
+  width:90%;
+ display: flex;
+ flex-direction: row;
+
+ overflow-x: scroll !important;
+ overflow-y: hidden;
+
+}
+
+.item-container-home{
+  width: 300px !important;
+  height:500px !important;
+  min-width: 300px;
+  display: flex;
+  border-radius: 46px;
+  position: relative;
+  margin-left: 25px;
+  margin-right:25px;
+}
+
+.item-container-home img{
+  width:100%;
+  height: 100%;
+  border-radius: 46px;
+  
+}
+
+.item-container-home-top{
+  width:100%;
+  height: 100%;
+  border-radius: 46px;
+  background-color: #CB807D;
+  position: absolute;
+  z-index: 5;
+  opacity: 0.8;
+
+
+}
+
+.item-container-home h2{
+
+  position: absolute;
+  left:30px;
+  z-index: 6;
+  font-family: "Exo-SemiBold";
+  font-size: 24px;
+  letter-spacing: 1.7px;
+  color: white;
+
+
 
 }
 
 
+.icon-container-button{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(40deg);
+}
+
+.button-icon{
+  margin:0 !important;
+  font-size: 80px !important;
+}
+
+.button-home-container{
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: auto;
+  height: auto;
+}
+.button-home-container-big{
+
+  display: flex;
+  flex-direction: row;
+  width:100%;
+  height:100%;
+  justify-content: center;
+}
 .emotions-container{
   width: 100%;
   height: auto;
@@ -38,6 +183,21 @@ max-height: 100vh;
   justify-content: center;
 flex-direction: row;
 
+
+}
+.circle-button-big .icon-container-button .button-icon{
+  font-size: 180px !important;
+  
+}
+
+.videos-home-container{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+flex-direction: row;
 
 }
 

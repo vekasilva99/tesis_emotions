@@ -4,10 +4,9 @@ import * as tf from "@tensorflow/tfjs-core";
 import * as tf_2 from "@tensorflow/tfjs";
 import * as tfjsWasm from "@tensorflow/tfjs-backend-wasm";
 import group from "./../assets/group.png";
-import {getEmotion} from "../helpers/getEmotion";
+import { getEmotion } from "../helpers/getEmotion";
 
 const ManuelModel = (props) => {
-
   // DEFINICIÓN DE VARIABLES Y CONSTANTES.
 
   // Este es el tamaño de pixeles con el que fue entrenado el modelo.
@@ -34,19 +33,16 @@ const ManuelModel = (props) => {
   // Definición de variables que serán utilizadas más adelante.
   let ctx, videoWidth, videoHeight, canvas, context;
 
-
   // const loadTensorflowModel = () => {
   //   const tf = require("@tensorflow/tfjs");
   //   const tfn = require("@tensorflow/tfjs-node");
   //   const handler = tfn.io.fileSystem("./path/to/your/model.json");
   //   const model = await tf.loadModel(handler);
   // }
-  
 
   // Este método sirve para tomar solo la parte del canvas que tiene la imagen
   // Se deshace de todos los pixels tramsparentes.
   const trimCanvas = (c) => {
-
     let ctx = c.getContext("2d"),
       copy = document.createElement("canvas").getContext("2d"),
       pixels = ctx.getImageData(0, 0, c.width, c.height),
@@ -66,11 +62,7 @@ const ManuelModel = (props) => {
     const cont = 5;
     let aux = 0;
     for (i = 0; i < l; i += 4) {
-
       if (pixels.data[i + 3] !== 0) {
-
-        // console.log('pixel', pixels.data[i + 3]);
-
         x = (i / 4) % c.width;
         y = ~~(i / 4 / c.width);
 
@@ -111,10 +103,9 @@ const ManuelModel = (props) => {
     // Return trimmed canvas
     return copy.canvas;
   };
- 
+
   // Capturar la imagen del video
   const snap = async (start, size, index) => {
-
     context = canvas2.getContext("2d");
     canvas2.width = videoWidth;
     canvas2.height = videoHeight;
@@ -123,7 +114,7 @@ const ManuelModel = (props) => {
     let realTopLeft_x = canvas2.width - (start[0] + size[0]);
     let imageWidth = size[0];
     const canvasWidth = canvas2.width;
-    
+
     // Manejar cuando el rostro se sale de los bordes horizontales del video.
     if (realTopLeft_x > canvasWidth) {
       imageWidth = imageWidth - (canvasWidth - realTopLeft_x);
@@ -134,7 +125,7 @@ const ManuelModel = (props) => {
       realTopLeft_x = realTopLeft_x - imageWidth;
     }
 
-    // Calcular la coordenada y real del top left. 
+    // Calcular la coordenada y real del top left.
     // Esta es la misma, ya que solo está invertido horizontalmente y no vertical.
     let realTopLeft_y = start[1];
     let imageHeight = size[1];
@@ -165,21 +156,16 @@ const ManuelModel = (props) => {
       // modelImageSize+1,
       0,
       0,
-      modelImageSize+1,
-      modelImageSize+1,
-
+      modelImageSize + 1,
+      modelImageSize + 1
     );
 
     // Capturar la imagen del rostro, deshaciéndose de los pixeles transparentes del canvas.
     let trimmedCanvas = trimCanvas(canvas2);
 
-    
-    const imageData = trimmedCanvas.getContext("2d").getImageData(
-      0,
-      0,
-      trimmedCanvas.width,
-      trimmedCanvas.height
-    );
+    const imageData = trimmedCanvas
+      .getContext("2d")
+      .getImageData(0, 0, trimmedCanvas.width, trimmedCanvas.height);
 
     // const imageData = canvas2.getContext("2d").getImageData(
     //     0,
@@ -187,42 +173,41 @@ const ManuelModel = (props) => {
     //     canvas2.width,
     //     canvas2.height
     // );
- 
+
     // Convertir la imagen a blanco y negro y tener el array blanco y negro (un solo channel)
     let baw_array = [];
-    for (var i=0;i<imageData.data.length;i+=4) {
+    for (var i = 0; i < imageData.data.length; i += 4) {
+      var avg =
+        (imageData.data[i] + imageData.data[i + 1] + imageData.data[i + 2]) / 3;
+      let baw =
+        0.3 * imageData.data[i] +
+        0.59 * imageData.data[i + 1] +
+        0.11 * imageData.data[i + 2];
 
-        var avg = (imageData.data[i]+imageData.data[i+1]+imageData.data[i+2])/3;
-        let baw = (0.3 * imageData.data[i]) + (0.59 * imageData.data[i+1]) + (0.11 * imageData.data[i+2])
-
-        baw_array.push(baw)
-        imageData.data[i] = avg;
-        imageData.data[i+1] = avg;
-        imageData.data[i+2] = avg;
-    
+      baw_array.push(baw);
+      imageData.data[i] = avg;
+      imageData.data[i + 1] = avg;
+      imageData.data[i + 2] = avg;
     }
-    
+
     // Modificar el canvas con la imagen b&w.
-    trimmedCanvas.getContext("2d").putImageData(imageData, 0, 0, 0, 0, imageData.width, imageData.height);
+    trimmedCanvas
+      .getContext("2d")
+      .putImageData(imageData, 0, 0, 0, 0, imageData.width, imageData.height);
     // Convertir la imagen del canvas en una imagen con un url.
     let url = trimmedCanvas.toDataURL();
     // Setear la imagen para poder visualizarla.
     setCurrentImage(url);
 
     // Crear tensor con la información de la imagen ya en blanco y negro.
-    console.log(JSON.stringify(baw_array));
-    let finalIMG = tf.tensor(baw_array);
-    finalIMG = tf.reshape(finalIMG, [1, modelImageSize, modelImageSize, 1])
-    console.log('i', index);
-    console.log('Shape de la imagen que le vamos a pasar al modelo', finalIMG.shape);
-    let prediction = model2.predict(finalIMG)
-    const value = prediction.dataSync()
-    console.log("PREDICTION", value)
-    console.log("PREDICTION", getEmotion(value))
 
+    let finalIMG = tf.tensor(baw_array);
+    finalIMG = tf.reshape(finalIMG, [1, modelImageSize, modelImageSize, 1]);
+
+    let prediction = model2.predict(finalIMG);
+    const value = prediction.dataSync();
   };
 
-  
   // Checkear si el acceso a la webCam es soportado por el navegador.
   const getUserMediaSupported = () => {
     return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
@@ -230,7 +215,6 @@ const ManuelModel = (props) => {
 
   // Predecir el rostro.
   const predictWebcam = () => {
-
     video.play();
 
     videoWidth = video.videoWidth;
@@ -251,8 +235,7 @@ const ManuelModel = (props) => {
 
     model
       .estimateFaces(video, returnTensors, flipHorizontal, annotateBoxes)
-      .then( (predictions) => {
-
+      .then((predictions) => {
         if (predictions.length > 0) {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           /*
@@ -275,10 +258,7 @@ const ManuelModel = (props) => {
                     ]
                     */
 
-          console.log('predictions length', predictions.length);
-
-          predictions.map( (face_detected, index) => {
-
+          predictions.map((face_detected, index) => {
             if (returnTensors) {
               face_detected.topLeft = face_detected.topLeft.arraySync();
               face_detected.bottomRight = face_detected.bottomRight.arraySync();
@@ -296,23 +276,22 @@ const ManuelModel = (props) => {
 
             // Tomar la imagen.
             snap(start, size, index);
-            
+
             if (annotateBoxes) {
               const landmarks = face_detected.landmarks;
               ctx.fillStyle = "blue";
-              landmarks.map( (mark) => {
+              landmarks.map((mark) => {
                 const x = mark[0];
                 const y = mark[1];
                 ctx.fillRect(x, y, 5, 5);
-              })
+              });
               // for (let j = 0; j < landmarks.length; j++) {
               //   const x = landmarks[j][0];
               //   const y = landmarks[j][1];
               //   ctx.fillRect(x, y, 5, 5);
               // }
             }
-            
-          })
+          });
 
           // for (let i = 0; i < predictions.length; i++) {
 
@@ -333,7 +312,6 @@ const ManuelModel = (props) => {
 
           //   // Tomar la imagen.
           //   snap(start, size, i);
-            
 
           //   if (annotateBoxes) {
           //     const landmarks = predictions[i].landmarks;
@@ -357,7 +335,6 @@ const ManuelModel = (props) => {
 
   // Enable the live webcam view and start classification.
   const enableCam = (event) => {
-
     // Only continue if the COCO-SSD has finished loading.
     if (!model) {
       console.log("no hay modelo");
@@ -402,8 +379,8 @@ const ManuelModel = (props) => {
       console.log("back ready ");
       blazeface
         .load()
-        .then( (loadedModel) => {
-          loadModel()
+        .then((loadedModel) => {
+          loadModel();
           setModel(loadedModel);
           setSectionClass("");
           console.log("modelo cargado");
@@ -419,11 +396,9 @@ const ManuelModel = (props) => {
     setupPage();
     return () => {};
   }, []);
-const loadModel = async () =>{
-
-setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
-console.log('holaaas')
-}
+  const loadModel = async () => {
+    setModel2(await tf_2.loadLayersModel("http://localhost:8887/model.json"));
+  };
 
   // useEffect(() => {
   //   loadModel();
@@ -439,7 +414,7 @@ console.log('holaaas')
           backgroundImage: `url(${currentImage})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          backgroundPosition: "center"
+          backgroundPosition: "center",
         }}
       ></div>
 

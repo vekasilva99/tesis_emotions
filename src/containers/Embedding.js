@@ -5,35 +5,31 @@ import * as tf_2 from "@tensorflow/tfjs";
 import "../styles/pages/__pages-dir.scss";
 import * as tfjsWasm from "@tensorflow/tfjs-backend-wasm";
 import group from "./../assets/group.png";
-import {getEmotion} from "../helpers/getEmotion";
-import {storage} from './../firebase';
+import { getEmotion } from "../helpers/getEmotion";
+import { storage } from "./../firebase";
 
+class scaling extends tf_2.layers.Layer {
+  static className = "scaling";
+  constructor(config) {
+    super(config);
+  }
+}
 
-  class scaling extends tf_2.layers.Layer {
-    static className = 'scaling';
-    constructor(config) {
-      super(config);
-    }
- }
+class l2Norm extends tf_2.layers.Layer {
+  static className = "l2Norm";
+  constructor(config) {
+    super(config);
+  }
+}
 
-    class l2Norm extends tf_2.layers.Layer {
-      static className = 'l2Norm';
-      constructor(config) {
-        super(config);
-      }
-   }
-
-   class L2Norm extends tf_2.layers.Layer {
-    static className = 'L2Norm';
-    constructor(config) {
-      super(config);
-    }
- }
-
-
+class L2Norm extends tf_2.layers.Layer {
+  static className = "L2Norm";
+  constructor(config) {
+    super(config);
+  }
+}
 
 const Embedding = (props) => {
-
   // DEFINICIÓN DE VARIABLES Y CONSTANTES.
 
   // Este es el tamaño de pixeles con el que fue entrenado el modelo.
@@ -44,7 +40,7 @@ const Embedding = (props) => {
   const [currentImage, setCurrentImage] = useState(group);
   // Este es el modelo que reconoce los rostros.
   const blazeface = require("@tensorflow-models/blazeface");
-  const faceLandmarksDetection = require('@tensorflow-models/face-landmarks-detection');
+  const faceLandmarksDetection = require("@tensorflow-models/face-landmarks-detection");
   // Esta variable guarda el valor de la clase para que pueda mostrar elementos de acuerdo a si el modelo se ha cargado o no.
   const [sectionClass, setSectionClass] = useState("invisible");
   // Esta variable es para poder acceder al video.
@@ -52,7 +48,8 @@ const Embedding = (props) => {
   // Guarda el modelo (en este caso, el modelo para el reconocimiento de rostros)
   const [model, setModel] = useState(undefined);
   const [model2, setModel2] = useState(undefined);
-  const [landmarkDetectionModel, setLandmarkDetectionModel] = useState(undefined);
+  const [landmarkDetectionModel, setLandmarkDetectionModel] =
+    useState(undefined);
   // Este es el canvas donde se está dibujando la imagen cortada.
   const canvas2 = document.getElementById("canvas");
   // Variable que define el backend para poder cargar el modelo de blazeface.
@@ -62,19 +59,16 @@ const Embedding = (props) => {
   // Definición de variables que serán utilizadas más adelante.
   let ctx, videoWidth, videoHeight, canvas, context;
 
-
   // const loadTensorflowModel = () => {
   //   const tf = require("@tensorflow/tfjs");
   //   const tfn = require("@tensorflow/tfjs-node");
   //   const handler = tfn.io.fileSystem("./path/to/your/model.json");
   //   const model = await tf.loadModel(handler);
   // }
-  
 
   // Este método sirve para tomar solo la parte del canvas que tiene la imagen
   // Se deshace de todos los pixels tramsparentes.
   const trimCanvas = (c) => {
-
     let ctx = c.getContext("2d"),
       copy = document.createElement("canvas").getContext("2d"),
       pixels = ctx.getImageData(0, 0, c.width, c.height),
@@ -94,11 +88,7 @@ const Embedding = (props) => {
     const cont = 5;
     let aux = 0;
     for (i = 0; i < l; i += 4) {
-
       if (pixels.data[i + 3] !== 0) {
-
-        // console.log('pixel', pixels.data[i + 3]);
-
         x = (i / 4) % c.width;
         y = ~~(i / 4 / c.width);
 
@@ -139,10 +129,9 @@ const Embedding = (props) => {
     // Return trimmed canvas
     return copy.canvas;
   };
- 
+
   // Capturar la imagen del video
   const snap = async (start, size, index) => {
-
     context = canvas2.getContext("2d");
     canvas2.width = videoWidth;
     canvas2.height = videoHeight;
@@ -151,7 +140,7 @@ const Embedding = (props) => {
     let realTopLeft_x = canvas2.width - (start[0] + size[0]);
     let imageWidth = size[0];
     const canvasWidth = canvas2.width;
-    
+
     // Manejar cuando el rostro se sale de los bordes horizontales del video.
     if (realTopLeft_x > canvasWidth) {
       imageWidth = imageWidth - (canvasWidth - realTopLeft_x);
@@ -162,7 +151,7 @@ const Embedding = (props) => {
       realTopLeft_x = realTopLeft_x - imageWidth;
     }
 
-    // Calcular la coordenada y real del top left. 
+    // Calcular la coordenada y real del top left.
     // Esta es la misma, ya que solo está invertido horizontalmente y no vertical.
     let realTopLeft_y = start[1];
     let imageHeight = size[1];
@@ -193,21 +182,16 @@ const Embedding = (props) => {
       // modelImageSize+1,
       0,
       0,
-      modelImageSize+1,
-      modelImageSize+1,
-
+      modelImageSize + 1,
+      modelImageSize + 1
     );
 
     // Capturar la imagen del rostro, deshaciéndose de los pixeles transparentes del canvas.
     let trimmedCanvas = trimCanvas(canvas2);
 
-    
-    const imageData = trimmedCanvas.getContext("2d").getImageData(
-      0,
-      0,
-      trimmedCanvas.width,
-      trimmedCanvas.height
-    );
+    const imageData = trimmedCanvas
+      .getContext("2d")
+      .getImageData(0, 0, trimmedCanvas.width, trimmedCanvas.height);
 
     // const imageData = canvas2.getContext("2d").getImageData(
     //     0,
@@ -215,41 +199,32 @@ const Embedding = (props) => {
     //     canvas2.width,
     //     canvas2.height
     // );
- 
+
     // Convertir la imagen a blanco y negro y tener el array blanco y negro (un solo channel)
     let baw_array = [];
-    for (var i=0;i<imageData.data.length;i+=4) {
-
-
-
-        baw_array.push(imageData.data[i])
-        baw_array.push(imageData.data[i+1])
-        baw_array.push(imageData.data[i+2])
-   
-    
+    for (var i = 0; i < imageData.data.length; i += 4) {
+      baw_array.push(imageData.data[i]);
+      baw_array.push(imageData.data[i + 1]);
+      baw_array.push(imageData.data[i + 2]);
     }
-    
+
     // Modificar el canvas con la imagen b&w.
-    trimmedCanvas.getContext("2d").putImageData(imageData, 0, 0, 0, 0, imageData.width, imageData.height);
+    trimmedCanvas
+      .getContext("2d")
+      .putImageData(imageData, 0, 0, 0, 0, imageData.width, imageData.height);
     // Convertir la imagen del canvas en una imagen con un url.
     let url = trimmedCanvas.toDataURL();
     // Setear la imagen para poder visualizarla.
     setCurrentImage(url);
 
     // Crear tensor con la información de la imagen ya en blanco y negro.
-    console.log(JSON.stringify(baw_array));
-    let finalIMG = tf.tensor(baw_array);
-    finalIMG = tf.reshape(finalIMG, [1, modelImageSize, modelImageSize, 3])
-    console.log('i', index);
-    console.log('Shape de la imagen que le vamos a pasar al modelo', finalIMG.shape);
-    let prediction = model2.predict(finalIMG)
-    const value = prediction.dataSync()
-    console.log("PREDICTION", value)
-    // console.log("PREDICTION", getEmotion(value))
 
+    let finalIMG = tf.tensor(baw_array);
+    finalIMG = tf.reshape(finalIMG, [1, modelImageSize, modelImageSize, 3]);
+    let prediction = model2.predict(finalIMG);
+    const value = prediction.dataSync();
   };
 
-  
   // Checkear si el acceso a la webCam es soportado por el navegador.
   const getUserMediaSupported = () => {
     return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
@@ -258,7 +233,6 @@ const Embedding = (props) => {
   // Predecir el rostro.
 
   const predictWebcamLandmark = () => {
-
     video.play();
 
     videoWidth = video.videoWidth;
@@ -273,9 +247,9 @@ const Embedding = (props) => {
 
     landmarkDetectionModel
       .estimateFaces({
-        input: video
+        input: video,
       })
-      .then( (predictions) => {
+      .then((predictions) => {
         if (predictions.length > 0) {
           /*
           `predictions` is an array of objects describing each detected face, for example:
@@ -307,11 +281,10 @@ const Embedding = (props) => {
             }
           ]
           */
-      
+
           for (let i = 0; i < predictions.length; i++) {
-       
             const keypoints = predictions[i].scaledMesh;
-            
+
             // const resta246 =Math.sqrt(Math.abs(((keypoints[246][0]-keypoints[7][0])^2)+((keypoints[246][1]-keypoints[7][1])^2)))
             // const resta161 =Math.sqrt(Math.abs(((keypoints[161][0]-keypoints[163][0])^2)+((keypoints[161][1]-keypoints[163][1])^2)))
             // const resta160 =Math.sqrt(Math.abs(((keypoints[160][0]-keypoints[144][0])^2)+((keypoints[160][1]-keypoints[144][1])^2)))
@@ -320,17 +293,26 @@ const Embedding = (props) => {
             // const resta157 =Math.sqrt(Math.abs(((keypoints[157][0]-keypoints[154][0])^2)+((keypoints[157][1]-keypoints[154][1])^2)))
             // const resta173 =Math.sqrt(Math.abs(((keypoints[173][0]-keypoints[155][0])^2)+((keypoints[173][1]-keypoints[155][1])^2)))
 
-            const left_eye_1 =Math.abs(keypoints[246][1]-keypoints[7][1])
-            const left_eye_2 =Math.abs(keypoints[161][1]-keypoints[163][1])
-            const left_eye_3 =Math.abs(keypoints[160][1]-keypoints[144][1])
-            const left_eye_4 =Math.abs(keypoints[159][1]-keypoints[145][1])
-            const left_eye_5 =Math.abs(keypoints[158][1]-keypoints[153][1])
-            const left_eye_6 =Math.abs(keypoints[157][1]-keypoints[154][1])
-            const left_eye_7 =Math.abs(keypoints[173][1]-keypoints[155][1])
+            const left_eye_1 = Math.abs(keypoints[246][1] - keypoints[7][1]);
+            const left_eye_2 = Math.abs(keypoints[161][1] - keypoints[163][1]);
+            const left_eye_3 = Math.abs(keypoints[160][1] - keypoints[144][1]);
+            const left_eye_4 = Math.abs(keypoints[159][1] - keypoints[145][1]);
+            const left_eye_5 = Math.abs(keypoints[158][1] - keypoints[153][1]);
+            const left_eye_6 = Math.abs(keypoints[157][1] - keypoints[154][1]);
+            const left_eye_7 = Math.abs(keypoints[173][1] - keypoints[155][1]);
 
             // const left_distance =Math.sqrt(Math.abs(((keypoints[33][0]-keypoints[133][0])^2)+((keypoints[33][1]-keypoints[133][1])^2)+((keypoints[33][2]-keypoints[133][2])^2)))
-            const left_distance =Math.abs(keypoints[33][0]-keypoints[133][0])
-            const left_eye_sum = left_eye_1+left_eye_2+left_eye_3+left_eye_4+left_eye_5+left_eye_6+left_eye_7
+            const left_distance = Math.abs(
+              keypoints[33][0] - keypoints[133][0]
+            );
+            const left_eye_sum =
+              left_eye_1 +
+              left_eye_2 +
+              left_eye_3 +
+              left_eye_4 +
+              left_eye_5 +
+              left_eye_6 +
+              left_eye_7;
 
             // const resta398 =Math.sqrt(Math.abs(((keypoints[398][0]-keypoints[382][0])^2)+((keypoints[398][1]-keypoints[382][1])^2)))
             // const resta384 =Math.sqrt(Math.abs(((keypoints[384][0]-keypoints[381][0])^2)+((keypoints[384][1]-keypoints[381][1])^2)))
@@ -340,15 +322,16 @@ const Embedding = (props) => {
             // const resta388 =Math.sqrt(Math.abs(((keypoints[388][0]-keypoints[390][0])^2)+((keypoints[388][1]-keypoints[390][1])^2)))
             // const resta466 =Math.sqrt(Math.abs(((keypoints[466][0]-keypoints[249][0])^2)+((keypoints[466][1]-keypoints[249][1])^2)))
 
-            const right_eye_1 =Math.abs(keypoints[398][1]-keypoints[382][1])
-            const right_eye_2 =Math.abs(keypoints[384][1]-keypoints[381][1])
-            const right_eye_3 =Math.abs(keypoints[385][1]-keypoints[380][1])
-            const right_eye_4 =Math.abs(keypoints[386][1]-keypoints[374][1])
-            const right_eye_5 =Math.abs(keypoints[387][1]-keypoints[373][1])
-            const right_eye_6 =Math.abs(keypoints[388][1]-keypoints[390][1])
-            const right_eye_7 =Math.abs(keypoints[466][1]-keypoints[249][1])
+            const right_eye_1 = Math.abs(keypoints[398][1] - keypoints[382][1]);
+            const right_eye_2 = Math.abs(keypoints[384][1] - keypoints[381][1]);
+            const right_eye_3 = Math.abs(keypoints[385][1] - keypoints[380][1]);
+            const right_eye_4 = Math.abs(keypoints[386][1] - keypoints[374][1]);
+            const right_eye_5 = Math.abs(keypoints[387][1] - keypoints[373][1]);
+            const right_eye_6 = Math.abs(keypoints[388][1] - keypoints[390][1]);
+            const right_eye_7 = Math.abs(keypoints[466][1] - keypoints[249][1]);
 
             // const right_distance =Math.sqrt(Math.abs(((keypoints[362][0]-keypoints[263][0])^2)+((keypoints[362][1]-keypoints[263][1])^2)+((keypoints[362][2]-keypoints[263][2])^2)))
+<<<<<<< HEAD
             const right_distance = Math.abs(keypoints[362][0]-keypoints[263][0])
             const right_eye_sum = right_eye_1+right_eye_2+right_eye_3+right_eye_4+right_eye_5+right_eye_6+right_eye_7
 
@@ -357,25 +340,33 @@ const Embedding = (props) => {
             console.log('DISTANCIA IZQUIERDO',left_distance.toFixed(2))
             console.log('DISTANCIA DERECHO',right_distance.toFixed(2))
             console.log("----------------------------------------------------")
+=======
+            const right_distance = Math.abs(
+              keypoints[362][0] - keypoints[263][0]
+            );
+            const right_eye_sum =
+              right_eye_1 +
+              right_eye_2 +
+              right_eye_3 +
+              right_eye_4 +
+              right_eye_5 +
+              right_eye_6 +
+              right_eye_7;
+>>>>>>> 2f4effd... Stats
 
             for (let i = 0; i < keypoints.length; i++) {
               const [x, y, z] = keypoints[i];
             }
           }
         }
+      });
 
-      })
-
-      setTimeout(function () {
-        requestAnimationFrame(predictWebcamLandmark);
-      }, 20000);
-
-
-  }
-
+    setTimeout(function () {
+      requestAnimationFrame(predictWebcamLandmark);
+    }, 20000);
+  };
 
   const predictWebcam = () => {
-
     video.play();
 
     videoWidth = video.videoWidth;
@@ -396,8 +387,7 @@ const Embedding = (props) => {
 
     model
       .estimateFaces(video, returnTensors, flipHorizontal, annotateBoxes)
-      .then( (predictions) => {
-
+      .then((predictions) => {
         if (predictions.length > 0) {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           /*
@@ -420,10 +410,7 @@ const Embedding = (props) => {
                     ]
                     */
 
-          console.log('predictions length', predictions.length);
-
-          predictions.map( (face_detected, index) => {
-
+          predictions.map((face_detected, index) => {
             if (returnTensors) {
               face_detected.topLeft = face_detected.topLeft.arraySync();
               face_detected.bottomRight = face_detected.bottomRight.arraySync();
@@ -441,23 +428,22 @@ const Embedding = (props) => {
 
             // Tomar la imagen.
             snap(start, size, index);
-            
+
             if (annotateBoxes) {
               const landmarks = face_detected.landmarks;
               ctx.fillStyle = "blue";
-              landmarks.map( (mark) => {
+              landmarks.map((mark) => {
                 const x = mark[0];
                 const y = mark[1];
                 ctx.fillRect(x, y, 5, 5);
-              })
+              });
               // for (let j = 0; j < landmarks.length; j++) {
               //   const x = landmarks[j][0];
               //   const y = landmarks[j][1];
               //   ctx.fillRect(x, y, 5, 5);
               // }
             }
-            
-          })
+          });
 
           // for (let i = 0; i < predictions.length; i++) {
 
@@ -478,7 +464,6 @@ const Embedding = (props) => {
 
           //   // Tomar la imagen.
           //   snap(start, size, i);
-            
 
           //   if (annotateBoxes) {
           //     const landmarks = predictions[i].landmarks;
@@ -502,7 +487,6 @@ const Embedding = (props) => {
 
   // Enable the live webcam view and start classification.
   const enableCam = (event) => {
-
     // Only continue if the COCO-SSD has finished loading.
     if (!model) {
       console.log("no hay modelo");
@@ -546,44 +530,39 @@ const Embedding = (props) => {
     }
   };
 
-  const loadLandmarkModel = async () =>{
-  
+  const loadLandmarkModel = async () => {
     const model = await faceLandmarksDetection.load(
-      faceLandmarksDetection.SupportedPackages.mediapipeFacemesh);
-  
-      setLandmarkDetectionModel(model)
+      faceLandmarksDetection.SupportedPackages.mediapipeFacemesh
+    );
 
-      console.log('MODELITO', model)
-  }
+    setLandmarkDetectionModel(model);
 
+    console.log("MODELITO", model);
+  };
 
   async function loadBackend() {
-    console.log("entre")
+    console.log("entre");
     await tf.ready();
     return tf.getBackend();
-}
+  }
 
+  const setupPage = async () => {
+    // loadBackend().then((backend) => console.log("Logrado")
+    //  .catch((e) => console.log(`Failed to load backend: ${e}`, true)))
 
-
-  const setupPage = async() => {
-
-  // loadBackend().then((backend) => console.log("Logrado")
-  //  .catch((e) => console.log(`Failed to load backend: ${e}`, true)))
-
-
-   loadBackend().then(async() => {
-      
+    loadBackend().then(async () => {
       console.log("back ready ");
-      let r = await blazeface.load()
-        .then( (loadedModel) => {
-          loadModel()
-          loadLandmarkModel()
+      let r = await blazeface
+        .load()
+        .then((loadedModel) => {
+          loadModel();
+          loadLandmarkModel();
           setModel(loadedModel);
           setSectionClass("");
           console.log("modelo cargado");
         })
         .catch((error) => {
-          console.log("Error",error);
+          console.log("Error", error);
           console.log("no cargo");
         });
     });
@@ -594,18 +573,16 @@ const Embedding = (props) => {
     return () => {};
   }, []);
 
-const loadModel = async () =>{
-  
-  tf_2.serialization.registerClass(scaling);
-  tf_2.serialization.registerClass(l2Norm);
-  tf_2.serialization.registerClass(L2Norm);
+  const loadModel = async () => {
+    tf_2.serialization.registerClass(scaling);
+    tf_2.serialization.registerClass(l2Norm);
+    tf_2.serialization.registerClass(L2Norm);
 
-  // setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
-  console.log('EMPEZANDO')
-  setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS))
-  console.log('TERMINADO')
-
-}
+    // setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
+    console.log("EMPEZANDO");
+    setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
+    console.log("TERMINADO");
+  };
 
   // useEffect(() => {
   //   loadModel();
@@ -621,7 +598,7 @@ const loadModel = async () =>{
           backgroundImage: `url(${currentImage})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          backgroundPosition: "center"
+          backgroundPosition: "center",
         }}
       ></div>
 
@@ -643,21 +620,10 @@ const loadModel = async () =>{
               "-webkit-transform": "scaleX(-1)",
               transform: "scaleX(-1)",
             }}
-            // playsinline
           ></video>
           <canvas id="output"></canvas>
 
-          <canvas
-            id="canvas"
-            // width={modelImageSize}
-            // height={modelImageSize}
-            width="640"
-            height="480"
-            // style={{
-            //   "-webkit-transform": "scaleX(-1)",
-            //   transform: "scaleX(-1)",
-            // }}
-          ></canvas>
+          <canvas id="canvas" width="640" height="480"></canvas>
         </div>
       </div>
     </div>

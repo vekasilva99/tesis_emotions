@@ -10,10 +10,10 @@ const Drawer= ({sideDrawerOpen,drawerToggleClickHandler,color}) => {
     <div className={sideDrawerOpen ? "drawer-container drawer-visible" :"drawer-container"} style={{background:color ? color:""}}>
       <div className="drawer-close-container"><VscClose className={color ? "close-icon green":"close-icon"} onClick={drawerToggleClickHandler}/></div>
       <div className="navlinks-container">
-      <NavLink to='/home' className={color ? "navlink green":"navlink"}>Home</NavLink>
-      <NavLink to='/home' className={color ? "navlink green":"navlink"}>Sign In</NavLink>
-      <NavLink to='/home' className={color ? "navlink green":"navlink"}>Sign Up</NavLink>
-      <NavLink to='/home' className={color ? "navlink green":"navlink"}>Join us</NavLink>
+      <NavLink to='/' className={color ? "navlink green":"navlink"}>Home</NavLink>
+      <NavLink to='/' className={color ? "navlink green":"navlink"}>Sign In</NavLink>
+      <NavLink to='/' className={color ? "navlink green":"navlink"}>Sign Up</NavLink>
+      <NavLink to='/' className={color ? "navlink green":"navlink"}>Join us</NavLink>
       </div>
       
 

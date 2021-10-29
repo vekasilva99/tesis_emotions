@@ -7,7 +7,8 @@ ADD_VIDEO_SUCCESS,
 ADD_VIDEO_REQUEST,
 FETCH_EMOTIONS_ERROR,
 FETCH_EMOTIONS_REQUEST,
-FETCH_EMOTIONS_SUCCESS
+FETCH_EMOTIONS_SUCCESS,
+LOADING
 } from "../constants/ActionTypes";
 
 export const fetchEmotionsRequest = (payload) => {
@@ -69,6 +70,13 @@ export const addVideoSuccess= (payload) => {
 export const addVideoError = (payload) => {
   return {
     type: ADD_VIDEO_ERROR,
+    payload: payload,
+  };
+};
+
+export const loading = (payload) => {
+  return {
+    type: LOADING,
     payload: payload,
   };
 };

@@ -5,6 +5,7 @@ import {
   SIGN_IN_COMPANY_REQUEST,
   SIGN_IN_ADMIN_REQUEST,
   FETCH_USER_REQUEST,
+  SIGN_OUT,
 } from "../constants/ActionTypes";
 import {
   signInAdminError,
@@ -15,13 +16,13 @@ import {
   signInUserSuccess,
   fetchUserError,
   fetchUserSuccess,
+  signOutSuccess,
 } from "../actions/SignIn";
 import axios from "axios";
 
 // import API_URL from '../constants/ApiURL';
 
 const signInUserRequest = async (payload) => {
-  console.log("UPDATE RESUME", payload);
   const options = {
     url: "http://localhost:5000/login/user",
     method: "POST",
@@ -31,11 +32,9 @@ const signInUserRequest = async (payload) => {
 
   let res = await axios(options)
     .then((resp) => {
-      console.log("RESPUESTA", resp);
       return resp;
     })
     .catch((error) => {
-      console.log("ERROR", error.response.status);
       return error.response.status;
     });
 
@@ -43,28 +42,24 @@ const signInUserRequest = async (payload) => {
 };
 
 const fetchUserRequest = async (payload) => {
-  console.log("UPDATE RESUME", payload);
   const options = {
     url: "http://localhost:5000/account",
     method: "GET",
-    headers: { 'Authorization': `Bearer ${payload.payload}` },
+    headers: { Authorization: `Bearer ${payload.payload}` },
   };
 
   let res = await axios(options)
     .then((resp) => {
-      console.log("RESPUESTA", resp);
       return resp;
     })
     .catch((error) => {
-      console.log("ERROR", error.response.status);
-      return error.response.status
+      return error.response.status;
     });
 
   return res;
 };
 
 const signInCompanyRequest = async (payload) => {
-  console.log("UPDATE RESUME", payload);
   const options = {
     url: "http://localhost:5000/login/company",
     method: "POST",
@@ -74,15 +69,20 @@ const signInCompanyRequest = async (payload) => {
 
   let res = await axios(options)
     .then((resp) => {
-      console.log("RESPUESTA", resp);
-      return resp;
+      return { status: 200, resp: resp };
     })
     .catch((error) => {
-      console.log("ERROR", error.response.status);
-      return error.response.status;
+      return { status: error.response.status };
     });
 
   return res;
+};
+
+const signOutRequest = async (payload) => {
+  window.localStorage.removeItem("token");
+  window.localStorage.removeItem("_id");
+
+  return "res";
 };
 
 function* signInUser(payload) {
@@ -90,6 +90,7 @@ function* signInUser(payload) {
     const res = yield call(signInUserRequest, payload);
     if (res.data) {
       yield put(signInUserSuccess(res));
+      payload.payload.history.push("/homeCompany");
     } else {
       let error = { emailError: null, passwordError: null };
       if (res === 404) {
@@ -136,24 +137,25 @@ function* fetchUser(payload) {
 function* signInCompany(payload) {
   try {
     const res = yield call(signInCompanyRequest, payload);
-    if (res.data) {
-      yield put(signInCompanySuccess(res));
+    if (res.status === 200) {
+      yield put(signInCompanySuccess(res.resp));
+      payload.payload.history();
     } else {
       let error = { emailError: null, passwordError: null };
-      if (res === 404) {
+      if (res.status === 404) {
         error = {
           emailError: "The email or password you have provided is incorrect.",
           passwordError:
             "The email or password you have provided is incorrect.",
         };
-      } else if (res === 400) {
+      } else if (res.status === 400) {
         error = {
           emailError:
-          'This company has been inactivated by the admins. You no longer have access to our system. Check your email for more information.',
+            "This company has been inactivated by the admins. You no longer have access to our system. Check your email for more information.",
           passwordError:
-          'This company has been inactivated by the admins. You no longer have access to our system. Check your email for more information.',
+            "This company has been inactivated by the admins. You no longer have access to our system. Check your email for more information.",
         };
-      } else if (res === 500) {
+      } else if (res.status === 500) {
         error = { emailError: "Server Error", passwordError: "Server Error" };
       } else {
         error = {
@@ -168,10 +170,20 @@ function* signInCompany(payload) {
   }
 }
 
+const delay = (time) => new Promise((resolve) => setTimeout(resolve, time));
+function* signOut(payload) {
+  const res = yield call(signOutRequest, payload);
+  yield call(delay, 2000);
+
+  yield put(signOutSuccess());
+  payload.payload.history.push("/home");
+}
+
 export default function* rootSaga() {
   yield all([
     takeEvery(SIGN_IN_USER_REQUEST, signInUser),
     takeEvery(FETCH_USER_REQUEST, fetchUser),
     takeEvery(SIGN_IN_COMPANY_REQUEST, signInCompany),
+    takeEvery(SIGN_OUT, signOut),
   ]);
 }

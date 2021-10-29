@@ -114,6 +114,26 @@ display:flex;
     //   left: 0;
   }
 
+  .sign-out-container{
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    cursor:pointer;
+   
+  }
+
+  .sign-out-container{
+    font-family: 'Exo-Light';
+    text-align: right;
+    font-size: 12px;
+    transition: all 0.5s ease-in-out;
+    &:hover{
+      color:#A9B18F;
+      font-size: 14px;
+    }
+  }
+
+
   .MuiCircularProgress-colorPrimary{
     color: #A9B18F !important;
   }
@@ -121,7 +141,7 @@ display:flex;
   .full-page-loader{
     width: 100vw;
     height: 100vh;
-    position: absolute;
+    position: fixed;
     z-index: 200000000;
     background:rgba(203, 128, 125, 0.9);
     top: 0;
@@ -138,4 +158,7 @@ display:flex;
     visibility: hidden;
     transition: all 2s;
 
+  }
+  .no-background{
+    background: transparent;
   }

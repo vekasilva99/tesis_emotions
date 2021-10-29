@@ -19,7 +19,6 @@ import { storage } from "../firebase";
 // import API_URL from '../constants/ApiURL';
 
 const signUpUserRequest = async (payload) => {
-  console.log("UPDATE RESUME", payload);
   const options = {
     url: "http://localhost:5000/users/register",
     method: "POST",
@@ -29,11 +28,9 @@ const signUpUserRequest = async (payload) => {
 
   let res = await axios(options)
     .then((resp) => {
-      console.log("RESPUESTA", resp);
       return resp;
     })
     .catch((error) => {
-      console.log("ERROR", error.response.status);
       return error.response.status;
     });
 
@@ -41,7 +38,6 @@ const signUpUserRequest = async (payload) => {
 };
 
 const signUpCompanyRequest = async (payload) => {
-  console.log("UPDATE RESUME", payload);
   const options = {
     url: "http://localhost:5000/companies/register",
     method: "POST",
@@ -58,39 +54,32 @@ const signUpCompanyRequest = async (payload) => {
 
   let res = await axios(options)
     .then((resp) => {
-      console.log("RESPUESTA", resp);
-
-      storage.ref(`companies/${resp.data.data._id}`).put(payload.payload.mainImg)
-          .then( () => {
-              storage.ref('companies')
-              .child(resp.data.data._id)
-              .getDownloadURL()
-              .then( async url => {
-                  console.log(url);
-                  const options2 = {
-                    url: `http://localhost:5000/companies/register/${resp.data.data._id}/upload/image`,
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    data: {
-    
-                      mainImg: url,
-                    },
-                  };
-                  let res2 = await axios(options2).then((resp2)=>{
-                    console.log("IMAGE", resp2)
-                  }) .catch( err => {
-                    console.log('Error: ', err);
-                })
-
-              })
-              .catch( err => {
-                  console.log('image posted but unable to get the url. Error: ', err);
-              })
-          })
+      storage
+        .ref(`companies/${resp.data.data._id}`)
+        .put(payload.payload.mainImg)
+        .then(() => {
+          storage
+            .ref("companies")
+            .child(resp.data.data._id)
+            .getDownloadURL()
+            .then(async (url) => {
+              const options2 = {
+                url: `http://localhost:5000/companies/register/${resp.data.data._id}/upload/image`,
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                data: {
+                  mainImg: url,
+                },
+              };
+              let res2 = await axios(options2)
+                .then((resp2) => {})
+                .catch((err) => {});
+            })
+            .catch((err) => {});
+        });
       return resp;
     })
     .catch((error) => {
-      console.log("ERROR", error.response.status);
       return error.response.status;
     });
 
