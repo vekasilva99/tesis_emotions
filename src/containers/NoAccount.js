@@ -47,8 +47,13 @@ const NoAccount = (props) => {
 
   const [inputFields, setInputFields] = useState([
     {
+<<<<<<< HEAD
       placeholder: "Enter your age",
       name: "age",
+=======
+      placeholder: "Ingrese su edad",
+      name: "edad",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       value: "",
       type: "number",
       error: "",
@@ -57,12 +62,18 @@ const NoAccount = (props) => {
 
   const [selectFields, setSelectFields] = useState([
     {
+<<<<<<< HEAD
       placeholder: "Choose your gender",
       name: "gender",
+=======
+      placeholder: "Seleccione su género",
+      name: "género",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       selected: "",
       type: "text",
       error: "",
       options: [
+<<<<<<< HEAD
         { value: "Male", name: "Male" },
         { value: "Female", name: "Female" },
         { value: "Other", name: "Other" },
@@ -70,6 +81,15 @@ const NoAccount = (props) => {
     },
     {
       placeholder: "Choose your country",
+=======
+        { value: "Masculino", name: "Masculino" },
+        { value: "Femenino", name: "Femenino" },
+        { value: "Otro", name: "Otro" },
+      ],
+    },
+    {
+      placeholder: "Seleccione su país",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       name: "country",
       selected: "",
       type: "text",
@@ -85,16 +105,28 @@ const NoAccount = (props) => {
     let error = false;
 
     if (inputFields[0].value === "") {
+<<<<<<< HEAD
       setError(true, 0, "Required Field");
       emptyField = true;
     }
     if (selectFields[0].selected === "") {
       setError(false, 0, "Required Field");
+=======
+      setError(true, 0, "Campo requerido");
+      emptyField = true;
+    }
+    if (selectFields[0].selected === "") {
+      setError(false, 0, "Campo requerido");
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 
       emptyField = true;
     }
     if (selectFields[1].selected === "") {
+<<<<<<< HEAD
       setError(false, 1, "Required Field");
+=======
+      setError(false, 1, "Campo requerido");
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       emptyField = true;
     }
 
@@ -146,7 +178,11 @@ const NoAccount = (props) => {
         </div>
         <Button event={submit} title={"Continue"} position={"left"} top />
         <div className="link-button" style={{ bottom: "16vh" }}>
+<<<<<<< HEAD
           <h3>Already have an account? </h3>
+=======
+          <h3>Ya tiene una cuenta? </h3>
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           <h4
             onClick={() => {
               history.push({
@@ -160,7 +196,11 @@ const NoAccount = (props) => {
             }}
           >
             {" "}
+<<<<<<< HEAD
             Sign In Here
+=======
+            Inicia Sesión aqui
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           </h4>
         </div>
         {/* <div className="link-button2">
@@ -172,4 +212,8 @@ const NoAccount = (props) => {
   );
 };
 
+<<<<<<< HEAD
 export default NoAccount;
+=======
+export default NoAccount;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

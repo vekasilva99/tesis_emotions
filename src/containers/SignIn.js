@@ -42,15 +42,24 @@ const SignIn = (props) => {
 
   const [inputFields, setInputFields] = useState([
     {
+<<<<<<< HEAD
       placeholder: "Enter your email",
+=======
+      placeholder: "Ingrese su email",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       name: "email",
       value: "",
       error: !errors ? "" : errors.emailError ? errors.emailError : "",
       type: "email",
     },
     {
+<<<<<<< HEAD
       placeholder: "Enter your password",
       name: "password",
+=======
+      placeholder: "Ingrese su contraseña",
+      name: "contraseña",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       value: "",
       error:
         !errors === {} ? "" : errors.passwordError ? errors.passwordError : "",
@@ -71,6 +80,7 @@ const SignIn = (props) => {
     let emptyField = false;
     let error = false;
     if (inputFields[0].value === "") {
+<<<<<<< HEAD
       setError(true, 0, "Required Field");
       emptyField = true;
     } 
@@ -80,6 +90,17 @@ const SignIn = (props) => {
     }
     if (!validator.isEmail(inputFields[0].value)) {
       setError(true, 0, "Invalid Email");
+=======
+      setError(true, 0, "Campo requerido");
+      emptyField = true;
+    } 
+    if (inputFields[1].value === "") {
+      setError(true, 1, "Campo requerido");
+      emptyField = true;
+    }
+    if (!validator.isEmail(inputFields[0].value)) {
+      setError(true, 0, "Email invalido");
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       error = true;
     }
     if (!emptyField && !error) {
@@ -112,27 +133,45 @@ const SignIn = (props) => {
             />
           ))}
         </div>
+<<<<<<< HEAD
         <Button event={signIn} title={"Sign In"} position={"left"} top />
 
         <div className="link-button" style={{ bottom: "16vh" }}>
           <h3>Want to create an account? </h3>
+=======
+        <Button event={signIn} title={"Iniciar Sesión"} position={"left"} top />
+
+        <div className="link-button" style={{ bottom: "16vh" }}>
+          <h3>Desea crear una cuenta? </h3>
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           <h4
             onClick={() => {
               history.push("/signup");
             }}
           >
             {" "}
+<<<<<<< HEAD
             Sign Up Here
+=======
+            Registrese Aqui
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           </h4>
         </div>
         {location.state ?
         <>
         {location.state.videoId && location.state.companyId ? (
           <div className="link-button2" style={{ bottom: "12vh" }}>
+<<<<<<< HEAD
             <h3>Wanto to watch video without an account? </h3>
             <h4   onClick={() => {
               history.push(`/watchvideo/${location.state.companyId}/${location.state.videoId}`);
             }}>Click Here</h4>
+=======
+            <h3>Desea ver sin crear una cuenta? </h3>
+            <h4   onClick={() => {
+              history.push(`/watchvideo/${location.state.companyId}/${location.state.videoId}`);
+            }}>Click Aqui</h4>
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           </div>
         ) : null}
         </>
@@ -142,4 +181,8 @@ const SignIn = (props) => {
   );
 };
 
+<<<<<<< HEAD
 export default SignIn;
+=======
+export default SignIn;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

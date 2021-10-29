@@ -248,14 +248,23 @@ function* addVideo(payload) {
     const res = yield call(addNewVideoRequest, payload);
     if (res === 200) {
       yield put(
+<<<<<<< HEAD
         addVideoSuccess({ success: "The video has been successfully added." })
       );
       yield put(fetchVideosRequest(payload.payload.companyID))
+=======
+        addVideoSuccess({ success: "El video se ha agregado correctamente." })
+      );
+
+      yield put(fetchVideosRequest(payload.payload.companyID))
+      
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
     } else {
       let error = { emailError: null };
       if (res === 400) {
         error = {
           error:
+<<<<<<< HEAD
             "There's already another video called like this one. Please, enter another name.",
         };
       } else if (res === 500) {
@@ -263,6 +272,17 @@ function* addVideo(payload) {
       } else {
         error = {
           error: "Oops. Something went wrong.",
+=======
+            "Ya hay otro video llamado así. Por favor, ingrese otro nombre.",
+        };
+      } else if (res === 500) {
+        error = { emailError: "Error de Servidor"
+ };
+      } else {
+        error = {
+          error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       }
       yield put(addVideoError(error));
@@ -279,7 +299,11 @@ function* addEmotion(payload) {
       yield put(fetchEmotionsRequest());
       yield put(
         addEmotionSuccess({
+<<<<<<< HEAD
           success: "The emotion has been successfully added.",
+=======
+          success: "La emoción se ha agregado con éxito.",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         })
       );
 
@@ -288,6 +312,7 @@ function* addEmotion(payload) {
       if (res.status === 400) {
         error = {
           error:
+<<<<<<< HEAD
             "There's already another emotion called like this one. Please, enter another name.",
         };
       } else if (res.status === 500) {
@@ -295,6 +320,17 @@ function* addEmotion(payload) {
       } else {
         error = {
           error: "Oops. Something went wrong.",
+=======
+            "Ya hay otra emoción llamada así. Por favor, ingrese otro nombre.",
+        };
+      } else if (res.status === 500) {
+        error = { emailError: "Error de Servidor"
+ };
+      } else {
+        error = {
+          error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       }
       yield put(addEmotionError(error));
@@ -314,6 +350,7 @@ function* fetchEmotions(payload) {
       if (res.status === 400) {
         error = {
           error:
+<<<<<<< HEAD
             "There's already another emotion called like this one. Please, enter another name.",
         };
       } else if (res.status === 500) {
@@ -321,6 +358,17 @@ function* fetchEmotions(payload) {
       } else {
         error = {
           error: "Oops. Something went wrong.",
+=======
+            "Ya hay otra emoción llamada así. Por favor, ingrese otro nombre.",
+        };
+      } else if (res.status === 500) {
+        error = { emailError: "Error de Servidor"
+ };
+      } else {
+        error = {
+          error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       }
       yield put(fetchEmotionsError(error));
@@ -338,10 +386,19 @@ function* disableVideo(payload) {
     } else {
       let error = { emailError: null };
       if (res.status === 500) {
+<<<<<<< HEAD
         error = { emailError: "Server Error" };
       } else {
         error = {
           error: "Oops. Something went wrong.",
+=======
+        error = { emailError: "Error de Servidor"
+ };
+      } else {
+        error = {
+          error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       }
       yield put(fetchEmotionsError(error));
@@ -358,10 +415,19 @@ function* updateImage(payload) {
     } else {
       let error = { emailError: null };
       if (res.status === 500) {
+<<<<<<< HEAD
         error = { emailError: "Server Error" };
       } else {
         error = {
           error: "Oops. Something went wrong.",
+=======
+        error = { emailError: "Error de Servidor"
+ };
+      } else {
+        error = {
+          error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       }
       yield put(updateImageError(error));
@@ -382,10 +448,19 @@ function* updateEmotion(payload) {
     } else {
       let error = { emailError: null };
       if (res.status === 500) {
+<<<<<<< HEAD
         error = { emailError: "Server Error" };
       } else {
         error = {
           error: "Oops. Something went wrong.",
+=======
+        error = { emailError: "Error de Servidor"
+ };
+      } else {
+        error = {
+          error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       }
       yield put(updateEmotionError(error));

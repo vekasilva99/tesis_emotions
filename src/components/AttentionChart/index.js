@@ -9,14 +9,22 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 const AttentionChart = ({}) => {
 const dispatch = useDispatch();
 const { video } = useParams();
+<<<<<<< HEAD
 const { attention,loaderStatistics } = useSelector((state) => ({
+=======
+const { attention,loaderStatistics,loaderAttention } = useSelector((state) => ({
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   ...state.stats,
 }));
 const [lineData, setLineData] = useState({
   labels: [],
   datasets: [
     {
+<<<<<<< HEAD
       label: 'High Level of Attention',
+=======
+      label: 'Alto Nivel de Atención',
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       fill: false,
       lineTension: 0.3,
       backgroundColor: 'rgba(203, 128, 125, 0.4)',
@@ -37,7 +45,11 @@ const [lineData, setLineData] = useState({
       data: [],
     },
     {
+<<<<<<< HEAD
       label: 'Low Level of Attention',
+=======
+      label: 'Bajo Nivel de Atención',
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       fill: false,
       lineTension: 0.3,
       backgroundColor: 'rgba(169, 177, 143, 0.4)',
@@ -98,7 +110,11 @@ const lineOptions = {
   {Object.keys(attention).length>0 &&
 <Line data={lineData} options={lineOptions} width={null} height={null} />
 }
+<<<<<<< HEAD
 {Object.keys(attention).length === 0 && loaderStatistics &&
+=======
+{Object.keys(attention).length === 0 && loaderAttention &&
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         <CircularProgress size={100} thickness={5} />
        }
 </div>

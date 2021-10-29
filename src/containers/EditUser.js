@@ -61,35 +61,55 @@ const EditUser = (props) => {
 
   const [inputFields, setInputFields] = useState([
     {
+<<<<<<< HEAD
       placeholder: "Enter your full name",
+=======
+      placeholder: "Ingrese su nombre",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       name: "full_name",
       value: full_name,
       error: "",
       type: "text",
     },
     {
+<<<<<<< HEAD
       placeholder: "Enter your email",
+=======
+      placeholder: "Ingrese su email",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       name: "email",
       value: email,
       error: "",
       type: "email",
     },
     {
+<<<<<<< HEAD
       placeholder: "Enter your password",
+=======
+      placeholder: "Ingrese su contraseña",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       name: "password",
       value: "",
       error: "",
       type: "password",
     },
     {
+<<<<<<< HEAD
       placeholder: "Enter your new password",
+=======
+      placeholder: "Ingrese su nueva contraseña",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       name: "new password",
       value: "",
       error: "",
       type: "password",
     },
     {
+<<<<<<< HEAD
       placeholder: "Confirm your new password",
+=======
+      placeholder: "Confirme su nueva contraseña",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       name: "confirm new password",
       value: "",
       error: "",
@@ -101,12 +121,18 @@ const EditUser = (props) => {
 
   const [selectFields, setSelectFields] = useState([
     {
+<<<<<<< HEAD
       placeholder: "Choose your gender",
       name: "gender",
+=======
+      placeholder: "Selecciona tu genero",
+      name: "genero",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       error: "",
       selected: gender,
       type: "text",
       options: [
+<<<<<<< HEAD
         { value: "Male", name: "Male" },
         { value: "Female", name: "Female" },
         { value: "Other", name: "Other" },
@@ -115,6 +141,16 @@ const EditUser = (props) => {
     {
       placeholder: "Choose your country",
       name: "country",
+=======
+        { value: "Masculino", name: "Masculino" },
+        { value: "Femenino", name: "Femenino" },
+        { value: "Otro", name: "Otro" },
+      ],
+    },
+    {
+      placeholder: "Selecciona tu país",
+      name: "País",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       error: "",
       selected:country,
       type: "text",
@@ -149,33 +185,57 @@ const EditUser = (props) => {
 
     let error = false;
     if (inputFields[0].value === "") {
+<<<<<<< HEAD
       setError(true, 0, "Required Field");
+=======
+      setError(true, 0, "Campo requerido");
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       emptyField = true;
     }
     
     if (inputFields[1].value === "") {
+<<<<<<< HEAD
       setError(true, 1, "Required Field");
+=======
+      setError(true, 1, "Campo requerido");
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       emptyField = true;
     }
 
     if (selectFields[0].selected === "") {
+<<<<<<< HEAD
       setError(false, 0, "Required Field");
       emptyField = true;
     }
     if (selectFields[1].selected === "") {
       setError(false, 1, "Required Field");
+=======
+      setError(false, 0, "Campo requerido");
+      emptyField = true;
+    }
+    if (selectFields[1].selected === "") {
+      setError(false, 1, "Campo requerido");
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       emptyField = true;
     }
     if (
       moment(birthdateDate).format("LL") === moment(new Date()).format("LL") ||
       birthdateDate >= new Date()
     ) {
+<<<<<<< HEAD
       setBirthdateError("Required Field");
+=======
+      setBirthdateError("Campo requerido");
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       emptyField = true;
     }
 
     if (!validator.isEmail(inputFields[1].value)) {
+<<<<<<< HEAD
       setError(true, 1, "Invalid Email");
+=======
+      setError(true, 1, "Email invalido");
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       error = true;
     }
 
@@ -224,6 +284,7 @@ const EditUser = (props) => {
     let error = false;
 
     if (inputFields[2].value === "") {
+<<<<<<< HEAD
       setError(true, 2, "Required Field");
       emptyField = true;
     }
@@ -233,17 +294,37 @@ const EditUser = (props) => {
     }
     if (inputFields[4].value === "") {
       setError(true, 4, "Required Field");
+=======
+      setError(true, 2, "Campo requerido");
+      emptyField = true;
+    }
+    if (inputFields[3].value === "") {
+      setError(true, 3, "Campo requerido");
+      emptyField = true;
+    }
+    if (inputFields[4].value === "") {
+      setError(true, 4, "Campo requerido");
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       emptyField = true;
     }
 
 
     if (!validator.isStrongPassword(inputFields[3].value)) {
+<<<<<<< HEAD
       setError(true, 2, "Weak Password");
       error = true;
     }
     if (inputFields[3].value != inputFields[4].value) {
       setError(true, 3, "Passwords do not match");
       setError(true, 4, "Passwords do not match");
+=======
+      setError(true, 2, "Contraseña debil");
+      error = true;
+    }
+    if (inputFields[3].value != inputFields[4].value) {
+      setError(true, 3, "Contraseñas no concuerdan");
+      setError(true, 4, "Contraseñas no concuerdan");
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       error = true;
     }
 
@@ -264,7 +345,11 @@ const EditUser = (props) => {
       {/* <SuccessPopUp defaultInputs={defaultInputs} inputs={inputFields} /> */}
       <div className={open ? "add-company-image" : "add-company-image-hidden"}>
         <div className="add-company-image-container big">
+<<<<<<< HEAD
           <h4>Change Password</h4>
+=======
+          <h4>Cambio de Contraseña</h4>
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           <div className="input-container-column small" >
     
     {inputFields.slice(2,5 ).map((input, index) => (
@@ -309,7 +394,11 @@ const EditUser = (props) => {
           className="subtitle"
           style={{ marginTop: "0px", marginBottom: "30px" }}
         >
+<<<<<<< HEAD
           Profile.
+=======
+          Perfil.
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         </h1>
         <div className="input-container-column">
     
@@ -350,12 +439,20 @@ const EditUser = (props) => {
             onChange={(date) => setBirthdate(date)}
           />
         </div>
+<<<<<<< HEAD
         <h5 className="change-password" onClick={()=>{setOpen(true)}}>Change Password?</h5>
+=======
+        <h5 className="change-password" onClick={()=>{setOpen(true)}}>Cambiar Contraseña?</h5>
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         <Button
           event={() => {
             signUp();
           }}
+<<<<<<< HEAD
           title={"Update Profile."}
+=======
+          title={"Actualizar."}
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           position={"right"}
         />
       </div>
@@ -363,4 +460,8 @@ const EditUser = (props) => {
   );
 };
 
+<<<<<<< HEAD
 export default EditUser;
+=======
+export default EditUser;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

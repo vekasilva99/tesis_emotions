@@ -95,6 +95,7 @@ function* signUpUser(payload) {
       let error = { emailError: null };
       if (res === 400) {
         error = {
+<<<<<<< HEAD
           emailError: "There is already a user registered with this email.",
         };
       } else if (res === 500) {
@@ -102,6 +103,17 @@ function* signUpUser(payload) {
       } else {
         error = {
           emailError: "Oops. Something went wrong.",
+=======
+          emailError: "Ya hay un usuario registrado con este correo electrónico.",
+        };
+      } else if (res === 500) {
+        error = { emailError: "Error de Servidor"
+ };
+      } else {
+        error = {
+          emailError: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       }
       yield put(signUpUserError(error));
@@ -120,6 +132,7 @@ function* signUpCompany(payload) {
       let error = { emailError: null };
       if (res === 400) {
         error = {
+<<<<<<< HEAD
           emailError: "There is already a company registered with this email.",
         };
       } else if (res === 500) {
@@ -127,6 +140,17 @@ function* signUpCompany(payload) {
       } else {
         error = {
           emailError: "Oops. Something went wrong.",
+=======
+          emailError: "Ya hay una compañia registrada con este correo electrónico.",
+        };
+      } else if (res === 500) {
+        error = { emailError: "Error de Servidor"
+ };
+      } else {
+        error = {
+          emailError: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       }
       yield put(signUpCompanyError(error));

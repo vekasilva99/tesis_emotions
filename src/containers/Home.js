@@ -85,7 +85,11 @@ return radious
     <>
       <div className="home-big-circle">
         <circular-text
+<<<<<<< HEAD
           text="Full service creative agency  Full service creative agency   "
+=======
+          text="Agencia creativa de servicio completo  Agencia creativa de servicio completo "
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           radius={getRadious()}
         ></circular-text>
       </div>
@@ -99,8 +103,13 @@ return radious
       <Circle />
       <div className={visible ? companies.length>0 ? "app-home":"app-home no-companies" : companies.length>0 ? "app-home onload":"app-home onload no-companies"}>
         <div className="section-home" >
+<<<<<<< HEAD
           <h2 className="home-title-vertical">Full service creative agency</h2>
           <h1 className="home-title">We build brands of the future</h1>
+=======
+          <h2 className="home-title-vertical">Agencia creativa de servicio completo</h2>
+          <h1 className="home-title">Construimos Marcas del Futuro</h1>
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         </div>
         <div
           className="section-home"
@@ -115,12 +124,17 @@ return radious
             <div className="medium-circle-center"></div>
             <div className="circular-cont">
               <circular-text
+<<<<<<< HEAD
                 text="Full service creative agency    "
+=======
+                text="Agencia creativa de servicio completo "
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
                 radius={getRadiousSmall()}
               ></circular-text>
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
+<<<<<<< HEAD
             <h1 className="subtitle-home">What we do.</h1>
             <h2 className="paragraph-home">
               Full service creative agency Full service creative agency Full
@@ -130,6 +144,17 @@ return radious
               Full service creative agency Full service creative agency. Full
               service creative agency Full service creative agency Full service
               creative agency.
+=======
+            <h1 className="subtitle-home">¿Qué hacemos?</h1>
+            <h2 className="paragraph-home">
+              Proporcionamos información relevante a 
+              empresas acerca de la recepción de sus comerciales
+               con el uso de Inteligencia Artificial. A través de nuestra
+                plataforma, usuarios de todo el mundo podrán visualizar las
+                 propagandas disponibles, y mediante sus dispositivos captaremos
+                 las expresiones faciales que realicen a lo largo de la transmisión, 
+                 con el fin de que cada empresa pueda evaluar lo que sus comerciales causan en los usuarios.
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
             </h2>
           </div>
         </div>
@@ -143,7 +168,11 @@ return radious
           }}
         >
           
+<<<<<<< HEAD
           <h1 className="subtitle2-home">Our Brands.</h1>
+=======
+          <h1 className="subtitle2-home">Nuestras Marcas.</h1>
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           <div className="brands-container-home">
             {companies
               .filter((comp) => {
@@ -160,4 +189,8 @@ return radious
   );
 };
 
+<<<<<<< HEAD
 export default Home;
+=======
+export default Home;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

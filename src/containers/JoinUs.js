@@ -50,29 +50,48 @@ const JoinUs = (props) => {
 
   const [inputFields, setInputFields] = useState([
     {
+<<<<<<< HEAD
       placeholder: "Enter company name",
       name: "company name",
+=======
+      placeholder: "Ingrese nombre",
+      name: "nombre de la compañia",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       value: "",
       error: "",
       type: "text",
     },
     {
+<<<<<<< HEAD
       placeholder: "Enter email",
+=======
+      placeholder: "Ingrese email",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       name: "email",
       value: "",
       error: "",
       type: "email",
     },
     {
+<<<<<<< HEAD
       placeholder: "Enter password",
       name: "password",
+=======
+      placeholder: "Ingrese contraseña",
+      name: "contraseña",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       value: "",
       error: "",
       type: "password",
     },
     {
+<<<<<<< HEAD
       placeholder: "Confirm your password",
       name: "confirm password",
+=======
+      placeholder: "Confirme contraseña",
+      name: "Confirme contraseña",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       value: "",
       error: "",
       type: "password",
@@ -92,6 +111,7 @@ const JoinUs = (props) => {
     let emptyField = false;
     let error = false;
     if (inputFields[0].value === "") {
+<<<<<<< HEAD
       setError(true, 0, "Required Field");
 
       emptyField = true;
@@ -104,10 +124,25 @@ const JoinUs = (props) => {
       emptyField = true;
     } else if (inputFields[3].value === "") {
       setError(true, 3, "Required Field");
+=======
+      setError(true, 0, "Campo requerido");
+
+      emptyField = true;
+    } else if (inputFields[1].value === "") {
+      setError(true, 1, "Campo requerido");
+
+      emptyField = true;
+    } else if (inputFields[2].value === "") {
+      setError(true, 2, "Campo requerido");
+      emptyField = true;
+    } else if (inputFields[3].value === "") {
+      setError(true, 3, "Campo requerido");
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       emptyField = true;
     }
 
     if (!validator.isEmail(inputFields[1].value)) {
+<<<<<<< HEAD
       setError(true, 1, "Invalid Email");
       error = true;
     }
@@ -118,6 +153,18 @@ const JoinUs = (props) => {
     if (inputFields[2].value != inputFields[3].value) {
       setError(true, 2, "Passwords do not match");
       setError(true, 3, "Passwords do not match");
+=======
+      setError(true, 1, "Email invalido");
+      error = true;
+    }
+    if (!validator.isStrongPassword(inputFields[2].value)) {
+      setError(true, 2, "Contraseña Debil");
+      error = true;
+    }
+    if (inputFields[2].value != inputFields[3].value) {
+      setError(true, 2, "Contraseñas no concuerdan");
+      setError(true, 3, "Contraseñas no concuerdan");
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       error = true;
     }
     if (image == null) {
@@ -147,6 +194,7 @@ const JoinUs = (props) => {
     let emptyField = false;
     let error = false;
     if (inputFields[0].value === "") {
+<<<<<<< HEAD
       setError(true, 0, "Required Field");
 
       emptyField = true;
@@ -159,10 +207,25 @@ const JoinUs = (props) => {
       emptyField = true;
     } else if (inputFields[3].value === "") {
       setError(true, 3, "Required Field");
+=======
+      setError(true, 0, "Campo requerido");
+
+      emptyField = true;
+    } else if (inputFields[1].value === "") {
+      setError(true, 1, "Campo requerido");
+
+      emptyField = true;
+    } else if (inputFields[2].value === "") {
+      setError(true, 2, "Campo requerido");
+      emptyField = true;
+    } else if (inputFields[3].value === "") {
+      setError(true, 3, "Campo requerido");
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       emptyField = true;
     }
 
     if (!validator.isEmail(inputFields[1].value)) {
+<<<<<<< HEAD
       setError(true, 1, "Invalid Email");
       error = true;
     }
@@ -173,6 +236,18 @@ const JoinUs = (props) => {
     if (inputFields[2].value != inputFields[3].value) {
       setError(true, 2, "Passwords do not match");
       setError(true, 3, "Passwords do not match");
+=======
+      setError(true, 1, "Email invalido");
+      error = true;
+    }
+    if (!validator.isStrongPassword(inputFields[2].value)) {
+      setError(true, 2, "Contraseña Debil");
+      error = true;
+    }
+    if (inputFields[2].value != inputFields[3].value) {
+      setError(true, 2, "Contraseñas no concuerdan");
+      setError(true, 3, "Contraseñas no concuerdan");
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       error = true;
     }
 
@@ -190,7 +265,11 @@ const JoinUs = (props) => {
       {" "}
       <div className={open ? "add-company-image" : "add-company-image-hidden"}>
         <div className="add-company-image-container">
+<<<<<<< HEAD
           <h4>Add Logo</h4>
+=======
+          <h4>Insertar Logo</h4>
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           <label
             style={{ marginBottom: "5px", marginTop: "70px" }}
             className="upload-button-2"
@@ -216,7 +295,11 @@ const JoinUs = (props) => {
           </label>
           <ButtonPopUp
             color={"pink"}
+<<<<<<< HEAD
             title={"Join Now."}
+=======
+            title={"Unirse."}
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
             position={"right"}
             event={signUp}
           />
@@ -243,7 +326,11 @@ const JoinUs = (props) => {
           className="subtitle"
           style={{ marginTop: "0px", marginBottom: "60px" }}
         >
+<<<<<<< HEAD
           Join Us.
+=======
+          Unete a Nosotros.
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         </h1>
         <div className="input-container">
           {inputFields.map((input, index) => (
@@ -264,7 +351,11 @@ const JoinUs = (props) => {
           event={() => {
             preSignUp();
           }}
+<<<<<<< HEAD
           title={"Join Now."}
+=======
+          title={"Unirse."}
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           position={"right"}
         />
       </div>
@@ -272,4 +363,8 @@ const JoinUs = (props) => {
   );
 };
 
+<<<<<<< HEAD
 export default JoinUs;
+=======
+export default JoinUs;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

@@ -16,6 +16,39 @@
   visibility: hidden;
 }
 
+<<<<<<< HEAD
+=======
+.cam-test {
+  z-index: 0;
+  visibility: visible;
+}
+.test-results-container-1-test{
+  height: 100%;
+  width: 40%;
+  position: relative;
+
+
+
+}
+.test-results-container-1-test video{
+  position: absolute; 
+  right: 0; 
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto; 
+  height: auto; 
+  z-index: 10;
+  background-size: cover;
+  overflow: hidden;
+}
+#output-test{
+  position: absolute !important; 
+  z-index: -1000;
+}
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 .video-watch-title {
   font-family: "PlayfairDisplay-SemiBold";
   color: black;
@@ -70,6 +103,19 @@ cursor: pointer;
   align-items: center;
   position: absolute;
 }
+<<<<<<< HEAD
+=======
+
+.video-container-test {
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 .video-container-statistics {
 
   width: 80vw;
@@ -139,9 +185,15 @@ cursor: pointer;
 .graphs-left-container {
   position: absolute;
   // background-color:black;
+<<<<<<< HEAD
   width: 35%;
   height: auto;
   left: 15vw;
+=======
+  width: 40%;
+  height: auto;
+  left: 5vw;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   top: 65vh;
   display: flex;
   flex-direction: column;

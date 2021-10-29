@@ -331,6 +331,7 @@ const Embedding = (props) => {
             const right_eye_7 = Math.abs(keypoints[466][1] - keypoints[249][1]);
 
             // const right_distance =Math.sqrt(Math.abs(((keypoints[362][0]-keypoints[263][0])^2)+((keypoints[362][1]-keypoints[263][1])^2)+((keypoints[362][2]-keypoints[263][2])^2)))
+<<<<<<< HEAD:src/containers/Embedding.js
 <<<<<<< HEAD:src/components/Embedding.js
             const right_distance = Math.abs(keypoints[362][0]-keypoints[263][0])
             const right_eye_sum = right_eye_1+right_eye_2+right_eye_3+right_eye_4+right_eye_5+right_eye_6+right_eye_7
@@ -341,6 +342,8 @@ const Embedding = (props) => {
             console.log('DISTANCIA DERECHO',right_distance.toFixed(2))
             console.log("----------------------------------------------------")
 =======
+=======
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf:src/components/Embedding.js
             const right_distance = Math.abs(
               keypoints[362][0] - keypoints[263][0]
             );
@@ -352,7 +355,10 @@ const Embedding = (props) => {
               right_eye_5 +
               right_eye_6 +
               right_eye_7;
+<<<<<<< HEAD:src/containers/Embedding.js
 >>>>>>> 0f9f13ca579db4796208b146bec244c266630f68:src/containers/Embedding.js
+=======
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf:src/components/Embedding.js
 
             for (let i = 0; i < keypoints.length; i++) {
               const [x, y, z] = keypoints[i];

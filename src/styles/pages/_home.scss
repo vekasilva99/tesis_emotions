@@ -20,7 +20,11 @@ transform: translateX(100%);
 .home-title {
   font-family: "PlayfairDisplay-SemiBold";
   color: black;
+<<<<<<< HEAD
   font-size: 120px;
+=======
+  font-size: 110px;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   max-width: 60vw;
   position: absolute;
   left: 25vw;
@@ -75,7 +79,11 @@ transform: translateX(100%);
 .subtitle-home {
   font-family: "PlayfairDisplay-Medium";
   color: black;
+<<<<<<< HEAD
   font-size: 120px;
+=======
+  font-size: 100px;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   margin-right: 5vw;
   display: flex;
   justify-content: center;
@@ -131,7 +139,11 @@ transform: translateX(100%);
 .subtitle2-home {
   font-family: "PlayfairDisplay-Medium";
   color: #a9b18f;
+<<<<<<< HEAD
   font-size: 120px;
+=======
+  font-size: 100px;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   display: flex;
   justify-content: center;
   align-items: center;
@@ -139,7 +151,11 @@ transform: translateX(100%);
   font-style: normal;
   text-transform: uppercase;
   letter-spacing: 4px;
+<<<<<<< HEAD
   margin-top: 15vh;
+=======
+  margin-top: 5vh;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   margin-left: 15vw;
 
   @media screen and (max-width: 800px) {
@@ -185,11 +201,19 @@ transform: translateX(100%);
 .home-title-vertical {
   font-family: "Exo-Medium";
   color: black;
+<<<<<<< HEAD
   font-size: 24px;
   min-width: 500px;
   min-height: 1px;
   position: absolute;
   left: 3vw;
+=======
+  font-size: 20px;
+  min-width: 500px;
+  min-height: 1px;
+  position: absolute;
+  left: 5vw;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   top: 50vh;
   transform: translateY(-50%);
   display: flex;

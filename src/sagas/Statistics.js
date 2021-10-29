@@ -306,7 +306,11 @@ return res;
 };
 
 const testRequest = async (payload) => {
+<<<<<<< HEAD
 
+=======
+console.log(payload)
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   const options = {
     url: API_URL+`statistics/emotions-in-photo`,
     method: "POST",
@@ -341,7 +345,12 @@ function* totalViews(payload) {
       let error = { emailError: null };
 
       error = {
+<<<<<<< HEAD
         error: "Oops. Something went wrong.",
+=======
+        error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
       yield put(statTotalViewsError(error));
     }
@@ -361,7 +370,12 @@ function* topGender(payload) {
       let error = { emailError: null };
 
       error = {
+<<<<<<< HEAD
         error: "Oops. Something went wrong.",
+=======
+        error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
       yield put( statTopGenderError(error));
     }
@@ -381,7 +395,12 @@ function* topCountry(payload) {
       let error = { emailError: null };
 
       error = {
+<<<<<<< HEAD
         error: "Oops. Something went wrong.",
+=======
+        error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
       yield put( statTopCountryError(error));
     }
@@ -400,7 +419,12 @@ function* topAge(payload) {
       let error = { emailError: null };
 
       error = {
+<<<<<<< HEAD
         error: "Oops. Something went wrong.",
+=======
+        error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
       yield put( statTopAgeError(error));
     }
@@ -420,7 +444,12 @@ function* payingAttention(payload) {
       let error = { emailError: null };
 
       error = {
+<<<<<<< HEAD
         error: "Oops. Something went wrong.",
+=======
+        error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
       yield put( statPayingAttentionError(error));
     }
@@ -440,7 +469,12 @@ function* predominantEmotion(payload) {
       let error = { emailError: null };
 
       error = {
+<<<<<<< HEAD
         error: "Oops. Something went wrong.",
+=======
+        error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
       yield put( statPredominantEmotionError(error));
     }
@@ -460,7 +494,12 @@ function* gender(payload) {
       let error = { emailError: null };
 
       error = {
+<<<<<<< HEAD
         error: "Oops. Something went wrong.",
+=======
+        error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
       yield put( statGenderError(error));
     }
@@ -480,7 +519,12 @@ function* country(payload) {
       let error = { emailError: null };
 
       error = {
+<<<<<<< HEAD
         error: "Oops. Something went wrong.",
+=======
+        error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
       yield put( statCountryError(error));
     }
@@ -500,7 +544,12 @@ function* age(payload) {
       let error = { emailError: null };
 
       error = {
+<<<<<<< HEAD
         error: "Oops. Something went wrong.",
+=======
+        error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
       yield put( statAgeError(error));
     }
@@ -520,7 +569,12 @@ function* attention(payload) {
       let error = { emailError: null };
 
       error = {
+<<<<<<< HEAD
         error: "Oops. Something went wrong.",
+=======
+        error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
       yield put( statAttentionError(error));
     }
@@ -540,7 +594,12 @@ function* emotions(payload) {
       let error = { emailError: null };
 
       error = {
+<<<<<<< HEAD
         error: "Oops. Something went wrong.",
+=======
+        error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
       yield put( emotionsInVideoError(error));
     }
@@ -554,13 +613,25 @@ function* test(payload) {
     const res = yield call(testRequest, payload);
     if (res.status === 200) {
       yield put(
+<<<<<<< HEAD
         testSuccess(res.res)
       );
+=======
+        testSuccess({results:res.res,image:payload.payload.img})
+      );
+ 
+      yield put(payload.payload.setOpen());
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
     } else {
       let error = { emailError: null };
 
       error = {
+<<<<<<< HEAD
         error: "Oops. Something went wrong.",
+=======
+        error: "Oops. Algo salió mal."
+,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
       yield put( testError(error));
     }

@@ -7,19 +7,36 @@ import { FaPlus } from "react-icons/fa";
 import Button from "../ButtonPopUp/index";
 import * as tf from "@tensorflow/tfjs-core";
 import * as tf_2 from "@tensorflow/tfjs";
+<<<<<<< HEAD
 import { getEmbedding } from "../../helpers/getEmbedding";
 import { addEmotionRequest, loading } from "../../actions/Company";
 import { useDispatch, useSelector } from "react-redux";
+=======
+// import { getEmbedding } from "../../helpers/getEmbedding";
+import { addEmotionRequest, loading } from "../../actions/Company";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getMean,
+  getSTD,
+  getStandarizedArray,
+} from "../../helpers/Model/methods";
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 import ErrorPopUp from "../../components/ErrorPopUp/index";
 import ErrorPopUpModel from "../../components/ErrorPopUpModel/index";
 import SuccessPopUp from "../../components/SuccessPopUp/index";
 import CircularProgress from "@material-ui/core/CircularProgress";
+<<<<<<< HEAD
 import {testRequest} from "../../actions/Statistics"
+=======
+import { testRequest } from "../../actions/Statistics";
+import adidas from "../../assets/images/adidas.png";
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 
 class scaling extends tf_2.layers.Layer {
   static className = "scaling";
   constructor(config) {
     super(config);
+<<<<<<< HEAD
     this.scale=config.scale
   }
   call(input){
@@ -34,6 +51,22 @@ class scaling extends tf_2.layers.Layer {
   getConfig() {
     const config = super.getConfig();
     Object.assign(config, {scale: this.scale});
+=======
+    this.scale = config.scale;
+  }
+  call(input) {
+    return tf_2.tidy(() => {
+      //   console.log("SCALE ",this)
+      // console.log("SCALE Antes",JSON.stringify(input[0].arraySync()))
+      // console.log("SCALE Despues",input[0].mul(this.scale).dataSync())
+      return input[0].mul(this.scale);
+      // return tf_2.math.l2_normalize(input,-1,1e-12,this.name)
+    });
+  }
+  getConfig() {
+    const config = super.getConfig();
+    Object.assign(config, { scale: this.scale });
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
     return config;
   }
 }
@@ -43,6 +76,7 @@ class l2Norm extends tf_2.layers.Layer {
   constructor(config) {
     super(config);
   }
+<<<<<<< HEAD
   call(input){
     return tf_2.tidy(()=>{
       console.log("SJA ANTES",JSON.stringify(input[0].arraySync()))
@@ -50,6 +84,18 @@ class l2Norm extends tf_2.layers.Layer {
       return input[0].div(tf_2.sqrt(tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12)))
       // return tf_2.math.l2_normalize(input,-1,1e-12,this.name)
     })
+=======
+
+  call(input) {
+    return tf_2.tidy(() => {
+      // console.log("SJA ANTES",JSON.stringify(input[0].arraySync()))
+      // console.log("SJA",input[0].div(tf_2.sqrt(tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12))).dataSync())
+      return input[0].div(
+        tf_2.sqrt(tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12))
+      );
+      // return tf_2.math.l2_normalize(input,-1,1e-12,this.name)
+    });
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   }
 }
 
@@ -59,17 +105,39 @@ class l2Norm extends tf_2.layers.Layer {
 //     super(config);
 //   }
 // }
+<<<<<<< HEAD
 const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage,selectedEmotions }) => {
   const dispatch = useDispatch();
   const [images, setImages] = useState([
     { image: null },
   ]);
   const [preview, setPreview] = useState(null);
+=======
+const UploadImage = ({
+  settingChooseEmotion,
+  open,
+  setOpen,
+  error,
+  setErrorMessage,
+  selectedEmotions,
+  setShowResults,
+  setSelectedEmotions
+}) => {
+  const dispatch = useDispatch();
+  const [images, setImages] = useState([{ image: null }]);
+  const [preview, setPreview] = useState(null);
+  const [show, setShow] = useState(false);
+  const [finalArray, setFinalArray] = useState(null);
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   const [submitted, setSubmitted] = useState(false);
   const blazeface = require("@tensorflow-models/blazeface");
   const faceLandmarksDetection = require("@tensorflow-models/face-landmarks-detection");
   const [model, setModel] = useState(undefined);
   const [model2, setModel2] = useState(undefined);
+<<<<<<< HEAD
+=======
+  let image = new Image();
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   const modelImageSize = 160;
   const img1 = useRef(null);
   const img2 = useRef(null);
@@ -80,11 +148,16 @@ const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage
   const errors = useSelector((state) => ({ ...state.company.error }));
   const success = useSelector((state) => ({ ...state.company.success }));
   const loader = useSelector((state) => ({ ...state.company })).loaderCompany;
+<<<<<<< HEAD
  
+=======
+const loaderStatistics =useSelector((state) => (state.stats.loaderStatistics));
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   const uploadImages = (files, index) => {
     let auxImages = images;
     let auxFiles = images.filter((image) => image.image === null);
     if (files.length <= 1) {
+<<<<<<< HEAD
   
       for (let j = 0; j < files.length; j++) {
         for (var i = 0; i < auxImages.length; i++) {
@@ -106,6 +179,34 @@ const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage
       }
     }
     setPreview(URL.createObjectURL(files[0]));
+=======
+      for (let j = 0; j < files.length; j++) {
+        for (var i = 0; i < auxImages.length; i++) {
+          auxImages[i].image = files[j];
+          let canvas = document.getElementById(
+            `output-upload` + (i + 1).toString()
+          );
+          canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+          let ctx = canvas.getContext("2d");
+
+          image.src = URL.createObjectURL(files[j]);
+          image.onload = () => {
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+          };
+          canvas
+            .getContext("2d")
+            .getImageData(0, 0, canvas.width, canvas.height);
+
+          break;
+        }
+      }
+    }
+    try{
+    setPreview(URL.createObjectURL(files[0]));
+    }catch(error){
+
+    }
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   };
 
   const [inputFields, setInputFields] = useState([
@@ -157,6 +258,16 @@ const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage
     return () => {};
   }, []);
 
+<<<<<<< HEAD
+=======
+//   useEffect(() => {
+//     if(!open && submitted){
+//       setSubmitted(false);
+// setShowResults(true)
+//     }
+//   }, [open]);
+
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   useEffect(() => {
     if (Object.keys(success).length > 0 && open === true) {
       let auxFields = inputFields;
@@ -181,6 +292,7 @@ const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage
     tf_2.serialization.registerClass(l2Norm);
     // tf_2.serialization.registerClass(L2Norm);
 
+<<<<<<< HEAD
    
     try{
     console.log("EMPEZANDO");
@@ -190,6 +302,17 @@ const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage
     }catch(error){
       setErrorMessage('Oops! It seems something went wrong when loading the model. Please clear your cache and try again. Sorry for the inconvinience.')
  
+=======
+    try {
+      console.log("EMPEZANDO");
+      // setModel2(await tf_2.loadLayersModel("http://localhost:8887/model.json"));
+      setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
+      console.log("TERMINADO");
+    } catch (error) {
+      setErrorMessage(
+        "Oops! Parece que algo salió mal al cargar el modelo. Limpia tu caché y vuelve a intentarlo. Perdon por la inconveniencia."
+      );
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
     }
   };
 
@@ -200,12 +323,265 @@ const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage
       setInputFields(fields);
     }
   };
+<<<<<<< HEAD
+=======
+  useEffect(() => {
+    if (finalArray != null) {
+      let result = undefined;
+      let auxArray = [];
+      let baw_array = [];
+      for (var i = 0; i < finalArray.data.length; i += 4) {
+        baw_array.push(finalArray.data[i]);
+        baw_array.push(finalArray.data[i + 1]);
+        baw_array.push(finalArray.data[i + 2]);
+      }
+      console.log("ARREGLO", JSON.stringify(baw_array));
+      // Setear la imagen para poder visualizarla.
+      let mean = getMean(baw_array);
+
+      let std = getSTD(baw_array, mean);
+      console.log("MEAN", mean);
+      console.log("STD", std);
+      if (std > 0) {
+        baw_array = getStandarizedArray(baw_array, mean, std);
+        console.log("PIXELS",JSON.stringify(baw_array))
+        let finalIMG = tf_2.tensor(baw_array);
+
+        finalIMG = tf_2.reshape(finalIMG, [
+          1,
+          modelImageSize,
+          modelImageSize,
+          3,
+        ]);
+        console.log("MODEL", JSON.stringify(finalIMG.arraySync()));
+        let prediction = model2.predict(finalIMG);
+        const value = prediction.dataSync();
+        result = value;
+      }
+     
+      var arrayString = JSON.stringify(result);
+      result = JSON.parse(arrayString);
+    
+      let aux = [];
+
+      for (let j = 0; j < 16; j++) {
+ 
+        aux.push(result[j]);
+      }
+     
+      let auxItem = {
+        img: images[0].image,
+        embedding: aux,
+      };
+      auxArray.push(auxItem);
+     
+  
+    dispatch(
+      testRequest({
+        emotions: selectedEmotions,
+        company: _id,
+        photo_embedding: auxArray[0].embedding,
+        img:images[0].image,
+        setOpen:()=>{setShowResults(true);setOpen(false); setSubmitted(false);setSelectedEmotions([]);setImages([{ image: null }])
+        let canvas = document.getElementById(
+          `output-upload` + (1).toString()
+        );
+        canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);}
+      })
+    );
+    }
+  }, [finalArray]);
+
+  const getEmbedding = async (img, model, model2, i) => {
+    let canvas = document.getElementById(`output-upload${i}`);
+    let ctx = canvas.getContext("2d");
+
+    const returnTensors = false; // Pass in `true` to get tensors back, rather than values.
+    const flipHorizontal = true;
+    const annotateBoxes = true;
+
+    console.log(
+      "kik;",
+      canvas.getContext("2d").getImageData(0, 0, canvas.width, canvas.height)
+    );
+    const embedding = await model
+      .estimateFaces(canvas, returnTensors, flipHorizontal, annotateBoxes)
+      .then((predictions) => {
+        let array = [];
+        if (predictions.length > 0) {
+          console.log("blazeface is", model);
+
+          array = predictions.map((face_detected, index) => {
+            if (returnTensors) {
+              face_detected.topLeft = face_detected.topLeft.arraySync();
+              face_detected.bottomRight = face_detected.bottomRight.arraySync();
+              if (annotateBoxes) {
+                face_detected.landmarks = face_detected.landmarks.arraySync();
+              }
+            }
+            const start = face_detected.topLeft;
+            const end = face_detected.bottomRight;
+            const size = [end[0] - start[0], end[1] - start[1]];
+
+            // Render a rectangle over each detected face.
+            // ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
+            // ctx.fillRect(start[0], start[1], size[0], size[1]);
+
+            // Tomar la imagen.
+            snap(start, size, index, img, model2, i);
+          });
+        }
+
+        return array;
+      })
+      .then((resp) => {
+        return resp;
+      });
+
+    return embedding;
+  };
+
+  const snap = (start, size, index, img, model2, i) => {
+    const canvas2 = document.getElementById("output-upload-detail");
+    canvas2.getContext("2d").clearRect(0, 0, canvas2.width, canvas2.height);
+    let canvas = document.getElementById(`output-upload${i}`);
+    const realTopLeftX = canvas.width - (start[0] + size[0]);
+    const modelImageSize = 160;
+    let context = canvas2.getContext("2d");
+    canvas2.width = canvas.width;
+    canvas2.height = canvas.height;
+
+    let imageData = canvas
+      .getContext("2d")
+      .getImageData(0, 0, canvas.width, canvas.height);
+
+    canvas2
+      .getContext("2d")
+      .putImageData(imageData, 0, 0, realTopLeftX, start[1], size[0], size[1]);
+    // Dibujar la imagen recortada.
+    imageData = canvas2
+      .getContext("2d")
+      .getImageData(0, 0, canvas2.width, canvas2.height);
+
+    let trimmedCanvas = trimCanvas(canvas2);
+    imageData = trimmedCanvas
+      .getContext("2d")
+      .getImageData(0, 0, trimmedCanvas.width, trimmedCanvas.height);
+    let baw_array0 = [];
+    for (var i = 0; i < imageData.data.length; i += 4) {
+      baw_array0.push(imageData.data[i]);
+      baw_array0.push(imageData.data[i + 1]);
+      baw_array0.push(imageData.data[i + 2]);
+    }
+
+    console.log("ARREGLO", baw_array0);
+    console.log("ARREGLO", trimmedCanvas.width, trimmedCanvas.height);
+
+    canvas2.width = 160;
+    canvas2.height = 160;
+    trimmedCanvas
+      .getContext("2d")
+      .putImageData(imageData, 0, 0, 0, 0, imageData.width, imageData.height);
+
+    // Convertir la imagen del canvas en una imagen con un url.
+    imageData = trimmedCanvas.getContext("2d").getImageData(0, 0, 160, 160);
+
+    let url = trimmedCanvas.toDataURL();
+
+    const image = new Image();
+    image.src = url;
+
+    image.onload = async () => {
+      await context.drawImage(image, 0, 0, 160, 160);
+
+      imageData = await context.getImageData(
+        0,
+        0,
+        canvas2.width,
+        canvas2.height
+      );
+      setFinalArray(imageData);
+    };
+
+    context.fillStyle = "rgba(255, 0, 0, 0.5)";
+    context.fillRect(0, 0, 170, 170);
+    trimmedCanvas.remove();
+  };
+
+  const trimCanvas = (c) => {
+    let ctx = c.getContext("2d"),
+      copy = document.createElement("canvas"),
+      pixels = ctx.getImageData(0, 0, c.width, c.height),
+      l = pixels.data.length,
+      i,
+      bound = {
+        top: null,
+        left: null,
+        right: null,
+        bottom: null,
+      },
+      x,
+      y;
+
+    copy.setAttribute("id", "trimmed-canvas");
+    copy = copy.getContext("2d");
+    // Iterate over every pixel to find the highest
+    // and where it ends on every axis ()
+    const cont = 5;
+    let aux = 0;
+    for (i = 0; i < l; i += 4) {
+      if (pixels.data[i + 3] !== 0) {
+        x = (i / 4) % c.width;
+        y = ~~(i / 4 / c.width);
+
+        if (bound.top === null) {
+          bound.top = y;
+        }
+
+        if (bound.left === null) {
+          bound.left = x;
+        } else if (x < bound.left) {
+          bound.left = x;
+        }
+
+        if (bound.right === null) {
+          bound.right = x;
+        } else if (bound.right < x) {
+          bound.right = x;
+        }
+
+        if (bound.bottom === null) {
+          bound.bottom = y;
+        } else if (bound.bottom < y) {
+          bound.bottom = y;
+        }
+      }
+    }
+
+    // Calculate the height and width of the content
+
+    let trimHeight = bound.bottom - bound.top,
+      trimWidth = bound.right - bound.left,
+      trimmed = ctx.getImageData(bound.left, bound.top, trimWidth, trimHeight);
+
+    copy.canvas.width = trimWidth;
+    copy.canvas.height = trimHeight;
+    copy.putImageData(trimmed, 0, 0);
+
+    // Return trimmed canvas
+    return copy.canvas;
+  };
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 
   return (
     <>
       <div
         className={
+<<<<<<< HEAD
           loader || submitted
+=======
+          loaderStatistics || submitted
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
             ? "full-page-loader no-background"
             : "full-page-loader no-background not-loading"
         }
@@ -215,6 +591,7 @@ const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage
       <ErrorPopUpModel error={error} setError={setErrorMessage} />
       <ErrorPopUp company={true} inputs={inputFields} />
       <SuccessPopUp company={true} inputs={inputFields} />
+<<<<<<< HEAD
       <div className={open ? "pop-up-container-down" : "pop-up-container-down closed"}>
         <div className="close-pop-up"> <h3
               onClick={() => {
@@ -225,6 +602,25 @@ const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage
             </h3></div>
         <div className="pop-up-content">
           <h4>Upload Image</h4>
+=======
+      <div
+        className={
+          open ? "pop-up-container-down" : "pop-up-container-down closed"
+        }
+      >
+        <div className="close-pop-up">
+          {" "}
+          <h3
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            Cerrar
+          </h3>
+        </div>
+        <div className="pop-up-content">
+          <h4>Subir Imagen</h4>
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 
           <div className="pop-up-item-new-emotion">
             <div className="pop-up-item-new-emotion-1-upload">
@@ -283,11 +679,19 @@ const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage
             ></canvas>
           </div>
           <Button
+<<<<<<< HEAD
             title={"Results."}
             position={"right"}
             event={async () => {
               // videoSmall();
 
+=======
+            title={"Resultados."}
+            position={"right"}
+            event={async () => {
+              // videoSmall();
+setSubmitted(true)
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
               let auxArray = [];
 
               for (let i = 0; i < images.length; i++) {
@@ -297,6 +701,7 @@ const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage
                   model2,
                   i + 1
                 );
+<<<<<<< HEAD
                 var arrayString = JSON.stringify(auxEmbedding);
                 auxEmbedding = JSON.parse(arrayString);
 
@@ -320,6 +725,9 @@ const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage
                   photo_embedding:auxArray[0].embedding,
                 })
               );
+=======
+              }
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
             }}
           />
         </div>

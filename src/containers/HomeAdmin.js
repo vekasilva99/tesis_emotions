@@ -47,6 +47,7 @@ const HomeAdmin = (props) => {
     let time = today.getHours();
 
     if (time < 12 && time >= 5) {
+<<<<<<< HEAD
       return "Good Morning, ";
     } else if (time >= 12 && time < 18) {
       return "Good Afternoon, ";
@@ -54,6 +55,15 @@ const HomeAdmin = (props) => {
       return "Good Evening, ";
     } else {
       return "Good Night, ";
+=======
+      return "Buenos días, ";
+    } else if (time >= 12 && time < 18) {
+      return "Buenas tarder, ";
+    } else if (time >= 18) {
+      return "Buenas noches, ";
+    } else {
+      return "Buenas noches, ";
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
     }
   };
   return (
@@ -78,7 +88,11 @@ const HomeAdmin = (props) => {
           <div className="admin-col">
             <div className="admin-request">
               <div className="title-request">
+<<<<<<< HEAD
                 <h2>Company Requests</h2>
+=======
+                <h2>Solicitudes de Marcas</h2>
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
               </div>
               {companiesNotAccepted.length > 0 ? (
                 <div className="request-container">
@@ -87,7 +101,11 @@ const HomeAdmin = (props) => {
                   })}
                 </div>
               ) : <div className="request-container">
+<<<<<<< HEAD
               <h4 className="no-content">There are no pending companies requests</h4>
+=======
+              <h4 className="no-content">No hay solicitudes pendientes</h4>
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
               </div>}
             </div>
           </div>
@@ -103,7 +121,11 @@ const HomeAdmin = (props) => {
                   })}
                 </div>
               ) : <div className="request-container">
+<<<<<<< HEAD
                 <h4 className="no-content">There are no videos available</h4>
+=======
+                <h4 className="no-content">No hay videos disponibles</h4>
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
                 </div>}
             </div>
           </div>
@@ -113,4 +135,8 @@ const HomeAdmin = (props) => {
   );
 };
 
+<<<<<<< HEAD
 export default HomeAdmin;
+=======
+export default HomeAdmin;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

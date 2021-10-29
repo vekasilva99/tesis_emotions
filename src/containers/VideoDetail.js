@@ -99,7 +99,11 @@ const VideoDetail = (props) => {
               >
                 <div className="section-title">
                   <h2 className="home-title-vertical2">
+<<<<<<< HEAD
                     By {selectedCompany.full_name}
+=======
+                    Por {selectedCompany.full_name}
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
                   </h2>
                   <h1 className="video-title2">{selectedVideo.name}</h1>
                 </div>
@@ -107,7 +111,11 @@ const VideoDetail = (props) => {
               </div>
               <Button
                 event={openInstructions}
+<<<<<<< HEAD
                 title={"Watch Now."}
+=======
+                title={"Ver Ahora."}
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
                 position={"right"}
               />
             </>
@@ -118,4 +126,8 @@ const VideoDetail = (props) => {
   );
 };
 
+<<<<<<< HEAD
 export default VideoDetail;
+=======
+export default VideoDetail;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

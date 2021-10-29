@@ -121,7 +121,11 @@ const HomeCompany = (props) => {
             }}
           >
             <circular-text
+<<<<<<< HEAD
               text="ADD EMOTION   "
+=======
+              text="AGREGAR EMOCIÓN   "
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
               radius={
                 emotions.length === 0 && videos.length === 0 ? "230" : "100"
               }
@@ -141,7 +145,11 @@ const HomeCompany = (props) => {
             }}
           >
             <circular-text
+<<<<<<< HEAD
               text="ADD VIDEO   "
+=======
+              text="AGREGAR VIDEO   "
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
               radius={
                 emotions.length === 0 && videos.length === 0 ? "230" : "100"
               }
@@ -153,7 +161,11 @@ const HomeCompany = (props) => {
         </div>
         {emotions.length > 0 ? (
           <div className="emotions-home-section">
+<<<<<<< HEAD
             <h1>Emotions</h1>
+=======
+            <h1>Emociones</h1>
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 
             <div className="emotions-home-container">
               {emotions.map((emotion) => {
@@ -178,4 +190,8 @@ const HomeCompany = (props) => {
   );
 };
 
+<<<<<<< HEAD
 export default HomeCompany;
+=======
+export default HomeCompany;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

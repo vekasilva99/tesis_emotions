@@ -19,7 +19,11 @@ import neutrogenaLogo from "../assets/images/neutrogena.png";
 import nikeLogo from "../assets/images/nike.png";
 import Button from "../components/Button/index";
 import group from "../assets/group.png";
+<<<<<<< HEAD
 import { scaling, l2Norm, L2Norm } from "../helpers/Model/modelClasses";
+=======
+import { scaling, l2Norm} from "../helpers/Model/modelClasses";
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 import { loadBackend } from "../helpers/Model/setUp";
 import { YouTubeGetID } from "../helpers/Model/methods";
 import "../styles/pages/__pages-dir.scss";
@@ -28,6 +32,10 @@ import { createViewRequest } from "../actions/Model";
 import ErrorPopUpModel from "../components/ErrorPopUpModel/index";
 import NotLoading from "../components/NotLoading";
 import { getMean, getSTD, getStandarizedArray } from "../helpers/Model/methods";
+<<<<<<< HEAD
+=======
+import { IFFT } from "@tensorflow/tfjs-core";
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 const VideoWatch = (props) => {
   // DEFINICIÓN DE VARIABLES Y CONSTANTES.
   const { id, videoId } = useParams();
@@ -87,7 +95,11 @@ const VideoWatch = (props) => {
     const timer = setTimeout(function () {
       if (!visible && error===null) {
         setErrorMessage(
+<<<<<<< HEAD
           "We are having some issues loading the AI Model. Make sure to check your connection."
+=======
+          "Tenemos algunos problemas para cargar el modelo de IA. Asegúrese de verificar su conexión."
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         );
       }
     }, 100000);
@@ -154,6 +166,7 @@ const VideoWatch = (props) => {
   const loadModel = async () => {
     tf_2.serialization.registerClass(scaling);
     tf_2.serialization.registerClass(l2Norm);
+<<<<<<< HEAD
     tf_2.serialization.registerClass(L2Norm);
 
     // setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
@@ -164,6 +177,19 @@ const VideoWatch = (props) => {
     setVisible(true);
     }catch(error){
       setError('Oops! It seems something went wrong when loading the model. Please clear your cache and try again. Sorry for the inconvinience.')
+=======
+
+
+ 
+    try{
+    console.log("EMPEZANDO");
+    setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
+      //  setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
+    console.log("TERMINADO");
+    setVisible(true);
+    }catch(error){
+      setError('Oops! Parece que algo salió mal al cargar el modelo. Limpia tu caché y vuelve a intentarlo. Perdon por la inconveniencia.')
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
  
     }
   };
@@ -206,6 +232,24 @@ const VideoWatch = (props) => {
   }, [startTimer]);
 
   useEffect(() => {
+<<<<<<< HEAD
+=======
+ 
+    if(startTimer===false && timeLeft>0){
+    const mediaStream = video.srcObject;
+
+    // Through the MediaStream, you can get the MediaStreamTracks with getTracks():
+    const tracks = mediaStream.getTracks();
+    // Tracks are returned as an array, so if you know you only have one, you can stop it with: 
+    tracks[0].stop();
+    // Or stop all like so:
+    tracks.forEach(track => track.stop())
+    video.srcObject = null;
+    }
+  }, [startTimer]);
+
+  useEffect(() => {
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
     if (predict && startTimer) {
       const timer = setTimeout(function () {
         requestAnimationFrame(predictWebcam);
@@ -323,6 +367,10 @@ const VideoWatch = (props) => {
     }
 
     // Modificar el canvas con la imagen b&w.
+<<<<<<< HEAD
+=======
+    console.log("ACA ESTA EL ARREGLO",JSON.stringify(baw_array))
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
     trimmedCanvas
       .getContext("2d")
       .putImageData(imageData, 0, 0, 0, 0, imageData.width, imageData.height);
@@ -336,6 +384,10 @@ const VideoWatch = (props) => {
     let std = getSTD(baw_array, mean);
     if (std > 0) {
       baw_array = getStandarizedArray(baw_array, mean, std);
+<<<<<<< HEAD
+=======
+      console.log("ACA ESTA EL ARREGLO Stan",JSON.stringify(baw_array))
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       let finalIMG = tf.tensor(baw_array);
       finalIMG = tf.reshape(finalIMG, [1, modelImageSize, modelImageSize, 3]);
       let prediction = model2.predict(finalIMG);
@@ -344,7 +396,11 @@ const VideoWatch = (props) => {
 
       var arrayString = JSON.stringify(value);
       value = JSON.parse(arrayString);
+<<<<<<< HEAD
 
+=======
+      console.log("ACA ESTA EL ARREGLO Final",JSON.stringify(prediction.arraySync()))
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       let aux = [];
 
       for (let j = 0; j < 16; j++) {
@@ -560,7 +616,10 @@ const VideoWatch = (props) => {
       }
     } catch (error) {}
   };
+<<<<<<< HEAD
 
+=======
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   const enableCam = async () => {
     const constraints = {
       video: {
@@ -655,4 +714,8 @@ const VideoWatch = (props) => {
   );
 };
 
+<<<<<<< HEAD
 export default VideoWatch;
+=======
+export default VideoWatch;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

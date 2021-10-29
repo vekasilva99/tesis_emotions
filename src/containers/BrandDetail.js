@@ -88,4 +88,8 @@ const BrandDetail = (props) => {
   );
 };
 
+<<<<<<< HEAD
 export default BrandDetail;
+=======
+export default BrandDetail;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

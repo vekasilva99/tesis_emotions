@@ -41,15 +41,24 @@ const SignInCompany = (props) => {
 
   const [inputFields, setInputFields] = useState([
     {
+<<<<<<< HEAD
       placeholder: "Enter your email",
+=======
+      placeholder: "Ingrese su email",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       name: "email",
       value: "",
       error: !errors ? "" : errors.emailError ? errors.emailError : "",
       type: "email",
     },
     {
+<<<<<<< HEAD
       placeholder: "Enter your password",
       name: "password",
+=======
+      placeholder: "Ingrese su contraseña",
+      name: "contraseña",
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       value: "",
       error:
         errors === {} ? "" : errors.passwordError ? errors.passwordError : "",
@@ -68,16 +77,28 @@ const SignInCompany = (props) => {
     let emptyField = false;
     let error = false;
     if (inputFields[0].value === "") {
+<<<<<<< HEAD
       setError(true, 0, "Required Field");
+=======
+      setError(true, 0, "Campo requerido");
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       emptyField = true;
     } 
      if (inputFields[1].value === "") {
    
+<<<<<<< HEAD
       setError(true, 1, "Required Field");
       emptyField = true;
     }
     if (!validator.isEmail(inputFields[0].value)) {
       setError(true, 0, "Invalid Email");
+=======
+      setError(true, 1, "Campo requerido");
+      emptyField = true;
+    }
+    if (!validator.isEmail(inputFields[0].value)) {
+      setError(true, 0, "Email invalido");
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       error = true;
     }
    
@@ -113,6 +134,7 @@ const SignInCompany = (props) => {
             />
           ))}
         </div>
+<<<<<<< HEAD
         <Button event={signIn} title={"Sign In"} position={"left"} top />
         <div className="link-button green" style={{ bottom: "16vh" }}>
           <h3>Wanto to watch video without an account? </h3>
@@ -122,9 +144,17 @@ const SignInCompany = (props) => {
           <h3>Want to create an account? </h3>
           <h4> Sign Up Here</h4>
         </div>
+=======
+        <Button event={signIn} title={"Iniciar Sesión"} position={"left"} top />
+       
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       </div>
     </>
   );
 };
 
+<<<<<<< HEAD
 export default SignInCompany;
+=======
+export default SignInCompany;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

@@ -31,6 +31,7 @@ return emotion._id===emotionId
     setSideDrawerOpen(!sideDrawerOpen);
   };
 
+<<<<<<< HEAD
   const changeInput = (name, event) => {
     let fields = inputFields;
     var item = inputFields.find(function (input, index) {
@@ -68,6 +69,8 @@ return emotion._id===emotionId
       type: "password",
     },
   ]);
+=======
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   useEffect(() => {
     if (emotions.length === 0) {
       dispatch(fetchEmotionsRequest(_id));
@@ -110,4 +113,8 @@ return emotion._id===emotionId
   );
 };
 
+<<<<<<< HEAD
 export default EmotionDetail;
+=======
+export default EmotionDetail;
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

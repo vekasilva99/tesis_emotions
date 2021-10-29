@@ -52,7 +52,17 @@ const INIT_STATE = {
   topCountry:{},
   topGender:{},
   totalViews:null,
+<<<<<<< HEAD
   testInfo:[]
+=======
+  testInfo:[],
+  image:null,
+  loaderEmotions:false,
+  loaderGender:false,
+  loaderAttention:false,
+  loaderCountry:false,
+  loaderAge:false
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 };
 
 export default (state = INIT_STATE, action) => {
@@ -60,7 +70,11 @@ export default (state = INIT_STATE, action) => {
     case EMOTIONS_IN_VIDEO_REQUEST: {
       return {
         ...state,
+<<<<<<< HEAD
         loaderStatistics: true,
+=======
+        loaderEmotions: true,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
     }
     case EMOTIONS_IN_VIDEO_ERROR: {
@@ -68,19 +82,32 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         error: action.payload,
+<<<<<<< HEAD
+=======
+        loaderEmotions: false,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
     }
     case EMOTIONS_IN_VIDEO_SUCCESS: {
       return {
         ...state,
         loaderStatistics: false,
+<<<<<<< HEAD
         emotionsInVideo:action.payload
+=======
+        emotionsInVideo:action.payload,
+        loaderEmotions: false,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
     }
     case STAT_AGE_REQUEST: {
       return {
         ...state,
         loaderStatistics: true,
+<<<<<<< HEAD
+=======
+        loaderAge:true
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
     }
     case STAT_AGE_ERROR: {
@@ -88,6 +115,10 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         error: action.payload,
+<<<<<<< HEAD
+=======
+        loaderAge:false
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
     }
     case STAT_AGE_SUCCESS: {
@@ -95,12 +126,20 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         ages:action.payload,
+<<<<<<< HEAD
+=======
+        loaderAge:false
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
     }
     case STAT_ATTENTION_REQUEST: {
       return {
         ...state,
         loaderStatistics: true,
+<<<<<<< HEAD
+=======
+        loaderAttention:true
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
     }
     case STAT_ATTENTION_ERROR: {
@@ -108,6 +147,10 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         error: action.payload,
+<<<<<<< HEAD
+=======
+        loaderAttention:false
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
     }
     case STAT_ATTENTION_SUCCESS: {
@@ -115,12 +158,20 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         attention:action.payload,
+<<<<<<< HEAD
+=======
+        loaderAttention:false
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
     }
     case STAT_COUNTRY_REQUEST: {
       return {
         ...state,
         loaderStatistics: true,
+<<<<<<< HEAD
+=======
+        loaderCountry:true
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
     }
     case STAT_COUNTRY_ERROR: {
@@ -128,6 +179,10 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         error: action.payload,
+<<<<<<< HEAD
+=======
+        loaderCountry:false
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
     }
     case STAT_COUNTRY_SUCCESS: {
@@ -135,12 +190,20 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         country:action.payload,
+<<<<<<< HEAD
+=======
+        loaderCountry:false
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
     }
     case STAT_GENDER_REQUEST: {
       return {
         ...state,
         loaderStatistics: true,
+<<<<<<< HEAD
+=======
+        loaderGender: true,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
     }
     case STAT_GENDER_ERROR: {
@@ -148,6 +211,10 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         error: action.payload,
+<<<<<<< HEAD
+=======
+        loaderGender: false,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
     }
     case STAT_GENDER_SUCCESS: {
@@ -155,6 +222,10 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loaderStatistics: false,
         gender:action.payload,
+<<<<<<< HEAD
+=======
+        loaderGender: false,
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
     }
     case STAT_PAYING_ATTENTION_REQUEST: {
@@ -294,7 +365,12 @@ export default (state = INIT_STATE, action) => {
       return {
         ...state,
         loaderStatistics: false,
+<<<<<<< HEAD
         testInfo:action.payload,
+=======
+        testInfo:action.payload.results,
+        image:action.payload.image
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       };
     }
     

@@ -9,7 +9,11 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 const GenderChart = ({}) => {
 const dispatch = useDispatch();
 const { video } = useParams();
+<<<<<<< HEAD
 const { gender,loaderStatistics } = useSelector((state) => ({
+=======
+const { gender,loaderStatistics,loaderGender } = useSelector((state) => ({
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   ...state.stats,
 }));
 
@@ -42,10 +46,17 @@ useEffect(() => {
     for(let i=0;i<gender.length;i++){
       aux.labels.push(gender[i]._id)
       aux.datasets[0].data.push(gender[i].total)
+<<<<<<< HEAD
       if(gender[i]._id==="Female"){
         aux.datasets[0].backgroundColor.push("#CB807D")
         aux.datasets[0].hoverBackgroundColor.push("#CB807D")
       }else if(gender[i]._id==="Male"){
+=======
+      if(gender[i]._id==="Femenino"){
+        aux.datasets[0].backgroundColor.push("#CB807D")
+        aux.datasets[0].hoverBackgroundColor.push("#CB807D")
+      }else if(gender[i]._id==="Masculino"){
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         aux.datasets[0].backgroundColor.push("#A9B18F")
         aux.datasets[0].hoverBackgroundColor.push("#A9B18F") 
       }else{
@@ -68,7 +79,11 @@ const pieOptions = {
   {gender.length>0 &&
 <Pie data={pieData} options={pieOptions} width={null} height={null} />
 }
+<<<<<<< HEAD
 {gender.length === 0 && loaderStatistics &&
+=======
+{gender.length === 0 && loaderGender &&
+>>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         <CircularProgress size={100} thickness={5} />
        }
 </div>
