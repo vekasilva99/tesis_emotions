@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import Sidebar from "../components/Sidebar/index";
 import Drawer from "../components/Drawer/index";
 import Select from "../components/Select/index";
 import Input from "../components/InputWhite/index";
 import Button from "../components/Button/index";
 import ErrorPopUp from "../components/ErrorPopUp/index";
-import countryList from "../helpers/countries";
+import countryList from '../helpers/countries'
 import validator from "validator";
-import { signInUserRequest } from "../actions/SignIn";
+import { signInCompanyRequest } from "../actions/SignIn";
 import "../styles/pages/__pages-dir.scss";
-const SignIn = (props) => {
+const SignInCompany = (props) => {
   const dispatch = useDispatch();
   const [submitted, setSubmitted] = useState(false);
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
@@ -22,15 +22,6 @@ const SignIn = (props) => {
     console.log("click");
   };
 
-  const changeInput = (name, event) => {
-    let fields = inputFields;
-    var item = inputFields.find(function (input, index) {
-      if (input.name == name) fields[index].value = event;
-      console.log("entre", event);
-      console.log("entre", fields[index].value);
-      setInputFields(fields);
-    });
-  };
   const setError = (input, index, error) => {
     if (input) {
       let fields = inputFields;
@@ -38,6 +29,21 @@ const SignIn = (props) => {
       setInputFields(fields);
     }
   };
+
+  const changeInput=(name,event)=>{
+   
+    let fields= inputFields;
+    var item = inputFields.find(function(input, index) {
+ 
+      if(input.name == name )
+     
+        fields[index].value=event
+        console.log("entre",event)
+        console.log("entre",fields[index].value)
+        setInputFields(fields)
+    });
+
+  }
 
   const [inputFields, setInputFields] = useState([
     {
@@ -55,7 +61,6 @@ const SignIn = (props) => {
       type: "password",
     },
   ]);
-
   useEffect(() => {
     console.log("hollllll")
     if(errors.emailError && errors.passwordError){
@@ -63,63 +68,53 @@ const SignIn = (props) => {
   setError(true,0,errors.passwordError)
     }
   }, [errors]);
-console.log(inputFields)
-  const signIn = () => {
+
+  const signIn = () =>{
     setSubmitted(true)
-    let emptyField = false;
-    let error = false;
-    if (inputFields[0].value === "") {
+    let emptyField=false;
+    let error=false;
+    if(inputFields[0].value===""){
       setError(true, 0, "Required Field");
       emptyField = true;
-    } else if (inputFields[1].value === "") {
+    }else if(inputFields[1].value===""){
       setError(true, 1, "Required Field");
       emptyField = true;
     }
-    if (!validator.isEmail(inputFields[0].value)) {
+    if(!validator.isEmail(inputFields[0].value)){
       setError(true, 0, "Invalid Email");
-      error = true;
+      error=true;
+    
     }
-    if (!emptyField && !error) {
-      dispatch(
-        signInUserRequest({
-          email: inputFields[0].value,
-          password: inputFields[1].value,
-        })
-      );
+    if(!emptyField && !error){
+dispatch(signInCompanyRequest({email:inputFields[0].value,password:inputFields[1].value}))
     }
-  };
+  }
+  
 
   return (
     <>
-    <ErrorPopUp inputs={inputFields} />
-      <div className="app-no-account">
+      <ErrorPopUp inputs={inputFields} />
+
+      <div className="app-no-account pink">
         <div className="input-container-column">
-          {inputFields.map((input, index) => (
-            <Input
-              changeError={setError}
-              setSubmitted={() => {
-                setSubmitted(false);
-              }}
-              submitted={submitted}
-              index={index}
-              large={true}
-              item={input}
-              changeInput={changeInput}
-            />
-          ))}
+        {inputFields.map((input,index)=>
+        <Input changeError={setError}
+        setSubmitted={() => {
+          setSubmitted(false);
+        }}
+        pink={true}
+        submitted={submitted}
+        index={index}
+        large={true}
+        item={input}
+        changeInput={changeInput}/>)}
         </div>
-        <Button event={signIn} title={"Sign In"} position={"left"} top />
-        <div className="link-button" style={{ bottom: "20vh" }}>
-          <h3>Wanto to watch video without an account? </h3>
-          <h4>Click Here</h4>
-        </div>
-        <div className="link-button2" style={{ bottom: "16vh" }}>
-          <h3>Want to create an account? </h3>
-          <h4> Sign Up Here</h4>
-        </div>
+        <Button event={signIn} title={'Sign In'} position={"left"} top/>
+        <div className="link-button green" style={{bottom:"20vh"}}><h3>Wanto to watch video without an account?  </h3><h4>Click Here</h4></div>
+        <div className="link-button2 green"style={{bottom:"16vh"}}><h3>Want to create an account?  </h3><h4> Sign Up Here</h4></div>
       </div>
     </>
   );
 };
 
-export default SignIn;
+export default SignInCompany;

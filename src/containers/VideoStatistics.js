@@ -12,9 +12,13 @@ import lorealLogo from '../assets/images/loreal.png'
 import neutrogenaLogo from '../assets/images/neutrogena.png'
 import nikeLogo from '../assets/images/nike.png'
 import Button from "../components/Button/index";
+import AddVideo from "../components/AddVideo/index";
+import AddEmotion from "../components/AddEmotion/index";
+import ChooseEmotions from "../components/ChooseEmotions/index";
 import "../styles/pages/__pages-dir.scss";
 const VideoStatistics= (props) => {
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
+  const [chooseEmotion, setChooseEmotion] = useState(false);
   const [display, setDisplay] = useState(false);
   const [videoSmall, setVideoSmall] = useState(false);
   const drawerToggleClickHandler = () => {
@@ -30,9 +34,15 @@ const VideoStatistics= (props) => {
    
   }
 
+  const settingChooseEmotion =()=>{
+    setChooseEmotion(!chooseEmotion)
+   
+  }
+
   return (
     <>
-
+    <AddEmotion settingChooseEmotion={settingChooseEmotion} open={chooseEmotion} videoSmall={settingVideoSmall}/>
+ 
       <Sidebar drawerToggleClickHandler={drawerToggleClickHandler} />
       <Drawer
         sideDrawerOpen={sideDrawerOpen}
@@ -67,7 +77,7 @@ const VideoStatistics= (props) => {
         </div>
         
        
-        <Button title={'View Statistics.'} position={"right"} hide={videoSmall} event={settingVideoSmall}/>
+        <Button title={'View Statistics.'} position={"right"} hide={videoSmall} event={settingChooseEmotion}/>
         </div>
 
   

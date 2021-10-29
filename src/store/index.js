@@ -17,8 +17,8 @@ const loadingMiddleware = loadingBarMiddleware({
 const middlewares = [sagaMiddleware, routeMiddleware,loadingBarMiddleware()];
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default function configureStore(initialState) {
-  const store = createStore(reducers(history), initialState,
+export default function configureStore() {
+  const store = createStore(reducers(history),
     composeEnhancers(applyMiddleware(...middlewares)));
     
 
@@ -26,6 +26,7 @@ export default function configureStore(initialState) {
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
+  
     module.hot.accept('../reducers/index', () => {
       const nextRootReducer = require('../reducers/index');
       store.replaceReducer(nextRootReducer);
