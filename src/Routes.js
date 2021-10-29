@@ -36,6 +36,7 @@ import VideoDetail from "./containers/VideoDetail";
 import VideoWatch from "./containers/VideoWatch";
 import VideoStatistics from "./containers/VideoStatistics";
 import Emotions from "./containers/Emotions";
+import HomeCompany from "./containers/HomeCompany";
 import { fetchUserRequest } from "./actions/index";
 import GuardRoutesUser from "./helpers/GuardRoutesUser";
 import GuardRoutesCompany from "./helpers/GuardRoutesCompany";
@@ -52,9 +53,9 @@ function Routes() {
   }));
 
   const dispatch = useDispatch();
-  console.log("Autth", loader);
+
   useEffect(() => {
-    console.log("Autth2");
+ 
     if (token && _id && role === null) {
       dispatch(fetchUserRequest(_id));
     }
@@ -124,8 +125,12 @@ function Routes() {
             path="/:video/statistics"
             component={VideoStatistics}
           />
+<<<<<<< HEAD
           <Redirect exact from="*" to="/home" />
 >>>>>>> 2acdec8... Login
+=======
+       
+>>>>>>> c75d24d... Login
         </Switch>
       ) : (
         <>
@@ -136,7 +141,7 @@ function Routes() {
           <Route exact path="/signin-company" component={SignInCompany} />,
           <Route exact path="/join-us" component={JoinUs} />,
           <Route exact path="/watchvideo" component={NoAccount} />,
-          <Redirect exact from="*" to="/home" />
+        
         </Switch>
         : <div className="full-page-loader">
           <CircularProgress size={100} thickness={5}/></div>}
@@ -146,6 +151,8 @@ function Routes() {
         <Route exact path="/brand/:id/:video" component={VideoDetail} />,
         <Route exact path="/brand/:id" component={BrandDetail} />,
         <Route exact path="/home" component={Home} />,
+        <Route exact path="/homeCompany" component={HomeCompany} />,
+        <Route exact path="/embedding" component={Embedding} />,
       </Switch>
     </div>
   );

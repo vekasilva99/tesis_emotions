@@ -28,6 +28,7 @@ export const FETCH_USER_SUCCESS= 'fetch_user_success'
 export const FETCH_USER_ERROR= 'fetch_user_error'
 
 export const REMOVE_ERROR= 'remove_error'
+export const REMOVE_SUCCESS= 'remove_error'
 
 export const NOT_LOADING= 'not_loading'
 export const LOADING= 'loading'

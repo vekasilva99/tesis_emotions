@@ -9,6 +9,7 @@ import Button from "../components/Button/index";
 import countryList from "../helpers/countries";
 import DatePicker from "../components/DatePicker";
 import ErrorPopUp from "../components/ErrorPopUp/index";
+import SuccessPopUp from "../components/SuccessPopUp/index";
 import { signUpUserRequest } from "../actions/SignUp";
 import { notLoading } from "../actions/Loader";
 import "../styles/pages/__pages-dir.scss";
@@ -215,6 +216,7 @@ const SignUp = (props) => {
     <div className={loader || submitted ? "full-page-loader" :"full-page-loader not-loading"}>
           <CircularProgress size={100} thickness={5}/></div>
       <ErrorPopUp inputs={inputFields} />
+      <SuccessPopUp inputs={inputFields} />
       <div className="app-no-account">
         <div className="input-container-column">
           {selectFields.map((input, index) => (

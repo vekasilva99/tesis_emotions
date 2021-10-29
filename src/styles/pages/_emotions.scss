@@ -12,6 +12,23 @@ max-height: 100vh;
 
 }
 
+.circle-button{
+  width:200px;
+  height: 200px;
+  border-radius: 100%;
+  background-color: #CB807D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'PlayfairDisplay-SemiBold';
+  color: white;
+  font-size: 30px;
+  text-transform: uppercase;
+  transform: rotate(180deg);
+
+}
+
+
 .emotions-container{
   width: 100%;
   height: auto;

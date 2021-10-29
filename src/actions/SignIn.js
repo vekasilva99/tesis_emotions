@@ -11,7 +11,8 @@ import {
   FETCH_USER_ERROR,
   FETCH_USER_SUCCESS,
   FETCH_USER_REQUEST,
-  REMOVE_ERROR
+  REMOVE_ERROR,
+  REMOVE_SUCCESS
 } from "../constants/ActionTypes";
 
 export const signInUserRequest = (payload) => {
@@ -100,6 +101,13 @@ export const fetchUserError = (payload) => {
 export const removeError = (payload) => {
   return {
     type: REMOVE_ERROR,
+    payload: payload,
+  };
+};
+
+export const removeSuccess = (payload) => {
+  return {
+    type: REMOVE_SUCCESS,
     payload: payload,
   };
 };

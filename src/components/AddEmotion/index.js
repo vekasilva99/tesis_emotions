@@ -25,7 +25,7 @@ for(let j=0;j<files.length;j++){
       }
     }
     setPreview(URL.createObjectURL(files[0]))
-    console.log(auxImages)
+  
   }
 
   const [inputFields, setInputFields] = useState([
@@ -48,8 +48,7 @@ for(let j=0;j<files.length;j++){
       if(input.name == name )
      
         fields[index].value=event
-        console.log("entre",event)
-        console.log("entre",fields[index].value)
+  
         setInputFields(fields)
     });
 
@@ -63,7 +62,7 @@ for(let j=0;j<files.length;j++){
           <div className="pop-up-item-new-emotion-1">
             {images.map((image,index)=>
             <label style={{ marginBottom: "5px" }} className="upload-button">
-              <input style={{visibility:"hidden"}} onChange={(event)=>{console.log(event.target.files);uploadImages(event.target.files,index)}} type="file" accept="image/*" multiple={image.image==null ? true :false}/>
+              <input style={{visibility:"hidden"}} onChange={(event)=>{uploadImages(event.target.files,index)}} type="file" accept="image/*" multiple={image.image==null ? true :false}/>
               {image.image===null ?
               <FaPlus className="upload-button-icon"/>
               :<img className="upload-button-image" src={URL.createObjectURL(image.image)}/>}
