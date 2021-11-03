@@ -65,60 +65,36 @@ const EditCompany = (props) => {
 
   const [inputFields, setInputFields] = useState([
     {
-<<<<<<< HEAD
-      placeholder: "Enter your full name",
-      name: "full_name",
-=======
       placeholder: "Ingrese nombre",
       name: "nombre_completo",
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       value: full_name,
       error: "",
       type: "text",
     },
     {
-<<<<<<< HEAD
-      placeholder: "Enter your email",
-=======
       placeholder: "Ingrese su email",
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       name: "email",
       value: email,
       error: "",
       type: "email",
     },
     {
-<<<<<<< HEAD
-      placeholder: "Enter your password",
-      name: "password",
-=======
       placeholder: "Ingrese su contraseña",
       name: "contraseña",
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       value: "",
       error: "",
       type: "password",
     },
     {
-<<<<<<< HEAD
-      placeholder: "Enter your new password",
-      name: "new password",
-=======
       placeholder: "Ingrese nueva contraseña",
       name: "nueva contraseña",
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       value: "",
       error: "",
       type: "password",
     },
     {
-<<<<<<< HEAD
-      placeholder: "Confirm your new password",
-      name: "confirm new password",
-=======
       placeholder: "Confirme nueva contraseña",
       name: "Confirme nueva contraseña",
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       value: "",
       error: "",
       type: "password",
@@ -139,20 +115,12 @@ const EditCompany = (props) => {
 
     let error = false;
     if (inputFields[0].value === "") {
-<<<<<<< HEAD
-      setError(true, 0, "Required Field");
-=======
       setError(true, 0, "Campo requerido");
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       emptyField = true;
     }
 
     if (inputFields[1].value === "") {
-<<<<<<< HEAD
-      setError(true, 1, "Required Field");
-=======
       setError(true, 1, "Campo requerido");
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       emptyField = true;
     }
 
@@ -160,20 +128,12 @@ const EditCompany = (props) => {
       moment(birthdateDate).format("LL") === moment(new Date()).format("LL") ||
       birthdateDate >= new Date()
     ) {
-<<<<<<< HEAD
-      setBirthdateError("Required Field");
-=======
       setBirthdateError("Campo requerido");
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       emptyField = true;
     }
 
     if (!validator.isEmail(inputFields[1].value)) {
-<<<<<<< HEAD
-      setError(true, 1, "Invalid Email");
-=======
       setError(true, 1, "Email invalido");
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       error = true;
     }
 
@@ -213,17 +173,6 @@ const EditCompany = (props) => {
     let error = false;
 
     if (inputFields[2].value === "") {
-<<<<<<< HEAD
-      setError(true, 2, "Required Field");
-      emptyField = true;
-    }
-    if (inputFields[3].value === "") {
-      setError(true, 3, "Required Field");
-      emptyField = true;
-    }
-    if (inputFields[4].value === "") {
-      setError(true, 4, "Required Field");
-=======
       setError(true, 2, "Campo requerido");
       emptyField = true;
     }
@@ -233,26 +182,16 @@ const EditCompany = (props) => {
     }
     if (inputFields[4].value === "") {
       setError(true, 4, "Campo requerido");
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       emptyField = true;
     }
 
     if (!validator.isStrongPassword(inputFields[3].value)) {
-<<<<<<< HEAD
-      setError(true, 2, "Weak Password");
-      error = true;
-    }
-    if (inputFields[3].value != inputFields[4].value) {
-      setError(true, 3, "Passwords do not match");
-      setError(true, 4, "Passwords do not match");
-=======
       setError(true, 2, "Contraseña debil");
       error = true;
     }
     if (inputFields[3].value != inputFields[4].value) {
       setError(true, 3, "Contraseñas no concuerdan");
       setError(true, 4, "Contraseñas no concuerdan");
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       error = true;
     }
 
@@ -279,11 +218,7 @@ const EditCompany = (props) => {
       {/* <SuccessPopUp defaultInputs={defaultInputs} inputs={inputFields} /> */}
       <div className={open ? "add-company-image" : "add-company-image-hidden"}>
         <div className="add-company-image-container big">
-<<<<<<< HEAD
-          <h4>Change Password</h4>
-=======
           <h4>Cambio de Contraseña</h4>
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           <div className="input-container-column small">
             {inputFields.slice(2, 5).map((input, index) => (
               <Input
@@ -301,11 +236,7 @@ const EditCompany = (props) => {
           </div>
           <ButtonPopUp
             color={"pink"}
-<<<<<<< HEAD
-            title={"Set Password."}
-=======
             title={"Cambiar Contraseña."}
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
             position={"right"}
             event={changePassword}
           />
@@ -331,11 +262,7 @@ const EditCompany = (props) => {
           className="subtitle"
           style={{ marginTop: "0px", marginBottom: "30px" }}
         >
-<<<<<<< HEAD
-          Profile.
-=======
           Perfil.
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         </h1>
         <div className="input-container">
           {inputFields.slice(0, 2).map((input, index) => (
@@ -391,21 +318,13 @@ const EditCompany = (props) => {
             setOpen(true);
           }}
         >
-<<<<<<< HEAD
-          Change Password?
-=======
           Cambiar Contraseña?
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         </h5>
         <Button
           event={() => {
             signUp();
           }}
-<<<<<<< HEAD
-          title={"Update Profile."}
-=======
           title={"Actualizar."}
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           position={"right"}
         />
       </div>
@@ -413,8 +332,4 @@ const EditCompany = (props) => {
   );
 };
 
-<<<<<<< HEAD
 export default EditCompany;
-=======
-export default EditCompany;
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

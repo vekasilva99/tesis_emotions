@@ -7,14 +7,11 @@ import { FaPlus } from "react-icons/fa";
 import Button from "../ButtonPopUp/index";
 import * as tf from "@tensorflow/tfjs-core";
 import * as tf_2 from "@tensorflow/tfjs";
-<<<<<<< HEAD
-=======
 import {
   getMean,
   getSTD,
   getStandarizedArray,
 } from "../../helpers/Model/methods";
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 import { getEmbedding } from "../../helpers/getEmbedding";
 import { addEmotionRequest, loading } from "../../actions/Company";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,30 +19,11 @@ import ErrorPopUp from "../../components/ErrorPopUp/index";
 import ErrorPopUpModel from "../../components/ErrorPopUpModel/index";
 import SuccessPopUp from "../../components/SuccessPopUp/index";
 import CircularProgress from "@material-ui/core/CircularProgress";
-<<<<<<< HEAD
-=======
 
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 class scaling extends tf_2.layers.Layer {
   static className = "scaling";
   constructor(config) {
     super(config);
-<<<<<<< HEAD
-    this.scale=config.scale
-  }
-  call(input){
-    return tf_2.tidy(()=>{
-      console.log("SCALE ",this.scale)
-    // console.log("SCALE Antes",input[0].dataSync())
-    // console.log("SCALE Despues",input[0].mul(this.scale).dataSync())
-      return input[0].mul(this.scale)
-      // return tf_2.math.l2_normalize(input,-1,1e-12,this.name)
-    })
-  }
-  getConfig() {
-    const config = super.getConfig();
-    Object.assign(config, {scale: this.scale});
-=======
     this.scale = config.scale;
   }
   call(input) {
@@ -60,7 +38,6 @@ class scaling extends tf_2.layers.Layer {
   getConfig() {
     const config = super.getConfig();
     Object.assign(config, { scale: this.scale });
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
     return config;
   }
 }
@@ -70,17 +47,6 @@ class l2Norm extends tf_2.layers.Layer {
   constructor(config) {
     super(config);
   }
-<<<<<<< HEAD
-  call(input){
-    return tf_2.tidy(()=>{
-      console.log("SJA ANTES",tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12).dataSync())
-      console.log("SJA",input[0].div(tf_2.sqrt(tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12))).dataSync())
-      return input[0].div(tf_2.sqrt(tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12)))
-      // return tf_2.math.l2_normalize(input,-1,1e-12,this.name)
-    })
-  }
-}
-=======
 
   call(input) {
     return tf_2.tidy(() => {
@@ -94,7 +60,6 @@ class l2Norm extends tf_2.layers.Layer {
   }
 }
 
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage }) => {
   const dispatch = useDispatch();
   const [images, setImages] = useState([
@@ -103,11 +68,8 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
     { image: null },
   ]);
   const [preview, setPreview] = useState(null);
-<<<<<<< HEAD
-=======
   const [finalArray, setFinalArray] = useState(null);
   const [emotionsEmbeddings, setEmotionsEmbeddings] = useState([]);
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   const [submitted, setSubmitted] = useState(false);
   const blazeface = require("@tensorflow-models/blazeface");
   const faceLandmarksDetection = require("@tensorflow-models/face-landmarks-detection");
@@ -137,36 +99,19 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
               `output-upload` + (i + 1).toString()
             );
             let ctx = canvas.getContext("2d");
-<<<<<<< HEAD
-=======
             ctx.clearRect(0, 0, canvas.width, canvas.height)
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
             const image = new Image();
             image.src = URL.createObjectURL(files[j]);
             image.onload = () => {
               ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
             };
-<<<<<<< HEAD
-
-=======
             canvas
             .getContext("2d")
             .getImageData(0, 0, canvas.width, canvas.height);
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
             break;
           }
         }
       }
-<<<<<<< HEAD
-    }
-    setPreview(URL.createObjectURL(files[0]));
-  };
-
-  const [inputFields, setInputFields] = useState([
-    {
-      placeholder: "Enter Emotion Name",
-      name: "emotion name",
-=======
     }else{
       auxImages[index].image = files[0];
             let canvas = document.getElementById(
@@ -194,7 +139,6 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
     {
       placeholder: "Ingrese Emoción",
       name: "Nombre de Emoción",
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       value: "",
       error: "",
       type: "text",
@@ -267,19 +211,11 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
     
     try{
     console.log("EMPEZANDO");
-<<<<<<< HEAD
-    setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
-    // setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
-    console.log("TERMINADO");
-    }catch(error){
-      setErrorMessage('Oops! It seems something went wrong when loading the model. Please clear your cache and try again. Sorry for the inconvinience.')
-=======
     // setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
     setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
     console.log("TERMINADO");
     }catch(error){
       setErrorMessage('Oops! Parece que algo salió mal al cargar el modelo. Limpia tu caché y vuelve a intentarlo. Perdon por la inconveniencia.')
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
  
     }
   };
@@ -292,8 +228,6 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
     }
   };
 
-<<<<<<< HEAD
-=======
   useEffect(() => {
     
     if (finalArray != null) {
@@ -545,7 +479,6 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
     // Return trimmed canvas
     return copy.canvas;
   };
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   return (
     <>
       <div
@@ -566,17 +499,10 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
           setOpen(false)
               }}
             >
-<<<<<<< HEAD
-              Close
-            </h3></div>
-        <div className="pop-up-content">
-          <h4>New Emotion</h4>
-=======
               Cerrar
             </h3></div>
         <div className="pop-up-content">
           <h4>Nueva Emoción</h4>
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 
           <div className="pop-up-item-new-emotion">
             <div className="pop-up-item-new-emotion-1">
@@ -626,14 +552,6 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
               </div>
             </div>
             <div className="pop-up-item-new-emotion-2">
-<<<<<<< HEAD
-              <p>
-                Full service creative agency Full service creative agency Full
-                service creative agency Full Full service creative{" "}
-              </p>
-              <canvas
-                style={{ background: "pink", visibility: "hidden" }}
-=======
               {/* <p>
                Suba las tres imagenes que mejor describan la emoción o expresión que desea agregar. 
                Recuerde que los resultados obtenidos dependeran de esto.{" "}
@@ -642,17 +560,12 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
                 style={{ background: "pink"
                 , visibility: "hidden" 
               }}
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
                 id={`output-upload-detail`}
               ></canvas>
             </div>
           </div>
           <Button
-<<<<<<< HEAD
-            title={"Add Emotion."}
-=======
             title={"Agregar."}
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
             position={"right"}
             event={async () => {
               // videoSmall();
@@ -666,36 +579,10 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
                   model2,
                   i + 1
                 );
-<<<<<<< HEAD
-                var arrayString = JSON.stringify(auxEmbedding);
-                auxEmbedding = JSON.parse(arrayString);
-
-                let aux = [];
-
-                for (let j = 0; j < 16; j++) {
-                  aux.push(auxEmbedding[0][j]);
-                }
-
-                let auxItem = {
-                  img: images[i].image,
-                  embedding: aux,
-                };
-                auxArray.push(auxItem);
-              }
-              setSubmitted(false);
-              dispatch(
-                addEmotionRequest({
-                  emotion: inputFields[0].value,
-                  company: _id,
-                  embeddings: auxArray,
-                })
-              );
-=======
               }
                
            
            
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
             }}
           />
         </div>

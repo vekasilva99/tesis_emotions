@@ -7,15 +7,11 @@ import { FaPlus } from "react-icons/fa";
 import Button from "../ButtonPopUp/index";
 import * as tf from "@tensorflow/tfjs-core";
 import * as tf_2 from "@tensorflow/tfjs";
-<<<<<<< HEAD
-import { getEmbedding } from "../../helpers/getEmbedding";
-=======
 import {
   getMean,
   getSTD,
   getStandarizedArray,
 } from "../../helpers/Model/methods";
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 import {
   addEmotionRequest,
   loading,
@@ -27,16 +23,11 @@ import ErrorPopUpModel from "../../components/ErrorPopUpModel/index";
 import SuccessPopUp from "../../components/SuccessPopUp/index";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-<<<<<<< HEAD
-=======
 
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 class scaling extends tf_2.layers.Layer {
   static className = "scaling";
   constructor(config) {
     super(config);
-<<<<<<< HEAD
-=======
     this.scale = config.scale;
   }
   call(input) {
@@ -52,7 +43,6 @@ class scaling extends tf_2.layers.Layer {
     const config = super.getConfig();
     Object.assign(config, { scale: this.scale });
     return config;
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   }
 }
 
@@ -61,14 +51,6 @@ class l2Norm extends tf_2.layers.Layer {
   constructor(config) {
     super(config);
   }
-<<<<<<< HEAD
-}
-
-class L2Norm extends tf_2.layers.Layer {
-  static className = "L2Norm";
-  constructor(config) {
-    super(config);
-=======
 
   call(input) {
     return tf_2.tidy(() => {
@@ -79,7 +61,6 @@ class L2Norm extends tf_2.layers.Layer {
       );
       // return tf_2.math.l2_normalize(input,-1,1e-12,this.name)
     });
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   }
 }
 const ChooseEmotionPopUp = ({
@@ -93,10 +74,7 @@ const ChooseEmotionPopUp = ({
   const dispatch = useDispatch();
   const [images, setImages] = useState([{ image: null }]);
   const [preview, setPreview] = useState(null);
-<<<<<<< HEAD
-=======
   const [finalArray, setFinalArray] = useState(null);
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   const [submitted, setSubmitted] = useState(false);
   const blazeface = require("@tensorflow-models/blazeface");
   const faceLandmarksDetection = require("@tensorflow-models/face-landmarks-detection");
@@ -136,26 +114,19 @@ const ChooseEmotionPopUp = ({
           image.onload = () => {
             ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
           };
-<<<<<<< HEAD
-=======
           canvas
           .getContext("2d")
           .getImageData(0, 0, canvas.width, canvas.height);
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 
           break;
         }
       }
     }
-<<<<<<< HEAD
-    setPreview(URL.createObjectURL(files[0]));
-=======
     try{
     setPreview(URL.createObjectURL(files[0]));
     }catch(error){
       
     }
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   };
 
   const [inputFields, setInputFields] = useState([
@@ -229,19 +200,6 @@ const ChooseEmotionPopUp = ({
   const loadModel = async () => {
     tf_2.serialization.registerClass(scaling);
     tf_2.serialization.registerClass(l2Norm);
-<<<<<<< HEAD
-    tf_2.serialization.registerClass(L2Norm);
-
-    // setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
-    try{
-    console.log("EMPEZANDO");
-    setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
-    console.log("TERMINADO");
-    }catch(error){
-      setErrorMessage('Oops! It seems something went wrong when loading the model. Please clear your cache and try again. Sorry for the inconvinience.')
- 
-    }
-=======
 
 
     try{
@@ -253,7 +211,6 @@ const ChooseEmotionPopUp = ({
         setErrorMessage('Oops! Parece que algo salió mal al cargar el modelo. Limpia tu caché y vuelve a intentarlo. Perdon por la inconveniencia.')
    
       }
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   };
 
   const setError = (input, index, error) => {
@@ -263,8 +220,6 @@ const ChooseEmotionPopUp = ({
       setInputFields(fields);
     }
   };
-<<<<<<< HEAD
-=======
   useEffect(() => {
     if (finalArray != null) {
       let result = undefined;
@@ -513,7 +468,6 @@ const ChooseEmotionPopUp = ({
     // Return trimmed canvas
     return copy.canvas;
   };
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 
   return (
     <>
@@ -537,19 +491,11 @@ const ChooseEmotionPopUp = ({
               setOpen(false);
             }}
           >
-<<<<<<< HEAD
-            Close
-          </h3>
-        </div>
-        <div className="pop-up-content">
-          <h4>Update Image</h4>
-=======
             Cerrar
           </h3>
         </div>
         <div className="pop-up-content">
           <h4>Actualizar Imagen</h4>
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 
           <div className="pop-up-item-new-emotion">
             <div className="pop-up-item-new-emotion-1-upload">
@@ -609,11 +555,7 @@ const ChooseEmotionPopUp = ({
             ></canvas>
           </div>
           <Button
-<<<<<<< HEAD
-            title={"Add Emotion."}
-=======
             title={"Actualizar."}
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
             position={"right"}
             event={async () => {
               // videoSmall();
@@ -627,41 +569,8 @@ const ChooseEmotionPopUp = ({
                   model2,
                   i + 1
                 );
-<<<<<<< HEAD
-                var arrayString = JSON.stringify(auxEmbedding);
-                auxEmbedding = JSON.parse(arrayString);
-
-                let aux = [];
-
-                for (let j = 0; j < 16; j++) {
-                  aux.push(auxEmbedding[0][j]);
-                }
-
-                let auxItem = {
-                  img: images[i].image,
-                  embedding: aux,
-                };
-                auxArray.push(auxItem);
-              }
-              setSubmitted(false);
-              dispatch(
-                updateEmotionRequest({
-                  emotion: embedding.emotionID,
-                  company: _id,
-                  embeddings: {
-                    embedding: auxArray[0].embedding,
-                    _id: embedding._id,
-                    img: auxArray[0].img,
-                  },
-                  index: index,
-                  url: embedding.img,
-                  setOpen:()=>{setOpen(false)}
-                })
-              );
-=======
               }
              
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
             }}
           />
         </div>

@@ -84,11 +84,7 @@ const Emotions = (props) => {
           className="subtitle"
           style={{ color: "#CB807D", marginTop: "0px", marginBottom: "60px" }}
         >
-<<<<<<< HEAD
-          Emotions.
-=======
           Emociones.
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         </h1>
         {emotions.length > 0 ? (
           <div className="emotions-container">
@@ -102,11 +98,7 @@ const Emotions = (props) => {
             setOpen(true);
           }}
           disable={error ? true :false}
-<<<<<<< HEAD
-          title={"Add Emotion."}
-=======
           title={"Agregar Emoción."}
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           position={"right"}
         />
       </div>
@@ -114,8 +106,4 @@ const Emotions = (props) => {
   );
 };
 
-<<<<<<< HEAD
 export default Emotions;
-=======
-export default Emotions;
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

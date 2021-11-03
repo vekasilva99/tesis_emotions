@@ -132,19 +132,12 @@ function* acceptCompany(payload) {
     } else {
       let error = { emailError: null };
       if (res.status === 500) {
-<<<<<<< HEAD
-        error = { emailError: "Server Error" };
-      } else {
-        error = {
-          error: "Oops. Something went wrong.",
-=======
         error = { emailError: "Error de Servidor"
  };
       } else {
         error = {
           error: "Oops. Algo salió mal."
 ,
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       }
       yield put(acceptCompanyError(error));
@@ -163,19 +156,12 @@ function* rejectCompany(payload) {
     } else {
       let error = { emailError: null };
       if (res.status === 500) {
-<<<<<<< HEAD
-        error = { emailError: "Server Error" };
-      } else {
-        error = {
-          error: "Oops. Something went wrong.",
-=======
         error = { emailError: "Error de Servidor"
  };
       } else {
         error = {
           error: "Oops. Algo salió mal."
 ,
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       }
       yield put(rejectCompanyError(error));
@@ -194,19 +180,12 @@ function* blockVideo(payload) {
     } else {
       let error = { emailError: null };
       if (res.status === 500) {
-<<<<<<< HEAD
-        error = { emailError: "Server Error" };
-      } else {
-        error = {
-          error: "Oops. Something went wrong.",
-=======
         error = { emailError: "Error de Servidor"
  };
       } else {
         error = {
           error: "Oops. Algo salió mal."
 ,
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       }
       yield put(blockVideoError(error));
@@ -225,19 +204,12 @@ function* unblockVideo(payload) {
     } else {
       let error = { emailError: null };
       if (res.status === 500) {
-<<<<<<< HEAD
-        error = { emailError: "Server Error" };
-      } else {
-        error = {
-          error: "Oops. Something went wrong.",
-=======
         error = { emailError: "Error de Servidor"
  };
       } else {
         error = {
           error: "Oops. Algo salió mal."
 ,
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       }
       yield put(unblockVideoError(error));

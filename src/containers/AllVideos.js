@@ -82,11 +82,7 @@ const AllVideos = (props) => {
           event={() => {
             setOpenVideo(true);
           }}
-<<<<<<< HEAD
-          title={"Add Video."}
-=======
           title={"Agregar Video."}
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           position={"right"}
         />
       </div>
@@ -94,8 +90,4 @@ const AllVideos = (props) => {
   );
 };
 
-<<<<<<< HEAD
 export default AllVideos;
-=======
-export default AllVideos;
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

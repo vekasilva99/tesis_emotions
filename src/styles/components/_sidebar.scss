@@ -101,17 +101,6 @@
 
 .navlink{
   text-decoration: none;
-<<<<<<< HEAD
-  font-size: 100px;
-  color: white;
-  font-family: 'PlayfairDisplay-Medium';
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  transition: all 0.5s;
-  &:hover{
-    color: #A9B18F;
-    font-size: 120px;
-=======
   font-size: 80px;
   color: white;
   font-family: 'PlayfairDisplay-Medium';
@@ -123,7 +112,6 @@
   &:hover{
     color: #A9B18F;
     font-size: 90px;
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
     transition: all 0.5s;
   }
   @media screen and (max-width: 800px) {

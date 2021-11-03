@@ -23,10 +23,7 @@ const TestModel = ({}) => {
   const dispatch = useDispatch();
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
   const [openVideo, setOpenVideo] = useState(false);
-<<<<<<< HEAD
-=======
   const [showResults, setShowResults] = useState(false);
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   const [error, setErrorMessage] = useState(null);
   const [selectedEmotions, setSelectedEmotions] = useState([]);
   const [chooseEmotion, setChooseEmotion] = useState(false);
@@ -42,20 +39,13 @@ const TestModel = ({}) => {
   const name = useSelector((state) => ({ ...state.auth })).full_name;
   const emotions = useSelector((state) => ({ ...state.company })).emotions;
   const videos = useSelector((state) => ({ ...state.brands })).videos;
-<<<<<<< HEAD
-=======
   const testInfo = useSelector((state) => state.stats.testInfo);
   const testImage = useSelector((state) => state.stats.image);
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 
   const drawerToggleClickHandler = () => {
     setSideDrawerOpen(!sideDrawerOpen);
   };
 
-<<<<<<< HEAD
-
-=======
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   const addEmotion = (id) => {
     let aux = selectedEmotions;
     if (!aux.includes(id)) {
@@ -69,10 +59,6 @@ const TestModel = ({}) => {
     console.log(aux);
   };
 
-<<<<<<< HEAD
-
-=======
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   useEffect(() => {
     if (videos.length === 0) {
       dispatch(fetchVideosRequest(_id));
@@ -87,22 +73,12 @@ const TestModel = ({}) => {
 
   const settingVideoSmall = () => {
     setDisplay(true);
-<<<<<<< HEAD
-    setOpenAdd(true)
-=======
     setOpenAdd(true);
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   };
 
   const settingChooseEmotion = () => {
     setChooseEmotion(!chooseEmotion);
   };
-<<<<<<< HEAD
-  return (
-    <>
-      <UploadImage error={error} setErrorMessage={setErrorMessage} selectedEmotions={selectedEmotions} open={openAdd} setOpen={setOpenAdd} />
-           <ChooseEmotions
-=======
 
   return (
     <>
@@ -116,7 +92,6 @@ const TestModel = ({}) => {
         setOpen={setOpenAdd}
       />
       <ChooseEmotions
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         settingChooseEmotion={settingChooseEmotion}
         open={chooseEmotion}
         setOpen={setChooseEmotion}
@@ -135,33 +110,6 @@ const TestModel = ({}) => {
       />
 
       <div className="app-emotions-test">
-<<<<<<< HEAD
-        <h1
-          className="subtitle"
-          style={{ color: "black", marginTop: "0px", marginBottom: "40px" }}
-        >
-          Test Our Model.
-        </h1>
-        <div className="step-container">
-        <h2>Step 1</h2>
-        <h3>Choose some of your existing emotions to define the space we'll work with.</h3>
-        </div>
-        <div className="step-container">
-        <h2>Step 2</h2>
-        <h3>Upload an image.</h3>
-        </div>
-        <div className="step-container">
-        <h2>Step 3</h2>
-        <h3>See the results.</h3>
-        </div>
-        <Button
-         disable={error ? true :false}
-            title={"Start."}
-            position={"right"}
-            event={settingChooseEmotion}
-          />
-       
-=======
         {!showResults ? (
           <>
             <h1
@@ -284,14 +232,9 @@ const TestModel = ({}) => {
             />
           </>
         )}
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       </div>
     </>
   );
 };
 
-<<<<<<< HEAD
 export default TestModel;
-=======
-export default TestModel;
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

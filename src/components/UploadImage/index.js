@@ -7,11 +7,6 @@ import { FaPlus } from "react-icons/fa";
 import Button from "../ButtonPopUp/index";
 import * as tf from "@tensorflow/tfjs-core";
 import * as tf_2 from "@tensorflow/tfjs";
-<<<<<<< HEAD
-import { getEmbedding } from "../../helpers/getEmbedding";
-import { addEmotionRequest, loading } from "../../actions/Company";
-import { useDispatch, useSelector } from "react-redux";
-=======
 // import { getEmbedding } from "../../helpers/getEmbedding";
 import { addEmotionRequest, loading } from "../../actions/Company";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,38 +15,17 @@ import {
   getSTD,
   getStandarizedArray,
 } from "../../helpers/Model/methods";
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 import ErrorPopUp from "../../components/ErrorPopUp/index";
 import ErrorPopUpModel from "../../components/ErrorPopUpModel/index";
 import SuccessPopUp from "../../components/SuccessPopUp/index";
 import CircularProgress from "@material-ui/core/CircularProgress";
-<<<<<<< HEAD
-import {testRequest} from "../../actions/Statistics"
-=======
 import { testRequest } from "../../actions/Statistics";
 import adidas from "../../assets/images/adidas.png";
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 
 class scaling extends tf_2.layers.Layer {
   static className = "scaling";
   constructor(config) {
     super(config);
-<<<<<<< HEAD
-    this.scale=config.scale
-  }
-  call(input){
-    return tf_2.tidy(()=>{
-      console.log("SCALE ",this.scale)
-    // console.log("SCALE Antes",input[0].dataSync())
-    // console.log("SCALE Despues",input[0].mul(this.scale).dataSync())
-      return input[0].mul(this.scale)
-      // return tf_2.math.l2_normalize(input,-1,1e-12,this.name)
-    })
-  }
-  getConfig() {
-    const config = super.getConfig();
-    Object.assign(config, {scale: this.scale});
-=======
     this.scale = config.scale;
   }
   call(input) {
@@ -66,7 +40,6 @@ class scaling extends tf_2.layers.Layer {
   getConfig() {
     const config = super.getConfig();
     Object.assign(config, { scale: this.scale });
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
     return config;
   }
 }
@@ -76,15 +49,6 @@ class l2Norm extends tf_2.layers.Layer {
   constructor(config) {
     super(config);
   }
-<<<<<<< HEAD
-  call(input){
-    return tf_2.tidy(()=>{
-      console.log("SJA ANTES",JSON.stringify(input[0].arraySync()))
-      console.log("SJA",input[0].div(tf_2.sqrt(tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12))).dataSync())
-      return input[0].div(tf_2.sqrt(tf_2.maximum(tf_2.sum(tf_2.square(input[0])), 1e-12)))
-      // return tf_2.math.l2_normalize(input,-1,1e-12,this.name)
-    })
-=======
 
   call(input) {
     return tf_2.tidy(() => {
@@ -95,7 +59,6 @@ class l2Norm extends tf_2.layers.Layer {
       );
       // return tf_2.math.l2_normalize(input,-1,1e-12,this.name)
     });
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   }
 }
 
@@ -105,14 +68,6 @@ class l2Norm extends tf_2.layers.Layer {
 //     super(config);
 //   }
 // }
-<<<<<<< HEAD
-const UploadImage = ({ settingChooseEmotion, open, setOpen,error,setErrorMessage,selectedEmotions }) => {
-  const dispatch = useDispatch();
-  const [images, setImages] = useState([
-    { image: null },
-  ]);
-  const [preview, setPreview] = useState(null);
-=======
 const UploadImage = ({
   settingChooseEmotion,
   open,
@@ -128,16 +83,12 @@ const UploadImage = ({
   const [preview, setPreview] = useState(null);
   const [show, setShow] = useState(false);
   const [finalArray, setFinalArray] = useState(null);
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   const [submitted, setSubmitted] = useState(false);
   const blazeface = require("@tensorflow-models/blazeface");
   const faceLandmarksDetection = require("@tensorflow-models/face-landmarks-detection");
   const [model, setModel] = useState(undefined);
   const [model2, setModel2] = useState(undefined);
-<<<<<<< HEAD
-=======
   let image = new Image();
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   const modelImageSize = 160;
   const img1 = useRef(null);
   const img2 = useRef(null);
@@ -148,38 +99,11 @@ const UploadImage = ({
   const errors = useSelector((state) => ({ ...state.company.error }));
   const success = useSelector((state) => ({ ...state.company.success }));
   const loader = useSelector((state) => ({ ...state.company })).loaderCompany;
-<<<<<<< HEAD
- 
-=======
 const loaderStatistics =useSelector((state) => (state.stats.loaderStatistics));
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   const uploadImages = (files, index) => {
     let auxImages = images;
     let auxFiles = images.filter((image) => image.image === null);
     if (files.length <= 1) {
-<<<<<<< HEAD
-  
-      for (let j = 0; j < files.length; j++) {
-        for (var i = 0; i < auxImages.length; i++) {
- 
-            auxImages[i].image = files[j];
-            let canvas = document.getElementById(
-              `output-upload` + (i + 1).toString()
-            );
-            let ctx = canvas.getContext("2d");
-            const image = new Image();
-            image.src = URL.createObjectURL(files[j]);
-            image.onload = () => {
-              ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-            };
-
-            break;
-          
-        }
-      }
-    }
-    setPreview(URL.createObjectURL(files[0]));
-=======
       for (let j = 0; j < files.length; j++) {
         for (var i = 0; i < auxImages.length; i++) {
           auxImages[i].image = files[j];
@@ -206,7 +130,6 @@ const loaderStatistics =useSelector((state) => (state.stats.loaderStatistics));
     }catch(error){
 
     }
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   };
 
   const [inputFields, setInputFields] = useState([
@@ -258,8 +181,6 @@ const loaderStatistics =useSelector((state) => (state.stats.loaderStatistics));
     return () => {};
   }, []);
 
-<<<<<<< HEAD
-=======
 //   useEffect(() => {
 //     if(!open && submitted){
 //       setSubmitted(false);
@@ -267,7 +188,6 @@ const loaderStatistics =useSelector((state) => (state.stats.loaderStatistics));
 //     }
 //   }, [open]);
 
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   useEffect(() => {
     if (Object.keys(success).length > 0 && open === true) {
       let auxFields = inputFields;
@@ -292,17 +212,6 @@ const loaderStatistics =useSelector((state) => (state.stats.loaderStatistics));
     tf_2.serialization.registerClass(l2Norm);
     // tf_2.serialization.registerClass(L2Norm);
 
-<<<<<<< HEAD
-   
-    try{
-    console.log("EMPEZANDO");
-     setModel2(await tf_2.loadLayersModel('http://localhost:8887/model.json'))
-    // setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
-    console.log("TERMINADO");
-    }catch(error){
-      setErrorMessage('Oops! It seems something went wrong when loading the model. Please clear your cache and try again. Sorry for the inconvinience.')
- 
-=======
     try {
       console.log("EMPEZANDO");
       // setModel2(await tf_2.loadLayersModel("http://localhost:8887/model.json"));
@@ -312,7 +221,6 @@ const loaderStatistics =useSelector((state) => (state.stats.loaderStatistics));
       setErrorMessage(
         "Oops! Parece que algo salió mal al cargar el modelo. Limpia tu caché y vuelve a intentarlo. Perdon por la inconveniencia."
       );
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
     }
   };
 
@@ -323,8 +231,6 @@ const loaderStatistics =useSelector((state) => (state.stats.loaderStatistics));
       setInputFields(fields);
     }
   };
-<<<<<<< HEAD
-=======
   useEffect(() => {
     if (finalArray != null) {
       let result = undefined;
@@ -571,17 +477,12 @@ const loaderStatistics =useSelector((state) => (state.stats.loaderStatistics));
     // Return trimmed canvas
     return copy.canvas;
   };
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 
   return (
     <>
       <div
         className={
-<<<<<<< HEAD
-          loader || submitted
-=======
           loaderStatistics || submitted
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
             ? "full-page-loader no-background"
             : "full-page-loader no-background not-loading"
         }
@@ -591,18 +492,6 @@ const loaderStatistics =useSelector((state) => (state.stats.loaderStatistics));
       <ErrorPopUpModel error={error} setError={setErrorMessage} />
       <ErrorPopUp company={true} inputs={inputFields} />
       <SuccessPopUp company={true} inputs={inputFields} />
-<<<<<<< HEAD
-      <div className={open ? "pop-up-container-down" : "pop-up-container-down closed"}>
-        <div className="close-pop-up"> <h3
-              onClick={() => {
-          setOpen(false)
-              }}
-            >
-              Close
-            </h3></div>
-        <div className="pop-up-content">
-          <h4>Upload Image</h4>
-=======
       <div
         className={
           open ? "pop-up-container-down" : "pop-up-container-down closed"
@@ -620,7 +509,6 @@ const loaderStatistics =useSelector((state) => (state.stats.loaderStatistics));
         </div>
         <div className="pop-up-content">
           <h4>Subir Imagen</h4>
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 
           <div className="pop-up-item-new-emotion">
             <div className="pop-up-item-new-emotion-1-upload">
@@ -679,19 +567,11 @@ const loaderStatistics =useSelector((state) => (state.stats.loaderStatistics));
             ></canvas>
           </div>
           <Button
-<<<<<<< HEAD
-            title={"Results."}
-            position={"right"}
-            event={async () => {
-              // videoSmall();
-
-=======
             title={"Resultados."}
             position={"right"}
             event={async () => {
               // videoSmall();
 setSubmitted(true)
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
               let auxArray = [];
 
               for (let i = 0; i < images.length; i++) {
@@ -701,33 +581,7 @@ setSubmitted(true)
                   model2,
                   i + 1
                 );
-<<<<<<< HEAD
-                var arrayString = JSON.stringify(auxEmbedding);
-                auxEmbedding = JSON.parse(arrayString);
-
-                let aux = [];
-
-                for (let j = 0; j < 16; j++) {
-                  aux.push(auxEmbedding[0][j]);
-                }
-
-                let auxItem = {
-                  img: images[i].image,
-                  embedding: aux,
-                };
-                auxArray.push(auxItem);
               }
-              setSubmitted(false);
-              dispatch(
-                testRequest({
-                  emotions: selectedEmotions,
-                  company: _id,
-                  photo_embedding:auxArray[0].embedding,
-                })
-              );
-=======
-              }
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
             }}
           />
         </div>

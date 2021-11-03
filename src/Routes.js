@@ -29,10 +29,7 @@ import GuardRoutesCompany from "./helpers/GuardRoutesCompany";
 import WatchVideoRoute from "./helpers/WatchVideoRoute";
 import GuardRoutesAdmin from "./helpers/GuardRoutesAdmin";
 import TestModel from "./containers/TestModel"
-<<<<<<< HEAD
-=======
 import TestModelAttention from "./containers/TestModelAttention"
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 import AllVideos from "./containers/AllVideos"
 import EditUser from "./containers/EditUser"
 import NoRoleRoute from "./helpers/NoRoleRoute";
@@ -126,15 +123,12 @@ console.log("Admin",role)
                <GuardRoutesCompany
               role={role}
               exact
-<<<<<<< HEAD
-=======
               path="/testModelAttention"
               component={TestModelAttention}
             />
                <GuardRoutesCompany
               role={role}
               exact
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
               path="/videos"
               component={AllVideos}
             />

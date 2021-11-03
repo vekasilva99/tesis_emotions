@@ -52,11 +52,7 @@ const VideoStatistics = (props) => {
   const [visible, setVisible] = useState(false);
   const [loader, setLoader] = useState(true);
 
-<<<<<<< HEAD
-  const { selectedCompany, selectedVideo,error  } = useSelector((state) => ({
-=======
   const { selectedCompany, selectedVideo,error,loaderCompany  } = useSelector((state) => ({
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
     ...state.brands,
   }));
   const { emotions } = useSelector((state) => ({
@@ -91,27 +87,18 @@ const VideoStatistics = (props) => {
   useEffect(() => {
     dispatch(fetchEmotionsRequest());
   }, []);
-<<<<<<< HEAD
-=======
   useEffect(() => {
     if(loaderCompany==false){
       setLoader(false)
     }
   }, [loaderCompany]);
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 
   useEffect(() => {
     const timer = setTimeout(function () {
       console.log("ENTRE ACA",emotions,errorMessage)
-<<<<<<< HEAD
-      if (emotions.length===0 && errorMessage===null) {
-        setErrorMessage(
-          "It looks like your company has not defined any emotions. In order to see this video's statistics you need to define at least one."
-=======
       if (emotions.length===0 && errorMessage===null && loader===false && loaderCompany) {
         setErrorMessage(
           "Parece que su empresa no ha definido ninguna emoción. Para ver las estadísticas de este video, debes definir al menos una."
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         );
       
       }
@@ -162,11 +149,7 @@ const VideoStatistics = (props) => {
       : (window.innerWidth * 0.35).toString(),
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
-<<<<<<< HEAD
-      autoplay: 1,
-=======
       autoplay: 0,
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       controls: 0,
       modestbranding: 1,
       disablek: 1,
@@ -188,13 +171,10 @@ const VideoStatistics = (props) => {
   const onReady = (event) => {
     setLoader(false)
   };
-<<<<<<< HEAD
-=======
   const { emotionsInVideo,loaderStatistics } = useSelector((state) => ({
     ...state.stats,
   }));
  
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
 
   return (
     <>
@@ -222,11 +202,7 @@ const VideoStatistics = (props) => {
             : "app-video-statistics-watch large"
         }
       >
-<<<<<<< HEAD
-        <div className="section-statistics">
-=======
         <div className="section-statistics" style={{height:emotionsInVideo.length > 0 ? "215vh" :"110vh"}}>
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           <div style={{ width:"100%",display:"flex",flexDirection:"row",alignItems:"center"}}>
           <h1 className="video-stat-title">{selectedVideo.name}</h1>
          {selectedVideo != {} ?
@@ -279,49 +255,23 @@ const VideoStatistics = (props) => {
           >
             {Object.keys(predominantEmotion).length > 0 && (
               <Circle
-<<<<<<< HEAD
-                title={"Predominant Emotion"}
-                data={
-                  predominantEmotion.count > 0
-                    ? predominantEmotion.name
-                    : "None"
-=======
                 title={"Emoción Predominante"}
                 data={
                   predominantEmotion.count > 0
                     ? predominantEmotion.name
                     : "Ninguna"
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
                 }
               />
             )}
             {totalViews != null && (
               <Circle
-<<<<<<< HEAD
-                title={totalViews === 1 ? "View" : "Views"}
-=======
                 title={totalViews === 1 ? "Vista" : "Vistas"}
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
                 data={totalViews.toString()}
               />
             )}
             {Object.keys(payingAttention).length > 0 && (
               <Circle
                 title={payingAttention.message}
-<<<<<<< HEAD
-                data={payingAttention.value.toString() != "Nobody" ? payingAttention.value.toString()+"%" :payingAttention.value.toString()}
-              />
-            )}
-            {Object.keys(topGender).length > 0 ? (
-              <Circle title={"GENDER WITH MOST VIEWS"} data={topGender._id} />
-            ): <Circle title={"GENDER WITH MOST VIEWS"} data={"None"} />}
-            {Object.keys(topCountry).length > 0 ? (
-              <Circle title={"COUNTRY WITH MOST VIEWS"} data={topCountry._id} />
-            ):   <Circle title={"COUNTRY WITH MOST VIEWS"} data={"None"} />}
-            {Object.keys(topAges).length > 0 ? (
-              <Circle title={"AGE GROUP WITH MOST VIEWS"} data={topAges._id} />
-            ):   <Circle title={"AGE GROUP WITH MOST VIEWS"} data={"None"} />}
-=======
                 data={payingAttention.value.toString() != "Nadie" ? payingAttention.value.toString()+"%" :payingAttention.value.toString()}
               />
             )}
@@ -334,7 +284,6 @@ const VideoStatistics = (props) => {
             {Object.keys(topAges).length > 0 ? (
               <Circle title={"GRUPO ETARIO CON MAS VISTAS"} data={topAges._id} />
             ):   <Circle title={"GRUPO ETARIO CON MAS VISTAS"} data={"Ninguno"} />}
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           </div>
           {totalViews >0 ?
           <>
@@ -382,11 +331,7 @@ const VideoStatistics = (props) => {
 
         <Button
         disable={emotions.length===0 ? true:false}
-<<<<<<< HEAD
-          title={"View Statistics."}
-=======
           title={"Ver Estadisticas."}
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           position={"right"}
           hide={videoSmall}
           event={settingChooseEmotion}
@@ -396,8 +341,4 @@ const VideoStatistics = (props) => {
   );
 };
 
-<<<<<<< HEAD
 export default VideoStatistics;
-=======
-export default VideoStatistics;
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

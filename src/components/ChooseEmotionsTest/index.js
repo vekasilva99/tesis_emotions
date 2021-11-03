@@ -19,11 +19,6 @@ const ChooseEmotionPopUp = ({
   }));
   const { video } = useParams();
   const dispatch = useDispatch();
-<<<<<<< HEAD
-  useEffect(() => {
-    dispatch(fetchEmotionsRequest());
-  }, []);
-=======
   const [selected, setSelected] = useState(false);
   useEffect(() => {
     dispatch(fetchEmotionsRequest());
@@ -31,7 +26,6 @@ const ChooseEmotionPopUp = ({
   useEffect(() => {
     dispatch(fetchEmotionsRequest());
   }, [selectedEmotions]);
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   return (
     <div className={open ? "pop-up-container" : "pop-up-container closed"}>
        <div className="close-pop-up"> <h3
@@ -39,28 +33,17 @@ const ChooseEmotionPopUp = ({
           setOpen(false)
               }}
             >
-<<<<<<< HEAD
-              Close
-            </h3></div>
-      <div className="pop-up-content">
-        <h4>Choose Emotions</h4>
-=======
               Cerrar
             </h3></div>
       <div className="pop-up-content">
         <h4>Seleccionar Emociones</h4>
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         <div className="pop-up-item-container">
           {emotions.map((emotion) => {
             return <Item addEmotion={addEmotion} selectedEmotions={selectedEmotions} emotion={emotion} />;
           })}
         </div>
         <Button
-<<<<<<< HEAD
-          title={"Next."}
-=======
           title={"Siguiente."}
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           position={"right"}
           event={() => {
             if(selectedEmotions.length>0){

@@ -49,11 +49,7 @@ const NotExistPopUp = ({inputs,stateLocation,company}) => {
       <div className={"pop-up-container-error"}>
         <BiSad className="message-icon" />
         <h4>
-<<<<<<< HEAD
-       Oops! It looks like this video is not available.
-=======
        Oops! Parece que este video no se encuentra disponible.
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         </h4>
       </div>
     </div>

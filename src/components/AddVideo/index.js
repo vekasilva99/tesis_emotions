@@ -68,32 +68,20 @@ const AddVideoPopUp = ({ open, setOpen }) => {
 
   const [inputFields, setInputFields] = useState([
     {
-<<<<<<< HEAD
-      placeholder: "Enter Video Name",
-      name: "video name",
-=======
       placeholder: "Ingrese Nombre",
       name: "nombre del video",
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       value: "",
       type: "text",
       error: "",
     },
     {
-<<<<<<< HEAD
-      placeholder: "Enter Video Link",
-=======
       placeholder: "Ingrese link",
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       name: "video link",
       value: "",
       type: "text",
       error: "",
     },
   ]);
-<<<<<<< HEAD
-
-=======
   const defaults=()=>{
     let aux=inputFields
     aux[0].value=""
@@ -102,7 +90,6 @@ const AddVideoPopUp = ({ open, setOpen }) => {
     setInputFields(aux)
 
   }
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   const changeInput = (name, event) => {
     let fields = inputFields;
     var item = inputFields.find(function (input, index) {
@@ -117,16 +104,6 @@ const AddVideoPopUp = ({ open, setOpen }) => {
       setInputFields(fields);
     });
   };
-<<<<<<< HEAD
-  useEffect(() => {
-    if (Object.keys(successCompany).length > 0 && open === true) {
-      inputFields[0].value = "";
-      inputFields[1].value = "";
-      setDuration(null);
-      setImage(null);
-      inputFields[0].error = "";
-      inputFields[1].error = "";
-=======
 
   useEffect(() => {
     if (Object.keys(successCompany).length > 0 && open === true) {
@@ -138,7 +115,6 @@ const AddVideoPopUp = ({ open, setOpen }) => {
       aux[0].error = "";
       aux[1].error = "";
       setInputFields(aux)
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       setOpen(false);
     }
   }, [successCompany]);
@@ -161,21 +137,6 @@ const AddVideoPopUp = ({ open, setOpen }) => {
     let error = false;
 
     if (inputFields[0].value === "") {
-<<<<<<< HEAD
-      setError(true, 0, "Required Field");
-      emptyField = true;
-    }
-    if (inputFields[1].value === "") {
-      setError(true, 1, "Required Field");
-      emptyField = true;
-    }
-    if (duration === null) {
-      // setError(true, 2, "Required Field");
-      emptyField = true;
-    }
-    if (image === null) {
-      // setError(true, 3, "Required Field");
-=======
       setError(true, 0, "Campo requerido");
       emptyField = true;
     }
@@ -189,7 +150,6 @@ const AddVideoPopUp = ({ open, setOpen }) => {
     }
     if (image === null) {
       // setError(true, 3, "Campo requerido");
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
       emptyField = true;
     }
     if (!validateYouTubeUrl(inputFields[1].value)) {
@@ -205,11 +165,7 @@ const AddVideoPopUp = ({ open, setOpen }) => {
         companyID: _id,
         mainImg: image,
         duration:
-<<<<<<< HEAD
-          duration.hours * 3600 + duration.minutes * 60 + duration.seconds,
-=======
           duration,
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         link: inputFields[1].value,
         active: true,
       };
@@ -223,17 +179,11 @@ const AddVideoPopUp = ({ open, setOpen }) => {
   };
 
   const onReady2 = (event) => {
-<<<<<<< HEAD
-    setDuration(event.target.getDuration());
-  };
-
-=======
     console.log("duracion",event.target.getDuration())
     setDuration(event.target.getDuration());
   };
 
 
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   console.log("LOAD VIDEO", loader)
   return (
     <>
@@ -254,11 +204,7 @@ const AddVideoPopUp = ({ open, setOpen }) => {
           setOpen(false)
               }}
             >
-<<<<<<< HEAD
-              Close
-=======
               Cerrar
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
             </h3></div>
         <div className="pop-up-content">
           <h4>New Video</h4>
@@ -275,11 +221,7 @@ const AddVideoPopUp = ({ open, setOpen }) => {
             ))}
 
             <div style={{ display: "flex", flexDirection: "column" }}>
-<<<<<<< HEAD
-              <h2 className="placeholder">Video Image</h2>
-=======
               <h2 className="placeholder">Imagen</h2>
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
               <label
                 style={{
                   marginBottom: "5px",
@@ -319,11 +261,7 @@ const AddVideoPopUp = ({ open, setOpen }) => {
             event={() => {
               onSubmit();
             }}
-<<<<<<< HEAD
-            title={"Add Video."}
-=======
             title={"Agregar."}
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
             position={"right"}
           />
         </div>

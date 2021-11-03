@@ -49,11 +49,7 @@ const CompanyNotExistPopUp = ({inputs,stateLocation,company}) => {
       <div className={"pop-up-container-error"}>
         <BiSad className="message-icon" />
         <h4>
-<<<<<<< HEAD
-       Oops! It looks like this company is not available.
-=======
        Oops! Parece que esta compañia no existe.
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         </h4>
       </div>
     </div>

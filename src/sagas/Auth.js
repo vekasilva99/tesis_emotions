@@ -150,33 +150,15 @@ function* signInUser(payload) {
       let error = { emailError: null, passwordError: null };
       if (res.status === 404) {
         error = {
-<<<<<<< HEAD
-          emailError: "The email or password you have provided is incorrect.",
-          passwordError:
-            "The email or password you have provided is incorrect.",
-=======
           emailError: "El correo electrónico o la contraseña que proporcionaste son incorrectos."
 ,
           passwordError:
             "El correo electrónico o la contraseña que proporcionaste son incorrectos."
 ,
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       } else if (res.status === 400) {
         error = {
           emailError:
-<<<<<<< HEAD
-            "This user has been inactivated by the admins. You no longer have access to our system. Check your email for more information.",
-          passwordError:
-            "This user has been inactivated by the admins. You no longer have access to our system. Check your email for more information.",
-        };
-      } else if (res.status === 500) {
-        error = { emailError: "Server Error", passwordError: "Server Error" };
-      } else {
-        error = {
-          emailError: "Oops. Something went wrong.",
-          passwordError: "Oops. Something went wrong.",
-=======
             "Los administradores han desactivado a este usuario. Ya no tienes acceso a nuestro sistema. Consulte su correo electrónico para obtener más información."
 ,
           passwordError:
@@ -193,7 +175,6 @@ function* signInUser(payload) {
 ,
           passwordError: "Oops. Algo salió mal."
 ,
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       }
       yield put(signInUserError(error));
@@ -226,33 +207,15 @@ function* signInCompany(payload) {
       let error = { emailError: null, passwordError: null };
       if (res.status === 404) {
         error = {
-<<<<<<< HEAD
-          emailError: "The email or password you have provided is incorrect.",
-          passwordError:
-            "The email or password you have provided is incorrect.",
-=======
           emailError: "El correo electrónico o la contraseña que proporcionaste son incorrectos."
 ,
           passwordError:
             "El correo electrónico o la contraseña que proporcionaste son incorrectos."
 ,
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       } else if (res.status === 400) {
         error = {
           emailError:
-<<<<<<< HEAD
-            "This company has been inactivated by the admins. You no longer have access to our system. Check your email for more information.",
-          passwordError:
-            "This company has been inactivated by the admins. You no longer have access to our system. Check your email for more information.",
-        };
-      } else if (res.status === 500) {
-        error = { emailError: "Server Error", passwordError: "Server Error" };
-      } else {
-        error = {
-          emailError: "Oops. Something went wrong.",
-          passwordError: "Oops. Something went wrong.",
-=======
             "Los administradores han desactivado esta empresa. Ya no tienes acceso a nuestro sistema. Consulte su correo electrónico para obtener más información."
 ,
           passwordError:
@@ -269,7 +232,6 @@ function* signInCompany(payload) {
 ,
           passwordError: "Oops. Algo salió mal."
 ,
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       }
       yield put(signInCompanyError(error));
@@ -298,19 +260,6 @@ function* changePassword(payload) {
       let error = { emailError: null, passwordError: null };
       if (res.status === 404) {
         error = {
-<<<<<<< HEAD
-          emailError: "The old password is incorrect.",
-          passwordError:
-            "The old password is incorrect.",
-        };
-    
-      } else if (res.status === 500) {
-        error = { emailError: "Server Error", passwordError: "Server Error" };
-      } else {
-        error = {
-          emailError: "Oops. Something went wrong.",
-          passwordError: "Oops. Something went wrong.",
-=======
           emailError: "La contraseña anterior es incorrecta."
 ,
           passwordError:
@@ -328,7 +277,6 @@ function* changePassword(payload) {
 ,
           passwordError: "Oops. Algo salió mal."
 ,
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       }
       yield put(changePasswordError(error));
@@ -348,24 +296,13 @@ function* updateProfile(payload) {
       let error = { emailError: null, passwordError: null };
       if (res.status === 400) {
         error = {
-<<<<<<< HEAD
-          emailError: "There is already another user registered with that email.",
-=======
           emailError: "Ya hay otro usuario registrado con ese correo electrónico."
 ,
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
           passwordError:
             "",
         };
     
       } else if (res.status === 500) {
-<<<<<<< HEAD
-        error = { emailError: "Server Error", passwordError: "Server Error" };
-      } else {
-        error = {
-          emailError: "Oops. Something went wrong.",
-          passwordError: "Oops. Something went wrong.",
-=======
         error = { emailError: "Error de Servidor"
 , passwordError: "Error de Servidor"
  };
@@ -375,7 +312,6 @@ function* updateProfile(payload) {
 ,
           passwordError: "Oops. Algo salió mal."
 ,
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         };
       }
       yield put(updateProfileError(error));

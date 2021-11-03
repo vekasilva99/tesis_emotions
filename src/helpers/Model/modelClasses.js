@@ -1,27 +1,6 @@
 import * as tf_2 from "@tensorflow/tfjs";
 
 export class scaling extends tf_2.layers.Layer {
-<<<<<<< HEAD
-    static className = "scaling";
-    constructor(config) {
-      super(config);
-    }
-  }
-  
-export class l2Norm extends tf_2.layers.Layer {
-    static className = "l2Norm";
-    constructor(config) {
-      super(config);
-    }
-  }
-  
-  export class L2Norm extends tf_2.layers.Layer {
-    static className = "L2Norm";
-    constructor(config) {
-      super(config);
-    }
-  }
-=======
   static className = "scaling";
   constructor(config) {
     super(config);
@@ -60,4 +39,3 @@ export class l2Norm extends tf_2.layers.Layer {
     });
   }
 }
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

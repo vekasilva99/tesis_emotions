@@ -1,190 +1,186 @@
 .App {
-    text-align: center;
-  }
-  
-  .App-logo {
-    height: 40vmin;
-    pointer-events: none;
-  }
-  
-  @media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-      animation: App-logo-spin infinite 20s linear;
-    }
-  }
-  
-  .App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
-  
-  .App-link {
-    color: #61dafb;
-  }
-  
-  @keyframes App-logo-spin {
-    from {
-      transform: (0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
-  
-  body {
-  font-family: helvetica, arial, sans-serif;
-  margin: 2em;
-  color: #3D3D3D;
-  }
-  
-  h1 {
-  font-style: italic;
-  color: pink;
-  }
-  
-  video {
-  display: block;
-  }
-  
-  section {
-  opacity: 1;
-  transition: opacity 500ms ease-in-out;
-  }
-  .removed {
-    display: none;
-  }
-  
-  .invisible {
-    opacity: 0.2;
-  }
-  
-  .camView {
-    position: relative;
-    float: left;
-    width: calc(100% - 20px);
-    margin: 10px;
-    cursor: pointer;
-  }
-  
-  .camView p {
-    position: absolute;
-    padding: 5px;
-    background-color: rgba(255, 111, 0, 0.85);
-    color: #FFF;
-    border: 1px dashed rgba(255, 255, 255, 0.7);
-    z-index: 2;
-    font-size: 12px;
-  }
-  
-  .camView2{
-    position: relative;
-    float: left ;
-    width: calc(100% - 20px);
-    margin: 10px;
-    cursor: pointer;
-  }
-  
-  .highlighter {
-  background: rgba(0, 255, 0, 0.25);
-  border: 1px dashed #fff;
-  z-index: 1;
-  position: absolute;
-  }
-  
-  .prediction-div{
-    height: 250px;
-    width: 250px;
-  }
+  text-align: center;
+}
 
-  .Routes{
-      width: 100%;
-      min-height: 100vh;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: (0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+body {
+font-family: helvetica, arial, sans-serif;
+margin: 2em;
+color: #3D3D3D;
+}
+
+h1 {
+font-style: italic;
+color: pink;
+}
+
+video {
+display: block;
+}
+
+section {
+opacity: 1;
+transition: opacity 500ms ease-in-out;
+}
+.removed {
+  display: none;
+}
+
+.invisible {
+  opacity: 0.2;
+}
+
+.camView {
+  position: relative;
+  float: left;
+  width: calc(100% - 20px);
+  margin: 10px;
+  cursor: pointer;
+}
+
+.camView p {
+  position: absolute;
+  padding: 5px;
+  background-color: rgba(255, 111, 0, 0.85);
+  color: #FFF;
+  border: 1px dashed rgba(255, 255, 255, 0.7);
+  z-index: 2;
+  font-size: 12px;
+}
+
+.camView2{
+  position: relative;
+  float: left ;
+  width: calc(100% - 20px);
+  margin: 10px;
+  cursor: pointer;
+}
+
+.highlighter {
+background: rgba(0, 255, 0, 0.25);
+border: 1px dashed #fff;
+z-index: 1;
+position: absolute;
+}
+
+.prediction-div{
+  height: 250px;
+  width: 250px;
+}
+
+.Routes{
+    width: 100%;
+    min-height: 100vh;
 background:rgba(229, 229, 229, 1);
 display:flex;
+
+  //   position: fixed;
+  //   top: 0;
+  //   left: 0;
+}
+
+.sign-out-container{
+  position: fixed;
+  z-index: 90;
+  top: 30px;
+  right: 50px;
+  cursor:pointer;
+ 
+}
+
+.sign-out-container{
+  font-family: 'Exo-Light';
+  text-align: right;
+  font-size: 12px;
+  transition: all 0.5s ease-in-out;
   
-    //   position: fixed;
-    //   top: 0;
-    //   left: 0;
+  &:hover{
+    color:#A9B18F;
+    font-size: 14px;
   }
+}
 
-  .sign-out-container{
-    position: fixed;
-<<<<<<< HEAD
-    z-index: 900;
-=======
-    z-index: 90;
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
-    top: 30px;
-    right: 50px;
-    cursor:pointer;
-   
-  }
+.close-pop-up{
+  position: fixed;
+  z-index: 90000;
+  top: 30px;
+  right: 50px;
+  cursor:pointer;
+ 
+}
 
-  .sign-out-container{
-    font-family: 'Exo-Light';
-    text-align: right;
-    font-size: 12px;
-    transition: all 0.5s ease-in-out;
-    
-    &:hover{
-      color:#A9B18F;
-      font-size: 14px;
-    }
+.close-pop-up{
+  font-family: 'Exo-Light';
+  text-align: right;
+  font-size: 12px;
+  color: white;
+  transition: all 0.5s ease-in-out;
+  
+  &:hover{
+    color:#A9B18F;
+    font-size: 14px;
   }
+}
+.MuiCircularProgress-colorPrimary{
+  color: #A9B18F !important;
+}
 
-  .close-pop-up{
-    position: fixed;
-    z-index: 90000;
-    top: 30px;
-    right: 50px;
-    cursor:pointer;
-   
-  }
+.full-page-loader{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 200000000;
+  background:rgba(203, 128, 125, 0.9);
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  opacity: 1;
+  visibility: visible;
+  transition: all 2s;
+}
+.full-page-loader.not-loading{
+  opacity: 0;
+  visibility: hidden;
+  transition: all 2s;
 
-  .close-pop-up{
-    font-family: 'Exo-Light';
-    text-align: right;
-    font-size: 12px;
-    color: white;
-    transition: all 0.5s ease-in-out;
-    
-    &:hover{
-      color:#A9B18F;
-      font-size: 14px;
-    }
-  }
-  .MuiCircularProgress-colorPrimary{
-    color: #A9B18F !important;
-  }
-
-  .full-page-loader{
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    z-index: 200000000;
-    background:rgba(203, 128, 125, 0.9);
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    left: 0;
-    opacity: 1;
-    visibility: visible;
-    transition: all 2s;
-  }
-  .full-page-loader.not-loading{
-    opacity: 0;
-    visibility: hidden;
-    transition: all 2s;
-
-  }
-  .no-background{
-    background: transparent;
-  }
+}
+.no-background{
+  background: transparent;
+}

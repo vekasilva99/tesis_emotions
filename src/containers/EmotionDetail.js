@@ -31,46 +31,6 @@ return emotion._id===emotionId
     setSideDrawerOpen(!sideDrawerOpen);
   };
 
-<<<<<<< HEAD
-  const changeInput = (name, event) => {
-    let fields = inputFields;
-    var item = inputFields.find(function (input, index) {
-      if (input.name == name) fields[index].value = event;
-      setInputFields(fields);
-    });
-  };
-
-  const setError = (input, index, error) => {
-    if (input) {
-      let fields = inputFields;
-      fields[index].error = error;
-      setInputFields(fields);
-    }
-  };
-
-  const [inputFields, setInputFields] = useState([
-    {
-      placeholder: "Enter company name",
-      name: "company name",
-      value: "",
-      type: "text",
-    },
-    { placeholder: "Enter email", name: "email", value: "", type: "email" },
-    {
-      placeholder: "Enter password",
-      name: "password",
-      value: "",
-      type: "password",
-    },
-    {
-      placeholder: "Confirm your password",
-      name: "confirm password",
-      value: "",
-      type: "password",
-    },
-  ]);
-=======
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
   useEffect(() => {
     if (emotions.length === 0) {
       dispatch(fetchEmotionsRequest(_id));
@@ -113,8 +73,4 @@ return emotion._id===emotionId
   );
 };
 
-<<<<<<< HEAD
 export default EmotionDetail;
-=======
-export default EmotionDetail;
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf

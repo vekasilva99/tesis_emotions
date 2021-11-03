@@ -40,11 +40,7 @@ const Instructions = ({instruction,setInstruction,watchVideo}) => {
       <div className={"pop-up-container-error pink"}>
         {/* <BiSad className="message-icon" /> */}
         <h4>
-<<<<<<< HEAD
-       1. Please try to be in a location with good light. This will help us improve our statistics.<br/><br/>2. Make sure there is only one person watching the video. The AI will only evaluate one person in the frame. 
-=======
         1. Intente estar en un lugar con buena iluminación. Esto nos ayudará a mejorar nuestras estadísticas.<br/><br/>2. Asegúrese de que solo haya una persona viendo el video. La IA solo evaluará a una persona en el marco.
->>>>>>> e7378db40bd8bd8325ec48c0e53f0cc4922dadbf
         </h4>
       </div>
     </div>
