@@ -215,6 +215,7 @@ const ChooseEmotionPopUp = ({ settingChooseEmotion, open, setOpen,error,setError
     setModel2(await tf_2.loadLayersModel(process.env.REACT_APP_MODEL_AWS));
     console.log("TERMINADO");
     }catch(error){
+      console.log(error)
       setErrorMessage('Oops! Parece que algo salió mal al cargar el modelo. Limpia tu caché y vuelve a intentarlo. Perdon por la inconveniencia.')
  
     }
