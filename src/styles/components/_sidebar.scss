@@ -16,6 +16,9 @@
   background-color: #CB807D;
   width: 10vw;
   height: 10vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   @media screen and (max-width: 800px) {
     width:10vh;
   height: 10vh;
@@ -124,5 +127,16 @@
   &:hover{
     color: #CB807D;
 
+  }
+}
+
+.menu-image{
+  width: 40%;
+  height: 40%;
+  opacity: 1;
+  cursor: pointer;
+  transition: all 1s;
+  &:hover{
+    opacity: 0.3;
   }
 }
