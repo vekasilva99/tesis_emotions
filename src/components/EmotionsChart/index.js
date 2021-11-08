@@ -9,6 +9,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 const EmotionsChart = ({ selectedEmotions }) => {
   const dispatch = useDispatch();
   const { video } = useParams();
+  const [show,setShow]=useState(false)
   const { emotionsInVideo,loaderStatistics,loaderEmotions } = useSelector((state) => ({
     ...state.stats,
   }));
@@ -101,21 +102,22 @@ const EmotionsChart = ({ selectedEmotions }) => {
           aux.datasets = auxData;
         }
       }
-      console.log("EMOTIONS",aux)
+      console.log("EMOTIONS",aux,loaderEmotions)
       setLineData(aux);
+      setShow(true)
     
     }
   }, [emotionsInVideo]);
 
   const lineOptions = {
     aspectRatio: 1.4,
-    scales: {
-      xAxes: [
-        {
-          display: false,
-        },
-      ],
-    },
+    // scales: {
+    //   xAxes: [
+    //     {
+    //       display: false,
+    //     },
+    //   ],
+    // },
   };
 
   return (
@@ -128,7 +130,7 @@ const EmotionsChart = ({ selectedEmotions }) => {
         alignItems: "center",
       }}
     >
-      {lineData.datasets.length>0 && (
+      {show && (
         <Line
           data={lineData}
           options={lineOptions}
