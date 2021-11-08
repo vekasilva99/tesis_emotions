@@ -23,12 +23,14 @@ const Input = ({
     setSubmitted();
     setTimeout(() => {
       changeError(true, index, "");
+
     }, 400);
 
     setValue(event.target.value);
     changeInput(item.name, event.target.value);
   };
   useEffect(() => {
+ 
     setError(item.error);
   }, [submitted]);
 
@@ -40,10 +42,10 @@ const Input = ({
         name={item.name}
         className={
           white
-            ? item.error != ""
+            ? error != ""
               ? "input-white-field error"
               : "input-white-field"
-            : item.error != ""
+            : error != ""
             ? "input-field error"
             : "input-field"
         }

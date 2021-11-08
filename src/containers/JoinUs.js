@@ -84,7 +84,9 @@ const JoinUs = (props) => {
       let fields = inputFields;
       fields[index].error = error;
       setInputFields(fields);
+
     }
+
   };
 
   const signUp = () => {
@@ -144,6 +146,7 @@ const JoinUs = (props) => {
   };
 
   const preSignUp = () => {
+    setSubmitted(true)
     let emptyField = false;
     let error = false;
     if (inputFields[0].value === "") {
@@ -179,6 +182,9 @@ const JoinUs = (props) => {
     if (!error && !emptyField) {
       setOpen(true);
     }
+    setTimeout(() => {
+      setSubmitted(false);
+    }, 1200);
   };
 
   const uploadImage = (files) => {
