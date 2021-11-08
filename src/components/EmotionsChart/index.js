@@ -12,7 +12,7 @@ const EmotionsChart = ({ selectedEmotions }) => {
   const { emotionsInVideo,loaderStatistics,loaderEmotions } = useSelector((state) => ({
     ...state.stats,
   }));
- 
+
   const getColor = (cont) => {
     if (cont === 0) {
       return {
@@ -101,7 +101,7 @@ const EmotionsChart = ({ selectedEmotions }) => {
           aux.datasets = auxData;
         }
       }
-
+      console.log("EMOTIONS",aux)
       setLineData(aux);
     
     }
@@ -128,7 +128,7 @@ const EmotionsChart = ({ selectedEmotions }) => {
         alignItems: "center",
       }}
     >
-      {emotionsInVideo.length > 0 && (
+      {lineData.datasets.length>0 && (
         <Line
           data={lineData}
           options={lineOptions}
