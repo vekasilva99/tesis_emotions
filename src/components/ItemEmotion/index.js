@@ -8,7 +8,7 @@ const history = useHistory()
 
 
   return (
-    <div className="item-container-home">
+    <div className="item-container-home" onClick={()=>{history.push(`/emotion/${emotion._id}`)}}>
               <img src={emotion.embeddings[0].img} className="logo"></img>
               <div className="item-container-home-top"></div>
               <h2>{emotion.name}</h2>
