@@ -37,16 +37,16 @@ useEffect(() => {
     for(let i=0;i<ages.length;i++){
       aux.labels.push(ages[i]._id)
       aux.datasets[0].data.push(ages[i].total)
-      if(ages[i]._id==="Kids"){
+      if(ages[i]._id==="Niños"){
         aux.datasets[0].backgroundColor.push("rgba(240, 181, 179, 0.4)")
         aux.datasets[0].borderColor.push("rgba(240, 181, 179, 1)")
-      }else if(ages[i]._id==="Teenagers"){
+      }else if(ages[i]._id==="Adolescentes"){
         aux.datasets[0].backgroundColor.push("rgba(169, 177, 143, 0.4)")
         aux.datasets[0].borderColor.push("rgba(169, 177, 143, 1)")
-      }else if(ages[i]._id==="Adults"){
+      }else if(ages[i]._id==="Adultos"){
         aux.datasets[0].backgroundColor.push("rgba(203, 128, 125, 0.4)")
         aux.datasets[0].borderColor.push("rgba(203, 128, 125, 1)")
-      }else if(ages[i]._id==="Elderly"){
+      }else if(ages[i]._id==="3era Edad"){
         aux.datasets[0].backgroundColor.push("rgba(182, 132, 161, 0.4)")
         aux.datasets[0].borderColor.push("rgba(182, 132, 161, 1)")
       }else{
