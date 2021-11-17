@@ -148,7 +148,7 @@ const TestModel = ({}) => {
               Resultados.
             </h1>
             <h3 className="explanation">
-            La métrica que se muestra es la similitud de coseno entre la imagen que subió y las emociones seleccionadas. Una emoción coincidirá con la imagen si el valor de la similitud es 0,97 o más.
+            La métrica que se muestra es la similitud de coseno entre la imagen que subió y las emociones seleccionadas. Una emoción coincidirá con la imagen si el valor de la similitud es mayor a 0,97.
               </h3>
             <div className="test-results-container">
               <div className="test-results-container-1">
